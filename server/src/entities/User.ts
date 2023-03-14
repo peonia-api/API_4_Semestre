@@ -5,27 +5,33 @@ import * as bcrypt from "bcrypt";
 export class User {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
-    id: number;
+    userId: number;
+
+    @Column({nullable: false, length: 100})
+    userName: string;
 
     @Column({nullable: false, unique:true, length: 70})
-    mail: string;
+    userEmail: string;
 
     @Column({nullable: false, select: false, length: 100})
-    password: string;
+    userPassword: string;
+
+    @Column({nullable: false, length: 1})
+    userType: string;
 
 
 
     @BeforeInsert() //a função hashPassword é disparada antes do insert e update
     @BeforeUpdate()
     hashPassword(): void {
-        if (this.password) {
+        if (this.userPassword) {
             // a senha é codificada usando o algoritmo do pacote bcrypt
-            this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+            this.userPassword = bcrypt.hashSync(this.userPassword, bcrypt.genSaltSync(10));
         }
     }
 
     compare(input: string): Promise<boolean> {
         // a senha fornecida em input é comparada com a senha do registro armazenado no SGBD
-        return bcrypt.compare(input, this.password);
+        return bcrypt.compare(input, this.userPassword);
     }
 }
