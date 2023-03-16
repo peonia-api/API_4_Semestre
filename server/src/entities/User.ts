@@ -1,11 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToMany, ManyToOne } from "typeorm";
 import * as bcrypt from "bcrypt";
+import { Call } from "./Call";
 
 @Entity({name:"users"})
 export class User {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
-    userId: number;
+    id: number;
 
     @Column({nullable: false, length: 100})
     userName: string;
@@ -18,6 +19,9 @@ export class User {
 
     @Column({nullable: false, length: 1})
     userType: string;
+
+    @OneToMany(() => Call, (call) => call.user)
+    call: Call[];
 
 
 

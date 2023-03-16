@@ -75,8 +75,8 @@ class UserController {
   public async update(req: Request, res: Response): Promise<Response> {
     const { userEmail, userPassword } = req.body;
     // obtém o id do usuário que foi salvo na autorização na middleware
-    const { userId } = res.locals;
-    const usuario: any = await AppDataSource.manager.findOneBy(User, { userId }).catch((e) => {
+    const { id } = res.locals;
+    const usuario: any = await AppDataSource.manager.findOneBy(User, { id }).catch((e) => {
       return { error: "Identificador inválido" };
     })
     if (usuario && usuario.id) {
