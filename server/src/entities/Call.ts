@@ -1,8 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
 import { User } from "./User";
-import { Hotfix } from "./Hotfix";
-import { Arquivo } from "./Arquivo";
-import { Feature } from "./Feature";
+import { DeniedArchive } from "./DeniedArchive";
+import { Development } from "./Development";
 
 @Entity({name:"call"})
 export class Call {
@@ -13,6 +12,8 @@ export class Call {
     @Column({nullable: false, length: 4})
     callType: string;
 
+    @Column({nullable: false, length: 80})
+    callTitle: string;
 
     @Column({nullable: false, length: 250})
     callDescription: string;
@@ -20,18 +21,16 @@ export class Call {
     @Column({nullable: true})
     callAttachments: number;
 
+    @Column({nullable: true, type: 'date'})
+    callDateCreate: string;
+
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @OneToMany(() => Hotfix, (hotfix) => hotfix.id)
-    hotfix: Hotfix[];
+    @OneToMany(() => DeniedArchive, (deniedArchive) => deniedArchive.id)
+    deniedArchive: DeniedArchive[];
 
-    @OneToMany(() => Feature, (feature) => feature.id)
-    feature: Feature[];
+    @OneToMany(() => Development, (development) => development.id)
+    development: Development[];
 
-    @OneToMany(() => Arquivo, (arquivo) => arquivo.id)
-    arquivo: Arquivo[];
-
-
-  
 }

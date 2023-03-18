@@ -3,17 +3,20 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, Man
 
 import { Call } from "./Call";
 
-@Entity({name:"arquivo"})
-export class Arquivo {
+@Entity({name:"deniedArchive"})
+export class DeniedArchive {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column({nullable: false, length: 4})
-    arquivoType: string;
+    archiveType: string;
 
     @Column({nullable: false, length: 15})
-    featureState: string;
+    archiveState: string;
+
+    @Column({nullable: false, type: 'date'})
+    callFinishedDate: string;
 
     @ManyToOne(() => Call, (call) => call.id)
     call: Call;
