@@ -9,7 +9,7 @@ export class Call {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable: false, length: 4})
+    @Column({nullable: false, length: 8})
     callType: string;
 
     @Column({nullable: false, length: 80})

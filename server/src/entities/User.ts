@@ -18,7 +18,7 @@ export class User {
     @Column({nullable: false, select: false, length: 100})
     userPassword: string;
 
-    @Column({nullable: false, length: 1})
+    @Column({nullable: false, length: 8})
     userType: string;
 
     @OneToMany(() => Call, (call) => call.user)
