@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToMany, ManyToOne } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { Call } from "./Call";
+import { Group } from "./Group";
 
 @Entity({name:"users"})
 export class User {
@@ -22,6 +23,9 @@ export class User {
 
     @OneToMany(() => Call, (call) => call.user)
     call: Call[];
+
+    @ManyToOne(() => Group, (group) => group.user)
+    group: Group;
 
 
 

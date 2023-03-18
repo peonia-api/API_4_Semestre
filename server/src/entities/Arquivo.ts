@@ -17,6 +17,5 @@ export class Arquivo {
 
     @ManyToOne(() => Call, (call) => call.id)
     call: Call;
-
   
 }
