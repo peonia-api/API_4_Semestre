@@ -9,7 +9,7 @@ const app = express();
 // suporta parâmetros JSON no body da requisição
 app.use(express.json()); 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // inicializa o servidor na porta especificada
 app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
