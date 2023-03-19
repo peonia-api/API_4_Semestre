@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 
 
 import { Call } from "./Call";
@@ -15,6 +15,9 @@ export class Archive {
 
     @Column({nullable: false, length: 15})
     featureState: string;
+
+    @CreateDateColumn({ name: 'callFinishedDate'})
+    callFinishedDate: Date;
 
     @ManyToOne(() => Development, (development) => development.id)
     development: Development;

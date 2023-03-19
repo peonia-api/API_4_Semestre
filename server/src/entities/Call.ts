@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 import { User } from "./User";
 import { DeniedArchive } from "./DeniedArchive";
 import { Development } from "./Development";
@@ -21,8 +21,8 @@ export class Call {
     @Column({nullable: true})
     callAttachments: number;
 
-    @Column({nullable: true, type: 'date'})
-    callDateCreate: string;
+    @CreateDateColumn({ name: 'callDateCreate'})
+    callDateCreate: Date;
 
     @ManyToOne(() => User, (user) => user.id)
     user: User;

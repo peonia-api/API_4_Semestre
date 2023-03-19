@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
 
 
 import { Call } from "./Call";
@@ -15,8 +15,8 @@ export class DeniedArchive {
     @Column({nullable: false, length: 15})
     archiveState: string;
 
-    @Column({nullable: false, type: 'date'})
-    callFinishedDate: string;
+    @CreateDateColumn({ name: 'callFinishedDate'})
+    callFinishedDate: Date;
 
     @ManyToOne(() => Call, (call) => call.id)
     call: Call;
