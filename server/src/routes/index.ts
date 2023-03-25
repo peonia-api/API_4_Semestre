@@ -1,8 +1,11 @@
+import cors = require("cors");
 import { Router, Request, Response } from "express";
 
 import call from "./call";
 
 const routes = Router()
+
+routes.use(cors());
 
 routes.use("/call", call);
 
