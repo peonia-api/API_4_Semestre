@@ -23,6 +23,13 @@ class CallController {
         return res.json(allCall)
     }
 
+    public async getCall (req: Request, res: Response) : Promise<Response> {
+        const idCall:any = req.params.uuid
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCall = await callRepository.findOneBy({id: idCall})
+        return res.json(allCall)
+    }
+
     public async postCall (req: Request, res: Response) : Promise<Response> {
         const createCall = req.body
         const callRepository = AppDataSource.getRepository(Call)
