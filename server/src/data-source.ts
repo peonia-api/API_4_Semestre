@@ -40,7 +40,7 @@ const AppDataSource = new DataSource({
     host: 'localhost', // não use esta propriedade se for sqlite
     port: 3306, // não use esta propriedade se for sqlite
     username: 'root', // não use esta propriedade se for sqlite
-    password:'12345', // não use esta propriedade se for sqlite
+    password:'africas2lucas', // não use esta propriedade se for sqlite
     // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
     // deixe false ao usar migrations
     synchronize: false, 

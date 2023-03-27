@@ -2,6 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, Man
 import { User } from "./User";
 import { DeniedArchive } from "./DeniedArchive";
 import { Development } from "./Development";
+import { Committee } from "./Committee";
+import { Historic } from "./Historic";
 
 @Entity({name:"call"})
 export class Call {
@@ -24,13 +26,19 @@ export class Call {
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
-    @ManyToOne(() => User, (user) => user.id)
-    user: User;
+    @CreateDateColumn({nullable: false, length: 40})
+    callProduct: Date;
 
-    @OneToMany(() => DeniedArchive, (deniedArchive) => deniedArchive.id)
-    deniedArchive: DeniedArchive[];
+    @CreateDateColumn({nullable: false, length: 40})
+    callClient: Date;
 
-    @OneToMany(() => Development, (development) => development.id)
+    @OneToMany(() => Historic, (historic) => historic.call)
+    historic: Historic[];
+
+    @OneToMany(() => Development, (development) => development.call)
     development: Development[];
+
+    @ManyToOne(() => Committee, (committee) => committee.id)
+    committee: Committee;
 
 }

@@ -1,25 +1,20 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
-
-
-import { Call } from "./Call";
 import { Development } from "./Development";
+import { Call } from "./Call";
 
-@Entity({name:"archive"})
-export class Archive {
+@Entity({name:"historic"})
+export class Historic {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable: false, length: 4})
-    archiveType: string;
-
     @Column({nullable: false, length: 15})
-    featureState: string;
+    histState: string;
 
     @CreateDateColumn({ name: 'callFinishedDate'})
     callFinishedDate: Date;
 
-    @ManyToOne(() => Development, (development) => development.id)
-    development: Development;
+    @ManyToOne(() => Call, (call) => call.id)
+    call: Call;
 
 }

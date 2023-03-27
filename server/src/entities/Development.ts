@@ -1,7 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
-import { Archive } from "./Archive";
-
-
 import { Call } from "./Call";
 
 @Entity({name:"development"})
@@ -25,7 +22,6 @@ export class Development {
     @ManyToOne(() => Call, (call) => call.id)
     call: Call;
 
-    @OneToMany(() => Archive, (archive) => archive.id)
-    archive: Archive[];
+   
   
 }
