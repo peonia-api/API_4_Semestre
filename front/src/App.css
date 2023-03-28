@@ -1,0 +1,91 @@
+@import url('https://fonts.cdnfonts.com/css/coolvetica');
+@import url('https://fonts.cdnfonts.com/css/source-sans-pro');
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.cor-logo {
+  background-color: #54C5CE !important;
+}
+
+.font-padrao-titulo {
+  font-family: 'Coolvetica', sans-serif;
+  letter-spacing: 1px;
+}
+
+input {
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-bottom: 1px solid #333 !important;
+  border-radius: 0 !important;
+}
+
+.fs-6, input, button {
+  font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+a.nav-link {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #333333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.background-header {
+  background-color: #333333;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bg-div{
+  /*background-image: url("/public/media/img/bg.jpg");*/
+  background-color: #333333;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hf-spacing{
+  padding-top: 80px !important;
+  padding-bottom: 65px !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
