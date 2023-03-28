@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, CreateDateColumn } from "typeorm";
-import { User } from "./User";
-import { DeniedArchive } from "./DeniedArchive";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, JoinColumn } from "typeorm";
+
 import { Development } from "./Development";
 import { Committee } from "./Committee";
 import { Historic } from "./Historic";
+import { User } from "./User";
 
 @Entity({name:"call"})
 export class Call {
@@ -26,11 +26,11 @@ export class Call {
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
-    @CreateDateColumn({nullable: false, length: 40})
-    callProduct: Date;
+    @Column({nullable: false, length: 40 })
+    callProduct: string;
 
-    @CreateDateColumn({nullable: false, length: 40})
-    callClient: Date;
+    @Column({nullable:true})
+    callGroup: string;
 
     @OneToMany(() => Historic, (historic) => historic.call)
     historic: Historic[];
@@ -38,7 +38,10 @@ export class Call {
     @OneToMany(() => Development, (development) => development.call)
     development: Development[];
 
-    @ManyToOne(() => Committee, (committee) => committee.id)
+    @ManyToOne(() => Committee, (committee) => committee.id, {eager:true})
     committee: Committee;
+
+    @ManyToOne(() => User, (user) => user.id, {eager:true})
+    user: User;
 
 }

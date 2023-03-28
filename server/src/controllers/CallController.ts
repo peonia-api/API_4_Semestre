@@ -8,6 +8,7 @@ class CallController {
     public async getHistoricCall (req: Request, res: Response) : Promise<Response> {
         const callRepository = AppDataSource.getRepository(Call)
         const allCall = await callRepository.find()
+        console.log(allCall)
         return res.json(allCall)
     }
 
@@ -31,8 +32,10 @@ class CallController {
         insertCall.callTitle = createCall.callTitle
         insertCall.callDescription = createCall.callDescription
         insertCall.callAttachments = createCall.callAttachments
-        insertCall.callDateCreate = createCall.callDateCreate
+        insertCall.callProduct = createCall.callProduct
         insertCall.user = createCall.user
+        insertCall.committee = createCall.committee
+        insertCall.callGroup = createCall.callGroup //será utilizado depois
         const allCall = await callRepository.save(insertCall)
         return res.json(allCall)
     }
@@ -46,14 +49,15 @@ class CallController {
         findCall.callTitle = createCall.callTitle
         findCall.callDescription = createCall.callDescription
         findCall.callAttachments = createCall.callAttachments
-        findCall.callDateCreate = createCall.callDateCreate
+        findCall.callProduct = createCall.callProduct
+        findCall.committee = createCall.committee
+        findCall.callGroup = createCall.callGroup
         findCall.user = createCall.user
         const allCall = await callRepository.save(findCall)
         return res.json(allCall)
     }
 
     public async deleteCall (req: Request, res: Response) : Promise<Response> {
-        const createCall = req.body
         const idCall:any = req.params.uuid
         const callRepository = AppDataSource.getRepository(Call)
         const findCall = await callRepository.findOneBy({id: idCall})

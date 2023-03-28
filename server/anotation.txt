@@ -1,0 +1,3 @@
+manytoone = está recebendo a chave estrangeiro
+
+onetomany = está enviando a chave estrangeira
