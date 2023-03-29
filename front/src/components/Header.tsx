@@ -9,21 +9,20 @@ function Header() {
   return (
     <>
       <Navbar collapseOnSelect fixed="top" expand="sm" variant="dark" className='position-fixed w-100 top-0 background-header'>
-        <Container>
+        <Container className='mb-2'>
           <Navbar.Brand to="/" as={CustomLink}>
-            <img
-              src={ Images }
-              height="30"
-              className="d-inline-block align-top"
-              alt="Ionic Health logo"
+            <img 
+            src="https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cfbef568f863947dd4951_logo-color.svg" 
+            alt="Logotipo de IONIC Health" 
+            className="d-inline-block align-top"
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <CustomLink to="/">Solicitação</CustomLink>
-              <CustomLink to="/historico">Histórico</CustomLink>
-              <CustomLink to="/perfil">Perfil</CustomLink>
+              <CustomLink to="/">SOLICITAÇÃO</CustomLink>
+              <CustomLink to="/historico">HISTÓRICO</CustomLink>
+              <CustomLink to="/perfil">PERFIL</CustomLink>
             </Nav>
           </Navbar.Collapse>          
         </Container>
