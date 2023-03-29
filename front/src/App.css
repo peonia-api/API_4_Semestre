@@ -146,3 +146,15 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.box-search{
+  padding-bottom: 8px;
+  padding-left: 2px;
+}
+
+.input-search{
+  width: 200px;
+  background: url(images/search.png) no-repeat;
+  background-position: 170px;
+  background-size: 25px;
+}

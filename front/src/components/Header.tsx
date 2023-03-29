@@ -21,7 +21,7 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
               <CustomLink to="/">SOLICITAÇÃO</CustomLink>
-              <CustomLink to="/historico">HISTÓRICO</CustomLink>
+              <CustomLink to="/listagem">LISTAGEM</CustomLink>
               <CustomLink to="/perfil">PERFIL</CustomLink>
             </Nav>
           </Navbar.Collapse>          

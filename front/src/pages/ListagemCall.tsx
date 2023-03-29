@@ -1,12 +1,13 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { Container, Table, Form, FloatingLabel, Row } from 'react-bootstrap';
+import { Container, Table, Form, FloatingLabel } from 'react-bootstrap';
 import React, { useState, useEffect, useRef } from 'react';
 import autoAnimate from '@formkit/auto-animate';
-import ReactPaginate from 'react-paginate';
 import excluir from '../images/excluir.png';
+import ReactPaginate from 'react-paginate';
 import editar from '../images/editar.png';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import '../App.css';
 interface Calls {
   id: number;
   callType: string;
@@ -16,7 +17,7 @@ interface Calls {
   callDateCreate: Date;
 };
 
-function Historico() {
+function ListagemCall() {
 
   const [data, setData] = useState<Calls[]>([]);
 
@@ -109,19 +110,21 @@ function Historico() {
   return (
     <>
       <div className='text-center'>
-        <h1 className='text-dark fw-bolder mb-0 font-padrao-titulo'>Histórico</h1>
+        <h1 className='text-dark fw-bolder mb-0 font-padrao-titulo'>Listagem dos chamados</h1>
       </div>
       <Container className='px-2 mb-5'>
         <Container>
-          <Row className=''>
-            <Form.Control className='px-2 mb-2 pl-2'
+          <div className='box-search'>
+            <input className='input-search' type="text" placeholder="Pesquisar" 
+              value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)}/>
+                {/* <img src={search}  alt='Procurar'/> */}
+            {/* <Form.Control className='px-2 mb-2 pl-2'
               type="text"
               placeholder="Pesquisar"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-            />
-          </Row>
-
+            /> */}
+          </div>
           <Table bordered hover responsive>
             <thead>
               <tr>
@@ -135,7 +138,7 @@ function Historico() {
                 <th onClick={() => sorting("callTitle")} className="text-center">Assunto
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
-                <th onClick={() => sorting("callDescription")} className="text-center">Status
+                <th onClick={() => sorting("callDescription")} className="text-center">Produto
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 <th className='text-center'>Ações</th>
@@ -193,4 +196,4 @@ function Historico() {
   );
 }
 
-export default Historico;
+export default ListagemCall;
