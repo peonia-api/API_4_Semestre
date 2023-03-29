@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import Swal from 'sweetalert2'
 import '../App.css';
+import IMask from 'imask'
 
 const initialValues = {
   nome: '',
@@ -67,14 +68,28 @@ function Solicitacao() {
   }
 
   function onClickEnviar() {
-
-    Swal.fire('Sucesso', 'Solicitação enviada com sucesso!', 'success');
-    formik.resetForm();
+    if(!formik.isValid){
+      Swal.fire({
+        title: 'Erro',
+        text: 'Preencha todos os campos antes de enviar!',
+        icon: 'error',
+        confirmButtonColor: '#54C5CE',
+      });
+      formik.submitForm();
+    } else {
+      Swal.fire({
+        title: 'Sucesso',
+        text: 'Solicitação enviada com sucesso!',
+        icon: 'success',
+        confirmButtonColor: '#54C5CE',
+      });
+      formik.resetForm();
+    }
 
   }
 
   useEffect(() => {
-    
+
   }, [])
 
   return (
@@ -83,10 +98,11 @@ function Solicitacao() {
       noValidate
       id='form-solicitacao'
       onSubmit={formik.handleSubmit}
+      style={{margin:"8px"}}
     >
       <div className='text-center mb-4'>
-        <h1 className='text-dark fw-bolder mb-3 font-padrao-titulo'>Solicitação</h1>
-        <div className='text-gray-500 fs-6'>Preencha os campos para gerar um chamado</div>
+        <h1 className='text-dark fw-bolder mb-3 font-padrao-titulo'>SOLICITAÇÃO</h1>
+        <div className='text-gray-500 fs-6 font-padrao-titulo mb-5' style={{letterSpacing:0}}>Preencha os campos para gerar um chamado</div>
       </div>
 
       {formik.status && (
@@ -311,8 +327,19 @@ function Solicitacao() {
       
       {/* begin::Form group */}
       <div className='d-flex align-items-center justify-content-between mt-4'>
-        <button type='button' className='btn btn-secondary' onClick={onClickLimpar}>Limpar</button>
-        <button type='button' className='btn btn-secondary' onClick={onClickEnviar} disabled={formik.isSubmitting || !formik.isValid}>Enviar</button>        
+        <button type='button' className='btn btn-form' onClick={onClickLimpar}>
+          Limpar
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-backspace-fill" viewBox="0 0 16 16">
+            <path d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"/>
+          </svg>
+        </button>
+        <button type='button' className='btn btn-form' onClick={onClickEnviar} disabled={formik.isSubmitting}>
+          Enviar
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill" viewBox="0 0 16 16">
+              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+              <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/>
+            </svg>
+        </button>        
       </div>
       {/* end::Form group */}
     </form>

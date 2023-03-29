@@ -14,9 +14,9 @@ function App() {
 
         <Header /> 
 
-        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2'>
+        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
           
-          <div className='container bg-light border border-dark rounded shadow-lg p-4 mx-auto'>
+          <div className='container bg-light-opacity rounded mx-auto' style={{padding:"2rem"}}>
             <Routes>
               <Route path="/" element={<Solicitacao />} />
               <Route path="/historico" element={<Historico />} />
@@ -25,10 +25,10 @@ function App() {
           </div>
               
         </div>
-
-        <Footer />
         
       </div> 
+      <Footer />
+
     </>  
   );
 }

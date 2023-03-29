@@ -109,20 +109,20 @@ function Historico() {
   return (
     <>
       <div className='text-center'>
-        <h1 className='text-dark fw-bolder mb-0'>Histórico</h1>
+        <h1 className='text-dark fw-bolder mb-0 font-padrao-titulo'>Histórico</h1>
       </div>
       <Container className='px-2 mb-5'>
         <Container>
           <Row className=''>
             <Form.Control className='px-2 mb-2 pl-2'
               type="text"
-              placeholder="Search"
+              placeholder="Pesquisar"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
             />
           </Row>
 
-          <Table bordered hover>
+          <Table bordered hover responsive>
             <thead>
               <tr>
                 {/*cabeçalho tabela*/}

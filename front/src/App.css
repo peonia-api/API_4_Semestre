@@ -16,7 +16,11 @@
 
 .font-padrao-titulo {
   font-family: 'Coolvetica', sans-serif;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
+}
+
+.fv-help-block{
+  color:#dc3545;
 }
 
 input {
@@ -27,12 +31,23 @@ input {
   border-radius: 0 !important;
 }
 
-.fs-6, input, button {
+.fs-6, input, button, th {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
 
 a.nav-link {
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  color:#54C5CE;
+}
+
+.navbar-collapse{
+  justify-content: end;
+  margin-top: 10px;
+}
+
+.nav-link + .nav-link {
+  margin-left: 3rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -52,8 +67,48 @@ a.nav-link {
   color: white;
 }
 
+.bg-light-opacity{
+  background-color: white;
+  opacity: 95%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+@media screen and (min-width: 1396px)  {
+  .btn-form{
+    width: 8%;
+    height: 40%;
+  }
+}
+
+@media screen and (max-width: 1396px) {
+  .rights{
+    display: none;
+  }
+}
+.btn-form{
+  display: flex;
+  align-items: center;
+  background-color: #424242 !important;
+  color: white !important;
+}
+
+svg{
+  margin-left: 6px;
+}
+
 .background-header {
   background-color: #333333;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 10px 14px;
+}
+
+.footer{
+    position:relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .App-link {
@@ -70,10 +125,12 @@ a.nav-link {
 }
 
 .bg-div{
-  /*background-image: url("/public/media/img/bg.jpg");*/
-  background-color: #333333;
+  background-image: linear-gradient(270deg,rgba(43,43,43,0),#212121),linear-gradient(180deg,rgba(43,43,43,.6),rgba(43,43,43,.6)),url("https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cf5b134d44a7c0953ac37_sobre.webp");
+  background-position: 0 0,0 0,0 0;
+  background-size: auto,auto,cover;
   min-height: 100vh;
   height: 100%;
+  min-width: 100vh;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
