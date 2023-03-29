@@ -14,7 +14,7 @@ class Footer extends React.Component {
           
           <div className="d-none d-lg-flex align-items-center fw-bold fs-6">
                 <span className="text-muted">{new Date().getFullYear()} © Powered by</span>
-                <a href="https://fatecsjc-prd.azurewebsites.net/" className="text-black-50 text-decoration-none link-primary px-2" target='_blank'>
+                <a href="https://github.com/peonia-api" className="text-black-50 text-decoration-none link-primary px-2" target='_blank'>
                     Peônia
                 </a>
           </div>   
