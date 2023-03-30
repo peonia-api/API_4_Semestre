@@ -1,2 +1,2 @@
 node_modules
-migration
+./server/src/migrations
