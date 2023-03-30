@@ -24,6 +24,9 @@ export class Call {
     @Column({nullable: false, length: 40})
     callRequester: string;
 
+    @Column({nullable: false, length: 50})
+    callTeam: string;
+
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
