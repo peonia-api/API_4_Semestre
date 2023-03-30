@@ -13,7 +13,9 @@ interface Calls {
   callType: string;
   callTitle: string;
   callDescription: string;
-  callAttachments: number;
+  callState: string;
+  callRequester: string;
+  callPriority: number;
   callDateCreate: Date;
 };
 
@@ -132,13 +134,22 @@ function ListagemCall() {
                 <th onClick={() => sorting("id")} className="text-center">Número da solitição
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
+                <th onClick={() => sorting("callRequester")} className="text-center">Solicitante
+                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
+                </th>
+                <th onClick={() => sorting("callType")} className="text-center">Tipo
+                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
+                </th>
+                <th onClick={() => sorting("callTitle")} className="text-center">Título
+                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
+                </th>
+                <th onClick={() => sorting("callState")} className="text-center">Status
+                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
+                </th>
+                <th onClick={() => sorting("callDescription")} className="text-center">Descrição
+                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
+                </th>
                 <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação
-                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
-                <th onClick={() => sorting("callTitle")} className="text-center">Assunto
-                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
-                <th onClick={() => sorting("callDescription")} className="text-center">Produto
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 <th className='text-center'>Ações</th>
@@ -152,11 +163,14 @@ function ListagemCall() {
                     <td className="text-center">
                       {/*animate*/}
                       <strong className="dropdown-label" onClick={() => reveal(data.id)}>{data.id}</strong>
+
                     </td>
-                    <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
-                    <td className="text-center">{data.callTitle}</td>
-                    <td className="text-center">{data.callDescription}</td>
-                    
+                      <td className="text-center">{data.callRequester}</td>
+                      <td className="text-center">{data.callType}</td>
+                      <td className="text-center">{data.callTitle}</td>
+                      <td className="text-center">{data.callState}</td>
+                      <td className="text-center">{data.callDescription}</td>
+                      <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
                     <td className='text-center'>
                       <img style={{ width: '25px' }} src={editar} alt='Editar' />
                       <img style={{ width: '35px' }} src={excluir} alt='Excluir' onClick={() => handleDeleteCall(data.id)} />
