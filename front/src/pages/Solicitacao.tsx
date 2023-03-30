@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import clsx from "clsx";
 import Swal from "sweetalert2";
 import "../App.css";
-import IMask from "imask";
 import axios from "axios";
 import { registrationSchema } from "../controllers";
 
@@ -17,26 +15,20 @@ const initialValues = {
   callPhone: "",
   callTitle: "",
   callDescription: "",
+  callTeam: "",
   callPriority: "Padrão",
   callState: "Inicializado",
-  callTeam: "",
-};
+}
 
 function Solicitacao() {
-  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
     initialErrors: { callRequester: "" },
     onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
-      console.log(formik.values.callRequester);
-      const response = await axios.post(
-        "http://localhost:3001/call/createCall",
-        formik.touched
-      );
-      console.log(response.data);
+      (JSON.stringify(values, null, 2));
+      await axios.post('http://localhost:3001/call/createCall', formik.values);
     },
   });
 
@@ -127,7 +119,6 @@ function Solicitacao() {
           {/* end::Form group */}
         </div>
         <div className="col-lg-6">
-          {/* begin::Form group Equipe */}
           <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">
               Chamado
@@ -137,6 +128,8 @@ function Solicitacao() {
               type="text"
               autoComplete="off"
               {...formik.getFieldProps("callType")}
+              onChange={formik.handleChange}
+              value={formik.values.callType}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -173,6 +166,8 @@ function Solicitacao() {
               type="email"
               autoComplete="off"
               {...formik.getFieldProps("callEmail")}
+              onChange={formik.handleChange}
+              value={formik.values.callEmail}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -210,6 +205,8 @@ function Solicitacao() {
                 if (/\+|\.|-/.test(event.key)) event.preventDefault();
               }}
               {...formik.getFieldProps("callPhone")}
+              onChange={formik.handleChange}
+              value={formik.values.callPhone}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -246,6 +243,8 @@ function Solicitacao() {
               type="text"
               autoComplete="off"
               {...formik.getFieldProps("callTitle")}
+              onChange={formik.handleChange}
+              value={formik.values.callTitle}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -267,18 +266,21 @@ function Solicitacao() {
             )}
           </div>
           {/* end::Form group */}
+          </div>        
         </div>
+
+        <div className="row">
         <div className="col-lg-6">
-          {/* begin::Form group Produto */}
+          {/* begin::Form group Nome */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Equipe
-            </label>
+            <label className="form-label fw-bolder text-dark fs-6">Equipe</label>
             <input
-              placeholder="Equipe do usuário solicitante"
+              placeholder="Nome da Equipe"
               type="text"
               autoComplete="off"
               {...formik.getFieldProps("callTeam")}
+              onChange={formik.handleChange}
+              value={formik.values.callTeam}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -287,7 +289,8 @@ function Solicitacao() {
                 },
                 {
                   "is-valid":
-                    formik.touched.callTeam && !formik.errors.callTeam,
+                    formik.touched.callTeam &&
+                    !formik.errors.callTeam,
                 }
               )}
             />
@@ -315,6 +318,8 @@ function Solicitacao() {
               rows={5}
               autoComplete="off"
               {...formik.getFieldProps("callDescription")}
+              onChange={formik.handleChange}
+              value={formik.values.callDescription}
               className={clsx(
                 "form-control bg-transparent",
                 {
