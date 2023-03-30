@@ -14,7 +14,7 @@ export class Historic {
     @CreateDateColumn({ name: 'callFinishedDate'})
     callFinishedDate: Date;
 
-    @ManyToOne(() => Call, (call) => call.id)
+    @ManyToOne(() => Call, (call) => call.id , {eager:true})
     call: Call;
 
 }

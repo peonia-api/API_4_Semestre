@@ -24,7 +24,7 @@ export class User {
     @OneToMany(() => Call, (call) => call.user)
     call: Call[];
 
-    @ManyToOne(() => Group, (group) => group.user)
+    @ManyToOne(() => Group, (group) => group.user , {eager:true}) 
     group: Group;
 
 
