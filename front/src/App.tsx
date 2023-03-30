@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-div">
+      <body className="bg-div">
 
         <Header /> 
 
@@ -26,7 +26,7 @@ function App() {
               
         </div>
         
-      </div> 
+      </body> 
       <Footer />
 
     </>  
