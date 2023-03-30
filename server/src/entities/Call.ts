@@ -1,10 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, JoinColumn } from "typeorm";
 
-import { Development } from "./Development";
-import { Committee } from "./Committee";
-import { Historic } from "./Historic";
-import { User } from "./User";
-
 @Entity({name:"call"})
 export class Call {
     // define a chave primária como auto incremento
@@ -20,28 +15,23 @@ export class Call {
     @Column({nullable: false, length: 250})
     callDescription: string;
 
-    @Column({nullable: true})
-    callAttachments: number;
+    @Column({nullable: false, length: 10})
+    callPriority: string;
+
+    @Column({nullable: false, length: 20})
+    callState: string;
+
+    @Column({nullable: false, length: 40})
+    callRequester: string;
 
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
-    @Column({nullable: false, length: 40 })
-    callProduct: string;
+    @Column({nullable: false, length: 70 })
+    callEmail: string;
 
-    @Column({nullable:true})
-    callGroup: string;
+    @Column({nullable: false, length: 15 })
+    callPhone: string;
 
-    @OneToMany(() => Historic, (historic) => historic.call)
-    historic: Historic[];
-
-    @OneToMany(() => Development, (development) => development.call)
-    development: Development[];
-
-    @ManyToOne(() => Committee, (committee) => committee.id, {eager:true})
-    committee: Committee;
-
-    @ManyToOne(() => User, (user) => user.id, {eager:true})
-    user: User;
 
 }

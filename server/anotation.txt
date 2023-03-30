@@ -1,3 +1,15 @@
 manytoone = está recebendo a chave estrangeiro
 
 onetomany = está enviando a chave estrangeira
+
+
+{ 
+	"callType": "feature",
+	"callTitle": "product a",
+	"callDescription": "fazer alguma coisa",
+	"callPriority": "alta",
+	"callState": "init",
+	"callRequester": "mateus",
+	"callEmail": "teste@teste.com",
+	"callPhone": 1298123436
+}
