@@ -12,7 +12,7 @@ export class Committee {
     @Column({nullable: false, length: 20})
     comiName: string;
 
-    @ManyToOne(() => Group, (group) => group.user)
+    @ManyToOne(() => Group, (group) => group.user , {eager:true})
     group: Group;
 
     @OneToMany(() => Call, (call) => call.committee)

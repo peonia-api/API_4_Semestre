@@ -19,7 +19,7 @@ export class Development {
     @Column({nullable: false, length: 10})
     devType: string;
 
-    @ManyToOne(() => Call, (call) => call.id)
+    @ManyToOne(() => Call, (call) => call.id , {eager:true})
     call: Call;
 
    
