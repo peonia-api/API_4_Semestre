@@ -7,46 +7,29 @@ import clsx from 'clsx'
 import Swal from 'sweetalert2'
 import '../App.css';
 import IMask from 'imask'
+import axios from 'axios'
+import { registrationSchema } from '../controllers'
 
-const initialValues = {
+const  initialValues = {
   nome: '',
-  equipe: '',
+  tipo: '',
   email: '',
   telefone: '',
   titulo: '',
-  produto: '',
   descricao: '',
+  prioridade: '',
+  equipe: '',
+  produto: ''
+  // callRequester: '',
+  // callEmail: '',
+  // callPhone: '',
+  // callTitle: '',
+  // callType: '',
+  // callDescription: '',
+  // callPriority: '',
+  // callState: ''
 }
 
-const registrationSchema = Yup.object().shape({
-  nome: Yup.string()
-    .min(3, 'O nome deve ter no mínimo 3 caracteres')
-    .max(50, 'O nome deve ter no máximo 50 caracteres')
-    .required('O nome é obrigatório'),
-  equipe: Yup.string()
-    .min(3, 'A equipe deve ter no mínimo 3 caracteres')
-    .max(50, 'A equipe deve ter no máximo 50 caracteres')
-    .required('A equipe é obrigatória'),
-  email: Yup.string()
-    .email('O e-mail deve ser em um formato válido')
-    .required('O e-mail é obrigatório'),
-  telefone: Yup.string()
-    .min(10, 'O telefone deve ter no mínimo 10 números incluindo DDD')
-    .max(11, 'O telefone deve ter no máximo 11 números incluindo DDD')
-    .required('O telefone é obrigatório'),
-  titulo: Yup.string()
-    .min(3, 'O título deve ter no mínimo 3 caracteres')
-    .max(50, 'O título deve ter no máximo 50 caracteres')
-    .required('O título é obrigatório'),
-  produto: Yup.string()
-    .min(3, 'O produto deve ter no mínimo 3 caracteres')
-    .max(50, 'O produto deve ter no máximo 50 caracteres')
-    .required('O produto é obrigatório'),
-  descricao: Yup.string()
-    .min(3, 'A descrição deve ter no mínimo 3 caracteres')
-    .max(500, 'A descrição deve ter no máximo 500 caracteres')
-    .required('A descrição é obrigatória'),
-})
 
 function Solicitacao() {
 
@@ -56,15 +39,17 @@ function Solicitacao() {
     initialValues,
     validationSchema: registrationSchema,
     initialErrors: {nome: ""},
-    onSubmit: async () => {      
-      
+    onSubmit: async (values) => {     
+      alert(JSON.stringify(values, null, 2));
+      console.log(formik.values.nome);
+      const response = await axios.post('http://localhost:3001/call/createCall', formik.touched);
+      console.log(response.data); 
     },
+
   })
 
   function onClickLimpar() {
-
     formik.resetForm();
-
   }
 
   function onClickEnviar() {
@@ -75,7 +60,6 @@ function Solicitacao() {
         icon: 'error',
         confirmButtonColor: '#54C5CE',
       });
-      formik.submitForm();
     } else {
       Swal.fire({
         title: 'Sucesso',
@@ -83,7 +67,7 @@ function Solicitacao() {
         icon: 'success',
         confirmButtonColor: '#54C5CE',
       });
-      formik.resetForm();
+      formik.submitForm();
     }
 
   }
@@ -121,6 +105,8 @@ function Solicitacao() {
               type='text'
               autoComplete='off'
               {...formik.getFieldProps('nome')}
+              onChange={formik.handleChange}
+              value={formik.values.nome}
               className={clsx(
                 'form-control bg-transparent',
                 {
@@ -347,3 +333,4 @@ function Solicitacao() {
 }
 
 export default Solicitacao
+
