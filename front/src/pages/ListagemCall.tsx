@@ -153,9 +153,10 @@ function ListagemCall() {
                       {/*animate*/}
                       <strong className="dropdown-label" onClick={() => reveal(data.id)}>{data.id}</strong>
                     </td>
+                    <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
                     <td className="text-center">{data.callTitle}</td>
                     <td className="text-center">{data.callDescription}</td>
-                    <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
+                    
                     <td className='text-center'>
                       <img style={{ width: '25px' }} src={editar} alt='Editar' />
                       <img style={{ width: '35px' }} src={excluir} alt='Excluir' onClick={() => handleDeleteCall(data.id)} />
