@@ -32,7 +32,7 @@ function ListagemCall() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get("http://localhost:3001/call/historic")
+        .get(URI.PEGAR_CALL)
         .then((response) => {
           setData(response.data);
         })
@@ -46,9 +46,6 @@ function ListagemCall() {
   //delete
   async function handleDeleteCall(id: number) {
     try {
-      await axios.delete(`${URI.DELETE_CALL}${id}`);
-      const updatedCalls = data.filter((call) => call.id !== id);
-      setData(updatedCalls);
       Swal.fire({
         title: "Deletar chamado",
         text: "Essa ação não pode ser revertida",
@@ -57,7 +54,15 @@ function ListagemCall() {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Sim, deletar",
-      });
+      }).then( async (result) => {
+        if(result.isConfirmed){
+          await axios.delete(`${URI.DELETE_CALL}${id}`);
+          const updatedCalls = data.filter((call) => call.id !== id);
+          setData(updatedCalls);
+        }
+        
+      })
+      
     } catch (error) {
       console.error(error);
       Swal.fire({
