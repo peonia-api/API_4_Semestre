@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Swal, { SweetAlertResult } from "sweetalert2";
 
 function avisoConcluido () {
 Swal.fire({
@@ -9,4 +9,17 @@ Swal.fire({
   });
 }
 
-export { avisoConcluido };
+async function avisoDeletar(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Deletar chamado",
+    text: "Essa ação não pode ser revertida",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, deletar",
+  });
+}
+
+
+export { avisoConcluido, avisoDeletar };

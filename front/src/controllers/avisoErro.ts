@@ -9,4 +9,13 @@ function avisoErro() {
   });
 } 
 
-export { avisoErro };
+function avisoErroDeletar() {
+  Swal.fire({
+    icon: "error",
+    title: "Ocorreu um erro!",
+    text: "Não foi possível excluir o chamado.",
+  });
+  
+}
+
+export { avisoErro, avisoErroDeletar };
