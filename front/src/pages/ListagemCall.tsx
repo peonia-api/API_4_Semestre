@@ -10,10 +10,11 @@ import autoAnimate from "@formkit/auto-animate";
 import excluir from "../images/excluir.png";
 import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
-import Swal from "sweetalert2";
 import axios from "axios";
 import "../App.css";
 import { URI } from "../enumerations/uri";
+import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoErroDeletar } from "../controllers/avisoErro";
 interface Calls {
   id: number;
   callType: string;
@@ -46,15 +47,7 @@ function ListagemCall() {
   //delete
   async function handleDeleteCall(id: number) {
     try {
-      Swal.fire({
-        title: "Deletar chamado",
-        text: "Essa ação não pode ser revertida",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, deletar",
-      }).then( async (result) => {
+     avisoDeletar().then( async (result) => {
         if(result.isConfirmed){
           await axios.delete(`${URI.DELETE_CALL}${id}`);
           const updatedCalls = data.filter((call) => call.id !== id);
@@ -65,11 +58,7 @@ function ListagemCall() {
       
     } catch (error) {
       console.error(error);
-      Swal.fire({
-        icon: "error",
-        title: "Ocorreu um erro!",
-        text: "Não foi possível excluir o chamado.",
-      });
+      avisoErroDeletar();
     }
   }
 
