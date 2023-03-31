@@ -5,7 +5,7 @@ const routes = Router();
 routes.get('/historic', CallController.getHistoricCall);
 routes.get('/hotfix', CallController.getHistoricHotfix);
 routes.get('/feature', CallController.getHistoricFeature);
-routes.get('/:uuid', CallController.getCall);
+routes.get('/especifico/:uuid', CallController.getCall);
 
 routes.post('/createCall', CallController.postCall);
 
