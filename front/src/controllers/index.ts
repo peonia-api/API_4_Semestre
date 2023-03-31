@@ -1,3 +1,5 @@
+import { avisoConcluido } from './avisoConcluido';
+import { avisoErro } from './avisoErro';
 import registrationSchema from './validateCall';
 
-export {registrationSchema} 
+export { registrationSchema, avisoErro, avisoConcluido } 
