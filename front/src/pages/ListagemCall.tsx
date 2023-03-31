@@ -15,6 +15,7 @@ import "../App.css";
 import { URI } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
+import { Link } from "react-router-dom";
 interface Calls {
   id: number;
   callType: string;
@@ -29,34 +30,8 @@ interface Calls {
 
 function ListagemCall() {
 
-//   const [showTeste, setShowTeste] = useState(false);
-
-//   const handleClose = () => setShowTeste(false);
-//   const handleShow = () => setShowTeste(true);
-
-//   function Example() {
-
-//     <Modal
-//       show={showTeste}
-//       onHide={handleClose}
-//       backdrop="static"
-//       keyboard={false}
-//     >
-//       <Modal.Header closeButton>
-//         <Modal.Title>Modal title</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         I will not close if you click outside me. Don't even try to press
-//         escape key.
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button variant="secondary" onClick={handleClose}>
-//           Close
-//         </Button>
-//         <Button variant="primary">Understood</Button>
-//       </Modal.Footer>
-//     </Modal>
-// }
+  const url_atual = window.location.href;
+  const id = window.location.href.split("/")[4]
 
   const [data, setData] = useState<Calls[]>([]);
 
@@ -92,6 +67,7 @@ function ListagemCall() {
       avisoErroDeletar();
     }
   }
+
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
@@ -231,11 +207,9 @@ function ListagemCall() {
                         )}
                       </td>
                       <td className="text-center">
-                        <img
-                          style={{ width: "25px" }}
-                          src={editar}
-                          alt="Editar"
-                        />
+                        <Link to={"/editar/" + data.id}>
+                            <img style={{ width: '25px' }} src={editar} alt='Editar' />
+                        </Link>
                         <img
                           style={{ width: "35px" }}
                           src={excluir}

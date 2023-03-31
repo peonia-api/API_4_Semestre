@@ -3,8 +3,9 @@ import Footer from "./components/Footer";
 import './App.css';
 import Solicitacao from "./pages/Solicitacao";
 import Perfil from "./pages/Perfil";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import ListagemCall from "./pages/ListagemCall";
+import EditarCall from "./pages/EditarCall";
 
 function App() {
 
@@ -18,9 +19,9 @@ function App() {
           
           <div className='container bg-light-opacity rounded mx-auto' style={{padding:"2rem"}}>
             <Routes>
-              <Route path="/" element={<Solicitacao />} />
-              <Route path="/listagem" element={<ListagemCall />} />
-              <Route path="/perfil" element={<Perfil />} />
+                <Route path="/" element={<Solicitacao />} />
+                <Route path="/listagem" element={<ListagemCall />} />
+                <Route path="editar/:id" element={<EditarCall />} />
             </Routes>
           </div>
               
@@ -34,3 +35,7 @@ function App() {
 }
 
 export default App;
+
+
+
+ 
