@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { Container, Table, Form, FloatingLabel, Modal, Button } from 'react-bootstrap';
-import React, { useState, useEffect, useRef } from 'react';
-import autoAnimate from '@formkit/auto-animate';
-import excluir from '../images/excluir.png';
-import ReactPaginate from 'react-paginate';
-import editar from '../images/editar.png';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import '../App.css';
-import { render } from '@testing-library/react';
-import MyButton from '../components/Modal';
-=======
 import {
   FaSortUp,
   FaSortDown,
@@ -29,7 +15,6 @@ import "../App.css";
 import { URI } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
->>>>>>> Building-Components
 interface Calls {
   id: number;
   callType: string;
@@ -43,7 +28,6 @@ interface Calls {
 
 
 function ListagemCall() {
-<<<<<<< HEAD
 
 //   const [showTeste, setShowTeste] = useState(false);
 
@@ -74,8 +58,6 @@ function ListagemCall() {
 //     </Modal>
 // }
 
-=======
->>>>>>> Building-Components
   const [data, setData] = useState<Calls[]>([]);
 
   //axios get
@@ -243,16 +225,6 @@ function ListagemCall() {
                       <td className="text-center">{data.callType}</td>
                       <td className="text-center">{data.callTitle}</td>
                       <td className="text-center">{data.callState}</td>
-<<<<<<< HEAD
-                      <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
-                      <td className='text-center'>
-                        <MyButton/>
-                        <img style={{ width: '35px' }} src={excluir} alt='Excluir' onClick={() => handleDeleteCall(data.id)} />
-                      </td>
-                  </tr>
-                )
-              })}
-=======
                       <td className="text-center">
                         {new Date(data.callDateCreate).toLocaleDateString(
                           "en-GB"
@@ -274,7 +246,6 @@ function ListagemCall() {
                     </tr>
                   );
                 })}
->>>>>>> Building-Components
             </tbody>
             {/*pagination*/}
             {data.length > itemsPerPage && (
