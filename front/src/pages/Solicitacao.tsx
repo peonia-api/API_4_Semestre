@@ -28,6 +28,7 @@ function Solicitacao() {
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post("http://localhost:3001/call/createCall", formik.values);
+      onClickLimpar();
     },
   });
 
