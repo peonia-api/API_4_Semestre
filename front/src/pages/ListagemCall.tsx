@@ -106,8 +106,7 @@ function ListagemCall() {
   const filteredData = data.filter((item) =>
     item.callRequester.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.callDescription.toLowerCase().includes(searchQuery.toLowerCase())
+    item.callType.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (

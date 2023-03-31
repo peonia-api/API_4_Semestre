@@ -12,7 +12,7 @@ export class Call {
     @Column({nullable: false, length: 80})
     callTitle: string;
 
-    @Column({nullable: false, length: 250})
+    @Column({nullable: false})
     callDescription: string;
 
     @Column({nullable: false, length: 10})
