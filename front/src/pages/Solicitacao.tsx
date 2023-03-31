@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
+import { URI } from "../enumerations/uri";
 
 const initialValues = {
   callRequester: "",
@@ -27,7 +28,7 @@ function Solicitacao() {
     initialErrors: { callRequester: "" },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      await axios.post("http://localhost:3001/call/createCall", formik.values);
+      await axios.post(URI.ENVIAR_CALL, formik.values);
       onClickLimpar();
     },
   });
