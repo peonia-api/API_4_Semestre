@@ -120,13 +120,6 @@ function ListagemCall() {
           <div className='box-search'>
             <input className='input-search' type="text" placeholder="Pesquisar" 
               value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)}/>
-                {/* <img src={search}  alt='Procurar'/> */}
-            {/* <Form.Control className='px-2 mb-2 pl-2'
-              type="text"
-              placeholder="Pesquisar"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            /> */}
           </div>
           <Table bordered hover responsive>
             <thead>
@@ -147,9 +140,6 @@ function ListagemCall() {
                 <th onClick={() => sorting("callState")} className="text-center">Status
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
-                <th onClick={() => sorting("callDescription")} className="text-center">Descrição
-                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
                 <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
@@ -164,13 +154,11 @@ function ListagemCall() {
                     <td className="text-center">
                       {/*animate*/}
                       <strong className="dropdown-label" onClick={() => reveal(data.id)}>{data.id}</strong>
-
                     </td>
                       <td className="text-center">{data.callRequester}</td>
                       <td className="text-center">{data.callType}</td>
                       <td className="text-center">{data.callTitle}</td>
                       <td className="text-center">{data.callState}</td>
-                      <td className="text-center">{data.callDescription}</td>
                       <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
                     <td className='text-center'>
                       <img style={{ width: '25px' }} src={editar} alt='Editar' />
@@ -198,7 +186,7 @@ function ListagemCall() {
               <div key={item.id} ref={parent}>
                 {
                   show === item.id && (
-                    <FloatingLabel controlId="floatingLabel" label="Assunto">
+                    <FloatingLabel controlId="floatingLabel" label="Descrição">
                       <Form.Control type="text" defaultValue={item.callDescription} disabled />
                     </FloatingLabel>
                   )
