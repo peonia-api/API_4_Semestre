@@ -84,7 +84,7 @@ function ListagemCall() {
 
   //pagination
   const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 3;
+  const itemsPerPage = 5;
   const pagesVisited = pageNumber * itemsPerPage;
   const pageCount = Math.ceil(data.length / itemsPerPage);
   const changePage = ({ selected }: { selected: number }) => {
@@ -104,8 +104,9 @@ function ListagemCall() {
   //search
   const [searchQuery, setSearchQuery] = useState<string>("");
   const filteredData = data.filter((item) =>
-    item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.callRequester.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.callDescription.toLowerCase().includes(searchQuery.toLowerCase())
   );
 

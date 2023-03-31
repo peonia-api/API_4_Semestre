@@ -1,13 +1,13 @@
 import * as Yup from 'yup'
 
-const  initialValues = {
+const initialValues = {
     callRequester: '',
     callType: '',
     callEmail: '',
     callPhone: '',
     callTitle: '',
     callDescription: '',
-    callPriority: 'Padrão',
+    callPriority: '',
     callState: 'Inicializado',
     callTeam:'',
   }  
@@ -18,9 +18,7 @@ const registrationSchema = Yup.object().shape({
       .max(40, 'O nome deve ter no máximo 40 caracteres')
       .required('O nome é obrigatório'),
     callType: Yup.string()
-      .min(3, 'O tipo do chamado deve ter no mínimo 3 caracteres')
-      .max(8, 'O tipo do chamado deve ter no máximo 8 caracteres')
-      .required('A equipe é obrigatória'),
+      .required('O tipo do chamado é obrigatório'),
     callEmail: Yup.string()
       .email('O e-mail deve ser em um formato válido')
       .required('O e-mail é obrigatório'),
@@ -32,13 +30,11 @@ const registrationSchema = Yup.object().shape({
       .min(3, 'O título deve ter no mínimo 3 caracteres')
       .max(80, 'O título deve ter no máximo 80 caracteres')
       .required('O título é obrigatório'),
-    callTeam: Yup.string()
-      .min(3, 'O nome da equipe deve ter no mínimo 3 caracteres')
-      .max(50, 'O nome da equipe deve ter no máximo 50 caracteres')
-      .required('O produto é obrigatório'),
     callDescription: Yup.string()
       .min(3, 'A descrição deve ter no mínimo 3 caracteres')
       .max(250, 'A descrição deve ter no máximo 250 caracteres')
       .required('A descrição é obrigatória'),
+    callPriority: Yup.string()
+      .required('A prioridade é obrigatória')
   })
   export default registrationSchema;

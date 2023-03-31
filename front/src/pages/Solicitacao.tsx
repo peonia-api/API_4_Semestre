@@ -16,7 +16,7 @@ const initialValues = {
   callTitle: "",
   callDescription: "",
   callTeam: "",
-  callPriority: "Padrão",
+  callPriority: "",
   callState: "Inicializado",
 }
 
@@ -55,7 +55,7 @@ function Solicitacao() {
     }
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <form
@@ -66,13 +66,8 @@ function Solicitacao() {
       style={{ margin: "8px" }}
     >
       <div className="text-center mb-4">
-        <h1 className="text-dark fw-bolder mb-3 font-padrao-titulo">
-          SOLICITAÇÃO
-        </h1>
-        <div
-          className="text-gray-500 fs-6 font-padrao-titulo mb-5"
-          style={{ letterSpacing: 0 }}
-        >
+        <h1 className="text-dark fw-bolder mb-3 font-padrao-titulo">SOLICITAÇÃO</h1>
+        <div className="text-gray-500 fs-6 font-padrao-titulo mb-5" style={{ letterSpacing: 0 }}>
           Preencha os campos para gerar um chamado
         </div>
       </div>
@@ -116,51 +111,12 @@ function Solicitacao() {
               </div>
             )}
           </div>
-          {/* end::Form group */}
+          {/* end::Form group Nome */}
         </div>
-        <div className="col-lg-6">
-          <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Chamado
-            </label>
-            <input
-              placeholder="Tipo do Chamado (Hotfix ou Feature)"
-              type="text"
-              autoComplete="off"
-              {...formik.getFieldProps("callType")}
-              onChange={formik.handleChange}
-              value={formik.values.callType}
-              className={clsx(
-                "form-control bg-transparent",
-                {
-                  "is-invalid":
-                    formik.touched.callType && formik.errors.callType,
-                },
-                {
-                  "is-valid":
-                    formik.touched.callType && !formik.errors.callType,
-                }
-              )}
-            />
-            {formik.touched.callType && formik.errors.callType && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callType}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* end::Form group */}
-        </div>
-      </div>
-
-      <div className="row">
         <div className="col-lg-6">
           {/* begin::Form group E-mail */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              E-mail
-            </label>
+            <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
             <input
               placeholder="E-mail do solicitante"
               type="email"
@@ -188,14 +144,15 @@ function Solicitacao() {
               </div>
             )}
           </div>
-          {/* end::Form group */}
+          {/* end::Form group E-mail */}
         </div>
+      </div>
+
+      <div className="row">
         <div className="col-lg-6">
           {/* begin::Form group Telefone */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Telefone
-            </label>
+            <label className="form-label fw-bolder text-dark fs-6">Telefone</label>
             <input
               id="fone"
               placeholder="Telefone para contato"
@@ -227,17 +184,12 @@ function Solicitacao() {
               </div>
             )}
           </div>
-          {/* end::Form group */}
+          {/* end::Form group Telefone */}
         </div>
-      </div>
-
-      <div className="row">
         <div className="col-lg-6">
           {/* begin::Form group Título */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Título
-            </label>
+            <label className="form-label fw-bolder text-dark fs-6">Título</label>
             <input
               placeholder="Título da solicitação"
               type="text"
@@ -265,44 +217,98 @@ function Solicitacao() {
               </div>
             )}
           </div>
-          {/* end::Form group */}
-          </div>        
+          {/* end::Form group Título */}
         </div>
 
-        <div className="row">
+      </div>
+
+      <div className="row">
         <div className="col-lg-6">
-          {/* begin::Form group Nome */}
+          {/* begin::Form group Tipo Chamado */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">Equipe</label>
-            <input
-              placeholder="Nome da Equipe"
-              type="text"
+            <label className="form-label fw-bolder text-dark fs-6">Chamado</label>
+            <select
+              placeholder="Tipo do Chamado (Hotfix ou Feature)"
               autoComplete="off"
-              {...formik.getFieldProps("callTeam")}
+              {...formik.getFieldProps("callType")}
               onChange={formik.handleChange}
-              value={formik.values.callTeam}
+              value={formik.values.callType}
               className={clsx(
                 "form-control bg-transparent",
                 {
                   "is-invalid":
-                    formik.touched.callTeam && formik.errors.callTeam,
+                    formik.touched.callType && formik.errors.callType,
                 },
                 {
                   "is-valid":
-                    formik.touched.callTeam &&
-                    !formik.errors.callTeam,
+                    formik.touched.callType && !formik.errors.callType,
                 }
               )}
-            />
-            {formik.touched.callTeam && formik.errors.callTeam && (
+            >
+            <option value="" disabled label="Selecione o tipo do chamado">
+              Tipo do chamado{" "}
+            </option>
+            <option value='hotfix' onChange={formik.handleChange} label="Hotfix">
+                Hotfix
+            </option>
+            <option value='feature' onChange={formik.handleChange} label="Feature">
+                Feature
+            </option>
+            </select>
+            {formik.touched.callType && formik.errors.callType && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callTeam}</span>
+                  <span role="alert">{formik.errors.callType}</span>
                 </div>
               </div>
             )}
           </div>
-          {/* end::Form group */}
+          {/* end::Form group Tipo Chamado*/}
+        </div>
+        <div className="col-lg-6">
+          {/* begin::Form group Prioridade */}
+          <div className="fv-row mb-3">
+            <label className="form-label fw-bolder text-dark fs-6">Prioridade</label>
+            <select
+              placeholder="Prioridade do chamado"
+              autoComplete="off"
+              {...formik.getFieldProps("callPriority")}
+              onChange={formik.handleChange}
+              value={formik.values.callPriority}
+              className={clsx(
+                "form-control bg-transparent",
+                {
+                  "is-invalid":
+                    formik.touched.callPriority && formik.errors.callPriority,
+                },
+                {
+                  "is-valid":
+                    formik.touched.callPriority && !formik.errors.callPriority,
+                }
+              )}
+            >
+            <option value="" disabled label="Selecione a prioridade do chamado">
+              Prioridade do chamado{" "}
+            </option>
+            <option value='alta' onChange={formik.handleChange} label="Alta">
+                Alta
+            </option>
+            <option value='media' onChange={formik.handleChange} label="Média">
+                Media
+            </option>
+            <option value='baixa' onChange={formik.handleChange} label="Baixa">
+                Baixa
+            </option>
+            </select>
+            {formik.touched.callPriority && formik.errors.callPriority && (
+              <div className="fv-plugins-message-container">
+                <div className="fv-help-block">
+                  <span role="alert">{formik.errors.callPriority}</span>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* end::Form group Tipo Prioridade*/}
         </div>
       </div>
 
@@ -310,9 +316,7 @@ function Solicitacao() {
         <div className="col-lg-12">
           {/* begin::Form group Descrição */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Descrição
-            </label>
+            <label className="form-label fw-bolder text-dark fs-6">Descrição</label>
             <textarea
               placeholder="Descrição da solicitação"
               rows={5}
@@ -324,13 +328,11 @@ function Solicitacao() {
                 "form-control bg-transparent",
                 {
                   "is-invalid":
-                    formik.touched.callDescription &&
-                    formik.errors.callDescription,
+                    formik.touched.callDescription && formik.errors.callDescription,
                 },
                 {
                   "is-valid":
-                    formik.touched.callDescription &&
-                    !formik.errors.callDescription,
+                    formik.touched.callDescription && !formik.errors.callDescription,
                 }
               )}
             ></textarea>
