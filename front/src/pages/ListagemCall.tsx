@@ -1,5 +1,5 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { Container, Table, Form, FloatingLabel } from 'react-bootstrap';
+import { Container, Table, Form, FloatingLabel, Modal, Button } from 'react-bootstrap';
 import React, { useState, useEffect, useRef } from 'react';
 import autoAnimate from '@formkit/auto-animate';
 import excluir from '../images/excluir.png';
@@ -8,6 +8,8 @@ import editar from '../images/editar.png';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import '../App.css';
+import { render } from '@testing-library/react';
+import MyButton from '../components/Modal';
 interface Calls {
   id: number;
   callType: string;
@@ -19,7 +21,37 @@ interface Calls {
   callDateCreate: Date;
 };
 
+
 function ListagemCall() {
+
+//   const [showTeste, setShowTeste] = useState(false);
+
+//   const handleClose = () => setShowTeste(false);
+//   const handleShow = () => setShowTeste(true);
+
+//   function Example() {
+
+//     <Modal
+//       show={showTeste}
+//       onHide={handleClose}
+//       backdrop="static"
+//       keyboard={false}
+//     >
+//       <Modal.Header closeButton>
+//         <Modal.Title>Modal title</Modal.Title>
+//       </Modal.Header>
+//       <Modal.Body>
+//         I will not close if you click outside me. Don't even try to press
+//         escape key.
+//       </Modal.Body>
+//       <Modal.Footer>
+//         <Button variant="secondary" onClick={handleClose}>
+//           Close
+//         </Button>
+//         <Button variant="primary">Understood</Button>
+//       </Modal.Footer>
+//     </Modal>
+// }
 
   const [data, setData] = useState<Calls[]>([]);
 
@@ -159,10 +191,10 @@ function ListagemCall() {
                       <td className="text-center">{data.callTitle}</td>
                       <td className="text-center">{data.callState}</td>
                       <td className='text-center'>{new Date(data.callDateCreate).toLocaleDateString('en-GB')}</td>
-                    <td className='text-center'>
-                      <img style={{ width: '25px' }} src={editar} alt='Editar' />
-                      <img style={{ width: '35px' }} src={excluir} alt='Excluir' onClick={() => handleDeleteCall(data.id)} />
-                    </td>
+                      <td className='text-center'>
+                        <MyButton/>
+                        <img style={{ width: '35px' }} src={excluir} alt='Excluir' onClick={() => handleDeleteCall(data.id)} />
+                      </td>
                   </tr>
                 )
               })}
