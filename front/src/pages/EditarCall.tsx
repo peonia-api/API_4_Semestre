@@ -110,7 +110,7 @@ function EditarCall() {
             className="text-gray-500 fs-6 font-padrao-titulo mb-5"
             style={{ letterSpacing: 0 }}
           >
-            Preencha os campos para gerar um chamado
+            Preencha os campos para atualizar um chamado
           </div>
         </div>
 
