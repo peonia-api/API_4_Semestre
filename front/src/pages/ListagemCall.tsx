@@ -182,7 +182,9 @@ function ListagemCall() {
               </tr>
             </thead>
             <tbody>
-              {data.map((data) => {
+              {filteredData
+                .slice(pagesVisited, pagesVisited + itemsPerPage)
+                .map((data) => {
                   return (
                     <tr key={data.id}>
                       {/*corpo tabela*/}
