@@ -38,7 +38,14 @@
  ## Entregas 
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img width="100%" src = "imagens/video-primeiraentrega.gif"></p>
+<p align="center"> 
+
+
+https://user-images.githubusercontent.com/86448876/229319165-8b928111-5344-4290-8595-af4de28aedf6.mp4
+
+
+</p>
+
 <!--<h4> Entrega da Sprint 2 </h4>
 <p align="center"> <img width="100%" src = "imagens/video - sprint2.gif"></p>
 <h4> Entrega da Sprint 3 </h4>
