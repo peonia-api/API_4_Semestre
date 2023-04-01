@@ -1,7 +1,7 @@
 import Swal, { SweetAlertResult } from "sweetalert2";
 
-function avisoConcluido () {
-Swal.fire({
+function avisoConcluido (): Promise<SweetAlertResult>  {
+  return Swal.fire({
     title: "Sucesso",
     text: "Solicitação enviada com sucesso!",
     icon: "success",

@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <body className="bg-div">
+      <div className="bg-div">
 
         <Header /> 
 
@@ -27,7 +27,7 @@ function App() {
               
         </div>
         
-      </body> 
+      </div> 
       <Footer />
 
     </>  

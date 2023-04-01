@@ -88,7 +88,10 @@ function EditarCall() {
       avisoErro();
     } else {
       formik.submitForm();
-      avisoConcluido();
+      avisoConcluido().then((res:any) => {
+        window.location.assign("/listagem");
+      })
+      
     }
     // <Link to={"/listagem"}/>
   }
