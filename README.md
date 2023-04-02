@@ -85,7 +85,11 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = "imagens/backlog.png"></p>
+<p align="center"> 
+    
+![Product backlog](https://user-images.githubusercontent.com/86448876/229383934-ff678e48-ef24-460e-97c7-dd9ec6b19ab1.png)
+    
+</p>
  
  <!--## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
