@@ -41,7 +41,7 @@
 <p align="center"> 
 
 
-https://user-images.githubusercontent.com/86448876/229319165-8b928111-5344-4290-8595-af4de28aedf6.mp4
+[![Apresentação de entrega 1ª Sprint](https://img.youtube.com/vi/CCdZYzMl5eo/0.jpg)](https://www.youtube.com/watch?v=CCdZYzMl5eo)
 
 
 </p>
