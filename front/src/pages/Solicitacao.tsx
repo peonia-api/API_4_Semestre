@@ -3,24 +3,13 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import Swal from "sweetalert2";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
 import React from "react";
+import { initialValues } from "../types";
 
-const initialValues = {
-  callRequester: "",
-  callType: "",
-  callEmail: "",
-  callPhone: "",
-  callTitle: "",
-  callDescription: "",
-  callTeam: "",
-  callPriority: "",
-  callState: "Inicializado",
-};
 
 function Solicitacao() {
   const formik = useFormik({

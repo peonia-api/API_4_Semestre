@@ -7,21 +7,8 @@ import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Calls } from "../types";
 
-interface Calls {
-  id: number;
-  callType: string;
-  callEmail: string;
-  callTitle: string;
-  callPhone: number;
-  callDescription: string;
-  callState: string;
-  callRequester: string;
-  callPriority: number;
-  callDateCreate: Date;
-}
 
 function EditarCall() {
   const id = window.location.href.split("/")[4];

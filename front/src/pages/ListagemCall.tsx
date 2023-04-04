@@ -16,16 +16,8 @@ import { URI } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
-interface Calls {
-  id: number;
-  callType: string;
-  callTitle: string;
-  callDescription: string;
-  callState: string;
-  callRequester: string;
-  callPriority: number;
-  callDateCreate: Date;
-}
+import { Calls } from "../types";
+
 
 
 function ListagemCall() {

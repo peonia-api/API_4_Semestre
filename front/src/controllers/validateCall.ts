@@ -1,16 +1,6 @@
 import * as Yup from 'yup'
 
-const initialValues = {
-    callRequester: '',
-    callType: '',
-    callEmail: '',
-    callPhone: '',
-    callTitle: '',
-    callDescription: '',
-    callPriority: '',
-    callState: 'Inicializado',
-    callTeam:'',
-  }  
+
 
 const registrationSchema = Yup.object().shape({
     callRequester: Yup.string()
