@@ -38,7 +38,13 @@
  ## Entregas 
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img width="100%" src = "imagens/video-primeiraentrega.gif"></p>
+<p align="center"> 
+
+https://user-images.githubusercontent.com/86448876/229383850-07c43960-d344-4bc1-937e-2391f1a4f639.mp4
+
+
+</p>
+
 <!--<h4> Entrega da Sprint 2 </h4>
 <p align="center"> <img width="100%" src = "imagens/video - sprint2.gif"></p>
 <h4> Entrega da Sprint 3 </h4>
@@ -59,7 +65,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 | Sprint | Entrega | Status | Relatório |
 |:-----:|:----------:|:---------:|:---------:|
-| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/1sprint.md) |
+| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
 <!--| 02 | 09/10/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint2.md) |
 | 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
 | 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
@@ -79,7 +85,11 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = "imagens/backlog.png"></p>
+<p align="center"> 
+    
+![Product backlog](https://user-images.githubusercontent.com/86448876/229383934-ff678e48-ef24-460e-97c7-dd9ec6b19ab1.png)
+    
+</p>
  
  <!--## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
