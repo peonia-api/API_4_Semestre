@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import ListagemCall from "./pages/ListagemCall";
 import EditarCall from "./pages/EditarCall";
 import CadastroUsuario from "./pages/CadastroUsuario";
+import ListagemUser from "./pages/ListagemUser";
 
 function App() {
 
@@ -20,10 +21,11 @@ function App() {
 
           <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
             <Routes>
-              <Route path="/" element={<Solicitacao />} />
+              <Route path="/solicitacao" element={<Solicitacao />} />
               <Route path="/listagem" element={<ListagemCall />} />
-              <Route path="editar/:id" element={<EditarCall />} />
-              <Route path="cadastroUsuario" element={<CadastroUsuario />} />
+              <Route path="/listagemUser" element={<ListagemUser />} />
+              <Route path="/editar/:id" element={<EditarCall />} />
+              <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
             </Routes>
           </div>
 

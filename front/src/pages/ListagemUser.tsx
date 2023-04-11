@@ -4,7 +4,7 @@ import {
   FaChevronRight,
   FaChevronLeft,
 } from "react-icons/fa";
-import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
+import { Container, Table, Form, FloatingLabel, Nav, Navbar } from "react-bootstrap";
 import React, { useState, useEffect, useRef } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import excluir from "../images/excluir.png";
@@ -20,7 +20,7 @@ import { Calls } from "../types";
 
 
 
-function ListagemCall() {
+function ListagemUser() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -113,23 +113,24 @@ function ListagemCall() {
   );
 
   return (
-    <>
-      <div className="text-center">
-        <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">
-          Listagem dos chamados
-        </h1>
-      </div>
+   <>
       <Container className="px-2 mb-5">
+        <div className="text-center" >
+          <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">
+            Listagem dos Usuários
+          </h1>
+        </div>
         <Container>
-        <div className="d-flex align-items-center justify-content-between mt-4 Margin">
+          <div className="d-flex align-items-center justify-content-between mt-4 Margin" >
             <input
               className="input-search"
               type="text"
               placeholder="Pesquisar"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
+              // <button type="button"className="btn btn-form">Adicionar Usuário</button>
             />
-            <button type="button"className="btn btn-form" onClick={() => window.location.href='/solicitacao'}>Adicionar Chamado
+              <button type="button"className="btn btn-form" onClick={() => window.location.href='/cadastroUsuario'}>Adicionar Usuário
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -146,46 +147,30 @@ function ListagemCall() {
           <Table bordered hover responsive>
             <thead>
               <tr>
-                {/*cabeçalho tabela*/}
-                <th onClick={() => sorting("id")} className="text-center">
-                  Número da solitição
+                <th 
+                  onClick={() => sorting("id")} className="text-center">Nome
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
+
                 <th
-                  onClick={() => sorting("callRequester")}
-                  className="text-center"
-                >
-                  Solicitante
+                  onClick={() => sorting("callRequester")}className="text-center">Email 
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
-                <th onClick={() => sorting("callType")} className="text-center">
-                  Tipo
+
+                <th 
+                  onClick={() => sorting("callType")} className="text-center">Equipe
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
+                
                 <th
-                  onClick={() => sorting("callTitle")}
-                  className="text-center"
-                >
-                  Título
+                  onClick={() => sorting("callTitle")}className="text-center">Permissão
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
-                <th
-                  onClick={() => sorting("callState")}
-                  className="text-center"
-                >
-                  Status
-                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
-                <th
-                  onClick={() => sorting("callDateCreate")}
-                  className="text-center"
-                >
-                  Data de criação
-                  {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
+
                 <th className="text-center">Ações</th>
               </tr>
             </thead>
+
             <tbody>
               {filteredData
                 .slice(pagesVisited, pagesVisited + itemsPerPage)
@@ -260,4 +245,4 @@ function ListagemCall() {
   );
 }
 
-export default ListagemCall;
+export default ListagemUser;

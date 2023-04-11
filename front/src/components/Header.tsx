@@ -25,8 +25,8 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <CustomLink to="/">SOLICITAÇÃO</CustomLink>
-              <CustomLink to="/listagem">LISTAGEM</CustomLink>
+              <CustomLink to="/listagem">CHAMADO</CustomLink>
+              <CustomLink to="/listagemUser">USUÁRIO</CustomLink>
               {/* <CustomLink to="/perfil">PERFIL</CustomLink> */}
             </Nav>
           </Navbar.Collapse>
