@@ -15,7 +15,7 @@ export class Group {
     @JoinTable()
     user: User[]
 
-    @ManyToOne(() => Committee, (committee) => committee.group)
+    @ManyToOne(() => Committee, (committee) => committee.group, {eager:true})
     committee: Committee;
 
 }

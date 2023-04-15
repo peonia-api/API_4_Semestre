@@ -24,10 +24,10 @@ export class Call {
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
-    @ManyToOne(() => Committee, (committee) => committee.call)
+    @ManyToOne(() => Committee, (committee) => committee.call , {eager:true})
     committee: Committee;
 
-    @ManyToOne(() => User, (user) => user.call)
+    @ManyToOne(() => User, (user) => user.call, {eager:true})
     user: User;
 
     @OneToMany(() => Attachment, (attachment) => attachment.call)
