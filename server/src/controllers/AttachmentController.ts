@@ -11,7 +11,7 @@ class AttachmentController {
 
     public async file (req: Request, res: Response) : Promise<Response> {
         try{            
-            const { name } = req.body
+            const { name, callId } = req.body
             const files = req.files
             
             const attachmentRep = AppDataSource.getRepository(Attachment);
@@ -21,6 +21,7 @@ class AttachmentController {
                 const attachment = new Attachment()
 
                 attachment.name = name[index]
+                attachment.call = callId
                 attachment.src = files[index].path
                 att = await attachmentRep.save(attachment)
 
@@ -32,7 +33,7 @@ class AttachmentController {
     }
 
     public async putFile (req: Request, res: Response) : Promise<Response> {
-        const { name } = req.body
+        const { name, callId } = req.body
         const file = req.file
         const id:any = req.params.uuid
         console.log(file);
@@ -41,6 +42,7 @@ class AttachmentController {
         const findFile = await attachmentRepository.findOneBy({id: id})
         fs.unlinkSync(findFile.src)
         findFile.name = name
+        findFile.call = callId
         findFile.src = file.path
 
         

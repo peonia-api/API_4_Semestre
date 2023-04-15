@@ -39,11 +39,9 @@ class CallController {
         insertCall.callTitle = createCall.callTitle
         insertCall.callDescription = createCall.callDescription
         insertCall.callPriority = createCall.callPriority
-        insertCall.callState = createCall.callState
-        insertCall.callRequester = createCall.callRequester
-        insertCall.callTeam = createCall.callTeam
-        insertCall.callEmail = createCall.callEmail
-        insertCall.callPhone = createCall.callPhone
+        insertCall.committee = createCall.committee
+        insertCall.user = createCall.user
+    
 
         const allCall = await callRepository.save(insertCall)
         return res.json(allCall)
@@ -58,11 +56,10 @@ class CallController {
         findCall.callTitle = createCall.callTitle
         findCall.callDescription = createCall.callDescription
         findCall.callPriority = createCall.callPriority
-        findCall.callState = createCall.callState
-        findCall.callRequester = createCall.callRequester
-        findCall.callTeam = createCall.callTeam
-        findCall.callEmail = createCall.callEmail
-        findCall.callPhone = createCall.callPhone 
+        findCall.committee = createCall.committee
+        findCall.user = createCall.user
+
+    
         const allCall = await callRepository.save(findCall)
         return res.json(allCall)
     }
