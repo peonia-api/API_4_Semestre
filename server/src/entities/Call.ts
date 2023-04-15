@@ -1,4 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, JoinColumn } from "typeorm";
+import { Committee } from "./Committee";
+import { User } from "./User";
+import { Attachment } from "./Attachment";
 
 @Entity({name:"call"})
 export class Call {
@@ -18,23 +21,19 @@ export class Call {
     @Column({nullable: false, length: 10})
     callPriority: string;
 
-    @Column({nullable: false, length: 20})
-    callState: string;
-
-    @Column({nullable: false, length: 40})
-    callRequester: string;
-
-    @Column({nullable: false, length: 50})
-    callTeam: string;
-
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 
-    @Column({nullable: false, length: 70 })
-    callEmail: string;
+    @ManyToOne(() => Committee, (committee) => committee.call)
+    committee: Committee;
 
-    @Column({nullable: false, length: 15 })
-    callPhone: string;
+    @ManyToOne(() => User, (user) => user.call)
+    user: User;
+
+    @OneToMany(() => Attachment, (attachment) => attachment.call)
+    attachment: Attachment[];
+
+
 
 
 }
