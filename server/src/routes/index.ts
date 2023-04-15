@@ -2,7 +2,6 @@ import cors = require("cors");
 import { Router, Request, Response } from "express";
 
 import call from "./call";
-import { Attachment } from "../entities/Attachment";
 import attachment from "./attachment";
 
 const routes = Router()
