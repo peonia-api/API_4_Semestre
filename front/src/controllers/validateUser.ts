@@ -12,7 +12,6 @@ const registrationSchemaUser = Yup.object().shape({
     userGroup: Yup.string()
     .required('O tipo da equipe é obrigatório'),
 
-
     userPosition: Yup.string()
       .required('O cargo é obrigatório'),
 

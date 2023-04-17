@@ -6,19 +6,18 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
-import { URI } from "../enumerations/uri";
-import React from "react";
-import { initialValues } from "../types";
+import { URIuser } from "../enumerations/uri";
+import { initialValues } from "../types/user";
 
 
 function CadastroUsuario() {
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        initialErrors: { callRequester: "" },
+        initialErrors: { userName: "" },
         onSubmit: async (values) => {
             JSON.stringify(values, null, 2);
-            await axios.post(URI.ENVIAR_CALL, formik.values);
+            await axios.post(URIuser.ENVIAR_USER, formik.values);
             onClickLimpar();
         },
     });
@@ -73,71 +72,68 @@ function CadastroUsuario() {
                             placeholder="Nome do usuário"
                             type="text"
                             autoComplete="off"
-                            {...formik.getFieldProps("callRequester")}
+                            {...formik.getFieldProps("userName")}
                             onChange={formik.handleChange}
-                            value={formik.values.callRequester}
+                            value={formik.values.userName}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callRequester && formik.errors.callRequester,
+                                        formik.touched.userName && formik.errors.userName,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callRequester &&
-                                        !formik.errors.callRequester,
+                                        formik.touched.userName &&
+                                        !formik.errors.userName,
                                 }
                             )}
                         />
-                        {formik.touched.callRequester && formik.errors.callRequester && (
+                        {formik.touched.userName && formik.errors.userName && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callRequester}</span>
+                                    <span role="alert">{formik.errors.userName}</span>
                                 </div>
                             </div>
                         )}
                     </div>
                     {/* end::Form group Nome */}
                 </div>
+
                 <div className="col-lg-6">
-                    {/* begin::Form group Telefone */}
+                    {/* begin::Form group Senha */}
                     <div className="fv-row mb-3">
                         <label className="form-label fw-bolder text-dark fs-6">
-                            Telefone
+                            Senha
                         </label>
                         <input
-                            id="fone"
-                            placeholder="Telefone para contato"
-                            type="number"
+                            placeholder="Senha"
+                            type="password"
                             autoComplete="off"
-                            onKeyDown={(event) => {
-                                if (/\+|\.|-/.test(event.key)) event.preventDefault();
-                            }}
-                            {...formik.getFieldProps("callPhone")}
+                            {...formik.getFieldProps("userPassword")}
                             onChange={formik.handleChange}
-                            value={formik.values.callPhone}
+                            value={formik.values.userPassword}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callPhone && formik.errors.callPhone,
+                                        formik.touched.userPassword && formik.errors.userPassword,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callPhone && !formik.errors.callPhone,
+                                        formik.touched.userPassword && !formik.errors.userPassword,
                                 }
                             )}
                         />
-                        {formik.touched.callPhone && formik.errors.callPhone && (
+                        {formik.touched.userPassword && formik.errors.userPassword && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callPhone}</span>
+                                    <span role="alert">{formik.errors.userPassword}</span>
                                 </div>
                             </div>
                         )}
                     </div>
-                    {/* end::Form group Telefone */}
-                </div>
+                    {/* end::Form group Título */}
+                </div>            
 
             </div>
 
@@ -152,70 +148,35 @@ function CadastroUsuario() {
                             placeholder="E-mail do usuário"
                             type="email"
                             autoComplete="off"
-                            {...formik.getFieldProps("callEmail")}
+                            {...formik.getFieldProps("userEmail")}
                             onChange={formik.handleChange}
-                            value={formik.values.callEmail}
+                            value={formik.values.userEmail}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callEmail && formik.errors.callEmail,
+                                        formik.touched.userEmail && formik.errors.userEmail,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callEmail && !formik.errors.callEmail,
+                                        formik.touched.userEmail && !formik.errors.userEmail,
                                 }
                             )}
                         />
-                        {formik.touched.callEmail && formik.errors.callEmail && (
+                        {formik.touched.userEmail && formik.errors.userEmail && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callEmail}</span>
+                                    <span role="alert">{formik.errors.userEmail}</span>
                                 </div>
                             </div>
                         )}
                     </div>
                     {/* end::Form group E-mail */}
                 </div>
-                <div className="col-lg-6">
-                    {/* begin::Form group Senha */}
-                    <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Senha
-                        </label>
-                        <input
-                            placeholder="Senha"
-                            type="password"
-                            autoComplete="off"
-                            {...formik.getFieldProps("callTitle")}
-                            onChange={formik.handleChange}
-                            value={formik.values.callTitle}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.callTitle && formik.errors.callTitle,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.callTitle && !formik.errors.callTitle,
-                                }
-                            )}
-                        />
-                        {formik.touched.callTitle && formik.errors.callTitle && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callTitle}</span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    {/* end::Form group Título */}
-                </div>
             </div>
 
             <div className="row">
-                <div className="col-lg-4">
+                <div className="col-lg-6">
                     {/* begin::Form group Cargo */}
                     <div className="fv-row mb-3">
                         <label className="form-label fw-bolder text-dark fs-6">
@@ -224,18 +185,18 @@ function CadastroUsuario() {
                         <select
                             placeholder="Tipo do Chamado (Hotfix ou Feature)"
                             autoComplete="off"
-                            {...formik.getFieldProps("callType")}
+                            {...formik.getFieldProps("userPosition")}
                             onChange={formik.handleChange}
-                            value={formik.values.callType}
+                            value={formik.values.userPosition}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callType && formik.errors.callType,
+                                        formik.touched.userPosition && formik.errors.userPosition,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callType && !formik.errors.callType,
+                                        formik.touched.userPosition && !formik.errors.userPosition,
                                 }
                             )}
                         >
@@ -243,52 +204,52 @@ function CadastroUsuario() {
                                 Cargo{" "}
                             </option>
                             <option
-                                value="hotfix"
+                                value="Cibersegurança"
                                 onChange={formik.handleChange}
                                 label="Cibersegurança"
                             >
                                 Cibersegurança
                             </option>
                             <option
-                                value="feature"
+                                value="RT"
                                 onChange={formik.handleChange}
                                 label="RT"
                             >
                                 RT
                             </option>
                             <option
-                                value="feature"
+                                value="CTO"
                                 onChange={formik.handleChange}
                                 label="CTO"
                             >
                                 CTO
                             </option>
                             <option
-                                value="feature"
+                                value="Head"
                                 onChange={formik.handleChange}
                                 label="Head"
                             >
                                 Head
                             </option>
                             <option
-                                value="feature"
+                                value="Squad"
                                 onChange={formik.handleChange}
                                 label="Squad"
                             >
                                 Squad
                             </option>
                         </select>
-                        {formik.touched.callType && formik.errors.callType && (
+                        {formik.touched.userPosition && formik.errors.userPosition && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callType}</span>
+                                    <span role="alert">{formik.errors.userPosition}</span>
                                 </div>
                             </div>
                         )}
                     </div>
                     {/* end::Form group Cargo*/}
                 </div>
-                <div className="col-lg-4">
+                <div className="col-lg-6">
                     {/* begin::Form group Equipe */}
                     <div className="fv-row mb-3">
                         <label className="form-label fw-bolder text-dark fs-6">
@@ -297,18 +258,18 @@ function CadastroUsuario() {
                         <select
                             placeholder="Selecione a equipe"
                             autoComplete="off"
-                            {...formik.getFieldProps("callPriority")}
+                            {...formik.getFieldProps("userGroup")}
                             onChange={formik.handleChange}
-                            value={formik.values.callPriority}
+                            value={formik.values.userGroup}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callPriority && formik.errors.callPriority,
+                                        formik.touched.userGroup && formik.errors.userGroup,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callPriority && !formik.errors.callPriority,
+                                        formik.touched.userGroup && !formik.errors.userGroup,
                                 }
                             )}
                         >
@@ -320,52 +281,52 @@ function CadastroUsuario() {
                                 Prioridade do chamado{" "}
                             </option>
                             <option
-                                value="hotfix"
+                                value="Cibersegurança"
                                 onChange={formik.handleChange}
                                 label="Cibersegurança"
                             >
                                 Cibersegurança
                             </option>
                             <option
-                                value="feature"
+                                value="RT"
                                 onChange={formik.handleChange}
                                 label="RT"
                             >
                                 RT
                             </option>
                             <option
-                                value="feature"
+                                value="CTO"
                                 onChange={formik.handleChange}
                                 label="CTO"
                             >
                                 CTO
                             </option>
                             <option
-                                value="feature"
+                                value="Head"
                                 onChange={formik.handleChange}
                                 label="Head"
                             >
                                 Head
                             </option>
                             <option
-                                value="feature"
+                                value="Squad"
                                 onChange={formik.handleChange}
                                 label="Squad"
                             >
                                 Squad
                             </option>
                         </select>
-                        {formik.touched.callPriority && formik.errors.callPriority && (
+                        {formik.touched.userGroup && formik.errors.userGroup && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callPriority}</span>
+                                    <span role="alert">{formik.errors.userGroup}</span>
                                 </div>
                             </div>
                         )}
                     </div>
                     {/* end::Form group Equipe*/}
                 </div>
-                <div className="col-lg-4">
+                <div className="col-lg-6">
                     {/* begin::Form group Tipo usuario */}
                     <div className="fv-row mb-3">
                         <label className="form-label fw-bolder text-dark fs-6">
@@ -374,18 +335,18 @@ function CadastroUsuario() {
                         <select
                             placeholder="Tipo do Chamado (Hotfix ou Feature)"
                             autoComplete="off"
-                            {...formik.getFieldProps("callType")}
+                            {...formik.getFieldProps("userType")}
                             onChange={formik.handleChange}
-                            value={formik.values.callType}
+                            value={formik.values.userType}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.callType && formik.errors.callType,
+                                        formik.touched.userType && formik.errors.userType,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.callType && !formik.errors.callType,
+                                        formik.touched.userType && !formik.errors.userType,
                                 }
                             )}
                         >
@@ -393,7 +354,7 @@ function CadastroUsuario() {
                                 Tipo de usuário{" "}
                             </option>
                             <option
-                                value="hotfix"
+                                value="Adm"
                                 onChange={formik.handleChange}
                                 label="Administrador"
                             >
@@ -407,10 +368,10 @@ function CadastroUsuario() {
                                 Feature
                             </option>
                         </select>
-                        {formik.touched.callType && formik.errors.callType && (
+                        {formik.touched.userType && formik.errors.userType && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.callType}</span>
+                                    <span role="alert">{formik.errors.userType}</span>
                                 </div>
                             </div>
                         )}

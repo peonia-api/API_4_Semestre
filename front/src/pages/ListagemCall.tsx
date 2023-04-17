@@ -16,7 +16,7 @@ import { URI } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
-import { Calls } from "../types";
+import { Calls } from "../types/call";
 
 
 
@@ -104,13 +104,6 @@ function ListagemCall() {
   };
 
   //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
-    (item) =>
-      item.callRequester.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callType.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   return (
     <>
@@ -122,13 +115,6 @@ function ListagemCall() {
       <Container className="px-2 mb-5">
         <Container>
         <div className="d-flex align-items-center justify-content-between mt-4 Margin">
-            <input
-              className="input-search"
-              type="text"
-              placeholder="Pesquisar"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
             <button type="button"className="btn btn-form" onClick={() => window.location.href='/solicitacao'}>Adicionar Chamado
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -187,9 +173,7 @@ function ListagemCall() {
               </tr>
             </thead>
             <tbody>
-              {filteredData
-                .slice(pagesVisited, pagesVisited + itemsPerPage)
-                .map((data) => {
+              {data.map((data) => {
                   return (
                     <tr key={data.id}>
                       {/*corpo tabela*/}

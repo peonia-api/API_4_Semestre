@@ -12,11 +12,11 @@ import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
 import axios from "axios";
 import "../App.css";
-import { URI } from "../enumerations/uri";
+import { URIuser } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
-import { Calls } from "../types";
+import { Users } from "../types/user";
 
 
 
@@ -25,13 +25,13 @@ function ListagemUser() {
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
 
-  const [data, setData] = useState<Calls[]>([]);
+  const [data, setData] = useState<Users[]>([]);
 
   //axios get
   useEffect(() => {
-    async function fetchCalls() {
+    async function fetchUsers() {
       axios
-        .get(URI.PEGAR_CALL)
+        .get(URIuser.PEGAR_USER)
         .then((response) => {
           setData(response.data);
         })
@@ -39,17 +39,17 @@ function ListagemUser() {
           console.log(error);
         });
     }
-    fetchCalls();
+    fetchUsers();
   }, []);
 
   //delete
-  async function handleDeleteCall(id: number) {
+  async function handleDeleteUser(id: number) {
     try {
      avisoDeletar().then( async (result) => {
         if(result.isConfirmed){
-          await axios.delete(`${URI.DELETE_CALL}${id}`);
-          const updatedCalls = data.filter((call) => call.id !== id);
-          setData(updatedCalls);
+          await axios.delete(`${URIuser.DELETE_USER}${id}`);
+          const updatedUsers = data.filter((user) => user.id !== id);
+          setData(updatedUsers);
         }
         
       })
@@ -107,9 +107,9 @@ function ListagemUser() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const filteredData = data.filter(
     (item) =>
-      item.callRequester.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callType.toLowerCase().includes(searchQuery.toLowerCase())
+      item.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.userGroup.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -148,22 +148,22 @@ function ListagemUser() {
             <thead>
               <tr>
                 <th 
-                  onClick={() => sorting("id")} className="text-center">Nome
+                  onClick={() => sorting("userName")} className="text-center">Nome
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
 
                 <th
-                  onClick={() => sorting("callRequester")}className="text-center">Email 
+                  onClick={() => sorting("userEmail")}className="text-center">Email 
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
 
                 <th 
-                  onClick={() => sorting("callType")} className="text-center">Equipe
+                  onClick={() => sorting("userGroup")} className="text-center">Equipe
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 
                 <th
-                  onClick={() => sorting("callTitle")}className="text-center">Permissão
+                  onClick={() => sorting("userPosition")}className="text-center">Permissão
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
 
@@ -187,15 +187,10 @@ function ListagemUser() {
                           {data.id}
                         </strong>
                       </td>
-                      <td className="text-center">{data.callRequester}</td>
-                      <td className="text-center">{data.callType}</td>
-                      <td className="text-center">{data.callTitle}</td>
-                      <td className="text-center">{data.callState}</td>
-                      <td className="text-center">
-                        {new Date(data.callDateCreate).toLocaleDateString(
-                          "en-GB"
-                        )}
-                      </td>
+                      <td className="text-center">{data.userName}</td>
+                      <td className="text-center">{data.userEmail}</td>
+                      <td className="text-center">{data.userGroup}</td>
+                      <td className="text-center">{data.userPosition}</td>
                       <td className="text-center">
                         <Link to={"/editar/" + data.id}>
                             <img style={{ width: '25px' }} src={editar} alt='Editar' />
@@ -204,7 +199,7 @@ function ListagemUser() {
                           style={{ width: "35px" }}
                           src={excluir}
                           alt="Excluir"
-                          onClick={() => handleDeleteCall(data.id)}
+                          onClick={() => handleDeleteUser(data.id)}
                         />
                       </td>
                     </tr>
@@ -223,22 +218,6 @@ function ListagemUser() {
               />
             )}
           </Table>
-          {/*animate*/}
-          {data.map((item) => {
-            return (
-              <div key={item.id} ref={parent}>
-                {show === item.id && (
-                  <FloatingLabel controlId="floatingLabel" label="Descrição">
-                    <Form.Control
-                      type="text"
-                      defaultValue={item.callDescription}
-                      disabled
-                    />
-                  </FloatingLabel>
-                )}
-              </div>
-            );
-          })}
         </Container>
       </Container>
     </>
