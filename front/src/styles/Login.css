@@ -1,0 +1,19 @@
+.background-login {
+    background-color: #333333;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 10px 14px;
+    min-height: 150vh;
+    height: 100%;
+    align-items: center;
+    display: flex;
+  }
+
+.row{
+    width: 101% !important;
+}
+
+.btn-login{
+    display: flex;
+    align-items: center;
+    background-color: #424242 !important;
+    color: white !important;
+ }
