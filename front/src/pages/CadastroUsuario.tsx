@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
+import { avisoConcluido, avisoErro, registrationSchemaUser} from "../controllers";
 import { URIuser } from "../enumerations/uri";
 import { initialValues } from "../types/user";
 
@@ -13,7 +13,7 @@ import { initialValues } from "../types/user";
 function CadastroUsuario() {
     const formik = useFormik({
         initialValues,
-        validationSchema: registrationSchema,
+        validationSchema: registrationSchemaUser,
         initialErrors: { userName: "" },
         onSubmit: async (values) => {
             JSON.stringify(values, null, 2);
@@ -173,9 +173,7 @@ function CadastroUsuario() {
                     </div>
                     {/* end::Form group E-mail */}
                 </div>
-            </div>
 
-            <div className="row">
                 <div className="col-lg-6">
                     {/* begin::Form group Cargo */}
                     <div className="fv-row mb-3">
@@ -249,6 +247,9 @@ function CadastroUsuario() {
                     </div>
                     {/* end::Form group Cargo*/}
                 </div>
+            </div>
+
+            <div className="row">
                 <div className="col-lg-6">
                     {/* begin::Form group Equipe */}
                     <div className="fv-row mb-3">

@@ -103,15 +103,6 @@ function ListagemUser() {
     setShow(show === id ? null : id);
   };
 
-  //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
-    (item) =>
-      item.userEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.userGroup.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
    <>
       <Container className="px-2 mb-5">
@@ -122,14 +113,6 @@ function ListagemUser() {
         </div>
         <Container>
           <div className="d-flex align-items-center justify-content-between mt-4 Margin" >
-            <input
-              className="input-search"
-              type="text"
-              placeholder="Pesquisar"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              // <button type="button"className="btn btn-form">Adicionar Usuário</button>
-            />
               <button type="button"className="btn btn-form" onClick={() => window.location.href='/cadastroUsuario'}>Adicionar Usuário
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -172,9 +155,7 @@ function ListagemUser() {
             </thead>
 
             <tbody>
-              {filteredData
-                .slice(pagesVisited, pagesVisited + itemsPerPage)
-                .map((data) => {
+              {data.map((data) => {
                   return (
                     <tr key={data.id}>
                       {/*corpo tabela*/}
