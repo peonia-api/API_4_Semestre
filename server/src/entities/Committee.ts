@@ -9,19 +9,19 @@ export class Committee {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable: false})
+    @Column()
     comiImpactCto: number;
 
-    @Column({nullable: false})
+    @Column()
     comiImpactHp: number;
 
-    @Column({nullable: false})
+    @Column()
     comiCostSquad: number;
 
-    @Column({nullable: false})
+    @Column()
     comiRiskRt: number;
 
-    @Column({nullable: false})
+    @Column()
     comiRiskCso: number;
 
     @OneToMany(() => Group, (group) => group.committee)
@@ -29,5 +29,8 @@ export class Committee {
 
     @OneToMany(() => Call, (call) => call.committee)
     call: Call[];
+
+    @ManyToOne(() => Call, (call) => call.committee, {eager:true})
+    committee: Committee;
 
 }
