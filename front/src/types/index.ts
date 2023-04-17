@@ -1,4 +1,4 @@
-export const initialValues = {
+export const initialValues = {    
     callRequester: '',
     callType: '',
     callEmail: '',
@@ -8,6 +8,8 @@ export const initialValues = {
     callTeam:'',
     callPriority: '',
     callState: 'Inicializado',
+    callRequesterId: null,
+    callFiles: null
 }
 
 export interface Calls {
@@ -21,5 +23,6 @@ export interface Calls {
     callRequester: string;
     callPriority: number;
     callDateCreate: Date;
+    callRequesterId: number
 }
 

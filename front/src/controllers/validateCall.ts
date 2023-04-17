@@ -3,6 +3,9 @@ import * as Yup from 'yup'
 
 
 const registrationSchema = Yup.object().shape({
+    callRequesterId: Yup.string()
+      .required('O solicitante é obrigatório'),
+
     callRequester: Yup.string()
       .min(3, 'O nome deve ter no mínimo 3 caracteres')
       .max(40, 'O nome deve ter no máximo 40 caracteres')

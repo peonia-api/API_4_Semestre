@@ -9,6 +9,7 @@ import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
 import React from "react";
 import { initialValues } from "../types";
+import Dropzone from "../components/Dropzone";
 
 
 function Solicitacao() {
@@ -66,116 +67,44 @@ function Solicitacao() {
 
       <div className="row">
         <div className="col-lg-6">
-          {/* begin::Form group Nome */}
+          {/* begin::Form group Solicitante */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">Nome</label>
-            <input
-              placeholder="Nome do solicitante"
-              type="text"
+            <label className="form-label fw-bolder text-dark fs-6">Solicitante</label>
+            <select
+              placeholder="Solicitante"
               autoComplete="off"
-              {...formik.getFieldProps("callRequester")}
+              {...formik.getFieldProps("callRequesterId")}
               onChange={formik.handleChange}
-              value={formik.values.callRequester}
+              value={formik.values.callRequesterId ?? ''}
               className={clsx(
                 "form-control bg-transparent",
                 {
                   "is-invalid":
-                    formik.touched.callRequester && formik.errors.callRequester,
+                    formik.touched.callRequesterId && formik.errors.callRequesterId,
                 },
                 {
                   "is-valid":
-                    formik.touched.callRequester &&
-                    !formik.errors.callRequester,
+                    formik.touched.callRequesterId && !formik.errors.callRequesterId,
                 }
               )}
-            />
-            {formik.touched.callRequester && formik.errors.callRequester && (
+            >
+              <option value="" disabled label="Selecione o solicitante">
+                Solicitante{" "}
+              </option>  
+              {/* Falta trazer o array de usuários do back e usar .map pra criar as options com id e nome */}  
+              <option value={1}>José</option>           
+              <option value={2}>Maria</option>           
+            </select>            
+            {formik.touched.callRequesterId && formik.errors.callRequesterId && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callRequester}</span>
+                  <span role="alert">{formik.errors.callRequesterId}</span>
                 </div>
               </div>
             )}
           </div>
           {/* end::Form group Nome */}
-        </div>
-        <div className="col-lg-6">
-          {/* begin::Form group E-mail */}
-          <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              E-mail
-            </label>
-            <input
-              placeholder="E-mail do solicitante"
-              type="email"
-              autoComplete="off"
-              {...formik.getFieldProps("callEmail")}
-              onChange={formik.handleChange}
-              value={formik.values.callEmail}
-              className={clsx(
-                "form-control bg-transparent",
-                {
-                  "is-invalid":
-                    formik.touched.callEmail && formik.errors.callEmail,
-                },
-                {
-                  "is-valid":
-                    formik.touched.callEmail && !formik.errors.callEmail,
-                }
-              )}
-            />
-            {formik.touched.callEmail && formik.errors.callEmail && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callEmail}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* end::Form group E-mail */}
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-lg-6">
-          {/* begin::Form group Telefone */}
-          <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Telefone
-            </label>
-            <input
-              id="fone"
-              placeholder="Telefone para contato"
-              type="number"
-              autoComplete="off"
-              onKeyDown={(event) => {
-                if (/\+|\.|-/.test(event.key)) event.preventDefault();
-              }}
-              {...formik.getFieldProps("callPhone")}
-              onChange={formik.handleChange}
-              value={formik.values.callPhone}
-              className={clsx(
-                "form-control bg-transparent",
-                {
-                  "is-invalid":
-                    formik.touched.callPhone && formik.errors.callPhone,
-                },
-                {
-                  "is-valid":
-                    formik.touched.callPhone && !formik.errors.callPhone,
-                }
-              )}
-            />
-            {formik.touched.callPhone && formik.errors.callPhone && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callPhone}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* end::Form group Telefone */}
-        </div>
+        </div>        
         <div className="col-lg-6">
           {/* begin::Form group Título */}
           <div className="fv-row mb-3">
@@ -363,6 +292,19 @@ function Solicitacao() {
                   </div>
                 </div>
               )}
+          </div>
+          {/* end::Form group */}
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-lg-12">
+          {/* begin::Form group Documentos */}
+          <div className="fv-row mb-3">
+            <label className="form-label fw-bolder text-dark fs-6">
+              Documentos
+            </label>
+            <Dropzone setFieldValue={formik.setFieldValue} />
           </div>
           {/* end::Form group */}
         </div>
