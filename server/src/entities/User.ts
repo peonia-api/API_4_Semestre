@@ -12,6 +12,9 @@ export class User {
     @Column({nullable: false, length: 100})
     userName: string;
 
+    @Column({nullable: false, length: 20})
+    userPosition: string;
+
     @Column({nullable: false, unique:true, length: 70})
     userEmail: string;
 
