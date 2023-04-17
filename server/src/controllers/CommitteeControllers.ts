@@ -74,4 +74,4 @@ class CommitteeController {
     }
 
 }
-export default new CallController();
+export default new CommitteeController();

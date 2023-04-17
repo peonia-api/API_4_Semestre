@@ -9,6 +9,6 @@ routes.post("/file", upload.array("file"), AttachmentController.file) //single("
 routes.get('/fileAll', AttachmentController.getAll)
 routes.delete("/fileRemove/:uuid", AttachmentController.deleteFile)
 routes.put("/fileReneme/:uuid", upload.single("file") , AttachmentController.putFile)
-
+routes.get("/fileCall/:uuid", AttachmentController.getFileByCallId)
 
 export default routes;
