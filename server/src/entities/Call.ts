@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, JoinColumn } from "typeorm";
 import { Committee } from "./Committee";
-import { User } from "./User";
 import { Attachment } from "./Attachment";
 
 @Entity({name:"call"})
@@ -8,6 +7,9 @@ export class Call {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column({nullable: false})
+    callEmail: string;
 
     @Column({nullable: false, length: 8})
     callType: string;
@@ -23,10 +25,6 @@ export class Call {
 
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
-
-
-    @ManyToOne(() => User, (user) => user.call, {eager:true})
-    user: User;
 
     @OneToMany(() => Attachment, (attachment) => attachment.call)
     attachment: Attachment[];

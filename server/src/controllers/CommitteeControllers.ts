@@ -23,6 +23,7 @@ class CommitteeController {
         insertCommittee.comiCostSquad = createCommittee.comiCostSquad
         insertCommittee.comiRiskRt = createCommittee.comiRiskRt
         insertCommittee.comiRiskCso = createCommittee.comiRiskCso
+        insertCommittee.call = createCommittee.call
   
     
 

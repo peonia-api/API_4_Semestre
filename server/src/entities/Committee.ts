@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
 import { User } from "./User";
-import { Group } from "./Group";
 import { Call } from "./Call";
 
 @Entity({name:"committee"})
@@ -24,13 +23,11 @@ export class Committee {
     @Column()
     comiRiskCso: number;
 
-    @OneToMany(() => Group, (group) => group.committee)
-    group: Group[];
-
-    @OneToMany(() => Call, (call) => call.committee)
-    call: Call[];
+    // @OneToMany(() => Group, (group) => group.committee)
+    // group: Group[];
 
     @ManyToOne(() => Call, (call) => call.committee, {eager:true})
-    committee: Committee;
+    call: Call;
+    
 
 }
