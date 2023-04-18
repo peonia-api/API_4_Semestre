@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
 import { User } from "./User";
-import { Group } from "./Group";
 import { Call } from "./Call";
 
 @Entity({name:"committee"})
@@ -9,25 +8,26 @@ export class Committee {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable: false})
+    @Column()
     comiImpactCto: number;
 
-    @Column({nullable: false})
+    @Column()
     comiImpactHp: number;
 
-    @Column({nullable: false})
+    @Column()
     comiCostSquad: number;
 
-    @Column({nullable: false})
+    @Column()
     comiRiskRt: number;
 
-    @Column({nullable: false})
+    @Column()
     comiRiskCso: number;
 
-    @OneToMany(() => Group, (group) => group.committee)
-    group: Group[];
+    // @OneToMany(() => Group, (group) => group.committee)
+    // group: Group[];
 
-    @OneToMany(() => Call, (call) => call.committee)
-    call: Call[];
+    @ManyToOne(() => Call, (call) => call.committee, {eager:true})
+    call: Call;
+    
 
 }

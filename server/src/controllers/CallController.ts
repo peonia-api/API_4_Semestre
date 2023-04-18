@@ -39,9 +39,7 @@ class CallController {
         insertCall.callTitle = createCall.callTitle
         insertCall.callDescription = createCall.callDescription
         insertCall.callPriority = createCall.callPriority
-        insertCall.committee = createCall.committee
-        insertCall.user = createCall.user
-    
+        insertCall.callEmail = createCall.callEmail
 
         const allCall = await callRepository.save(insertCall)
         return res.json(allCall)
@@ -56,9 +54,7 @@ class CallController {
         findCall.callTitle = createCall.callTitle
         findCall.callDescription = createCall.callDescription
         findCall.callPriority = createCall.callPriority
-        findCall.committee = createCall.committee
-        findCall.user = createCall.user
-
+        findCall.callEmail = findCall.callEmail
     
         const allCall = await callRepository.save(findCall)
         return res.json(allCall)
@@ -74,3 +70,4 @@ class CallController {
 
 }
 export default new CallController();
+

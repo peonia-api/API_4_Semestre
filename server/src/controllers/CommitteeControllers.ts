@@ -6,71 +6,45 @@ import { Committee } from "../entities/Committee";
 
 class CommitteeController {
 
-    public async getHistoricCommittee (req: Request, res: Response) : Promise<Response> {
+
+    public async getCommittee (req: Request, res: Response) : Promise<Response> {
+        const idCommittee:any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
-        const allCommittee = await committeeRepository.find()
-        console.log(allCommittee)
+        const allCommittee = await committeeRepository.findOneBy({id: idCommittee})
         return res.json(allCommittee)
     }
 
-    public async getHistoriCommittee (req: Request, res: Response) : Promise<Response> {
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCall = await callRepository.findBy({ callType: "hotfix" })
-        return res.json(allCall)
-    }
-
-    public async getHistoricFeature (req: Request, res: Response) : Promise<Response> {
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCall = await callRepository.findBy({ callType: "feature" })
-        return res.json(allCall)
-    }
-
-    public async getCall (req: Request, res: Response) : Promise<Response> {
-        const idCall:any = req.params.uuid
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCall = await callRepository.findOneBy({id: idCall})
-        return res.json(allCall)
-    }
-
-    public async postCall (req: Request, res: Response) : Promise<Response> {
-        const createCall = req.body
-        const callRepository = AppDataSource.getRepository(Call)
-        const insertCall = new Call();
-        insertCall.callType = createCall.callType
-        insertCall.callTitle = createCall.callTitle
-        insertCall.callDescription = createCall.callDescription
-        insertCall.callPriority = createCall.callPriority
-        insertCall.committee = createCall.committee
-        insertCall.user = createCall.user
+    public async postCommittee (req: Request, res: Response) : Promise<Response> {
+        const createCommittee = req.body
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const insertCommittee = new Committee();
+        insertCommittee.comiImpactCto = createCommittee.comiImpactCto
+        insertCommittee.comiImpactHp = createCommittee.comiImpactHp
+        insertCommittee.comiCostSquad = createCommittee.comiCostSquad
+        insertCommittee.comiRiskRt = createCommittee.comiRiskRt
+        insertCommittee.comiRiskCso = createCommittee.comiRiskCso
+        insertCommittee.call = createCommittee.call
+  
     
 
-        const allCall = await callRepository.save(insertCall)
-        return res.json(allCall)
+        const allCommittee = await committeeRepository.save(insertCommittee)
+        return res.json(allCommittee)
     }
 
-    public async putCall (req: Request, res: Response) : Promise<Response> {
-        const createCall = req.body
-        const idCall:any = req.params.uuid
-        const callRepository = AppDataSource.getRepository(Call)
-        const findCall = await callRepository.findOneBy({id: idCall})
-        findCall.callType = createCall.callType
-        findCall.callTitle = createCall.callTitle
-        findCall.callDescription = createCall.callDescription
-        findCall.callPriority = createCall.callPriority
-        findCall.committee = createCall.committee
-        findCall.user = createCall.user
+    public async putCommittee (req: Request, res: Response) : Promise<Response> {
+        const createCommittee = req.body
+        const idCommittee:any = req.params.uuid
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
+        findCommittee.comiImpactCto = createCommittee.comiImpactCto
+        findCommittee.comiImpactHp = createCommittee.comiImpactHp
+        findCommittee.comiCostSquad = createCommittee.comiCostSquad
+        findCommittee.comiRiskRt = createCommittee.comiRiskRt
+        findCommittee.comiRiskCso = createCommittee.comiRiskCso
 
     
-        const allCall = await callRepository.save(findCall)
-        return res.json(allCall)
-    }
-
-    public async deleteCall (req: Request, res: Response) : Promise<Response> {
-        const idCall:any = req.params.uuid
-        const callRepository = AppDataSource.getRepository(Call)
-        const findCall = await callRepository.findOneBy({id: idCall})
-        const allCall = await callRepository.remove(findCall)
-        return res.json(allCall)
+        const allCommittee = await committeeRepository.save(findCommittee)
+        return res.json(allCommittee)
     }
 
 }

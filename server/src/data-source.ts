@@ -37,7 +37,7 @@ const AppDataSource = new DataSource({
     
     database: 'callbd', // se for SQLite, então use bdaula.sqlite
     type: "mysql", // se for SQLite, então use sqlite
-    host: 'localhost', // não use esta propriedade se for sqlite
+    host: '172.17.0.1', // não use esta propriedade se for sqlite
     port: 3306, // não use esta propriedade se for sqlite
     username: 'root', // não use esta propriedade se for sqlite
     password:'fatec', // não use esta propriedade se for sqlite
