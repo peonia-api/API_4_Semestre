@@ -73,6 +73,21 @@ class AttachmentController {
         return res.json(allCall)
     }
     
+    public async getFileByCallId (req: Request, res: Response) : Promise<Response> {
+        const callId:any = req.params.uuid
+        let listaFile = []
+        const attachmentRepository = AppDataSource.getRepository(Attachment)
+        const findFile = await attachmentRepository.find()
+        findFile.map((lin)=> {
+            if(lin.call.id == callId){
+                listaFile.push(lin)
+            }else{
+                console.log(lin);
+                
+            }
+        })
+        return res.json(listaFile)
+   }
 
 }
 export default new AttachmentController();

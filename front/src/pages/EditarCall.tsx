@@ -7,7 +7,7 @@ import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
-import { Calls } from "../types";
+import { Calls } from "../types/call";
 
 
 function EditarCall() {

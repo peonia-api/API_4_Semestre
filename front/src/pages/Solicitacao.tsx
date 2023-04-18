@@ -6,9 +6,9 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
+
 import { URI } from "../enumerations/uri";
-import React from "react";
-import { initialValues } from "../types";
+import { initialValues } from "../types/call";
 
 
 function Solicitacao() {
