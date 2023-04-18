@@ -5,18 +5,17 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
+import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
 import React from "react";
-import { initialValues } from "../types";
+import { solicitacaoInitialValues } from "../types";
 import Dropzone from "../components/Dropzone";
-
 
 function Solicitacao() {
   const formik = useFormik({
-    initialValues,
-    validationSchema: registrationSchema,
-    initialErrors: { callRequester: "" },
+    initialValues: solicitacaoInitialValues,
+    validationSchema: solicitacaoValidationSchema,
+    initialErrors: { callEmail: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values);
@@ -67,38 +66,38 @@ function Solicitacao() {
 
       <div className="row">
         <div className="col-lg-6">
-          {/* begin::Form group Solicitante */}
+          {/* begin::Form group E-mail */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">Solicitante</label>
+            <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
             <select
-              placeholder="Solicitante"
+              placeholder="E-mail"
               autoComplete="off"
-              {...formik.getFieldProps("callRequesterId")}
+              {...formik.getFieldProps("callEmail")}
               onChange={formik.handleChange}
-              value={formik.values.callRequesterId ?? ''}
+              value={formik.values.callEmail ?? ''}
               className={clsx(
                 "form-control bg-transparent",
                 {
                   "is-invalid":
-                    formik.touched.callRequesterId && formik.errors.callRequesterId,
+                    formik.touched.callEmail && formik.errors.callEmail,
                 },
                 {
                   "is-valid":
-                    formik.touched.callRequesterId && !formik.errors.callRequesterId,
+                    formik.touched.callEmail && !formik.errors.callEmail,
                 }
               )}
             >
-              <option value="" disabled label="Selecione o solicitante">
+              <option value="" disabled label="Selecione o e-mail do solicitante">
                 Solicitante{" "}
               </option>  
-              {/* Falta trazer o array de usuários do back e usar .map pra criar as options com id e nome */}  
-              <option value={1}>José</option>           
-              <option value={2}>Maria</option>           
+              {/* Falta trazer o array de emails dos usuários do back e usar .map pra criar as options */}  
+              <option value={'jose@outlook.com'}>jose@outlook.com</option>           
+              <option value={'maria@outlook.com'}>maria@outlook.com</option>           
             </select>            
-            {formik.touched.callRequesterId && formik.errors.callRequesterId && (
+            {formik.touched.callEmail && formik.errors.callEmail && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callRequesterId}</span>
+                  <span role="alert">{formik.errors.callEmail}</span>
                 </div>
               </div>
             )}
@@ -304,7 +303,7 @@ function Solicitacao() {
             <label className="form-label fw-bolder text-dark fs-6">
               Documentos
             </label>
-            <Dropzone setFieldValue={formik.setFieldValue} />
+            <Dropzone callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} />
           </div>
           {/* end::Form group */}
         </div>
