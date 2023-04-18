@@ -25,8 +25,6 @@ class CommitteeController {
         insertCommittee.comiRiskCso = null
         insertCommittee.call = createCommittee.call
   
-    
-
         const allCommittee = await committeeRepository.save(insertCommittee)
         return res.json(allCommittee)
     }
@@ -85,8 +83,8 @@ class CommitteeController {
         const idCommittee:any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const allCommittee = await committeeRepository.findOneBy({id: idCommittee})
-        const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!"}
-        const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!"}
+        const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: true}
+        const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: true}
         
         if (allCommittee.comiRiskCso == 3) {
             return res.json(validate)
@@ -100,11 +98,11 @@ class CommitteeController {
         else if (allCommittee.comiImpactHp == 0) {
             return res.json(validate1)
         }
-        else if (allCommittee.comiImpactHp == 3) {
+        else if (allCommittee.comiCostSquad == 3) {
             return res.json(validate)
         }
         else{
-            return res.json(allCommittee)
+            return res.json({allCommittee, arquivada: false})
 
         }
 
