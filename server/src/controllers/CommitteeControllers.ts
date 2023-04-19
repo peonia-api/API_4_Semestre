@@ -14,6 +14,12 @@ class CommitteeController {
         return res.json(allCommittee)
     }
 
+    public async getAllCommittee (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const allCommittee = await committeeRepository.find()
+        return res.json(allCommittee)
+    }
+
    
 
     public async postCommittee (req: Request, res: Response) : Promise<Response> {

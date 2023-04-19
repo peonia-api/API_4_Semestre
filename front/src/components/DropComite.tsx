@@ -1,44 +1,40 @@
-import { FloatingLabel, Form } from "react-bootstrap";
 import { useFormik } from "formik";
-import clsx from "clsx";
-import registrationSchemaCommit from "../controllers/validateCommittee";
+import {registrationSchemaCommit} from "../controllers/validateCommittee";
 import axios from "axios";
 import { Committee, initialValues } from "../types/committee";
-import { URI, URIcommit } from "../enumerations/uri";
-import { useEffect, useRef, useState } from "react";
-import { Calls } from "../types/call";
+import { URIcommit } from "../enumerations/uri";
+import { useEffect, useState } from "react";
 import { avisoConcluido } from "../controllers/avisoConcluido";
 import { avisoErro } from "../controllers/avisoErro";
 import { ComiteCto } from "./ComiteCto";
-import { ComiteCso } from "./ComiteCso";
+import ComiteCso  from "./ComiteCso";
 import { ComiteRt } from "./ComiteRt";
 import { ComiteSquad } from "./ComiteSquad";
-import autoAnimate from "@formkit/auto-animate";
 
 export function DropComite() {
 
-    // const [data, setData] = useState<Calls[]>([]);
+    const [data, setData] = useState<Committee[]>([]);
 
-    // useEffect(() => {
-    //     async function fetchCalls() {
-    //         axios
-    //             .get(URI.PEGAR_CALL)
-    //             .then((response) => {
-    //                 setData(response.data);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //             });
-    //     }
-    //     fetchCalls();
-    // }, []);
+    useEffect(() => {
+        async function fetchCommittee() {
+            axios
+                .post(URIcommit.ENVIAR_COMITE)
+                .then((response) => {
+                    setData(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+                console.log('passou dropp');
+                
+        }
+        fetchCommittee();
+    }, []);
 
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchemaCommit,
         onSubmit: async (values) => {
-            JSON.stringify(values, null, 2);
-            await axios.post(URIcommit.ENVIAR_COMITE, formik.values);
         },
     });
 
@@ -51,36 +47,8 @@ export function DropComite() {
         }
     }
 
-    const [show, setShow] = useState<number | null>(null);
-    const parent = useRef(null);
-    useEffect(() => {
-      parent.current && autoAnimate(parent.current);
-    }, [parent]);
-    const reveal = (id: number) => {
-      setShow(show === id ? null : id);
-    };
-
     return (
         <div>
-
-            {/* {data.map((data) => {
-                return (
-                    <>
-                    <div key={data.id} ref={parent}>
-                        {show === data.id && (
-                            <FloatingLabel controlId="floatingLabel" label="Descrição">
-                                <Form.Control
-                                    type="text"
-                                    defaultValue={data.callDescription}
-                                    disabled />
-                            </FloatingLabel>
-                        )}
-                    </div>
-                    <br />
-                    
-                    </>
-                );
-            })} */}
 
             {/* {data.map((data) => {
                 return (
@@ -104,7 +72,7 @@ export function DropComite() {
                 <div className="row">
                     <h6>Comitê de aprovação</h6>
 
-                    <div className="col-lg-4"> {ComiteCso()} </div>
+                    <div className="col-lg-4"> <ComiteCso /> </div>
                     <div className="col-lg-4"> {ComiteRt()} </div>
                     <div className="col-lg-4"> {ComiteCto()} </div>
 

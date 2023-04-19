@@ -3,6 +3,7 @@ import { CommitteeControllers } from "../controllers";
 const routes = Router();
 
 routes.get('/especifico/:uuid', CommitteeControllers.getCommittee);
+routes.get('/committeeAll', CommitteeControllers.getAllCommittee);
 routes.get("/filter/:uuid", CommitteeControllers.getCommitteeFilter)
 routes.post('/createCommittee', CommitteeControllers.postCommittee);
 

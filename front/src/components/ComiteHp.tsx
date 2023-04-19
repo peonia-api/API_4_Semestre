@@ -3,7 +3,7 @@ import { initialValues } from "../types/committee";
 import { URIcommit } from "../enumerations/uri";
 import axios from "axios";
 import clsx from "clsx";
-import registrationSchemaCommit from "../controllers/validateCommittee";
+import {registrationSchemaCommit} from "../controllers/validateCommittee";
 
 export function ComiteHp() {
 
@@ -12,7 +12,6 @@ export function ComiteHp() {
         validationSchema: registrationSchemaCommit,
         onSubmit: async (values) => {
             JSON.stringify(values, null, 2);
-            // await axios.post(URIcommit.ENVIAR_COMITE);
             await axios.put(URIcommit.ALTERA_COMITE_HP, formik.values);
         },
     });

@@ -12,14 +12,13 @@ import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
 import axios from "axios";
 import "../App.css";
-import { URI } from "../enumerations/uri";
+import { URI, URIcommit } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
 import { DropComite } from "../components/DropComite";
-
-
+import ComiteCso from "../components/ComiteCso";
 
 function ListagemCall() {
 
@@ -39,8 +38,21 @@ function ListagemCall() {
         .catch((error) => {
           console.log(error);
         });
+      
     }
     fetchCalls();
+    async function fetchCommittee() {
+      axios
+          .post(URIcommit.ENVIAR_COMITE)
+          .then((response) => {
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+          console.log('passou dropp');
+          
+  }
+  fetchCommittee();
   }, []);
 
   //delete
@@ -86,6 +98,9 @@ function ListagemCall() {
   };
 
   //pagination
+  const [idLinux, setIdLinux] = useState(Number);
+
+
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5;
   const pagesVisited = pageNumber * itemsPerPage;
@@ -102,6 +117,7 @@ function ListagemCall() {
   }, [parent]);
   const reveal = (id: number) => {
     setShow(show === id ? null : id);
+    setIdLinux(id);
   };
 
   //search
@@ -244,6 +260,7 @@ function ListagemCall() {
                         alt="Excluir"
                         onClick={() => handleDeleteCall(data.id)}
                       />
+                      <ComiteCso id={idLinux}  />
                     </td>
                   </tr>
                 );
@@ -264,7 +281,7 @@ function ListagemCall() {
           {/*animate*/}
           {data.map((item) => {
             return (
-              <div key={item.id} ref={parent}>
+              <div key={item.id} ref={parent} >
                 {show === item.id && (
                   <FloatingLabel controlId="floatingLabel" label="Descrição">
                     <Form.Control
@@ -272,7 +289,6 @@ function ListagemCall() {
                       defaultValue={item.callDescription}
                       disabled
                     />
-                    <DropComite/>
                   </FloatingLabel>
 
                   // <DropComite />

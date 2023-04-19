@@ -15,5 +15,5 @@ export interface Committee {
     comiCostSquad: number;
     comiRiskRt: number;
     comiRiskCso: number;
-    call: Calls
+    call: Calls;
 }
