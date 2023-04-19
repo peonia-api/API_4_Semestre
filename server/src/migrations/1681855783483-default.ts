@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class default1681845882800 implements MigrationInterface {
-    name = 'default1681845882800'
+export class default1681855783483 implements MigrationInterface {
+    name = 'default1681855783483'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE \`committee\` CHANGE \`comiImpactCto\` \`comiImpactCto\` int NULL`);

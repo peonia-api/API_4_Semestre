@@ -16,3 +16,14 @@ export enum URIuser {
     PEGAR_USER_ESPECIFICO = "http://localhost:3001/user/especifico/",
 }
 
+export enum URIcommit{
+    ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
+    PEGAR_COMITE = "http://localhost:3001/committee/filter/",
+    PEGAR_COMITE_ESPECIFICO = "http://localhost:3001/committee/especifico/",
+    ALTERA_COMITE_CTO = "http://localhost:3001/committee/impactCto/",
+    ALTERA_COMITE_HP = "http://localhost:3001/committee/impactHp/",
+    ALTERA_COMITE_SQUAD = "http://localhost:3001/committee/costSquad/",
+    ALTERA_COMITE_RT = "http://localhost:3001/committee/riskRt/",
+    ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/"
+}
+
