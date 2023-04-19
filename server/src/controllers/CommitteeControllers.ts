@@ -86,6 +86,9 @@ class CommitteeController {
         const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: true}
         const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: true}
         
+        if(allCommittee.comiCostSquad == null || allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null){
+            return res.json({mensage: "Ainda não foi avaliado", arquivada: null})
+        }
         if (allCommittee.comiRiskCso == 3) {
             return res.json(validate)
         }
