@@ -14,19 +14,30 @@ class CommitteeController {
         return res.json(allCommittee)
     }
 
+   
+
     public async postCommittee (req: Request, res: Response) : Promise<Response> {
-        const createCommittee = req.body
+        const callRepository = AppDataSource.getRepository(Call)
         const committeeRepository = AppDataSource.getRepository(Committee)
-        const insertCommittee = new Committee();
-        insertCommittee.comiImpactCto = null
-        insertCommittee.comiImpactHp = null
-        insertCommittee.comiCostSquad = null
-        insertCommittee.comiRiskRt = null
-        insertCommittee.comiRiskCso = null
-        insertCommittee.call = createCommittee.call
-  
-        const allCommittee = await committeeRepository.save(insertCommittee)
-        return res.json(allCommittee)
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        feature.map(async (fe) => {
+            const committee = await committeeRepository.findOneBy({id: fe.id})
+            const id:any = fe.id
+            if(committee == null){
+                const insertCommittee = new Committee();
+                insertCommittee.id = id
+                insertCommittee.comiImpactCto = null
+                insertCommittee.comiCostSquad = null
+                insertCommittee.comiImpactHp = null
+                insertCommittee.comiRiskCso = null
+                insertCommittee.comiRiskRt = null
+                insertCommittee.call = id
+                const allCommittee = await committeeRepository.save(insertCommittee)
+            }
+            
+        })
+        return res.json({mensage: "Todos já estão em avaliação"})
     }
 
     public async putCommitteeImpactCto (req: Request, res: Response) : Promise<Response> {
