@@ -1,45 +1,85 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro } from "../controllers";
-import registrationSchemaUser from "../controllers/validateUser";
+import registrationSchemaUserEditar from "../controllers/validateUserEditar";
 import { URIuser } from "../enumerations/uri";
-import { initialValues } from "../types/user";
+import { Users } from "../types/user";
 
 
-function CadastroUsuario() {
-    const formik = useFormik({
-        initialValues,
-        validationSchema: registrationSchemaUser,
-        initialErrors: { userName: "" },
-        onSubmit: async (values) => {
-            JSON.stringify(values, null, 2);
-            await axios.post(URIuser.ENVIAR_USER, formik.values);
-            onClickLimpar();
-        },
-    });
+function EditarUser() {
+  const id = window.location.href.split("/")[4];
 
-    function onClickLimpar() {
-        formik.resetForm();
+  const [data, setData] = useState<Users>();
+
+  useEffect(() => {
+    async function fetchUsers(id: string) {
+      axios
+        .get(`${URIuser.PEGAR_USER_ESPECIFICO}${id}`)
+        .then((response) => {
+          const fetchedData = response.data;
+          setData(fetchedData);
+          formik.setValues(fetchedData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+    fetchUsers(id);
+}, []);
 
-    function onClickEnviar() {
-        if (!formik.isValid) {
-            avisoErro();
-        } else {
-            formik.submitForm();
-            avisoConcluido();
-        }
+  const formik = useFormik({
+    initialValues: {
+      userName: data?.userName ?? "",
+      userEmail: data?.userEmail ?? "",
+      userGroup: data?.userGroup ?? "",
+      userPosition: data?.userPosition ?? "",
+      userType: data?.userType ?? "",
+
+
+    },
+    validationSchema: registrationSchemaUserEditar,
+    initialErrors: { userName: "" },
+    onSubmit: async (values) => {
+      try {
+        const updatedData = {
+          userName: values.userName,
+          userEmail: values.userEmail,
+          userGroup: values.userGroup,
+          userPosition: values.userPosition,
+          userType: values.userType,
+        };
+        
+        await axios.put(`${URIuser.ALTERA_USER}${id}`, updatedData);
+      } catch (error) {
+        console.log(error);
+        formik.setStatus("Ocorreu um erro ao atualizar a solicitação.");
+      }
+    },
+  });
+
+  function onClickLimpar() {
+    formik.resetForm();
+  }
+
+  function onClickEnviar() {
+    if (!formik.isValid) {
+      avisoErro();
+    } else {
+      formik.submitForm();
+      avisoConcluido().then((res:any) => {
+        window.location.assign("/listagemUser");
+      })
+      
     }
+  }
 
-    useEffect(() => { }, []);
-
-    return (
-        <form
+  return (
+    <form
             className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
             noValidate
             id="form-solicitacao"
@@ -100,42 +140,6 @@ function CadastroUsuario() {
                     {/* end::Form group Nome */}
                 </div>
 
-                <div className="col-lg-6">
-                    {/* begin::Form group Senha */}
-                    <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Senha
-                        </label>
-                        <input
-                            placeholder="Senha"
-                            type="password"
-                            autoComplete="off"
-                            {...formik.getFieldProps("userPassword")}
-                            onChange={formik.handleChange}
-                            value={formik.values.userPassword}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.userPassword && formik.errors.userPassword,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.userPassword && !formik.errors.userPassword,
-                                }
-                            )}
-                        />
-                        {formik.touched.userPassword && formik.errors.userPassword && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.userPassword}</span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    {/* end::Form group Título */}
-                </div>            
-
             </div>
 
             <div className="row">
@@ -162,7 +166,7 @@ function CadastroUsuario() {
                                     "is-valid":
                                         formik.touched.userEmail && !formik.errors.userEmail,
                                 }
-                            )}
+                            )}  
                         />
                         {formik.touched.userEmail && formik.errors.userEmail && (
                             <div className="fv-plugins-message-container">
@@ -174,6 +178,7 @@ function CadastroUsuario() {
                     </div>
                     {/* end::Form group E-mail */}
                 </div>
+  
 
                 <div className="col-lg-6">
                     {/* begin::Form group Cargo */}
@@ -347,45 +352,46 @@ function CadastroUsuario() {
                 </div>
             </div>
 
-            {/* begin::Form group */}
-            <div className="d-flex align-items-center justify-content-between mt-4">
-                <button type="button" className="btn btn-form" onClick={onClickLimpar}>
-                    Limpar
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-backspace-fill"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z" />
-                    </svg>
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-form"
-                    onClick={onClickEnviar}
-                    disabled={formik.isSubmitting}
-                >
-                    Enviar
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-send-check-fill"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                        <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
-                        {/* https://icons.getbootstrap.com/icons/person-plus/ */}
-                    </svg>
-                </button>
-            </div>
-            {/* end::Form group */}
-        </form>
-    );
+
+        {/* begin::Form group */}
+        <div className="d-flex align-items-center justify-content-between mt-4">
+          <button type="button" className="btn btn-form" onClick={onClickLimpar}>
+            Limpar
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-backspace-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            className="btn btn-form"
+            onClick={onClickEnviar}
+            disabled={formik.isSubmitting}
+          >
+            Enviar
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-send-check-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+              <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+            </svg>
+          </button>
+        </div>
+        {/* end::Form group */}
+      </form>
+    
+  );
 }
 
-export default CadastroUsuario;
+export default EditarUser;

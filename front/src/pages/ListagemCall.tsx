@@ -41,6 +41,8 @@ function ListagemCall() {
     }
     fetchCalls();
   }, []);
+console.log(data);
+
 
   //delete
   async function handleDeleteCall(id: number) {
@@ -84,7 +86,7 @@ function ListagemCall() {
     }
   };
 
-  //pagination
+  // pagination
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 5;
   const pagesVisited = pageNumber * itemsPerPage;
@@ -196,7 +198,7 @@ function ListagemCall() {
                         )}
                       </td>
                       <td className="text-center">
-                        <Link to={"/editar/" + data.id}>
+                        <Link to={"/editarCall/" + data.id}>
                             <img style={{ width: '25px' }} src={editar} alt='Editar' />
                         </Link>
                         <img
@@ -210,7 +212,7 @@ function ListagemCall() {
                   );
                 })}
             </tbody>
-            {/*pagination*/}
+            {/* pagination */}
             {data.length > itemsPerPage && (
               <ReactPaginate
                 previousLabel={<FaChevronLeft />}
