@@ -41,6 +41,7 @@ function ListagemUser() {
     }
     fetchUsers();
   }, []);
+  
 
   //delete
   async function handleDeleteUser(id: number) {
@@ -158,22 +159,14 @@ function ListagemUser() {
               {data.map((data) => {
                   return (
                     <tr key={data.id}>
+                      
                       {/*corpo tabela*/}
-                      <td className="text-center">
-                        {/*animate*/}
-                        <strong
-                          className="dropdown-label"
-                          onClick={() => reveal(data.id)}
-                        >
-                          {data.id}
-                        </strong>
-                      </td>
                       <td className="text-center">{data.userName}</td>
                       <td className="text-center">{data.userEmail}</td>
                       <td className="text-center">{data.userGroup}</td>
                       <td className="text-center">{data.userPosition}</td>
                       <td className="text-center">
-                        <Link to={"/editar/" + data.id}>
+                        <Link to={"/editarUser/" + data.id}>
                             <img style={{ width: '25px' }} src={editar} alt='Editar' />
                         </Link>
                         <img

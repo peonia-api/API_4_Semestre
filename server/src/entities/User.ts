@@ -11,7 +11,7 @@ export class User {
     @Column({nullable: false, length: 100})
     userName: string;
 
-    @Column({nullable: false, length: 20})
+    @Column({nullable: false, length: 25})
     userPosition: string;
 
     @Column({nullable: false, unique:true, length: 70})
@@ -20,10 +20,10 @@ export class User {
     @Column({nullable: false, select: false, length: 100})
     userPassword: string;
 
-    @Column({nullable: false, length: 8})
+    @Column({nullable: false, length: 25})
     userType: string;
 
-    @Column({nullable: false})
+    @Column({nullable: false, length: 25})
     userGroup: string;
 
 

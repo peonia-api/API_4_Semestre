@@ -10,7 +10,7 @@ export class Attachment {
     @Column()
     name: string;
 
-    @Column()
+    @Column() 
     src: string;
 
     @ManyToOne(() => Call, (call) => call.attachment, {eager:true})

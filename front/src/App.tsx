@@ -2,12 +2,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import './App.css';
 import Solicitacao from "./pages/Solicitacao";
-import Perfil from "./pages/Perfil";
 import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import ListagemCall from "./pages/ListagemCall";
 import EditarCall from "./pages/EditarCall";
 import CadastroUsuario from "./pages/CadastroUsuario";
 import ListagemUser from "./pages/ListagemUser";
+import EditarUser from "./pages/EditarUser";
 
 function App() {
 
@@ -24,9 +24,12 @@ function App() {
               <Route path="/solicitacao" element={<Solicitacao />} />
               <Route path="/listagem" element={<ListagemCall />} />
               <Route path="/listagemUser" element={<ListagemUser />} />
-              <Route path="/editar/:id" element={<EditarCall />} />
+              <Route path="/editarCall/:id" element={<EditarCall />} />
               <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
+              <Route path="/editarUser/:id" element={<EditarUser />} />
             </Routes>
+                
+
           </div>
 
         </div>
