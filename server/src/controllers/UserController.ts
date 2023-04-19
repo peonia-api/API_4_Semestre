@@ -106,6 +106,12 @@ class UserController {
     }
   }
 
+  public async getHistoricUser (req: Request, res: Response) : Promise<Response> {
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.find()
+    console.log(allUser)
+    return res.json(allUser)
+}
 
 public async getUser (req: Request, res: Response) : Promise<Response> {
     const idUser:any = req.params.uuid
@@ -113,6 +119,8 @@ public async getUser (req: Request, res: Response) : Promise<Response> {
     const allUser = await userRepository.findOneBy({id: idUser})
     return res.json(allUser)
 }
+
+
 
 public async postUser (req: Request, res: Response) : Promise<Response> {
     const createUser = req.body
@@ -123,6 +131,7 @@ public async postUser (req: Request, res: Response) : Promise<Response> {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
+    insertUser.userGroup = createUser.userGroup
   
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
@@ -136,8 +145,8 @@ public async putUser (req: Request, res: Response) : Promise<Response> {
     findUser.userName = createUser.userName
     findUser.userPosition = createUser.userPosition
     findUser.userEmail = createUser.userEmail
-    findUser.userPassword = createUser.userPassword
     findUser.userType = createUser.userType
+    findUser.userGroup = createUser.userGroup
 
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)

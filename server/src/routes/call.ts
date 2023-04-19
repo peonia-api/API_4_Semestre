@@ -5,11 +5,11 @@ const routes = Router();
 routes.get('/historic', CallController.getHistoricCall);
 routes.get('/hotfix', CallController.getHistoricHotfix);
 routes.get('/feature', CallController.getHistoricFeature);
-routes.get('/especifico/:uuid', CallController.getCall);
+routes.get('/especificoCall/:uuid', CallController.getCall);
 
 routes.post('/createCall', CallController.postCall);
 
-routes.put('/modify/:uuid', CallController.putCall);
+routes.put('/modifyCall/:uuid', CallController.putCall);
 
 routes.delete('/delete/:uuid', CallController.deleteCall);
 export default routes;
