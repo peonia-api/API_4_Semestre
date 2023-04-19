@@ -8,19 +8,19 @@ export class Committee {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: true})
     comiImpactCto: number;
 
-    @Column()
+    @Column({nullable: true})
     comiImpactHp: number;
 
-    @Column()
+    @Column({nullable: true})
     comiCostSquad: number;
 
-    @Column()
+    @Column({nullable: true})
     comiRiskRt: number;
 
-    @Column()
+    @Column({nullable: true})
     comiRiskCso: number;
 
     // @OneToMany(() => Group, (group) => group.committee)
