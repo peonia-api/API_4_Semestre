@@ -21,7 +21,9 @@ class UserController {
       .getOne();
 
     if (usuario && usuario.id) {
+    	console.log(usuario)
       const r = await usuario.compare(userPassword);
+      console.log(r)
       if (r) {
         // cria um token codificando o objeto {id,userEmail}
         const token = await generateToken({ id: usuario.id, userEmail: usuario.userEmail });
@@ -32,12 +34,16 @@ class UserController {
           token
         });
       }
-      return res.json({ error: "Dados de login não conferem" });
+      return res.status(400).json({ error: "Dados de login não conferem" });
     }
     else {
-      return res.json({ error: "Usuário não localizado" });
+      return res.status(400).json({ error: "Usuário não localizado" });
     }
   }
+
+
+
+
 
   public async create(req: Request, res: Response): Promise<Response> {
     const { userEmail, userPassword } = req.body;
@@ -131,7 +137,6 @@ public async postUser (req: Request, res: Response) : Promise<Response> {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-    insertUser.userGroup = createUser.userGroup
   
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
@@ -146,7 +151,6 @@ public async putUser (req: Request, res: Response) : Promise<Response> {
     findUser.userPosition = createUser.userPosition
     findUser.userEmail = createUser.userEmail
     findUser.userType = createUser.userType
-    findUser.userGroup = createUser.userGroup
 
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)

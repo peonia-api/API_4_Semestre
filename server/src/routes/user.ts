@@ -3,6 +3,8 @@ import {UserController} from "../controllers";
 const routes = Router();
 
 routes.post('/create', UserController.create);
+routes.post("/login", UserController.login)
+
 
 routes.get('/historicUser', UserController.getHistoricUser);
 

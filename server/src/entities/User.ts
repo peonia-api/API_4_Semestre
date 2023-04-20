@@ -5,7 +5,7 @@ import { Call } from "./Call";
 @Entity({name:"users"})
 export class User {
     // define a chave primária como auto incremento
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("uuid")
     id: number;
 
     @Column({nullable: false, length: 100})
@@ -23,8 +23,8 @@ export class User {
     @Column({nullable: false, length: 25})
     userType: string;
 
-    @Column({nullable: false, length: 25})
-    userGroup: string;
+    //@Column({nullable: false, length: 25})
+    //userGroup: string;
 
 
 
