@@ -10,7 +10,7 @@ import ListagemUser from "./pages/ListagemUser";
 import EditarUser from "./pages/EditarUser";
 import Login from "./pages/Login";
 import ListagemCallAdm from "./pages/ListagemCallAdm";
-
+import { AuthProvider, Private } from "./contexts/auth";
 
 function App() {
 
@@ -20,21 +20,24 @@ function App() {
 
         <Header />
 
-        {/* <Login/> */}
+        {/* <Login/>  */}
 
         <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
           <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-            <Routes>
-              <Route path="/solicitacao" element={<Solicitacao />} />
-              <Route path="/listagem" element={<ListagemCall />} />
-              <Route path="/listagemUser" element={<ListagemUser />} />
-              <Route path="/editarCall/:id" element={<EditarCall />} />
-              <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
-              <Route path="/editarUser/:id" element={<EditarUser />} />
-              <Route path="/listagemCallAdm" element={<ListagemCallAdm />} />
-            </Routes>
-
+            <AuthProvider>
+              <Routes>
+                <Route path="/login" element={<Login />} /> 
+                <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
+                <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
+                <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
+                <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
+                <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
+                <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
+                <Route path="/listagemCallAdm" element={ <Private><ListagemCallAdm /> </Private>} />
+                 <Route path="/" element={ <Private> <ListagemCall /> </Private>} />  {/*Retirar depois */}
+              </Routes>
+            </AuthProvider>
 
           </div>
 

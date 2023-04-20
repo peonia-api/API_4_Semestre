@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export enum URI {
     ENVIAR_CALL = "http://localhost:3001/call/createCall",
     ALTERA_CALL = "http://localhost:3001/call/modifyCall/",
@@ -14,6 +16,7 @@ export enum URIuser {
     DELETE_USER = "http://localhost:3001/user/delete/",
     PEGAR_USER = "http://localhost:3001/user/historicUser",
     PEGAR_USER_ESPECIFICO = "http://localhost:3001/user/especificoUser/",
+    LOGIN_USER = "http://localhost:3001/user/login/"
 }
 
 export enum URIcommit{
@@ -28,3 +31,8 @@ export enum URIcommit{
     ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/"
 }
 
+
+export const api = axios.create({
+    baseURL: 'http://localhost:3000',
+    withCredentials: true
+  })

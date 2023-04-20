@@ -6,7 +6,7 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIuser } from "../enumerations/uri";
+import { URI, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
 
