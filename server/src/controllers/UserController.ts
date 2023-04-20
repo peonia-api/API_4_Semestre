@@ -131,7 +131,6 @@ public async postUser (req: Request, res: Response) : Promise<Response> {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-    insertUser.userGroup = createUser.userGroup
   
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
@@ -146,7 +145,6 @@ public async putUser (req: Request, res: Response) : Promise<Response> {
     findUser.userPosition = createUser.userPosition
     findUser.userEmail = createUser.userEmail
     findUser.userType = createUser.userType
-    findUser.userGroup = createUser.userGroup
 
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)

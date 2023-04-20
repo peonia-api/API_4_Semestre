@@ -142,12 +142,12 @@ function ListagemUser() {
                 </th>
 
                 <th 
-                  onClick={() => sorting("userGroup")} className="text-center">Equipe
+                  onClick={() => sorting("userType")} className="text-center">Tipo do usuário
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 
                 <th
-                  onClick={() => sorting("userPosition")}className="text-center">Permissão
+                  onClick={() => sorting("userPosition")}className="text-center">Cargo
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
 
@@ -163,7 +163,7 @@ function ListagemUser() {
                       {/*corpo tabela*/}
                       <td className="text-center">{data.userName}</td>
                       <td className="text-center">{data.userEmail}</td>
-                      <td className="text-center">{data.userGroup}</td>
+                      <td className="text-center">{data.userType}</td>
                       <td className="text-center">{data.userPosition}</td>
                       <td className="text-center">
                         <Link to={"/editarUser/" + data.id}>
