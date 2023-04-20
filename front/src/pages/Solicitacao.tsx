@@ -1,16 +1,34 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI } from "../enumerations/uri";
+import { URI, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
+import { Users } from "../types/user";
 
 function Solicitacao() {
+
+  const [data, setData] = useState<Users[]>([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      axios
+        .get(URIuser.PEGAR_USER)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchUsers();
+  }, []);
+
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
     validationSchema: solicitacaoValidationSchema,
@@ -34,8 +52,6 @@ function Solicitacao() {
       avisoConcluido();
     }
   }
-
-  useEffect(() => {}, []);
 
   return (
     <form
@@ -89,9 +105,11 @@ function Solicitacao() {
               <option value="" disabled label="Selecione o e-mail do solicitante">
                 Solicitante{" "}
               </option>  
-              {/* Falta trazer o array de emails dos usuários do back e usar .map pra criar as options */}  
-              <option value={'jose@outlook.com'}>jose@outlook.com</option>           
-              <option value={'maria@outlook.com'}>maria@outlook.com</option>           
+              {data.map((data) => {
+              return(
+                <option value={data.userEmail}>{data.userEmail}</option> 
+              )
+            })}                 
             </select>            
             {formik.touched.callEmail && formik.errors.callEmail && (
               <div className="fv-plugins-message-container">
