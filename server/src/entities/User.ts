@@ -20,14 +20,17 @@ export class User {
     @Column({nullable: false, select: false, length: 100})
     userPassword: string;
 
-    @Column({nullable: false, length: 25})
+    @Column({nullable: false, length: 70})
     userType: string;
 
+<<<<<<< HEAD
     //@Column({nullable: false, length: 25})
     //userGroup: string;
 
 
 
+=======
+>>>>>>> d47ac46566110cf2951daea681344d4ad948814e
     @BeforeInsert() //a função hashPassword é disparada antes do insert e update
     @BeforeUpdate()
     hashPassword(): void {
