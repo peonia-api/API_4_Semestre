@@ -51,11 +51,9 @@ function Dropzone(props: any) {
     },
     maxFiles: 5,
     onDrop: acceptedFiles => {
-      
-      let newCallFiles = [...callFiles.concat(acceptedFiles)]
-
-      setFieldValue("callFiles", newCallFiles)
-
+      let newCallFiles = [...callFiles, ...acceptedFiles];
+      newCallFiles = newCallFiles.slice(0, 5); // limita em 5 arquivos
+      setFieldValue("callFiles", newCallFiles);
     }
   });
 
