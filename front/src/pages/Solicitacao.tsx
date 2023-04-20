@@ -5,17 +5,16 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
-
+import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
-import { initialValues } from "../types/call";
-
+import { solicitacaoInitialValues } from "../types/call";
+import Dropzone from "../components/Dropzone";
 
 function Solicitacao() {
   const formik = useFormik({
-    initialValues,
-    validationSchema: registrationSchema,
-    initialErrors: { callRequester: "" },
+    initialValues: solicitacaoInitialValues,
+    validationSchema: solicitacaoValidationSchema,
+    initialErrors: { callEmail: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values);
@@ -66,52 +65,15 @@ function Solicitacao() {
 
       <div className="row">
         <div className="col-lg-6">
-          {/* begin::Form group Nome */}
-          <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">Nome</label>
-            <input
-              placeholder="Nome do solicitante"
-              type="text"
-              autoComplete="off"
-              {...formik.getFieldProps("callRequester")}
-              onChange={formik.handleChange}
-              value={formik.values.callRequester}
-              className={clsx(
-                "form-control bg-transparent",
-                {
-                  "is-invalid":
-                    formik.touched.callRequester && formik.errors.callRequester,
-                },
-                {
-                  "is-valid":
-                    formik.touched.callRequester &&
-                    !formik.errors.callRequester,
-                }
-              )}
-            />
-            {formik.touched.callRequester && formik.errors.callRequester && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callRequester}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* end::Form group Nome */}
-        </div>
-        <div className="col-lg-6">
           {/* begin::Form group E-mail */}
           <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              E-mail
-            </label>
-            <input
-              placeholder="E-mail do solicitante"
-              type="email"
+            <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
+            <select
+              placeholder="E-mail"
               autoComplete="off"
               {...formik.getFieldProps("callEmail")}
               onChange={formik.handleChange}
-              value={formik.values.callEmail}
+              value={formik.values.callEmail ?? ''}
               className={clsx(
                 "form-control bg-transparent",
                 {
@@ -123,7 +85,14 @@ function Solicitacao() {
                     formik.touched.callEmail && !formik.errors.callEmail,
                 }
               )}
-            />
+            >
+              <option value="" disabled label="Selecione o e-mail do solicitante">
+                Solicitante{" "}
+              </option>  
+              {/* Falta trazer o array de emails dos usuários do back e usar .map pra criar as options */}  
+              <option value={'jose@outlook.com'}>jose@outlook.com</option>           
+              <option value={'maria@outlook.com'}>maria@outlook.com</option>           
+            </select>            
             {formik.touched.callEmail && formik.errors.callEmail && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
@@ -132,50 +101,8 @@ function Solicitacao() {
               </div>
             )}
           </div>
-          {/* end::Form group E-mail */}
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-lg-6">
-          {/* begin::Form group Telefone */}
-          <div className="fv-row mb-3">
-            <label className="form-label fw-bolder text-dark fs-6">
-              Telefone
-            </label>
-            <input
-              id="fone"
-              placeholder="Telefone para contato"
-              type="number"
-              autoComplete="off"
-              onKeyDown={(event) => {
-                if (/\+|\.|-/.test(event.key)) event.preventDefault();
-              }}
-              {...formik.getFieldProps("callPhone")}
-              onChange={formik.handleChange}
-              value={formik.values.callPhone}
-              className={clsx(
-                "form-control bg-transparent",
-                {
-                  "is-invalid":
-                    formik.touched.callPhone && formik.errors.callPhone,
-                },
-                {
-                  "is-valid":
-                    formik.touched.callPhone && !formik.errors.callPhone,
-                }
-              )}
-            />
-            {formik.touched.callPhone && formik.errors.callPhone && (
-              <div className="fv-plugins-message-container">
-                <div className="fv-help-block">
-                  <span role="alert">{formik.errors.callPhone}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* end::Form group Telefone */}
-        </div>
+          {/* end::Form group Nome */}
+        </div>        
         <div className="col-lg-6">
           {/* begin::Form group Título */}
           <div className="fv-row mb-3">
@@ -363,6 +290,19 @@ function Solicitacao() {
                   </div>
                 </div>
               )}
+          </div>
+          {/* end::Form group */}
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-lg-12">
+          {/* begin::Form group Documentos */}
+          <div className="fv-row mb-3">
+            <label className="form-label fw-bolder text-dark fs-6">
+              Documentos
+            </label>
+            <Dropzone callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} />
           </div>
           {/* end::Form group */}
         </div>

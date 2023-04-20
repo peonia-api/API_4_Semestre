@@ -1,11 +1,9 @@
 import cors = require("cors");
 import { Router, Request, Response } from "express";
-
 import call from "./call";
 import attachment from "./attachment";
 import user from "./user";
 import committee from "./committee";
-
 
 const routes = Router()
 
