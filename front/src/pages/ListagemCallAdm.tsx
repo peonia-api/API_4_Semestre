@@ -12,13 +12,15 @@ import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
 import axios from "axios";
 import "../App.css";
-import { URI } from "../enumerations/uri";
+import { URI, URIcommit } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
+import { DropComite } from "../components/DropComite";
+import ComiteCso from "../components/ComiteCso";
 
-function ListagemCall() {
+function ListagemCallAdm() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -39,6 +41,18 @@ function ListagemCall() {
       
     }
     fetchCalls();
+    async function fetchCommittee() {
+      axios
+          .post(URIcommit.ENVIAR_COMITE)
+          .then((response) => {
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+          console.log('passou dropp');
+          
+  }
+  fetchCommittee();
   }, []);
 
   //delete
@@ -84,8 +98,11 @@ function ListagemCall() {
   };
 
   //pagination
+  const [idLinux, setIdLinux] = useState(Number);
+
+
   const [pageNumber, setPageNumber] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const pagesVisited = pageNumber * itemsPerPage;
   const pageCount = Math.ceil(data.length / itemsPerPage);
   const changePage = ({ selected }: { selected: number }) => {
@@ -100,6 +117,7 @@ function ListagemCall() {
   }, [parent]);
   const reveal = (id: number) => {
     setShow(show === id ? null : id);
+    setIdLinux(id);
   };
 
   //search
@@ -140,7 +158,7 @@ function ListagemCall() {
                   onClick={() => sorting("callRequester")}
                   className="text-center"
                 >
-                  Email do solicitante
+                  Solicitante
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 <th onClick={() => sorting("callType")} className="text-center">
@@ -168,6 +186,7 @@ function ListagemCall() {
                   Data de criação
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
+                <th className="text-center">Comitê</th>
                 <th className="text-center">Ações</th>
               </tr>
             </thead>
@@ -185,7 +204,7 @@ function ListagemCall() {
                         {data.id}
                       </strong>
                     </td>
-                    <td className="text-center">{data.callEmail}</td>
+                    <td className="text-center">{data.callRequester}</td>
                     <td className="text-center">{data.callType}</td>
                     <td className="text-center">{data.callTitle}</td>
                     <td className="text-center">{data.callState}</td>
@@ -193,6 +212,43 @@ function ListagemCall() {
                       {new Date(data.callDateCreate).toLocaleDateString(
                         "en-GB"
                       )}
+                    </td>
+                    <td className="text-center">
+                      <label className="form-label text-dark fs-6">
+                        Análise de Risco - CSO
+                      </label>
+                      <select
+                        placeholder="Análise de Risco - CSO"
+                        autoComplete="off"
+                      >
+                        <option value="" disabled label="Análise de Risco - CSO">
+                          Análise de Risco - CSO{" "}
+                        </option>
+                        <option
+                          value="0"
+                          label="0"
+                        >
+                          0
+                        </option>
+                        <option
+                          value="1"
+                          label="1"
+                        >
+                          1
+                        </option>
+                        <option
+                          value="2"
+                          label="2"
+                        >
+                          2
+                        </option>
+                        <option
+                          value="3"
+                          label="3"
+                        >
+                          3
+                        </option>
+                      </select>
                     </td>
                     <td className="text-center">
                       <Link to={"/editar/" + data.id}>
@@ -204,6 +260,7 @@ function ListagemCall() {
                         alt="Excluir"
                         onClick={() => handleDeleteCall(data.id)}
                       />
+                      <ComiteCso id={idLinux}  />
                     </td>
                   </tr>
                 );
@@ -233,6 +290,8 @@ function ListagemCall() {
                       disabled
                     />
                   </FloatingLabel>
+
+                  // <DropComite />
                 )}
               </div>
             );
@@ -243,4 +302,4 @@ function ListagemCall() {
   );
 }
 
-export default ListagemCall;
+export default ListagemCallAdm;

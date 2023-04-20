@@ -9,6 +9,7 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import ListagemUser from "./pages/ListagemUser";
 import EditarUser from "./pages/EditarUser";
 import Login from "./pages/Login";
+import ListagemCallAdm from "./pages/ListagemCallAdm";
 
 
 function App() {
@@ -31,8 +32,9 @@ function App() {
               <Route path="/editarCall/:id" element={<EditarCall />} />
               <Route path="/cadastroUsuario" element={<CadastroUsuario />} />
               <Route path="/editarUser/:id" element={<EditarUser />} />
+              <Route path="/listagemCallAdm" element={<ListagemCallAdm />} />
             </Routes>
-                
+
 
           </div>
 

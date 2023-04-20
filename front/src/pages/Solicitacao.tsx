@@ -6,28 +6,13 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIuser } from "../enumerations/uri";
+import { URI, URIattach, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
-import { Users } from "../types/user";
 
 function Solicitacao() {
 
-  const [data, setData] = useState<Users[]>([]);
-
-  useEffect(() => {
-    async function fetchUsers() {
-      axios
-        .get(URIuser.PEGAR_USER)
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchUsers();
-  }, []);
+  useEffect(() => {}, []);
 
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
@@ -36,6 +21,7 @@ function Solicitacao() {
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values);
+      //await axios.post(URIattach.ENVIAR_ANEXO)
       onClickLimpar();
     },
   });
@@ -84,7 +70,7 @@ function Solicitacao() {
           {/* begin::Form group E-mail */}
           <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
-            <select
+            <input
               placeholder="E-mail"
               autoComplete="off"
               {...formik.getFieldProps("callEmail")}
@@ -102,15 +88,7 @@ function Solicitacao() {
                 }
               )}
             >
-              <option value="" disabled label="Selecione o e-mail do solicitante">
-                Solicitante{" "}
-              </option>  
-              {data.map((data) => {
-              return(
-                <option value={data.userEmail}>{data.userEmail}</option> 
-              )
-            })}                 
-            </select>            
+            </input>        
             {formik.touched.callEmail && formik.errors.callEmail && (
               <div className="fv-plugins-message-container">
                 <div className="fv-help-block">
