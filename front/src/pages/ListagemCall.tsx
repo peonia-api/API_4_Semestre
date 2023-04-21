@@ -195,7 +195,7 @@ function ListagemCall() {
                       )}
                     </td>
                     <td className="text-center">
-                      <Link to={"/editar/" + data.id}>
+                      <Link to={"/editarCall/" + data.id}>
                         <img style={{ width: '25px' }} src={editar} alt='Editar' />
                       </Link>
                       <img
