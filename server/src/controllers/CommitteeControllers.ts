@@ -129,6 +129,41 @@ class CommitteeController {
         
     }
 
+    public async getCommitteeFilterAll (req: Request, res: Response) : Promise<Response> {
+        const idCommittee:any = req.params.uuid
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const allCommittee = await committeeRepository.find()
+        const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"}
+        const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"}
+
+        let lista = []
+
+        allCommittee.map((data) => {
+            if(data.comiCostSquad == null || data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
+                lista.push({id:data.id, mensage: "Ainda não foi avaliado", arquivada: "Em análise"})
+            }
+            if (data.comiRiskCso == 3) {
+                lista.push({id: data.id, validate})
+            }
+            else if (data.comiRiskRt == 3) {
+                lista.push({id: data.id, validate})
+            }
+            else if (data.comiImpactCto == 0) {
+                lista.push({id: data.id, validate1})
+            }
+            else if (data.comiImpactHp == 0) {
+                lista.push({id: data.id, validate1})
+            }
+            else if (data.comiCostSquad == 3) {
+                lista.push({id: data.id, validate})
+            }
+            else{
+                lista.push({id: data.id, arquivada: "Aprovada"})
+            }
+        })  
+        return res.json(lista)     
+    }
+
 
 }
 export default new CommitteeController();

@@ -22,6 +22,7 @@ export enum URIuser {
 export enum URIcommit{
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
+    PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
     PEGAR_TODOS_COMITE = "http://localhost:3001/committee/committeeAll/",
     PEGAR_COMITE_ESPECIFICO = "http://localhost:3001/committee/especifico/",
     ALTERA_COMITE_CTO = "http://localhost:3001/committee/impactCto/",
@@ -29,6 +30,15 @@ export enum URIcommit{
     ALTERA_COMITE_SQUAD = "http://localhost:3001/committee/costSquad/",
     ALTERA_COMITE_RT = "http://localhost:3001/committee/riskRt/",
     ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/"
+}
+
+export enum URIattach{
+    ENVIAR_ANEXO = "http://localhost:3001/file/file",
+    PEGAR_ANEXO = "http://localhost:3001/file/fun/",
+    PEGAR_TODOS_ANEXO = "http://localhost:3001/file/fileAll/",
+    PEGAR_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileCall/",
+    ALTERA_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileReneme/",
+    DELETE_ANEXO = "http://localhost:3001/file/fileRemove/"
 }
 
 
