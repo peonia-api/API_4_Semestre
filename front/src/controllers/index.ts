@@ -8,5 +8,6 @@ export { solicitacaoValidationSchema,
         avisoConcluido,
         avisoErroAoDeletar,
         avisoErroLogin,
+        avisoConcuidoComite,
         VerifyType
 } 
