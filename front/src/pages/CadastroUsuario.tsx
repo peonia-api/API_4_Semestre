@@ -195,12 +195,12 @@ function CadastroUsuario() {
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        formik.touched.userName && formik.errors.userName,
+                                        formik.touched.userPosition && formik.errors.userPosition,
                                 },
                                 {
                                     "is-valid":
-                                        formik.touched.userName &&
-                                        !formik.errors.userName,
+                                        formik.touched.userPosition &&
+                                        !formik.errors.userPosition,
                                 }
                             )}
                         />
