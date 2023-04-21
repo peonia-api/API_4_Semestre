@@ -8,6 +8,7 @@ import axios from "axios";
 import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
 import { Calls } from "../types/call";
+import Header from "../components/Header";
 
 
 function EditarCall() {
@@ -85,6 +86,9 @@ function EditarCall() {
 
   return (
     <>
+               <Header />
+    <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+      <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
       <form
         className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
         noValidate
@@ -427,6 +431,8 @@ function EditarCall() {
         </div>
         {/* end::Form group */}
       </form>
+      </div>
+    </div>
     </>
   );
 }

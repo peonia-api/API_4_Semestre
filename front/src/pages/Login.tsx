@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../App.css";
-import { Row } from "react-bootstrap";
 import "../styles/Login.css";
-import logo from "../images/logo_navbar.png"
 import { AuthContext } from "../contexts/auth";
 
 function Login(){
@@ -17,6 +15,9 @@ function Login(){
         console.log("submint", {email, password});
        
         login(email, password)
+    }
+    const changeInput = (e: any) =>{
+        e.style.backgroundColor = "#54C5CE";
     }
 
     return(
@@ -41,7 +42,7 @@ function Login(){
                                             type="text" 
                                             className="form-control input-login"
                                             value={email}
-                                            onChange={e => setEmail(e.target.value)}
+                                            onChange={e =>{setEmail(e.target.value); changeInput(e.target)}}
                                             id="email" 
                                             placeholder="Insira o nome de usuário" />
                                     </div>

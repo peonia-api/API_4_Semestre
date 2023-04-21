@@ -17,32 +17,19 @@ function App() {
   return (
     <>
       <div className="bg-div">
-
-        <Header />
-
-        {/* <Login/>  */}
-
-        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
-
-          <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-            <AuthProvider>
-              <Routes>
-                <Route path="/login" element={<Login />} /> 
-                <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
-                <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
-                <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
-                <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
-                <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
-                <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
-                <Route path="/listagemCallAdm" element={ <Private><ListagemCallAdm /> </Private>} />
-                 <Route path="/" element={ <Private> <ListagemCall /> </Private>} />  {/*Retirar depois */}
-              </Routes>
-            </AuthProvider>
-
-          </div>
-
-        </div>
-
+          <AuthProvider>
+            <Routes>
+              <Route path="/login" element={<Login />} /> 
+              <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
+              <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
+              <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
+              <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
+              <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
+              <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
+              <Route path="/listagemCallAdm" element={ <Private><ListagemCallAdm /> </Private>} />
+              <Route path="/" element={ <Private> <ListagemCall /> </Private>} />  {/*Retirar depois */}
+            </Routes>
+          </AuthProvider>
       </div>
       <Footer />
 

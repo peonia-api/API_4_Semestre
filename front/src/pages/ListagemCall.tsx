@@ -17,6 +17,7 @@ import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
+import Header from "../components/Header";
 
 function ListagemCall() {
 
@@ -106,6 +107,9 @@ function ListagemCall() {
 
   return (
     <>
+        <Header />
+    <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+      <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
       <div className="text-center">
         <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">
           Listagem dos chamados
@@ -239,6 +243,9 @@ function ListagemCall() {
           })}
         </Container>
       </Container>
+      </div>
+    </div>
+      
     </>
   );
 }
