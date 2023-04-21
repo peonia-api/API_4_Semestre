@@ -16,9 +16,12 @@ import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
+import { VerifyType } from "../controllers";
 
 function ListagemTipoUsuario() {
-
+  const linkUrl:any = localStorage.getItem("userType")
+  const linkCom:any =  VerifyType(linkUrl);
+  
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
 
@@ -188,7 +191,7 @@ function ListagemTipoUsuario() {
                       )}
                     </td>
                     <td className="text-center">
-                      <Link to={"/comite/" + data.id}>
+                      <Link to={linkCom + data.id}>
                         <img style={{width: '25px'}} src={avaliacao} alt='Comitê' />
                       </Link>
                     </td>
