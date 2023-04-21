@@ -1,49 +1,55 @@
-background-login {
-    background-color: #333333;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 10px 14px;
-    min-height: 150vh;
-    height: 100%;
-    align-items: center;
-    display: flex;
-  }
-label{
-  font-family: 'Coolvetica', sans-serif;
-  letter-spacing: 0.1rem;
+.background-login {
+  background-color: #333333;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 10px 14px;
+  min-height: 150vh;
+  height: 100%;
+  align-items: center;
+  display: flex;
+
+}
+.label{
+font-family: 'Coolvetica', sans-serif;
+letter-spacing: 0.1rem;
 }
 .row{
-    width: 101% !important;
+  width: 101% !important;
 }
 
 .btn-login{
-    display: flex;
-    align-items: center;
-    background-color: #424242 !important;
-    color: white !important;
-    font-family: 'Coolvetica', sans-serif !important;
-    letter-spacing: 0.1rem;
- }
- .logo-login{
-  width: 70% !important;
-  margin-bottom: 5%;
-  margin-left: 5% !important;
- }
- .card,.input-login{
-    background-color: #54C5CE !important;
-    padding: 0px 0px 0px 0px !important;
- }
-a{
-  font-family: 'Coolvetica', sans-serif;
+  display: flex;
+  align-items: center;
+  background-color: #424242 !important;
+  color: white !important;
+  font-family: 'Coolvetica', sans-serif !important;
   letter-spacing: 0.1rem;
+}
+.logo-login{
+width: 70% !important;
+margin-bottom: 5%;
+margin-left: 5% !important;
+}
+.card,.input-login{
+  background-color: #54C5CE !important;
+  padding: 0px 0px 0px 0px !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+-webkit-box-shadow: 0 0 0 30px #54C5CE inset;
+}
+a{
+font-family: 'Coolvetica', sans-serif;
+letter-spacing: 0.1rem;
 
 }
- a:link, a:visited {
-  color: black;
-  padding: 5px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+a:link, a:visited {
+color: black;
+padding: 5px 25px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
 }
 
 a:hover, a:active {
-  color: white;
+color: white;
 }

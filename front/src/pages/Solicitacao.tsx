@@ -9,6 +9,8 @@ import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../contr
 import { URI, URIattach, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
+import Header from "../components/Header";
+import '../App.css';
 
 function Solicitacao() {
 
@@ -40,7 +42,12 @@ function Solicitacao() {
   }
 
   return (
-    <form
+    <>
+    <Header /> 
+    <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+
+      <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+      <form
       className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
       noValidate
       id="form-solicitacao"
@@ -341,6 +348,9 @@ function Solicitacao() {
       </div>
       {/* end::Form group */}
     </form>
+      </div>
+    </div>
+    </>
   );
 }
 

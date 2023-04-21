@@ -9,6 +9,8 @@ import { avisoConcluido, avisoErro } from "../controllers";
 import registrationSchemaUser from "../controllers/validateUser";
 import { URIuser } from "../enumerations/uri";
 import { initialValues } from "../types/user";
+import Header from "../components/Header";
+import '../App.css';
 
 
 function CadastroUsuario() {
@@ -39,7 +41,11 @@ function CadastroUsuario() {
     useEffect(() => { }, []);
 
     return (
-        <form
+        <>
+        <Header /> 
+        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+            <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+            <form
             className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
             noValidate
             id="form-solicitacao"
@@ -293,6 +299,9 @@ function CadastroUsuario() {
             </div>
             {/* end::Form group */}
         </form>
+            </div>
+        </div>
+        </>
     );
 }
 
