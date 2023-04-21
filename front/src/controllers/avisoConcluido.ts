@@ -21,5 +21,14 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
+function avisoConcuidoComite(): Promise<SweetAlertResult>  {
+  return Swal.fire({
+    title: "Sucesso",
+    text: "Avaliação atribuída com sucesso!",
+    icon: "success",
+    confirmButtonColor: "#54C5CE",
+  });
+}
 
-export { avisoConcluido, avisoDeletar };
+
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite };

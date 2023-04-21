@@ -1,0 +1,16 @@
+.drop-comite {
+    width: 30%;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.button-comite {
+    margin-top: 25px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.select {
+    text-align: center;
+}
