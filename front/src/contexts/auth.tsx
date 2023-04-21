@@ -76,6 +76,7 @@ export const AuthProvider = ({children}:any) => {
         setUser(null);
         navigate("/login")
     }
+    
 
     return (
         <AuthContext.Provider value={{authenticated: Boolean(user), user, loading , logout, login}}>
@@ -149,3 +150,5 @@ export const VerifySQUAD = ({ children }:any) => {
 
     return children;
 }
+
+
