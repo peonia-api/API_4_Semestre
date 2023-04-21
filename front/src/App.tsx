@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import './App.css';
 import Solicitacao from "./pages/Solicitacao";
@@ -22,14 +21,6 @@ function App() {
   return (
     <>
        <div className="bg-div">
-
-          <Header /> 
-
-          {/* <Login/> */}
-
-          <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
-
-            <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
               <AuthProvider>
                 <Routes>
                   <Route path="/login" element={<Login />} />
@@ -49,15 +40,8 @@ function App() {
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                 </Routes>
               </AuthProvider>
-
-            </div>
-
-          </div> *
-
           </div>
           <Footer />
-
-
     </>
   );
 }
