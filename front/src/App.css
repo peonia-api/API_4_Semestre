@@ -35,6 +35,10 @@ input {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
 
+td {
+  padding: 1rem 0.5rem 0.5rem 0.5rem !important;
+}
+
 a.nav-link {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
