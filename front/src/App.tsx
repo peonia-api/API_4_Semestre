@@ -9,42 +9,55 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import ListagemUser from "./pages/ListagemUser";
 import EditarUser from "./pages/EditarUser";
 import Login from "./pages/Login";
-import ListagemCallAdm from "./pages/ListagemCallAdm";
 import { AuthProvider, Private } from "./contexts/auth";
+import ListagemTipoUsuario from "./pages/ListagemTipoUsuario";
+//import { Comite } from "./pages/Comite";
+import { ComiteCso } from "./pages/Comite/ComiteCso";
+import { ComiteCto } from "./pages/Comite/ComiteCto";
+import { ComiteHp } from "./pages/Comite/ComiteHp";
+import { ComiteRt } from "./pages/Comite/ComiteRt";
+import { ComiteSquad } from "./pages/Comite/ComiteSquad";
 
 function App() {
 
   return (
     <>
-      <div className="bg-div">
+       <div className="bg-div">
 
-        <Header />
+          <Header /> 
 
-        {/* <Login/>  */}
+          {/* <Login/> */}
 
-        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+          <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
-          <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-            <AuthProvider>
-              <Routes>
-                <Route path="/login" element={<Login />} /> 
-                <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
-                <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
-                <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
-                <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
-                <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
-                <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
-                <Route path="/listagemCallAdm" element={ <Private><ListagemCallAdm /> </Private>} />
-                 <Route path="/" element={ <Private> <ListagemCall /> </Private>} />  {/*Retirar depois */}
-              </Routes>
-            </AuthProvider>
+            <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+              <AuthProvider>
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
+                  <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
+                  <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
+                  <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
+                  <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
+                  <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
+                  <Route path="/ListagemTipoUsuario" element={<Private><ListagemTipoUsuario /></Private>} />
+                  {/* <Route path="/comite/:id" element={<Private><Comite /></Private>} /> */}
+                  <Route path="/" element={<Private> <ListagemCall /> </Private>} />
+                  <Route path="/comiteCso/:id" element={<Private> <ComiteCso/> </Private>} />
+                  <Route path="/comiteCto/:id" element={<Private> <ComiteCto/> </Private>} />
+                  <Route path="/comiteHp/:id" element={<Private> <ComiteHp/> </Private>} />
+                  <Route path="/comiteRt/:id" element={<Private> <ComiteRt/> </Private>} />
+                  <Route path="/comiteSquad/:id" element={<Private> <ComiteSquad/> </Private>} />
+                </Routes>
+              </AuthProvider>
+
+            </div>
+
+          </div> *
 
           </div>
+          <Footer />
 
-        </div>
-
-      </div>
-      <Footer />
 
     </>
   );
