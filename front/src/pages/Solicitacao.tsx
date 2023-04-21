@@ -6,7 +6,7 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIuser } from "../enumerations/uri";
+import { URI, URIattach, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
 
@@ -21,7 +21,7 @@ function Solicitacao() {
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values);
-      //await axios.post(URIattach.ENVIAR_ANEXO)
+      await axios.post(URIattach.ENVIAR_ANEXO, formik.values.callFiles)
       onClickLimpar();
     },
   });
