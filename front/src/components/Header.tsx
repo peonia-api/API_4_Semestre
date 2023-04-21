@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Images from "../images/logo_navbar.svg";
 import { AuthContext } from "../contexts/auth";
 import { useContext } from "react";
+import "../App.css";
 
 function Header() {
   const { logout } = useContext(AuthContext)
@@ -35,7 +36,7 @@ function Header() {
             <Nav>
               <CustomLink to="/listagem">CHAMADO</CustomLink>
               <CustomLink to="/listagemUser">USUÁRIO</CustomLink>
-              <Nav.Link onClick={signUp}>Logout</Nav.Link>
+              <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
