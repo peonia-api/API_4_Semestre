@@ -3,7 +3,6 @@ import { initialValues } from "../../types/committee";
 import { URIcommit } from "../../enumerations/uri";
 import axios from "axios";
 import clsx from "clsx";
-import registrationSchemaCommit from "../../controllers/validateCommittee";
 import { useState } from "react";
 
 export function ComiteCso() {
