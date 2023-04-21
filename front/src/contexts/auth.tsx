@@ -50,7 +50,9 @@ export const AuthProvider = ({children}:any) => {
                 navigate("/")
 
             })
-            .catch((err) => {                
+            .catch((err) => {     
+                localStorage.removeItem("userEmail");
+                localStorage.removeItem("token")           
                 alert("Erro ao entrar"); //colocar o swall
             })
         }catch(err){

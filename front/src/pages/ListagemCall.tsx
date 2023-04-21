@@ -154,13 +154,13 @@ function ListagemCall() {
                   Título
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
-                <th
+                {/* <th
                   onClick={() => sorting("callState")}
                   className="text-center"
                 >
                   Status
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
-                </th>
+                </th> */}
                 <th
                   onClick={() => sorting("callDateCreate")}
                   className="text-center"
@@ -188,7 +188,7 @@ function ListagemCall() {
                     <td className="text-center">{data.callEmail}</td>
                     <td className="text-center">{data.callType}</td>
                     <td className="text-center">{data.callTitle}</td>
-                    <td className="text-center">{data.callState}</td>
+                    {/* <td className="text-center">{data.callState}</td> */}
                     <td className="text-center">
                       {new Date(data.callDateCreate).toLocaleDateString(
                         "en-GB"
