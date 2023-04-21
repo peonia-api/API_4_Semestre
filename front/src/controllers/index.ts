@@ -1,4 +1,4 @@
-import { avisoConcluido } from './avisoConcluido';
+import { avisoConcluido, avisoConcuidoComite } from './avisoConcluido';
 import { avisoErro, avisoErroAoDeletar, avisoErroLogin } from './avisoErro';
 import { solicitacaoValidationSchema} from './validateCall';
 import { VerifyType } from "./verfyTypeComm";
