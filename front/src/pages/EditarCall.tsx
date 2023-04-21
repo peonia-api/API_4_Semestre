@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
+import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
 import { URI } from "../enumerations/uri";
 import { Calls } from "../types/call";
 
@@ -40,7 +40,7 @@ function EditarCall() {
       callPriority: data?.callPriority ?? "",
       //callState: "Inicializado",
     },
-    validationSchema: registrationSchema,
+    validationSchema: solicitacaoValidationSchema,
     initialErrors: { callEmail: "" },
     onSubmit: async (values) => {
       try {

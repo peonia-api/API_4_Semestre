@@ -12,7 +12,6 @@ const registrationSchemaUserEditar = Yup.object().shape({
     userPosition: Yup.string()
       .required('O cargo é obrigatório'),
 
-
     userEmail: Yup.string()     
       .required('O email é obrigatório'),
   })
