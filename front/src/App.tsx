@@ -9,7 +9,7 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import ListagemUser from "./pages/ListagemUser";
 import EditarUser from "./pages/EditarUser";
 import Login from "./pages/Login";
-import { AuthProvider, Private } from "./contexts/auth";
+import { AuthProvider, Private, VerifyCTO, VerifyCso, VerifyHP, VerifyRT, VerifySQUAD } from "./contexts/auth";
 import ListagemTipoUsuario from "./pages/ListagemTipoUsuario";
 //import { Comite } from "./pages/Comite";
 import { ComiteCso } from "./pages/Comite/ComiteCso";
@@ -43,11 +43,11 @@ function App() {
                   <Route path="/ListagemTipoUsuario" element={<Private><ListagemTipoUsuario /></Private>} />
                   {/* <Route path="/comite/:id" element={<Private><Comite /></Private>} /> */}
                   <Route path="/" element={<Private> <ListagemCall /> </Private>} />
-                  <Route path="/comiteCso/:id" element={<Private> <ComiteCso/> </Private>} />
-                  <Route path="/comiteCto/:id" element={<Private> <ComiteCto/> </Private>} />
-                  <Route path="/comiteHp/:id" element={<Private> <ComiteHp/> </Private>} />
-                  <Route path="/comiteRt/:id" element={<Private> <ComiteRt/> </Private>} />
-                  <Route path="/comiteSquad/:id" element={<Private> <ComiteSquad/> </Private>} />
+                  <Route path="/comiteCso/:id" element={<VerifyCso><Private> <ComiteCso/> </Private> </VerifyCso>} />
+                  <Route path="/comiteCto/:id" element={<VerifyCTO> <Private> <ComiteCto/> </Private> </VerifyCTO>} />
+                  <Route path="/comiteHp/:id" element={<VerifyHP> <Private> <ComiteHp/> </Private> </VerifyHP>} />
+                  <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
+                  <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                 </Routes>
               </AuthProvider>
 

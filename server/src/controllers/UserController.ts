@@ -30,6 +30,7 @@ class UserController {
         // retorna o token para o cliente
         return res.json({
           id: usuario.id,
+          userType: usuario.userType,
           userEmail: usuario.userEmail,
           token
         });

@@ -238,28 +238,28 @@ function EditarUser() {
                                 Tipo de usuário{" "}
                             </option>
                             <option
-                                value="CSO (Chief Security Officer)"
+                                value="CSO"
                                 onChange={formik.handleChange}
                                 label="CSO (Chief Security Officer)"
                             >
                                 CSO (Chief Security Officer)
                             </option>
                             <option
-                                value="RT (Responsável Técnico)"
+                                value="RT"
                                 onChange={formik.handleChange}
                                 label="RT (Responsável Técnico)"
                             >
                                 RT (Responsável Técnico)
                             </option>
                             <option
-                                value="CTO (Chief Technology Officer)"
+                                value="CTO"
                                 onChange={formik.handleChange}
                                 label="CTO (Chief Technology Officer)"
                             >
                                 CTO (Chief Technology Officer)
                             </option>
                             <option
-                                value="HP (Head de Plataformas)"
+                                value="HP"
                                 onChange={formik.handleChange}
                                 label="HP (Head de Plataformas)"
                             >
