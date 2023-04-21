@@ -137,7 +137,7 @@ function ListagemCall() {
                   {order === "ASC" ? <FaSortUp /> : <FaSortDown />}
                 </th>
                 <th
-                  onClick={() => sorting("callRequester")}
+                  onClick={() => sorting("callEmail")}
                   className="text-center"
                 >
                   Email do solicitante
