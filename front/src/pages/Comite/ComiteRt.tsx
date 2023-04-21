@@ -1,7 +1,7 @@
 import { URIcommit } from "../../enumerations/uri";
 import axios from "axios";
 import { useState } from "react";
-import { avisoConcuidoComite } from "../../controllers";
+import { avisoConcuidoComite } from "../../controllers/avisoConcluido";
 import Header from "../../components/Header";
 import '../../App.css';
 
