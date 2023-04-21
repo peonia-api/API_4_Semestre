@@ -66,6 +66,7 @@ export const AuthProvider = ({children}:any) => {
         
     }
 
+    
     const logout = () => {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token")
@@ -76,7 +77,6 @@ export const AuthProvider = ({children}:any) => {
         setUser(null);
         navigate("/login")
     }
-    
 
     return (
         <AuthContext.Provider value={{authenticated: Boolean(user), user, loading , logout, login}}>
@@ -85,7 +85,6 @@ export const AuthProvider = ({children}:any) => {
         </AuthContext.Provider>
     )
 }
-
 
 export const Private = ({ children }:any) => {
     const { authenticated, loading } = useContext(AuthContext);
