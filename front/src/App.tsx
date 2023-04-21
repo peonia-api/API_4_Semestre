@@ -19,7 +19,6 @@ import { ComiteRt } from "./pages/Comite/ComiteRt";
 import { ComiteSquad } from "./pages/Comite/ComiteSquad";
 
 function App() {
-  const t = "tttt"
   return (
     <>
        <div className="bg-div">
