@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { URIuser, api } from "../enumerations/uri";
+import { avisoErroLogin } from "../controllers";
 
 
 
@@ -53,7 +54,7 @@ export const AuthProvider = ({children}:any) => {
             .catch((err) => {     
                 localStorage.removeItem("userEmail");
                 localStorage.removeItem("token")           
-                alert("Erro ao entrar"); //colocar o swall
+                avisoErroLogin()
             })
         }catch(err){
 

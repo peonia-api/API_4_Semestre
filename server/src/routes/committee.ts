@@ -14,4 +14,6 @@ routes.put("/costSquad/:uuid", CommitteeControllers.putCommitCostSquad)
 routes.put("/riskRt/:uuid", CommitteeControllers.putCommitRikRt)
 routes.put("/riskCso/:uuid", CommitteeControllers.putCommitRiskCso)
 
+routes.delete("/deletar/:uuid", CommitteeControllers.deleteCommittee)
+
 export default routes;

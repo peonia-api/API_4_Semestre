@@ -29,7 +29,8 @@ export enum URIcommit{
     ALTERA_COMITE_HP = "http://localhost:3001/committee/impactHp/",
     ALTERA_COMITE_SQUAD = "http://localhost:3001/committee/costSquad/",
     ALTERA_COMITE_RT = "http://localhost:3001/committee/riskRt/",
-    ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/"
+    ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/",
+    DELETE_COMITE = "http://localhost:3001/committee/deletar/"
 }
 
 export enum URIattach{

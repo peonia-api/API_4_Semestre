@@ -96,6 +96,27 @@ class CommitteeController {
         const allCommittee = await committeeRepository.save(findCommittee)
         return res.json(allCommittee)
     }
+
+
+    public async deleteCommittee(req: Request, res: Response): Promise<Response> {
+        const deleteId:any = req.params.uuid
+        const committeeRep = AppDataSource.getRepository(Committee)
+        const find = await committeeRep.findOneBy({id: deleteId})
+        const remove = await committeeRep.remove(find)
+        return res.json(remove)
+    }
+
+
+   /*
+     public async deleteCall (req: Request, res: Response) : Promise<Response> {
+        const idCall:any = req.params.uuid
+        const callRepository = AppDataSource.getRepository(Call)
+        const findCall = await callRepository.findOneBy({id: idCall})
+        const allCall = await callRepository.remove(findCall)
+        return res.json(allCall)
+    }
+   */
+
     public async getCommitteeFilter (req: Request, res: Response) : Promise<Response> {
         const idCommittee:any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)

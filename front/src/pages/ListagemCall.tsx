@@ -12,9 +12,9 @@ import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
 import axios from "axios";
 import "../App.css";
-import { URI } from "../enumerations/uri";
+import { URI, URIcommit } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
-import { avisoErroDeletar } from "../controllers/avisoErro";
+import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
 
@@ -46,7 +46,15 @@ function ListagemCall() {
     try {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete(`${URI.DELETE_CALL}${id}`);
+          await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
+            console.log(res);
+            
+            await axios.delete(`${URI.DELETE_CALL}${id}`);
+
+          }).catch((err) => {
+            avisoErroAoDeletar()
+            
+          })
           const updatedCalls = data.filter((call) => call.id !== id);
           setData(updatedCalls);
         }
