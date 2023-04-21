@@ -134,7 +134,7 @@ function CadastroUsuario() {
                         )}
                     </div>
                     {/* end::Form group Título */}
-                </div>            
+                </div>
 
             </div>
 
@@ -174,8 +174,6 @@ function CadastroUsuario() {
                     </div>
                     {/* end::Form group E-mail */}
                 </div>
-
-
                 <div className="col-lg-6">
                     {/* begin::Form group Cargo */}
                     <div className="fv-row mb-3">
@@ -208,165 +206,52 @@ function CadastroUsuario() {
                             </div>
                         )}
                     </div>
-                    {/* begin::Form group Cargo */}
-                    {/* <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Cargo
-                        </label>
-                        <select
-                            placeholder="Tipo do Chamado (Hotfix ou Feature)"
-                            autoComplete="off"
-                            {...formik.getFieldProps("userPosition")}
-                            onChange={formik.handleChange}
-                            value={formik.values.userPosition}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.userPosition && formik.errors.userPosition,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.userPosition && !formik.errors.userPosition,
-                                }
-                            )}
-                        >
-                            <option value="" disabled label="Selecione o cargo">
-                                Cargo{" "}
-                            </option>
-                            <option
-                                value="Cibersegurança"
-                                onChange={formik.handleChange}
-                                label="Cibersegurança"
-                            >
-                                Cibersegurança
-                            </option>
-                            <option
-                                value="RT"
-                                onChange={formik.handleChange}
-                                label="RT"
-                            >
-                                RT
-                            </option>
-                            <option
-                                value="CTO"
-                                onChange={formik.handleChange}
-                                label="CTO"
-                            >
-                                CTO
-                            </option>
-                            <option
-                                value="Head"
-                                onChange={formik.handleChange}
-                                label="Head"
-                            >
-                                Head
-                            </option>
-                            <option
-                                value="Squad"
-                                onChange={formik.handleChange}
-                                label="Squad"
-                            >
-                                Squad
-                            </option>
-                        </select>
-                        {formik.touched.userPosition && formik.errors.userPosition && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.userPosition}</span>
-                                </div>
-                            </div>
-                        )}
-                    </div> */}
-                    {/* end::Form group Cargo*/}
-                </div>
             </div>
 
             <div className="row">
-                <div className="col-lg-6">
-                    {/* begin::Form group Equipe */}
-                    {/* <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Equipe
-                        </label>
-                        <select
-                            placeholder="Selecione a equipe"
-                            autoComplete="off"
-                            {...formik.getFieldProps("userGroup")}
-                            onChange={formik.handleChange}
-                            value={formik.values.userGroup}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.userGroup && formik.errors.userGroup,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.userGroup && !formik.errors.userGroup,
-                                }
-                            )}
-                        >
-                            <option value="" disabled label="Selecione a equipe"> Prioridade do chamado{" "} </option>
-                            <option value="Cibersegurança" onChange={formik.handleChange} label="Cibersegurança"> Cibersegurança </option>
-                            <option value="RT" onChange={formik.handleChange} label="RT" > RT </option>
-                            <option value="CTO" onChange={formik.handleChange} label="CTO"> CTO </option>
-                            <option value="Head" onChange={formik.handleChange} label="Head"> Head </option>
-                            <option value="Squad" onChange={formik.handleChange} label="Squad"> Squad </option>
-
-                        </select>
-                        {formik.touched.userGroup && formik.errors.userGroup && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.userGroup}</span>
+                    <div className="col-lg-6">
+                        {/* begin::Form group Tipo usuario */}
+                        <div className="fv-row mb-3">
+                            <label className="form-label fw-bolder text-dark fs-6">
+                                Tipo de usuário
+                            </label>
+                            <select
+                                placeholder="Tipo do Chamado (Hotfix ou Feature)"
+                                autoComplete="off"
+                                {...formik.getFieldProps("userType")}
+                                onChange={formik.handleChange}
+                                value={formik.values.userType}
+                                className={clsx(
+                                    "form-control bg-transparent",
+                                    {
+                                        "is-invalid":
+                                            formik.touched.userType && formik.errors.userType,
+                                    },
+                                    {
+                                        "is-valid":
+                                            formik.touched.userType && !formik.errors.userType,
+                                    }
+                                )}
+                            >
+                                <option value="" disabled label="Selecione o tipo de usuário">
+                                    Tipo de usuário{" "}
+                                </option>
+                                <option value="CSO" onChange={formik.handleChange} label="CSO (Chief Security Officer)"> CSO (Chief Security Officer) </option>
+                                <option value="RT" onChange={formik.handleChange} label="RT (Responsável Técnico)" > RT (Responsável Técnico) </option>
+                                <option value="CTO" onChange={formik.handleChange} label="CTO (Chief Technology Officer)"> CTO (Chief Technology Officer) </option>
+                                <option value="Head" onChange={formik.handleChange} label="Head de plataforma"> Head de plataforma </option>
+                                <option value="Squad" onChange={formik.handleChange} label="Squad"> Squad </option>
+                            </select>
+                            {formik.touched.userType && formik.errors.userType && (
+                                <div className="fv-plugins-message-container">
+                                    <div className="fv-help-block">
+                                        <span role="alert">{formik.errors.userType}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </div> */}
-                    {/* end::Form group Equipe*/}
-                </div>
-                <div className="col-lg-6">
-                    {/* begin::Form group Tipo usuario */}
-                    <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Tipo de usuário
-                        </label>
-                        <select
-                            placeholder="Tipo do Chamado (Hotfix ou Feature)"
-                            autoComplete="off"
-                            {...formik.getFieldProps("userType")}
-                            onChange={formik.handleChange}
-                            value={formik.values.userType}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.userType && formik.errors.userType,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.userType && !formik.errors.userType,
-                                }
                             )}
-                        >
-                            <option value="" disabled label="Selecione o tipo de usuário">
-                                Tipo de usuário{" "}
-                            </option>
-                            <option value="Cibersegurança" onChange={formik.handleChange} label="Cibersegurança"> Cibersegurança </option>
-                            <option value="RT" onChange={formik.handleChange} label="RT" > RT </option>
-                            <option value="CTO" onChange={formik.handleChange} label="CTO"> CTO </option>
-                            <option value="Head" onChange={formik.handleChange} label="Head"> Head </option>
-                            <option value="Squad" onChange={formik.handleChange} label="Squad"> Squad </option>
-                        </select>
-                        {formik.touched.userType && formik.errors.userType && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.userType}</span>
-                                </div>
-                            </div>
-                        )}
+                        </div>
+                        {/* end::Form group Tipo Usuario*/}
                     </div>
-                    {/* end::Form group Tipo Usuario*/}
                 </div>
             </div>
 
