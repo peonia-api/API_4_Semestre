@@ -127,8 +127,6 @@ public async getUser (req: Request, res: Response) : Promise<Response> {
     return res.json(allUser)
 }
 
-
-
 public async postUser (req: Request, res: Response) : Promise<Response> {
     const createUser = req.body
     const userRepository = AppDataSource.getRepository(User)
@@ -163,6 +161,24 @@ public async deleteUser (req: Request, res: Response) : Promise<Response> {
     const findUser = await userRepository.findOneBy({id: idUser})
     const allUser = await userRepository.remove(findUser)
     return res.json(allUser)
+}
+
+public async putPassword (req: Request, res: Response) : Promise<Response> {
+  const createUser = req.body
+  const email:any = req.body.email
+  const userRepository = AppDataSource.getRepository(User)
+  const findUser = await userRepository.findOneBy({userEmail: email})
+  findUser.userPassword = createUser.userPassword
+
+  const allUser = await userRepository.save(findUser)
+  return res.json(allUser)
+}
+
+public async getEmail (req: Request, res: Response) : Promise<Response> {
+  const email:any = req.body
+  const userRepository = AppDataSource.getRepository(User)
+  const AllEmail = await userRepository.findOneBy({userEmail: email})
+  return res.json(AllEmail)
 }
 
 }

@@ -16,7 +16,9 @@ export enum URIuser {
     DELETE_USER = "http://localhost:3001/user/delete/",
     PEGAR_USER = "http://localhost:3001/user/historicUser",
     PEGAR_USER_ESPECIFICO = "http://localhost:3001/user/especificoUser/",
-    LOGIN_USER = "http://localhost:3001/user/login/"
+    LOGIN_USER = "http://localhost:3001/user/login/",
+    //ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
+    //PEGAR_USER_ESPECIFICO_EMAIL = "http://localhost:3001/user/especificoEmail/",
 }
 
 export enum URIcommit{

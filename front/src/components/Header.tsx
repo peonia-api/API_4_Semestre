@@ -7,12 +7,12 @@ import { AuthContext } from "../contexts/auth";
 import { useContext } from "react";
 
 function Header() {
-  const { logout } = useContext(AuthContext)
+  const { logout } = useContext(AuthContext);
 
-  const signUp = (e:any) => {
-    e.preventDefault()   
+  const signUp = (e: any) => {
+    e.preventDefault();
     logout();
-  }
+  };
   return (
     <>
       <Navbar
@@ -35,7 +35,7 @@ function Header() {
             <Nav>
               <CustomLink to="/listagem">CHAMADO</CustomLink>
               <CustomLink to="/listagemUser">USUÁRIO</CustomLink>
-              <Nav.Link onClick={signUp}>Logout</Nav.Link>
+              <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
