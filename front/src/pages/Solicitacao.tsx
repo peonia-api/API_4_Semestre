@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
@@ -8,33 +8,64 @@ import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
 import { URI, URIattach, URIcommit, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
-import Dropzone from "../components/Dropzone";
+//import Dropzone from "../components/Dropzone";
 import Header from "../components/Header";
 import '../App.css';
-
+import Dropzonee from "../components/Dropzone";
+import { Dropzone, FileItem } from "@dropzone-ui/react";
+import { filesize } from "filesize";
+import { uniqueId } from "lodash";
 function Solicitacao() {
 
   useEffect(() => {}, []);
 
+
+  const [files, setFiles] = useState([] as any);
+
+  const data = new FormData()
+
+  
+
+  const updateFiles = (incommingFiles:any) => {
+    //do something with the files
+    setFiles(incommingFiles);
+    //even your own upload implementation
+  };
+  const removeFile = (id:any) => {
+    setFiles(files.filter((x:any) => x.id !== id));
+  };
+console.log(files);
+
+  
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
     validationSchema: solicitacaoValidationSchema,
     initialErrors: { callEmail: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      console.log(formik.values.callFiles);
+      //console.log(formik.values.callFiles);
       
       await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
-        await axios.post(URIattach.ENVIAR_ANEXO, {src:formik.values.callFiles, call: res.data.id}).then((s) => {
-          console.log(s);
+        if(files){
+          for (let index = 0; index < files.length; index++) {
+            console.log(files[index]);
+            
+            data.append('file', files[index].file)
+          }
+          //data.append('file', files)
+          console.log(data);
           
-        }).catch((err) =>{
-          console.log(err);
-          
-        })
+        }
+          await axios.post(`${URIattach.ENVIAR_ANEXO}${res.data.id}`, data).then((s) => {
+            console.log(s);
+            
+          }).catch((err) =>{
+            console.log(err);
+            
+          })
 
       }).catch((err) => {
           console.log("oi");
@@ -321,7 +352,17 @@ function Solicitacao() {
             <label className="form-label fw-bolder text-dark fs-6">
               Documentos
             </label>
-            <Dropzone callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} />
+            {/* <Dropzonee callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} /> */}
+              <Dropzone
+                  style={{ minWidth: "505px" }}
+                  onChange={updateFiles}
+                  value={files}
+                >
+                  {files.length > 0 &&
+                    files.map((file:any) => (
+                      <FileItem {...file} onDelete={removeFile} key={file.id} info />
+                    ))}
+              </Dropzone>
           </div>
           {/* end::Form group */}
         </div>
@@ -371,3 +412,4 @@ function Solicitacao() {
 }
 
 export default Solicitacao;
+

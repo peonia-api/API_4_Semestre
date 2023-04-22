@@ -37,7 +37,7 @@ export enum URIcommit{
 }
 
 export enum URIattach{
-    ENVIAR_ANEXO = "http://localhost:3001/file/file",
+    ENVIAR_ANEXO = "http://localhost:3001/file/file/",
     PEGAR_ANEXO = "http://localhost:3001/file/fun/",
     PEGAR_TODOS_ANEXO = "http://localhost:3001/file/fileAll/",
     PEGAR_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileCall/",
