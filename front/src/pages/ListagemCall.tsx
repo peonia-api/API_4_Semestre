@@ -48,15 +48,26 @@ function ListagemCall() {
     try {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
-          await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
-            console.log(res);
-            
-            await axios.delete(`${URI.DELETE_CALL}${id}`);
-
-          }).catch((err) => {
-            avisoErroAoDeletar()
-            
+          data.map(async (dados) => {
+            if(dados.id == id){
+              if (dados.callType === "feature") {
+                await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
+                  console.log(res);
+                  
+                  await axios.delete(`${URI.DELETE_CALL}${id}`);
+      
+                }).catch((err) => {
+                  avisoErroAoDeletar()
+                  
+                })
+              }else{
+                await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
+                  avisoErroAoDeletar()
+                })
+              }
+            }
           })
+          
           const updatedCalls = data.filter((call) => call.id !== id);
           setData(updatedCalls);
         }
