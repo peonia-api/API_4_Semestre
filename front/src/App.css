@@ -11,10 +11,10 @@ body{
   background-image: linear-gradient(270deg,rgba(43,43,43,0),#212121),linear-gradient(180deg,rgba(43,43,43,.6),rgba(43,43,43,.6)),url("https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cf5b134d44a7c0953ac37_sobre.webp");
   background-position: 0 0,0 0,0 0;
   background-size: auto,auto,cover;
-  width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .App {
   text-align: center;
 }
