@@ -18,6 +18,16 @@ function senhaAlterada(): Promise<SweetAlertResult> {
   });
 }
 
+function solicitaEmail(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title:
+      "Para recuperar a senha, favor inserir abaixo o seu E-mail cadastrado:",
+    input: "email",
+    inputPlaceholder: "Insira o E-mail cadastrado aqui",
+    allowOutsideClick: false,
+  });
+}
+
 async function avisoDeletar(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar chamado",
@@ -40,4 +50,4 @@ function avisoConcuidoComite(): Promise<SweetAlertResult> {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada };
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail };

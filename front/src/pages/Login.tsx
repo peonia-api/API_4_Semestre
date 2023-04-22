@@ -4,6 +4,7 @@ import "../styles/Login.css";
 import { AuthContext } from "../contexts/auth";
 //import emailjs from "emailjs-com";
 import  emailjs  from  '@emailjs/browser'
+import { solicitaEmail } from "../controllers";
 const Swal = require("sweetalert2");
 
 function Login() {
@@ -28,13 +29,7 @@ function Login() {
   };
 
   async function redefinirSenha() {
-    const { value: emailRecovery } = await Swal.fire({
-      title:
-        "Para recuperar a senha, favor inserir abaixo o seu E-mail cadastrado:",
-      input: "email",
-      inputPlaceholder: "Insira o seu E-mail cadastrado aqui",
-      allowOutsideClick: false,
-    });
+    const { value: emailRecovery } = await solicitaEmail();
 
     const emailRecebido = emailRecovery;
     console.log(emailRecebido);
