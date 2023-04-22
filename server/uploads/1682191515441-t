@@ -12,19 +12,20 @@ import { solicitacaoInitialValues } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
 import Dropzonee from "../components/Dropzone";
-import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { filesize } from "filesize";
-import { uniqueId } from "lodash";
+import { Dropzone, DropzoneEnglish, FileItem } from "@dropzone-ui/react";
 function Solicitacao() {
 
   useEffect(() => {}, []);
 
+  const formData = new FormData([] as any)
 
   const [files, setFiles] = useState([] as any);
-
-  const data = new FormData()
-
-  
+  formData.append('image', files)
+  const headers = {
+    'headers': {
+      'Content-Type': 'application/json'
+    }
+  }
 
   const updateFiles = (incommingFiles:any) => {
     //do something with the files
@@ -34,8 +35,8 @@ function Solicitacao() {
   const removeFile = (id:any) => {
     setFiles(files.filter((x:any) => x.id !== id));
   };
-console.log(files);
 
+  console.log(files);
   
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
@@ -49,23 +50,18 @@ console.log(files);
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
-        if(files){
-          for (let index = 0; index < files.length; index++) {
-            console.log(files[index]);
-            
-            data.append('file', files[index].file)
-          }
-          //data.append('file', files)
-          console.log(data);
+        files.map(async (file:any) => {
+          console.log(file.file);
           
-        }
-          await axios.post(`${URIattach.ENVIAR_ANEXO}${res.data.id}`, data).then((s) => {
+          await axios.post(`${URIattach.ENVIAR_ANEXO}${res.data.id}`, formData, headers).then((s) => {
             console.log(s);
             
           }).catch((err) =>{
             console.log(err);
             
           })
+        })
+        
 
       }).catch((err) => {
           console.log("oi");
