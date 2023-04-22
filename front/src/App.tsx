@@ -21,7 +21,6 @@ import RedefinirSenha from "./pages/RedefinirSenha";
 function App() {
   return (
     <>
-       <div className="bg-div">
               <AuthProvider>
                 <Routes>
                   <Route path="/login" element={<Login />} />
@@ -42,8 +41,7 @@ function App() {
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                 </Routes>
               </AuthProvider>
-          </div>
-          <Footer />
+              <Footer />
     </>
   );
 }

@@ -63,8 +63,7 @@ function Login() {
   }
 
   return (
-    <div className="d-flex flex-center flex-column flex-column-fluid">
-      <div className="row col-md-12">
+      <div className="row col-md-12 login m-0">
         <div className="col-md-6"></div>
         <div className="col-md-6 background-login">
           <div></div>
@@ -125,7 +124,6 @@ function Login() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
