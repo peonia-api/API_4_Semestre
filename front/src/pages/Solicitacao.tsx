@@ -16,6 +16,15 @@ function Solicitacao() {
 
   useEffect(() => {}, []);
 
+  const [ selectFile, setSelectFile ] = useState<File>()
+
+  const data = new FormData()
+
+  if(selectFile){
+    data.append('file', selectFile)
+    console.log(selectFile);
+    
+  }
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
     validationSchema: solicitacaoValidationSchema,
@@ -28,7 +37,7 @@ function Solicitacao() {
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
-        await axios.post(URIattach.ENVIAR_ANEXO, {src:formik.values.callFiles, call: res.data.id}).then((s) => {
+        await axios.post(`${URIattach.ENVIAR_ANEXO}${res.data.id}`, data).then((s) => {
           console.log(s);
           
         }).catch((err) =>{
@@ -321,7 +330,7 @@ function Solicitacao() {
             <label className="form-label fw-bolder text-dark fs-6">
               Documentos
             </label>
-            <Dropzone callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} />
+            <Dropzone onFileUploads={setSelectFile}  />
           </div>
           {/* end::Form group */}
         </div>

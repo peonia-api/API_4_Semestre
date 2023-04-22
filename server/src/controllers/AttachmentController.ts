@@ -11,7 +11,8 @@ class AttachmentController {
 
     public async file (req: Request, res: Response) : Promise<Response> {
         try{            
-            const { name, callId } = req.body
+            const callId:any = req.params.uuid
+            const { name } = req.body
             const files = req.files
             console.log(files);
             

@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import styled from 'styled-components';
 
@@ -30,10 +31,21 @@ const Container = styled.div`
   transition: border .24s ease-in-out;
 `;
 
-function Dropzone(props: any) {
+interface Props{
+  onFileUploads: (file: File) => void
+}
 
-  const { callFiles, setFieldValue } = props;
+const Dropzone: React.FC<Props> = ({ onFileUploads }) =>  {
 
+  const [ callFiles, setFieldValue ] = useState([] as any)
+
+  const onDrop = useCallback((acceptedFiles: any[]) => {
+    const file = acceptedFiles[0]
+    const fileUrl = URL.createObjectURL(file)
+
+    setFieldValue(fileUrl)
+    onFileUploads(file)
+  }, [onFileUploads])
   const {
     getRootProps,
     getInputProps,
@@ -50,28 +62,36 @@ function Dropzone(props: any) {
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx']
     },
     maxFiles: 5,
-    onDrop: acceptedFiles => {
-      let newCallFiles = [...callFiles, ...acceptedFiles];
-      newCallFiles = newCallFiles.slice(0, 5); // limita em 5 arquivos
-      setFieldValue("callFiles", newCallFiles);
-    }
+    // onDrop: acceptedFiles => {
+    //   let newCallFiles = [...callFiles, ...acceptedFiles];
+    //   newCallFiles = newCallFiles.slice(0, 5); // limita em 5 arquivos
+    //   setFieldValue(newCallFiles);
+    // }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    onDrop : useCallback((acceptedFiles: any[]) => {
+      const file = acceptedFiles[0]
+      const fileUrl = URL.createObjectURL(file)
+  
+      setFieldValue(fileUrl)
+      onFileUploads(file)
+    }, [onFileUploads])
   });
 
   const removeFile = (file: FileWithPath) => () => {
     callFiles.splice(callFiles.indexOf(file), 1)
-    setFieldValue("callFiles", callFiles)
+    setFieldValue(callFiles)
   }
 
-  const files = callFiles.map((file: FileWithPath) => 
-    <li className='my-1' key={file.path}>      
-      <button type='button' className='btn btn-sm btn-icon btn-danger me-2' onClick={removeFile(file)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill m-0" viewBox="0 0 16 16">
-          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-        </svg>
-      </button>
-      {file.path}
-    </li>
-  );
+  // const files = callFiles.map((file: FileWithPath) => 
+  //   <li className='my-1' key={file.path}>      
+  //     <button type='button' className='btn btn-sm btn-icon btn-danger me-2' onClick={removeFile(file)}>
+  //       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill m-0" viewBox="0 0 16 16">
+  //         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+  //       </svg>
+  //     </button>
+  //     {file.path}
+  //   </li>
+  // );
 
   return (
     <section className="container border border-1 rounded py-2">
@@ -80,12 +100,12 @@ function Dropzone(props: any) {
         <p>Arraste e solte os arquivos aqui, ou clique para selecionar</p>
         <em>(Máximo 5 arquivos)</em>
       </Container>
-      {files.length > 0 ? 
+      {/* {files.length > 0 ? 
         <aside>
           <label className="fs-6">Arquivos:</label>
           <ul className="mb-0">{files}</ul>
         </aside>
-      : ''}      
+      : ''}       */}
     </section>
   );
 
