@@ -6,7 +6,7 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI } from "../enumerations/uri";
+import { URI, URIcommit } from "../enumerations/uri";
 import { Calls } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
@@ -56,7 +56,11 @@ function EditarCall() {
           callDateCreate: data?.callDateCreate ?? new Date(),
         };
         
-        await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData);
+        await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
+          if(formik.values.callType == "feature"){
+            await axios.post(URIcommit.ENVIAR_COMITE, {id: id})
+          }
+        })
       } catch (error) {
         console.log(error);
         formik.setStatus("Ocorreu um erro ao atualizar a solicitação.");

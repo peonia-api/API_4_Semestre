@@ -13,6 +13,7 @@ class AttachmentController {
         try{            
             const { name, callId } = req.body
             const files = req.files
+            console.log(files);
             
             const attachmentRep = AppDataSource.getRepository(Attachment);
             let att;
@@ -31,7 +32,7 @@ class AttachmentController {
         }catch(err){
             console.log('oi');
             
-            return res.json({message: "Erro ao salvar o arquivo."})
+            return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
     }
 

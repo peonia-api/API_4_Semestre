@@ -23,6 +23,7 @@ export enum URIcommit{
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
     PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
+    PEGAR_COMITE_STATUS = "http://localhost:3001/committee//filterAllStatus/",
     PEGAR_TODOS_COMITE = "http://localhost:3001/committee/committeeAll/",
     PEGAR_COMITE_ESPECIFICO = "http://localhost:3001/committee/especifico/",
     ALTERA_COMITE_CTO = "http://localhost:3001/committee/impactCto/",

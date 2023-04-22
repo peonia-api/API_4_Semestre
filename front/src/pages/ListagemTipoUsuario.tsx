@@ -13,7 +13,7 @@ import axios from "axios";
 import "../App.css";
 import { URI, URIcommit } from "../enumerations/uri";
 import { Link } from "react-router-dom";
-import { Calls } from "../types/call";
+import { Calls, Status } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
 import { VerifyType } from "../controllers";
@@ -26,9 +26,26 @@ function ListagemTipoUsuario() {
   const id = window.location.href.split("/")[4]
 
   const [data, setData] = useState<Calls[]>([]);
+  const [commiteData, setCommiteData] = useState<Calls[]>([]);
 
   //axios get
   useEffect(() => {
+
+  //   async function fetchCommittee() {
+  //     axios
+  //         .post(URIcommit.ENVIAR_COMITE)
+  //         .then((response) => {
+  //           console.log("oi");
+            
+  //         })
+  //         .catch((error) => {
+  //             console.log(error);
+  //         });
+  //         console.log('passou dropp');
+      
+  // }
+  // fetchCommittee();
+
     async function fetchCalls() {
       axios
         .get(URI.PEGAR_CALL)
@@ -40,20 +57,21 @@ function ListagemTipoUsuario() {
         });
     }
     fetchCalls();
-    async function fetchCommittee() {
-      axios
-          .post(URIcommit.ENVIAR_COMITE)
-          .then((response) => {
-          })
-          .catch((error) => {
-              console.log(error);
-          });
-          console.log('passou dropp');
-          
-  }
-  fetchCommittee();
+    async function fetchStatus() {
+      axios.get(URIcommit.PEGAR_COMITE_STATUS)
+      .then((res) => {
+        setCommiteData(res.data)
+      }).catch((err) => {
+        console.log("bom");
+        
+      })
+    }
+    fetchStatus();
+    
   }, []);
 
+  console.log(commiteData);
+  
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
   const sorting = (col: keyof typeof data[0]) => {
@@ -168,7 +186,7 @@ function ListagemTipoUsuario() {
               </tr>
             </thead>
             <tbody>
-              {data.map((data) => {
+              {commiteData.map((data:any) => {
                 return (
                   <tr key={data.id}>
                     {/*corpo tabela*/}
@@ -184,7 +202,11 @@ function ListagemTipoUsuario() {
                     <td className="text-center">{data.callEmail}</td>
                     <td className="text-center">{data.callType}</td>
                     <td className="text-center">{data.callTitle}</td>
-                    <td className="text-center">{data.callPriority}</td>
+                    {/* {commiteData.map((com:any) => {
+                    })} */}
+                    <td className="text-center">{data.arquivada}</td>
+
+                    {/* <td className="text-center">{data.callPriority}</td>   */}
                     <td className="text-center">
                       {new Date(data.callDateCreate).toLocaleDateString(
                         "en-GB"

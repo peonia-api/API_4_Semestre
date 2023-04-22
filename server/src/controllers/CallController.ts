@@ -40,6 +40,7 @@ class CallController {
         insertCall.callDescription = createCall.callDescription
         insertCall.callPriority = createCall.callPriority
         insertCall.callEmail = createCall.callEmail
+        // insertCall.callStatus = null
 
         const allCall = await callRepository.save(insertCall)
         return res.json(allCall)
