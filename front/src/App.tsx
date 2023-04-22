@@ -25,7 +25,7 @@ function App() {
               <AuthProvider>
                 <Routes>
                   <Route path="/login" element={<Login />} />
-                  <Route path="/redefinirSenha/:email" element={<RedefinirSenha />} />
+                  <Route path="/redefinirSenha/" element={<RedefinirSenha />} />
                   <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
                   <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
                   <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />
