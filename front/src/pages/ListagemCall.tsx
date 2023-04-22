@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate";
 import editar from "../images/editar.png";
 import axios from "axios";
 import "../App.css";
-import { URI, URIcommit } from "../enumerations/uri";
+import { URI, URIattach, URIcommit } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
 import { Link } from "react-router-dom";
@@ -26,6 +26,7 @@ function ListagemCall() {
   const id = window.location.href.split("/")[4]
 
   const [data, setData] = useState<Calls[]>([]);
+  const [files, setFiles] = useState([]);
 
   //axios get
   useEffect(() => {
@@ -41,6 +42,22 @@ function ListagemCall() {
       
     }
     fetchCalls();
+
+    async function fetchFiles() {
+      axios
+        .get(URIattach.PEGAR_TODOS_ANEXO)
+        .then((response) => {
+          setFiles(response.data);
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+    }
+    fetchFiles();
+    console.log(files);
+
   }, []);
 
   //delete
@@ -50,6 +67,20 @@ function ListagemCall() {
         if (result.isConfirmed) {
           data.map(async (dados) => {
             if(dados.id == id){
+              files.map(async (fil:any) => {
+                if(fil.call.id == id){
+                  console.log(fil);
+                  
+                  await axios.delete(`${URIattach.DELETE_ANEXO}${fil.id}`).then((res) => {
+                    
+                  }).catch((err) =>{
+
+                  })
+                } else{
+
+                }               
+              })
+              
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);

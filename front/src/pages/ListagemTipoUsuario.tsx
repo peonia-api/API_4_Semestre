@@ -31,21 +31,6 @@ function ListagemTipoUsuario() {
   //axios get
   useEffect(() => {
 
-  //   async function fetchCommittee() {
-  //     axios
-  //         .post(URIcommit.ENVIAR_COMITE)
-  //         .then((response) => {
-  //           console.log("oi");
-            
-  //         })
-  //         .catch((error) => {
-  //             console.log(error);
-  //         });
-  //         console.log('passou dropp');
-      
-  // }
-  // fetchCommittee();
-
     async function fetchCalls() {
       axios
         .get(URI.PEGAR_CALL)

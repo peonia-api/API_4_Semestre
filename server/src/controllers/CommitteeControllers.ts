@@ -221,7 +221,6 @@ class CommitteeController {
             }
         })  
         for (let index = 0; index < feature.length; index++) {
-            console.log(lista[index].arquivada == null);
 
             lista2.push({
                 id: feature[index].id,
