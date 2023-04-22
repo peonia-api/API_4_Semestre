@@ -103,7 +103,7 @@ console.log(files);
     >
       <div className="text-center mb-4">
         <h1 className="text-dark fw-bolder mb-3 font-padrao-titulo">
-          SOLICITAÇÃO
+          Solicitação
         </h1>
         <div
           className="text-gray-500 fs-6 font-padrao-titulo mb-5"
