@@ -16,6 +16,7 @@ import { ComiteCto } from "./pages/Comite/ComiteCto";
 import { ComiteHp } from "./pages/Comite/ComiteHp";
 import { ComiteRt } from "./pages/Comite/ComiteRt";
 import { ComiteSquad } from "./pages/Comite/ComiteSquad";
+import RedefinirSenha from "./pages/RedefinirSenha";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <AuthProvider>
                 <Routes>
                   <Route path="/login" element={<Login />} />
+                  <Route path="/redefinirSenha/" element={<RedefinirSenha />} />
                   <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
                   <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
                   <Route path="/listagemUser" element={<Private><ListagemUser /></Private>} />

@@ -48,6 +48,7 @@ function Login() {
     Swal.fire(
       `Em alguns instantes você receberá um e-mail contendo as instruções para redefinir sua senha.`
     );
+    
     var templateParams = {
       email: email,
     };
