@@ -6,7 +6,7 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIuser } from "../enumerations/uri";
+import { URI, URIattach, URIcommit, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 import Dropzone from "../components/Dropzone";
 import Header from "../components/Header";
@@ -22,8 +22,24 @@ function Solicitacao() {
     initialErrors: { callEmail: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      await axios.post(URI.ENVIAR_CALL, formik.values);
-      await axios.post(URIattach.ENVIAR_ANEXO, formik.values.callFiles)
+      console.log(formik.values.callFiles);
+      
+      await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
+        if(formik.values.callType == "feature"){
+          await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
+        }
+        await axios.post(URIattach.ENVIAR_ANEXO, {src:formik.values.callFiles, call: res.data.id}).then((s) => {
+          console.log(s);
+          
+        }).catch((err) =>{
+          console.log(err);
+          
+        })
+
+      }).catch((err) => {
+          console.log("oi");
+          
+      })
       onClickLimpar();
     },
   });

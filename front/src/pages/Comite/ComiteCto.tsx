@@ -16,7 +16,9 @@ export function ComiteCto() {
         console.log("submint", {comiteCto});
        
         await axios.put(`${URIcommit.ALTERA_COMITE_CTO}${id}`, {comiImpactCto: comiteCto})
-        avisoConcuidoComite()
+        avisoConcuidoComite().then((res) => {
+            window.location.assign("/ListagemTipoUsuario");
+        })
     }
 
     return (

@@ -4,7 +4,7 @@ export const solicitacaoInitialValues = {
     callType: '',
     callPriority: '',
     callDescription: '',
-    callFiles: {},
+    callFiles: [],
 }
 
 export const initialValues = {    
@@ -14,7 +14,7 @@ export const initialValues = {
     callDescription: '',
     callPriority: '',
     callState: 'Inicializado',
-    callFiles: {}
+    callFiles: []
 }
 
 export interface Calls {
@@ -26,5 +26,12 @@ export interface Calls {
     callPriority: number;
     callDateCreate: Date;
     callRequesterId: number
-    callFiles: {}
+    callFiles: []
+    arquivada: string;
+}
+
+export interface Status {
+    id: number;
+    mensage: string;
+    arquivada: string;
 }

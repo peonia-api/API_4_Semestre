@@ -15,7 +15,9 @@ export function ComiteSquad() {
         e.preventDefault()
         console.log("submint", {comiteSquad});
         await axios.put(`${URIcommit.ALTERA_COMITE_SQUAD}${id}`, {comiCostSquad: comiteSquad})
-        avisoConcuidoComite()
+        avisoConcuidoComite().then((res) => {
+            window.location.assign("/ListagemTipoUsuario");
+        })
     }
 
     return (

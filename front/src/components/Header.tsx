@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Images from "../images/logo_navbar.svg";
 import { AuthContext } from "../contexts/auth";
 import { useContext } from "react";
+import "../App.css";
 
 function Header() {
   const { logout } = useContext(AuthContext);

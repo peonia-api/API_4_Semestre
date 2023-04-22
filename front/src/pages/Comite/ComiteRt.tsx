@@ -16,7 +16,9 @@ export function ComiteRt() {
         console.log("submint", {comiteRt});
        
         await axios.put(`${URIcommit.ALTERA_COMITE_RT}${id}`, {comiRiskRt: comiteRt})
-        avisoConcuidoComite()
+        avisoConcuidoComite().then((res) => {
+            window.location.assign("/ListagemTipoUsuario");
+        })
     }
 
     return (
