@@ -25,7 +25,7 @@ function RedefinirSenha() {
   useEffect(() => {
     async function fetchUsers(email: string) {
       axios
-        .get(`${URIuser.PEGAR_USER_ESPECIFICO_EMAIL}${email}`)
+        .get(`${URIuser.PEGAR_USER_ESPECIFICO}${email}`)
         .then((response) => {
           const fetchedData = response.data;
           setData(fetchedData);
