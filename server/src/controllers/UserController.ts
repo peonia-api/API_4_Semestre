@@ -21,7 +21,7 @@ class UserController {
       .getOne();
 
     if (usuario && usuario.id) {
-    	console.log(usuario)
+      console.log(usuario)
       const r = await usuario.compare(userPassword);
       console.log(r)
       if (r) {
@@ -113,29 +113,36 @@ class UserController {
     }
   }
 
-  public async getHistoricUser (req: Request, res: Response) : Promise<Response> {
+  public async getHistoricUser(req: Request, res: Response): Promise<Response> {
     const userRepository = AppDataSource.getRepository(User)
     const allUser = await userRepository.find()
     console.log(allUser)
     return res.json(allUser)
-}
+  }
 
-public async getUser (req: Request, res: Response) : Promise<Response> {
-    const idUser:any = req.params.uuid
+  public async getUser(req: Request, res: Response): Promise<Response> {
+    const idUser: any = req.params.uuid
     const userRepository = AppDataSource.getRepository(User)
-    const allUser = await userRepository.findOneBy({id: idUser})
+    const allUser = await userRepository.findOneBy({ id: idUser })
     return res.json(allUser)
-}
+  }
 
-public async getId (req: Request, res: Response) : Promise<Response> {
-  const { userEmail } = req.body
-  const userRepository = AppDataSource.getRepository(User)
-  const allUser = await userRepository.findBy({userEmail:userEmail})
-  console.log(allUser);
-  return res.json(allUser)
-}
+  public async getId(req: Request, res: Response): Promise<Response> {
+    const { userEmail } = req.body
+    const usuario: any = await AppDataSource
+      .getRepository(User)
+      .createQueryBuilder("user")
+      .select()
+      .addSelect('user.userPassword')
+      .where("user.userEmail=:userEmail", { userEmail })
+      .getOne();
+    // const userRepository = AppDataSource.getRepository(User)
+    // const allUser = await usuario.findBy({ userEmail: userEmail })
+    console.log(usuario);
+    return res.json(usuario)
+  }
 
-public async postUser (req: Request, res: Response) : Promise<Response> {
+  public async postUser(req: Request, res: Response): Promise<Response> {
     const createUser = req.body
     const userRepository = AppDataSource.getRepository(User)
     const insertUser = new User();
@@ -144,16 +151,16 @@ public async postUser (req: Request, res: Response) : Promise<Response> {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-  
+
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
-}
+  }
 
-public async putUser (req: Request, res: Response) : Promise<Response> {
+  public async putUser(req: Request, res: Response): Promise<Response> {
     const createUser = req.body
-    const idUser:any = req.params.uuid
+    const idUser: any = req.params.uuid
     const userRepository = AppDataSource.getRepository(User)
-    const findUser = await userRepository.findOneBy({id: idUser})
+    const findUser = await userRepository.findOneBy({ id: idUser })
     findUser.userName = createUser.userName
     findUser.userPosition = createUser.userPosition
     findUser.userEmail = createUser.userEmail
@@ -161,26 +168,35 @@ public async putUser (req: Request, res: Response) : Promise<Response> {
 
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)
-}
+  }
 
-public async deleteUser (req: Request, res: Response) : Promise<Response> {
-    const idUser:any = req.params.uuid
+  public async deleteUser(req: Request, res: Response): Promise<Response> {
+    const idUser: any = req.params.uuid
     const userRepository = AppDataSource.getRepository(User)
-    const findUser = await userRepository.findOneBy({id: idUser})
+    const findUser = await userRepository.findOneBy({ id: idUser })
     const allUser = await userRepository.remove(findUser)
     return res.json(allUser)
-}
+  }
 
-public async putPassword (req: Request, res: Response) : Promise<Response> {
-  const createUser = req.body
-  const idUser:any = req.params.uuid
-  const userRepository = AppDataSource.getRepository(User)
-  const findUser = await userRepository.findOneBy({id: idUser})
-  findUser.userPassword = createUser.userPassword
+  public async putPassword(req: Request, res: Response): Promise<Response> {
+    // const { userEmail }: any = req.params.uuid
+    const { userPassword, userEmail } = req.body
+    const usuario: any = await AppDataSource.manager
+      .getRepository(User)
+      .createQueryBuilder("user")
+      .select()
+      .addSelect('user.userPassword')
+      .where("user.userEmail=:userEmail", { userEmail })
+      .getOne();
+    console.log(usuario);
+    // const userRepository = AppDataSource.getRepository(User)
+    // const findUser = await userRepository.findOneBy({ id: idUser })
+    usuario.userPassword = userPassword
 
-  const allUser = await userRepository.save(findUser)
-  return res.json(allUser)
-}
+    // const allUser = await usuario.save(usuario)
+    const r = await AppDataSource.manager.save(User, usuario)
+    return res.json(r)
+  }
 
 }
 

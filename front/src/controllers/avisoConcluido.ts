@@ -1,9 +1,18 @@
 import Swal, { SweetAlertResult } from "sweetalert2";
 
-function avisoConcluido (): Promise<SweetAlertResult>  {
+function avisoConcluido(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Sucesso",
     text: "Solicitação enviada com sucesso!",
+    icon: "success",
+    confirmButtonColor: "#54C5CE",
+  });
+}
+
+function senhaAlterada(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Sucesso",
+    text: "Senha alterada com êxito!",
     icon: "success",
     confirmButtonColor: "#54C5CE",
   });
@@ -21,7 +30,7 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
-function avisoConcuidoComite(): Promise<SweetAlertResult>  {
+function avisoConcuidoComite(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Sucesso",
     text: "Avaliação atribuída com sucesso!",
@@ -31,4 +40,4 @@ function avisoConcuidoComite(): Promise<SweetAlertResult>  {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite };
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada };

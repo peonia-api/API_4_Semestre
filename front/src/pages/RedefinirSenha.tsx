@@ -7,56 +7,33 @@ import  emailjs  from  '@emailjs/browser'
 
 import { URIuser } from "../enumerations/uri";
 import { Users } from "../types/user";
+import { Navigate } from "react-router-dom";
+import { senhaAlterada } from "../controllers";
 
 const Swal = require("sweetalert2");
 
 function RedefinirSenha() {
-  const [email, setEmail] = useState("");
+
+  const email = window.location.href.split("/")[4];
+  console.log(email);
+
   const [userPassword, setuserPassword] = useState("");
-  const [data, setData] = useState<Users>();
 
   const handleRedefine = (e: any) => {
     e.preventDefault();
-    console.log("submit", { email, userPassword });
+    console.log("submit", { userPassword });
   };
 
   const changeInput = (e: any) => {
     e.style.backgroundColor = "#54C5CE";
   };
 
-  useEffect(() => {
-    async function fetchUsers(email: string) {
-      axios
-        .get(`${URIuser.PEGAR_USER_ESPECIFICO}${email}`)
-        .then((response) => {
-          const fetchedData = response.data;
-          setData(fetchedData);
+  async function redefinirSenha() {
+      await axios.put(`${URIuser.ALTERA_SENHA}`, {userEmail:email, userPassword: userPassword}).then((res) => {
+        senhaAlterada().then((res) => {
+          window.location.assign("/login");
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchUsers(email);
-  }, []);
-
-  function redefinirSenha() {
-    return {
-      initialValues: {
-        userPassword: data?.userPassword ?? "",
-      },
-      initialErrors: { userName: "" },
-      onSubmit: async (values: any) => {
-        try {
-          const updatedData = {
-            userPassword: values.userPassword,
-          };
-
-          await axios.put(`${URIuser.ALTERA_SENHA}${email}`, updatedData);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    };
+      })
   }
 
   return (
@@ -69,20 +46,6 @@ function RedefinirSenha() {
             <div className="card mt-5 w-50 ml-5">
               <div className="card-body">
                 <form onSubmit={handleRedefine}>
-                  <div className="form-group text-dark fw-bolder mb-3 font-padrao-titulo">
-                    <label htmlFor="email">E-mail Cadastrado:</label>
-                    <input
-                      type="text"
-                      className="form-control input-login"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        changeInput(e.target);
-                      }}
-                      id="email"
-                      placeholder="Insira o e-mail cadastrado"
-                    />
-                  </div>
                   <div className="form-group text-dark fw-bolder mb-3 font-padrao-titulo">
                     <label htmlFor="password">Nova senha:</label>
                     <input

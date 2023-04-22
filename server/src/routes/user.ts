@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {UserController} from "../controllers";
+import { UserController } from "../controllers";
 const routes = Router();
 
 routes.post('/create', UserController.create);
@@ -16,7 +16,7 @@ routes.post('/createUser', UserController.postUser);
 
 routes.put('/modifyUser/:uuid', UserController.putUser);
 
-routes.put('/redefinirSenha/uuid', UserController.putPassword);
+routes.put('/redefinirSenha/', UserController.putPassword);
 
 routes.delete('/delete/:uuid', UserController.deleteUser);
 
