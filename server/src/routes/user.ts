@@ -10,13 +10,13 @@ routes.get('/historicUser', UserController.getHistoricUser);
 
 routes.get('/especificoUser/:uuid', UserController.getUser);
 
-//routes.get('/especificoEmail/', UserController.getEmail);
+routes.get('/especificoId/', UserController.getId);
 
 routes.post('/createUser', UserController.postUser);
 
 routes.put('/modifyUser/:uuid', UserController.putUser);
 
-//routes.put('/redefinirSenha/', UserController.putPassword);
+routes.put('/redefinirSenha/uuid', UserController.putPassword);
 
 routes.delete('/delete/:uuid', UserController.deleteUser);
 

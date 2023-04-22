@@ -17,8 +17,8 @@ export enum URIuser {
     PEGAR_USER = "http://localhost:3001/user/historicUser",
     PEGAR_USER_ESPECIFICO = "http://localhost:3001/user/especificoUser/",
     LOGIN_USER = "http://localhost:3001/user/login/",
-    //ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
-    //PEGAR_USER_ESPECIFICO_EMAIL = "http://localhost:3001/user/especificoEmail/",
+    ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
+    PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
 }
 
 export enum URIcommit{

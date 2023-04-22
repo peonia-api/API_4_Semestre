@@ -127,6 +127,14 @@ public async getUser (req: Request, res: Response) : Promise<Response> {
     return res.json(allUser)
 }
 
+public async getId (req: Request, res: Response) : Promise<Response> {
+  const { userEmail } = req.body
+  const userRepository = AppDataSource.getRepository(User)
+  const allUser = await userRepository.findBy({userEmail:userEmail})
+  console.log(allUser);
+  return res.json(allUser)
+}
+
 public async postUser (req: Request, res: Response) : Promise<Response> {
     const createUser = req.body
     const userRepository = AppDataSource.getRepository(User)
@@ -165,20 +173,13 @@ public async deleteUser (req: Request, res: Response) : Promise<Response> {
 
 public async putPassword (req: Request, res: Response) : Promise<Response> {
   const createUser = req.body
-  const email:any = req.body.email
+  const idUser:any = req.params.uuid
   const userRepository = AppDataSource.getRepository(User)
-  const findUser = await userRepository.findOneBy({userEmail: email})
+  const findUser = await userRepository.findOneBy({id: idUser})
   findUser.userPassword = createUser.userPassword
 
   const allUser = await userRepository.save(findUser)
   return res.json(allUser)
-}
-
-public async getEmail (req: Request, res: Response) : Promise<Response> {
-  const email:any = req.body
-  const userRepository = AppDataSource.getRepository(User)
-  const AllEmail = await userRepository.findOneBy({userEmail: email})
-  return res.json(AllEmail)
 }
 
 }
