@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import "../App.css";
 import "../styles/Login.css";
 import { AuthContext } from "../contexts/auth";
-import emailjs from "emailjs-com";
+//import emailjs from "emailjs-com";
+import  emailjs  from  '@emailjs/browser'
 const Swal = require("sweetalert2");
 
 function Login() {
@@ -58,14 +59,11 @@ function Login() {
         templateParams,
         "w4LxBZJlq08EuppL3"
       )
-      .then(
-        function (response) {
+      .then((response) => {
           console.log("SUCCESS!", response.status, response.text);
-        },
-        function (error) {
-          console.log("FAILED...", error);
-        }
-      );
+        }).catch((err) => {
+          console.log("FAILED...", err);
+        });
   }
 
   return (
