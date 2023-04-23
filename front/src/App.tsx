@@ -31,7 +31,7 @@ function App() {
                   <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
                   <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
                   <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
-                  <Route path="/ListagemTipoUsuario" element={<Private><ListagemTipoUsuario  /></Private>} />
+                  <Route path="/listagemTipoUsuario" element={<Private><ListagemTipoUsuario  /></Private>} />
                   {/* <Route path="/comite/:id" element={<Private><Comite /></Private>} /> */}
                   <Route path="/" element={<Private> <ListagemCall /> </Private>} />
                   <Route path="/comiteCso/:id" element={<VerifyCso><Private> <ComiteCso/> </Private> </VerifyCso>} />

@@ -119,14 +119,6 @@ function ListagemCall() {
   };
 
   //pagination
-  // const [pageNumber, setPageNumber] = useState(0);
-  // const itemsPerPage = 10;
-  // const pagesVisited = pageNumber * itemsPerPage;
-  // const pageCount = Math.ceil(data.length / itemsPerPage);
-  // const changePage = ({ selected }: { selected: number }) => {
-  //   setPageNumber(selected);
-  // };
-
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
@@ -134,14 +126,14 @@ function ListagemCall() {
     setCurrentPage(data.selected);
   };
 
-  const dataToShow = data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-
   //animate
   const [show, setShow] = useState<number | null>(null);
   const parent = useRef(null);
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
+
+
   const reveal = async (id: number) => {
     setShow(show === id ? null : id);
     if (show !== id) {
@@ -157,8 +149,6 @@ function ListagemCall() {
       console.log(error);
     }
   }
-
-  //search
 
   return (
     <>
@@ -203,7 +193,7 @@ function ListagemCall() {
                 </thead>
 
                 <tbody>
-                  {dataToShow.map((data) => {
+                  {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
                       <tr key={data.id}>
                         {/*corpo tabela*/}
@@ -241,7 +231,7 @@ function ListagemCall() {
                       <FloatingLabel controlId="floatingLabel" label="Descrição">
                         <Form.Control type="text" defaultValue={item.callDescription} disabled />
                         {anexo.filter((anexo) => anexo.call.id === item.id).map((anexo) => (
-                          <a href={anexo.src} target="_blank" rel="noopener noreferrer">{anexo.name}</a>
+                          <a href={anexo.src} target="_blank" rel="noopener noreferrer">Visualizar anexo</a>
                         ))}
                       </FloatingLabel>
                     )}
