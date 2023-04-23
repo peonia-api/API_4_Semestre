@@ -26,6 +26,13 @@ export enum URIcommit{
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
     PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
     PEGAR_COMITE_STATUS = "http://localhost:3001/committee/filterAllStatus/",
+    PEGAR_comiRiskRt_STATUS = "http://localhost:3001/committee/comiRiskRtStatus/",
+
+    PEGAR_comiRiskCso_STATUS = "http://localhost:3001/committee//comiRiskCsoStatus/",
+    PEGAR_comiImpactCto_STATUS = "http://localhost:3001/committee/comiImpactCtoStatus/",
+    PEGAR_comiImpactHp_STATUS = "http://localhost:3001/committee/comiImpactHpStatus/",
+    PEGAR_comiCostSquad_STATUS = "http://localhost:3001/committee/comiCostSquadStatus/",
+
     PEGAR_TODOS_COMITE = "http://localhost:3001/committee/committeeAll/",
     PEGAR_COMITE_ESPECIFICO = "http://localhost:3001/committee/especifico/",
     ALTERA_COMITE_CTO = "http://localhost:3001/committee/impactCto/",

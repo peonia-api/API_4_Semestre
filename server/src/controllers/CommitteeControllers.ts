@@ -242,5 +242,214 @@ class CommitteeController {
     }
 
 
+    public async getcomiRisCso (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCommittee = await committeeRepository.find()
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        let lista2:any = []
+        let lista3:any = []
+
+
+        allCommittee.map((data) => {
+            if(data.comiRiskCso == null){
+                lista3.push({
+                    id: data.id,
+                    mensage: "Ainda não foi avaliado", 
+                    arquivada: "Avaliar"
+                })
+            }
+        })
+        console.log(lista3);
+        
+        feature.map((data) => {
+            lista3.map((l) => {
+                if(data.id == l.id){
+                    lista2.push({
+                        id: l.id,
+                        callEmail:  data.callEmail,
+                        callDateCreate:  data.callDateCreate,
+                        callTitle:  data.callTitle,
+                        callType:  data.callType,
+                        callDescription:  data.callDescription,
+                        arquivada: l.arquivada
+                    })
+                }
+            })
+        })
+        
+        
+
+        return res.json(lista2)     
+    }
+
+    public async getcomiRiskRt (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCommittee = await committeeRepository.find()
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        let lista2:any = []
+        let lista3:any = []
+
+
+        allCommittee.map((data) => {
+            if(data.comiRiskRt == null && data.comiRiskCso < 3){
+                lista3.push({
+                    id: data.id,
+                    mensage: "Ainda não foi avaliado", 
+                    arquivada: "Avaliar"
+                })
+            }
+        })
+
+        feature.map((data) => {
+            lista3.map((l) => {
+                if(data.id == l.id){
+                    lista2.push({
+                        id: l.id,
+                        callEmail:  data.callEmail,
+                        callDateCreate:  data.callDateCreate,
+                        callTitle:  data.callTitle,
+                        callType:  data.callType,
+                        callDescription:  data.callDescription,
+                        arquivada: l.arquivada
+                    })
+                }
+            })
+        })
+        
+        
+
+        return res.json(lista2)     
+    }
+
+    public async getcomiImpactCto (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCommittee = await committeeRepository.find()
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        let lista2:any = []
+        let lista3:any = []
+
+
+        allCommittee.map((data) => {
+            if(data.comiImpactCto == null && data.comiRiskCso < 3 && data.comiRiskRt < 3){
+                lista3.push({
+                    id: data.id,
+                    mensage: "Ainda não foi avaliado", 
+                    arquivada: "Avaliar"
+                })
+            }
+        })
+        console.log(lista3);
+        
+        feature.map((data) => {
+            lista3.map((l) => {
+                if(data.id == l.id){
+                    lista2.push({
+                        id: l.id,
+                        callEmail:  data.callEmail,
+                        callDateCreate:  data.callDateCreate,
+                        callTitle:  data.callTitle,
+                        callType:  data.callType,
+                        callDescription:  data.callDescription,
+                        arquivada: l.arquivada
+                    })
+                }
+            })
+        })
+        
+        
+
+        return res.json(lista2)     
+    }
+
+    public async getcomiImpactHp (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCommittee = await committeeRepository.find()
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        let lista2:any = []
+        let lista3:any = []
+
+
+        allCommittee.map((data) => {
+            if(data.comiImpactHp == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0){
+                lista3.push({
+                    id: data.id,
+                    mensage: "Ainda não foi avaliado", 
+                    arquivada: "Avaliar"
+                })
+            }
+        })
+        console.log(lista3);
+        
+        feature.map((data) => {
+            lista3.map((l) => {
+                if(data.id == l.id){
+                    lista2.push({
+                        id: l.id,
+                        callEmail:  data.callEmail,
+                        callDateCreate:  data.callDateCreate,
+                        callTitle:  data.callTitle,
+                        callType:  data.callType,
+                        callDescription:  data.callDescription,
+                        arquivada: l.arquivada
+                    })
+                }
+            })
+        })
+        
+        
+
+        return res.json(lista2)     
+    }
+
+    public async getcomiCostSquad (req: Request, res: Response) : Promise<Response> {
+        const committeeRepository = AppDataSource.getRepository(Committee)
+        const callRepository = AppDataSource.getRepository(Call)
+        const allCommittee = await committeeRepository.find()
+        const feature = await callRepository.findBy({ callType: "feature" })
+
+        let lista2:any = []
+        let lista3:any = []
+
+
+        allCommittee.map((data) => {
+            if(data.comiCostSquad == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiImpactHp > 0){
+                lista3.push({
+                    id: data.id,
+                    mensage: "Ainda não foi avaliado", 
+                    arquivada: "Avaliar"
+                })
+            }
+        })
+        console.log(lista3);
+        
+        feature.map((data) => {
+            lista3.map((l) => {
+                if(data.id == l.id){
+                    lista2.push({
+                        id: l.id,
+                        callEmail:  data.callEmail,
+                        callDateCreate:  data.callDateCreate,
+                        callTitle:  data.callTitle,
+                        callType:  data.callType,
+                        callDescription:  data.callDescription,
+                        arquivada: l.arquivada
+                    })
+                }
+            })
+        })
+        
+        
+
+        return res.json(lista2)     
+    }
+
 }
 export default new CommitteeController();

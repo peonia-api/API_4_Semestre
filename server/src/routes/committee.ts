@@ -7,6 +7,15 @@ routes.get('/committeeAll', CommitteeControllers.getAllCommittee);
 routes.get("/filter/:uuid", CommitteeControllers.getCommitteeFilter)
 routes.get("/filterAll", CommitteeControllers.getCommitteeFilterAll);
 routes.get("/filterAllStatus", CommitteeControllers.getCommitteeStatus);
+
+
+routes.get("/comiRiskRtStatus", CommitteeControllers.getcomiRiskRt);
+routes.get("/comiRiskCsoStatus", CommitteeControllers.getcomiRisCso);
+routes.get("/comiImpactCtoStatus", CommitteeControllers.getcomiImpactCto); 
+routes.get("/comiImpactHpStatus", CommitteeControllers.getcomiImpactHp); 
+routes.get("/comiCostSquadStatus", CommitteeControllers.getcomiCostSquad); 
+
+
 routes.post('/createCommittee', CommitteeControllers.postCommittee);
 
 routes.put('/impactCto/:uuid', CommitteeControllers.putCommitteeImpactCto);

@@ -21,7 +21,7 @@ import { VerifyType } from "../controllers";
 function ListagemTipoUsuario() {
   const linkUrl:any = localStorage.getItem("userType")
   const linkCom:any =  VerifyType(linkUrl);
-  
+  //const getCom:any = VerifyTypeList(linkUrl)
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
 
@@ -42,16 +42,47 @@ function ListagemTipoUsuario() {
         });
     }
     fetchCalls();
-    async function fetchStatus() {
-      axios.get(URIcommit.PEGAR_COMITE_STATUS)
-      .then((res) => {
-        setCommiteData(res.data)
-      }).catch((err) => {
-        console.log("bom");
+    // async function fetchStatus() {
+    //   axios.get(URIcommit.PEGAR_COMITE_STATUS)
+    //   .then((res) => {
+    //     setCommiteData(res.data)
+    //   }).catch((err) => {
+    //     console.log("bom");
         
-      })
+    //   })
+    // }
+    // fetchStatus();
+
+    async function VerifyTypeList(tipo:any){
+
+      if(tipo === "SQUAD"){
+        await axios.get(URIcommit.PEGAR_comiCostSquad_STATUS).then((res) => {
+          setCommiteData(res.data)
+        })
+      }
+      else if(tipo === "CSO"){
+        await axios.get(URIcommit.PEGAR_comiRiskCso_STATUS).then((res) => {
+          setCommiteData(res.data)
+        })
+      }
+      else if(tipo === "RT"){
+        await axios.get(URIcommit.PEGAR_comiRiskRt_STATUS).then((res) => {
+          setCommiteData(res.data)
+        })
+      }
+      else if(tipo === "CTO"){
+        await axios.get(URIcommit.PEGAR_comiImpactCto_STATUS).then((res) => {
+          setCommiteData(res.data)
+        })
+      }
+      else if(tipo === "HP"){
+        await axios.get(URIcommit.PEGAR_comiImpactHp_STATUS).then((res) => {
+          setCommiteData(res.data)
+        })
+      }
     }
-    fetchStatus();
+
+    VerifyTypeList(linkUrl)
     
   }, []);
 
