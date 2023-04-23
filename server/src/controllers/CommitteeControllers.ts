@@ -220,10 +220,12 @@ class CommitteeController {
                 lista.push({id: data.id, arquivada: "Aprovada"})
             }
         })  
+        console.log(lista);
+        
         for (let index = 0; index < feature.length; index++) {
 
             lista2.push({
-                id: feature[index].id,
+                id: lista[index].id,
                 callEmail:  feature[index].callEmail,
                 callDateCreate:  feature[index].callDateCreate,
                 callTitle:  feature[index].callTitle,
