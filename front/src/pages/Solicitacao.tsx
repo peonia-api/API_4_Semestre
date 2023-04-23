@@ -92,8 +92,10 @@ console.log(files);
       avisoErro();
     } else {
       formik.submitForm();
+      setTimeout(function(){}, 2000)
       avisoConcluido().then((res:any) => {
-        window.location.assign("/listagem");
+        setTimeout(function(){window.location.assign("/listagem");}, 1800)
+        
       })
     }
   }
