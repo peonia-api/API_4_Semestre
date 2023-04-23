@@ -37,12 +37,17 @@ function RedefinirSenha() {
   }
 
   return (
-    <div className="d-flex flex-center flex-column flex-column-fluid">
-      <div className="row col-md-12">
+    // <div className="d-flex flex-center flex-column flex-column-fluid">
+      <div className="row col-md-12 login m-0">
         <div className="col-md-6"></div>
         <div className="col-md-6 background-login">
           <div></div>
           <div className="container row col-md-12 d-flex justify-content-center">
+          <img
+              src="https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cfbef568f863947dd4951_logo-color.svg"
+              alt="Logotipo de IONIC Health"
+              className="logo-login"
+            />
             <div className="card mt-5 w-50 ml-5">
               <div className="card-body">
                 <form onSubmit={handleRedefine}>
@@ -72,7 +77,7 @@ function RedefinirSenha() {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 
