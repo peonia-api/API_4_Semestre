@@ -31,7 +31,7 @@ function ListagemCall() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(URI.PEGAR_CALL)
+        .get(URIcommit.PEGAR_COMITE_STATUS)
         .then((response) => {
           setData(response.data);
         })
@@ -50,11 +50,11 @@ function ListagemCall() {
         if (result.isConfirmed) {
           data.map(async (dados) => {
             if (dados.id == id) {
-              files.map(async (fil: any) => {
+              anexo.map(async (fil: any) => {
                 if (fil.call.id == id) {
                   console.log(fil);
 
-                  await axios.delete(`${URIattach.DELETE_ANEXO}${fil.id}`).then((res) => {
+                  await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${fil.id}`).then((res) => {
 
                   }).catch((err) => {
 

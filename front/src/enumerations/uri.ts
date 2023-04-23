@@ -49,7 +49,8 @@ export enum URIattach{
     PEGAR_TODOS_ANEXO = "http://localhost:3001/file/fileAll/",
     PEGAR_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileCall/",
     ALTERA_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileReneme/",
-    DELETE_ANEXO = "http://localhost:3001/file/fileRemove/"
+    DELETE_ANEXO = "http://localhost:3001/file/fileRemove/",
+    DELETE_ANEXO_SUPABASE = "http://localhost:3001/file/fileRemoveSupa/"
 }
 
 

@@ -92,12 +92,23 @@ class AttachmentController {
          return res.json(allCall)
     }
 
-     public async deleteFile (req: Request, res: Response) : Promise<Response> {
+    public async deleteFile (req: Request, res: Response) : Promise<Response> {
         const id:any = req.params.uuid
         const attachmentRepository = AppDataSource.getRepository(Attachment)
         const findFile = await attachmentRepository.findOneBy({id: id})
 
         fs.unlinkSync(findFile.src)
+
+        const allCall = await attachmentRepository.remove(findFile)
+        return res.json(allCall)
+    }
+
+    public async deleteFileSupabase (req: Request, res: Response) : Promise<Response> {
+        const id:any = req.params.uuid
+        const attachmentRepository = AppDataSource.getRepository(Attachment)
+        const findFile = await attachmentRepository.findOneBy({id: id})
+        console.log(findFile);
+        
 
         const allCall = await attachmentRepository.remove(findFile)
         return res.json(allCall)
