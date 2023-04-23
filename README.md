@@ -65,8 +65,8 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 | Sprint | Entrega | Status | Relatório |
 |:-----:|:----------:|:---------:|:---------:|
-| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
-| 02 | 09/10/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
+| 01 | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
+| 02 | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
 <!--| 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
 | 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
 
