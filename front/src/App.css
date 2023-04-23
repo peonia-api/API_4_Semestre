@@ -170,3 +170,22 @@ input::-webkit-inner-spin-button {
 .Margin {
   margin: 20px;
 }
+
+.pagination {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.pagination li {
+  margin: 0 0.5rem;
+  list-style: none;
+}
+
+.pagination li a {
+  color: #54C5CE;
+  text-decoration: none;
+}
+
+.pagination li.active a {
+  border-bottom: 2px solid #212529
+}
