@@ -1,7 +1,7 @@
 
 <br id="topo">
  
-<h1 align="center"> SPRINT 1 :ballot_box_with_check: </h1>
+<h1 align="center"> SPRINT 2 :ballot_box_with_check: </h1>
 
 <p align="center">
     <a href="#mvp">MVP</a> | 
@@ -16,14 +16,20 @@
   
  <h3 align="center"> WIREFRAME </h3>
 <p align="center">
-  <h2>Usuários e Comitê de Aprovação</h2>
+  <h4>Usuários e Comitê de Aprovação</h2>
   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/ListagemUsu%C3%A1rio.png" width="49%" align="center"/>
   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/CadastrarUsu%C3%A1rio.png" width="49%" align="center"/>
   </br>
   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/EditarUsu%C3%A1rio.png" width="49%" align="center"/> &nbsp;
   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/Comite%20de%20Aprova%C3%A7%C3%A3o.png" width="49%" align="center"/>
-  <h2>Login</h2>
+  <h4>Login</h2>
   <h1 align="center"><img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/TelaLogin_IONIC.png" width="80%" align="auto"/></h1>
+</p>
+<br>
+
+  <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
+<p align="center">
+
 </p>
 <br>
   

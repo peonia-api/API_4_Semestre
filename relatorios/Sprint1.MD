@@ -14,11 +14,20 @@
 <p align="justify">Nesta sprint desenvolvemos o CRUD de Chamados para que o cliente possa realizar o cadastro, edição e remoção das features e hotfix afim de ter a possibilidade de armazenar esses dados já no banco de dados.</p>
   
   
- <h3 align="center"> WIREFRAME </h3>
+ <h3 align="center" id="wireframe"> WIREFRAME </h3>
 <p align="center">
 <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/be292628-27c9-458a-9f3f-0bdc9630f464.png" width="49%"/>
 <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/1acfdab2-bae9-4a8f-9c50-84652709f636.png" width="49%"/>
 </p>
+</br>
+ 
+  <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
+<h1 align="center">
+   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/sprint1conceitual.png" align="center"/>
+ </h1>
+ <h1 align="center">
+   <img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/sprint1logico.png" align="center"/>
+</h1>
 <br>
   
 <span id="burndown">
