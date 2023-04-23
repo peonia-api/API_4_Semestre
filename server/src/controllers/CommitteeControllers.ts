@@ -2,6 +2,7 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
+import { Attachment } from "../entities/Attachment";
 
 
 class CommitteeController {
@@ -188,11 +189,16 @@ class CommitteeController {
     public async getCommitteeStatus (req: Request, res: Response) : Promise<Response> {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const callRepository = AppDataSource.getRepository(Call)
+        const filesRep = AppDataSource.getRepository(Attachment)
+        const allFiles = await filesRep.find()
         const allCommittee = await committeeRepository.find()
         const feature = await callRepository.findBy({ callType: "feature" })
+        const allcall = await callRepository.find()
+        
 
         let lista:any = []
         let lista2:any = []
+        let lista3:any = []
 
         allCommittee.map((data) => {
             if(allCommittee == null){
@@ -222,18 +228,39 @@ class CommitteeController {
         })  
         console.log(lista);
         
-        for (let index = 0; index < feature.length; index++) {
-
-            lista2.push({
-                id: lista[index].id,
-                callEmail:  feature[index].callEmail,
-                callDateCreate:  feature[index].callDateCreate,
-                callTitle:  feature[index].callTitle,
-                callType:  feature[index].callType,
-                callDescription:  feature[index].callDescription,
-                arquivada: lista[index].arquivada
-              })
-        }
+        //for (let index = 0; index < allcall.length; index++) {
+            allcall.map((call) => {
+                
+                    if(call.callType == 'feature'){
+                    lista.map((l) => {
+                        if(call.id == l.id){
+                            lista2.push({
+                                id: l.id,
+                                callEmail:  call.callEmail,
+                                callDateCreate:  call.callDateCreate,
+                                callTitle:  call.callTitle,
+                                callType:  call.callType,
+                                callDescription:  call.callDescription,
+                                arquivada: l.arquivada
+                            })
+                        }
+                    })
+                    }else{
+                        lista2.push({
+                            id: call.id,
+                            callEmail:  call.callEmail,
+                            callDateCreate:  call.callDateCreate,
+                            callTitle:  call.callTitle,
+                            callType:  call.callType,
+                            callDescription:  call.callDescription,
+                            arquivada: "Em desenvolvimento"
+                        })
+                    }
+                
+            })
+            
+            
+        //}
 
         
         

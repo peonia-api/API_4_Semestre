@@ -31,17 +31,17 @@ function ListagemTipoUsuario() {
   //axios get
   useEffect(() => {
 
-    async function fetchCalls() {
-      axios
-        .get(URI.PEGAR_CALL)
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchCalls();
+    // async function fetchCalls() {
+    //   axios
+    //     .get(URI.PEGAR_CALL)
+    //     .then((response) => {
+    //       setData(response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
+    // fetchCalls();
     // async function fetchStatus() {
     //   axios.get(URIcommit.PEGAR_COMITE_STATUS)
     //   .then((res) => {
