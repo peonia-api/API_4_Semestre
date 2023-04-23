@@ -199,7 +199,7 @@ function ListagemTipoUsuario() {
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(data.length / itemsPerPage)}
+                pageCount={Math.ceil(commiteData.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}
@@ -207,7 +207,7 @@ function ListagemTipoUsuario() {
                 activeClassName={"active"}
               />
               {/*animate*/}
-              {data.map((item) => {
+              {commiteData.map((item) => {
                 return (
                   <div key={item.id} ref={parent} >
                     {show === item.id && (
