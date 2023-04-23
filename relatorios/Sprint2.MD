@@ -28,9 +28,9 @@
 <br>
 
   <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
-<p align="center">
-
-</p>
+<h1 align="center">
+<img src="https://github.com/peonia-api/API_4_Semestre/blob/atualizacaoFinal/imagens/sprint2conceitual.png" align="auto"/>
+</h1>
 <br>
   
 <span id="burndown">
