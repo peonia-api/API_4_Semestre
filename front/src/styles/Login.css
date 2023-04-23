@@ -29,9 +29,9 @@ margin-left: 3% !important;
   background-color: #54C5CE !important;
   padding: 2px !important;
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
+.input-login:-webkit-autofill,
+.input-login:-webkit-autofill:hover,
+.input-login:-webkit-autofill:focus {
 -webkit-box-shadow: 0 0 0 30px #54C5CE inset;
 }
 a{
