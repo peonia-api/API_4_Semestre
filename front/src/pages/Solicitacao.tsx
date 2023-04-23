@@ -15,6 +15,7 @@ import Dropzonee from "../components/Dropzone";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
 import { filesize } from "filesize";
 import { uniqueId } from "lodash";
+import { supabase, uploadFile } from "../services/supabase";
 function Solicitacao() {
 
   useEffect(() => {}, []);
@@ -22,9 +23,11 @@ function Solicitacao() {
 
   const [files, setFiles] = useState([] as any);
 
+  
+
+
   const data = new FormData()
 
-  
 
   const updateFiles = (incommingFiles:any) => {
     //do something with the files
@@ -36,6 +39,7 @@ function Solicitacao() {
   };
 console.log(files);
 
+  //uploadFile(files)
   
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
@@ -50,22 +54,26 @@ console.log(files);
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
         if(files){
-          for (let index = 0; index < files.length; index++) {
-            console.log(files[index]);
+          // for (let index = 0; index < files.length; index++) {
+          //   console.log(files[index]);
             
-            data.append('file', files[index].file)
-          }
-          //data.append('file', files)
-          console.log(data);
-          
-        }
-          await axios.post(`${URIattach.ENVIAR_ANEXO}${res.data.id}`, data).then((s) => {
-            console.log(s);
+          //   data.append('file', files[index].file)
+          // }
+          // //data.append('file', files)
+          // console.log(data);
+          uploadFile(files).then(async (rest) => {
+            console.log(rest);
+            await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${res.data.id}`, rest ).then((s) => {
             
-          }).catch((err) =>{
-            console.log(err);
+            }).catch((err) =>{
+              console.log(err);
+              
+            })
             
           })
+          
+        }
+
 
       }).catch((err) => {
           console.log("oi");
@@ -359,6 +367,7 @@ console.log(files);
                   style={{ minWidth: "505px" }}
                   onChange={updateFiles}
                   value={files}
+                 
                 >
                   {files.length > 0 &&
                     files.map((file:any) => (

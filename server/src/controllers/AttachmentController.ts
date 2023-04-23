@@ -5,7 +5,36 @@ const fs = require("fs")
 
 class AttachmentController {
 
-    public fun (req: Request, res: Response){
+    public async fun (req: Request, res: Response) : Promise<Response> {
+        try{            
+            const  callId:any  = req.params.uuid
+            const files = req.body
+            console.log(files);
+            
+            const arquivosUploads = 'https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/'
+            //const files = req.files
+            console.log(files);
+            
+            const attachmentRep = AppDataSource.getRepository(Attachment);
+            let att;
+            
+            for (let index = 0; index < Number(files.length); index++) {
+                const attachment = new Attachment()
+
+                attachment.name = files[index].name
+                attachment.src = arquivosUploads + files[index].name
+                attachment.call = callId
+                att = await attachmentRep.save(attachment)
+                console.log(index);
+                
+            }
+            return res.json(att)
+        }catch(err){
+            console.log('oi');
+            
+            return res.status(400).json({message: "Erro ao salvar o arquivo."})
+        }
+
         return res.json("foi")
     }
 

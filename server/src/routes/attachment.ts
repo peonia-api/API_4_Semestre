@@ -4,7 +4,7 @@ const routes = Router();
 
 const upload = require("../config/multer")
 
-routes.get('/fun', AttachmentController.fun);
+routes.post('/fun/:uuid', AttachmentController.fun);
 routes.post("/file/:uuid", upload.array("file"), AttachmentController.file) //single("file")
 routes.get('/fileAll', AttachmentController.getAll)
 routes.delete("/fileRemove/:uuid", AttachmentController.deleteFile)
