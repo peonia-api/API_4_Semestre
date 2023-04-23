@@ -59,6 +59,10 @@ function EditarCall() {
         await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
           if(formik.values.callType == "feature"){
             await axios.post(URIcommit.ENVIAR_COMITE, {id: id})
+          }else{
+            if(data?.callType == "feature"){
+              await axios.delete(`${URIcommit.DELETE_COMITE}${id}`)
+            }
           }
         })
       } catch (error) {

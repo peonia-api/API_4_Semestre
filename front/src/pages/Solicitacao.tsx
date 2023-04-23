@@ -84,7 +84,9 @@ console.log(files);
       avisoErro();
     } else {
       formik.submitForm();
-      avisoConcluido();
+      avisoConcluido().then((res:any) => {
+        window.location.assign("/listagem");
+      })
     }
   }
 
