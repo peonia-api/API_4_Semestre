@@ -15,7 +15,7 @@ export async function uploadFile(e:any) {
     for (let index = 0; index < filesS.length; index++) {
       //const file = e.target.files[index]
       const file = filesS[index].file
-      const nameFile = Date.now() +'-'+ filesS[index].file.name.split(' ').join('')
+      const nameFile = Date.now() +'-'+ filesS[index].file.name.replace(/[^a-zA-Z0-9]/g, "").split(' ').join('')
       console.log(filesS[index].file.name);
       
       const { data, error } = await supabase.storage.from('uploads').upload(nameFile, file)
