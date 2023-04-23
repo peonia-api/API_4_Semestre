@@ -19,13 +19,13 @@
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
 - [ ] Cadastro de grupo de usuários;
-- [ ] Permissão por grupo e por usuário;
+- [x] Permissão por grupo e por usuário;
 - [ ] Distinção de usuários por times;
-- [ ] Fila de chamados para cada time;
-- [ ] Configuração e personalização de formulário de chamados;
+- [x] Fila de chamados para cada time;
+- [x] Configuração e personalização de formulário de chamados;
 - [ ] Árvore de Decisão para escalonamento de chamados;
 - [ ] Cadastro de soluções para problemas conhecidos;
-- [ ] Formulário de abertura de chamado com indicação de interessados;
+- [x] Formulário de abertura de chamado com indicação de interessados;
 
 <h3> Requisitos Não Funcionais </h3>
 
