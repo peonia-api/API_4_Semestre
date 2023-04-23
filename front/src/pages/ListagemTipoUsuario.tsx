@@ -90,23 +90,23 @@ function ListagemTipoUsuario() {
   
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-  const sorting = (col: keyof typeof data[0]) => {
+  const sorting = (col: keyof typeof commiteData[0]) => {
     if (order === "ASC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...commiteData].sort((a, b) =>
         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setCommiteData(sorted);
       setOrder("DSC");
     }
     if (order === "DSC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...commiteData].sort((a, b) =>
         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setCommiteData(sorted);
       setOrder("ASC");
     }
   };
@@ -115,7 +115,7 @@ function ListagemTipoUsuario() {
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = 10;
   const pagesVisited = pageNumber * itemsPerPage;
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(commiteData.length / itemsPerPage);
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected);
   };
@@ -238,7 +238,7 @@ function ListagemTipoUsuario() {
               })}
             </tbody>
             {/*pagination*/}
-            {data.length > itemsPerPage && (
+            {commiteData.length > itemsPerPage && (
               <ReactPaginate
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}
@@ -250,7 +250,7 @@ function ListagemTipoUsuario() {
             )}
           </Table>
           {/*animate*/}
-          {data.map((item) => {
+          {commiteData.map((item) => {
             return (
               <div key={item.id} ref={parent} >
                 {show === item.id && (
