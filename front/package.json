@@ -30,7 +30,7 @@
     "react-hook-form": "^7.43.8",
     "react-icons": "^4.8.0",
     "react-imask": "^6.4.3",
-    "react-paginate": "^8.1.4",
+    "react-paginate": "^8.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "rsuite": "^5.28.3",
