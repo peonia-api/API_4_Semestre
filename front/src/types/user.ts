@@ -3,7 +3,8 @@ export const initialValues = {
     userEmail: '',
     userPassword: '',
     userType: '',
-    userPosition: ''
+    userPosition: '',
+    userGroup: ''
 }
 
 export interface Users {
@@ -13,4 +14,5 @@ export interface Users {
     userPassword: string;
     userType: string;
     userPosition: string;
+    userGroup: string;
 }

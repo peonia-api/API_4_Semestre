@@ -2,13 +2,20 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <link rel="ico" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1" /> 
     <script src="https://unpkg.com/imask"></script>  
     <title>Ionichealth</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" class="body"></div>
   </body>
+  <style>
+    body.swal2-height-auto{
+      height: 100% !important;
+      padding-right: 0px !important;
+    }
+  </style>
 </html>

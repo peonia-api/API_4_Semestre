@@ -1,9 +1,25 @@
 @import url('https://fonts.cdnfonts.com/css/coolvetica');
 @import url('https://fonts.cdnfonts.com/css/source-sans-pro');
 
+body,html,.bg-div,.body,.login,.flex-column{
+  min-height: 100vh;
+  width: 100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(270deg,rgba(43,43,43,0),#212121),linear-gradient(180deg,rgba(43,43,43,.6),rgba(43,43,43,.6)),url("https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cf5b134d44a7c0953ac37_sobre.webp");
+  background-position: 0 0,0 0,0 0;
+  background-size: auto,auto,cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -19,7 +35,7 @@
   letter-spacing: 0.1rem;
 }
 
-.fv-help-block{
+.fv-help-block {
   color:#dc3545;
 }
 
@@ -31,17 +47,21 @@ input {
   border-radius: 0 !important;
 }
 
-.fs-6, input, button, th {
+.fs-6, input, button, th, td {
   font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+td {
+  padding: 1rem 0.5rem 0.5rem 0.5rem !important;
 }
 
 a.nav-link {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
-  color:#54C5CE;
+  color:#54C5CE !important;
 }
 
-.navbar-collapse{
+.navbar-collapse {
   justify-content: end;
   margin-top: 10px;
 }
@@ -67,17 +87,10 @@ a.nav-link {
   color: white;
 }
 
-.bg-light-opacity{
+.bg-light-opacity {
   background-color: white;
   opacity: 95%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-}
-
-@media screen and (min-width: 1396px)  {
-  .btn-form{
-    width: 8%;
-    height: 40%;
-  }
 }
 
 @media screen and (max-width: 1396px) {
@@ -85,14 +98,15 @@ a.nav-link {
     display: none;
   }
 }
-.btn-form{
+
+.btn-form {
   display: flex;
   align-items: center;
   background-color: #424242 !important;
   color: white !important;
 }
 
-svg{
+svg {
   margin-left: 6px;
 }
 
@@ -101,7 +115,7 @@ svg{
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 10px 14px;
 }
 
-.footer{
+.footer {
     position:relative;
     right: 0;
     bottom: 0;
@@ -124,19 +138,7 @@ svg{
   }
 }
 
-.bg-div{
-  background-image: linear-gradient(270deg,rgba(43,43,43,0),#212121),linear-gradient(180deg,rgba(43,43,43,.6),rgba(43,43,43,.6)),url("https://uploads-ssl.webflow.com/60dcc4691817e11aa93685ab/636cf5b134d44a7c0953ac37_sobre.webp");
-  background-position: 0 0,0 0,0 0;
-  background-size: auto,auto,cover;
-  min-height: 100vh;
-  height: 100%;
-  min-width: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.hf-spacing{
+.hf-spacing {
   padding-top: 80px !important;
   padding-bottom: 65px !important;
 }
@@ -147,17 +149,37 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.box-search{
+.box-search {
   padding-bottom: 8px;
   padding-left: 2px;
 }
 
-.input-search{
+.input-search {
   width: 200px;
   background: url(images/search.png) no-repeat;
   background-position: 170px;
   background-size: 25px;
 }
-.Margin{
+
+.Margin {
   margin: 20px;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.pagination li {
+  margin: 0 0.5rem;
+  list-style: none;
+}
+
+.pagination li a {
+  color: #54C5CE;
+  text-decoration: none;
+}
+
+.pagination li.active a {
+  border-bottom: 2px solid #212529
 }

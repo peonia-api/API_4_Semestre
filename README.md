@@ -23,7 +23,7 @@
 - [ ] Distinção de usuários por times;
 - [x] Fila de chamados para cada time;
 - [x] Configuração e personalização de formulário de chamados;
-- [ ] Árvore de Decisão para escalonamento de chamados;
+- [x] Árvore de Decisão para escalonamento de chamados;
 - [ ] Cadastro de soluções para problemas conhecidos;
 - [x] Formulário de abertura de chamado com indicação de interessados;
 
@@ -65,9 +65,9 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 | Sprint | Entrega | Status | Relatório |
 |:-----:|:----------:|:---------:|:---------:|
-| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
-<!--| 02 | 09/10/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint2.md) |
-| 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
+| 01 | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
+| 02 | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
+<!--| 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
 | 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
 
 <span id="Documentação">
@@ -85,11 +85,11 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> 
+<h1 align="center"> 
     
-![Product backlog](https://user-images.githubusercontent.com/86448876/229383934-ff678e48-ef24-460e-97c7-dd9ec6b19ab1.png)
+![Product Backlog](https://user-images.githubusercontent.com/86448876/233865256-1b61cd15-4214-4fdc-926d-fa6901173e2f.png)
     
-</p>
+</h1>
  
  <!--## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
