@@ -1,7 +1,7 @@
 
 <br id="topo">
  
-<h1 align="center"> SPRINT 1 :ballot_box_with_check: </h1>
+<h1 align="center"> SPRINT 2 :ballot_box_with_check: </h1>
 
 <p align="center">
     <a href="#mvp">MVP</a> | 
