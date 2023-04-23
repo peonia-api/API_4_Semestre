@@ -23,6 +23,9 @@ export class Call {
     @Column({nullable: false, length: 10})
     callPriority: string;
 
+    // @Column({nullable: true})
+    // callStatus: string;
+
     @CreateDateColumn({ name: 'callDateCreate'})
     callDateCreate: Date;
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { URIuser, api } from "../enumerations/uri";
+import { avisoErroLogin } from "../controllers";
 
 
 
@@ -36,9 +37,11 @@ export const AuthProvider = ({children}:any) => {
             .then((res) => {
                 const loggedUser = res.data.userEmail
                 const token = res.data.token
+                const userType = res.data.userType
 
                 localStorage.setItem('userEmail', JSON.stringify(loggedUser))
                 localStorage.setItem('token', token)
+                localStorage.setItem("userType",userType)
 
                 console.log(res);
                 
@@ -50,8 +53,12 @@ export const AuthProvider = ({children}:any) => {
                 navigate("/")
 
             })
-            .catch((err) => {                
-                alert("Erro ao entrar"); //colocar o swall
+            .catch((err) => {     
+                localStorage.removeItem("userEmail");
+                localStorage.removeItem("token")    
+                localStorage.removeItem("userType")
+
+                avisoErroLogin()
             })
         }catch(err){
 
@@ -59,9 +66,11 @@ export const AuthProvider = ({children}:any) => {
         
     }
 
+    
     const logout = () => {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token")
+        localStorage.removeItem("userType")
         api.defaults.headers.Authorization = null
         api.defaults.headers.common = { Authorization: `` }
         api.defaults.withCredentials = false
@@ -77,7 +86,6 @@ export const AuthProvider = ({children}:any) => {
     )
 }
 
-
 export const Private = ({ children }:any) => {
     const { authenticated, loading } = useContext(AuthContext);
 
@@ -91,3 +99,55 @@ export const Private = ({ children }:any) => {
     return children;
 
 }
+
+export const VerifyCso = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "CSO"){
+        return <Navigate to={"/ListagemTipoUsuario"}/>
+    }
+
+    return children;
+}
+
+export const VerifyRT = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "RT"){
+        return <Navigate to={"/ListagemTipoUsuario"}/>
+    }
+
+    return children;
+}
+
+export const VerifyCTO = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "CTO"){
+        return <Navigate to={"/ListagemTipoUsuario"}/>
+    }
+
+    return children;
+}
+
+export const VerifyHP = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "HP"){
+        return <Navigate to={"/ListagemTipoUsuario"}/>
+    }
+
+    return children;
+}
+
+export const VerifySQUAD = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "SQUAD"){
+        return <Navigate to={"/ListagemTipoUsuario"}/>
+    }
+
+    return children;
+}
+
+

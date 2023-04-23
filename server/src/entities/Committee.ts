@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { Entity, Column, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { User } from "./User";
 import { Call } from "./Call";
 
 @Entity({name:"committee"})
 export class Committee {
     // define a chave primária como auto incremento
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn()
     id: number;
 
     @Column({nullable: true})

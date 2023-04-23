@@ -15,7 +15,23 @@ function avisoErroDeletar() {
     title: "Ocorreu um erro!",
     text: "Não foi possível excluir o chamado.",
   });
-  
 }
 
-export { avisoErro, avisoErroDeletar };
+function avisoErroAoDeletar(){
+  Swal.fire({
+    icon: 'error',
+    title: 'Erro',
+    text: 'Não foi possível excluir!',
+  })
+}
+
+
+function avisoErroLogin(){
+  Swal.fire({
+    icon: 'error',
+    title: 'Erro',
+    text: 'Não foi possível realizar o login!',
+  })
+}
+
+export { avisoErro, avisoErroDeletar, avisoErroAoDeletar, avisoErroLogin };

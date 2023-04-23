@@ -5,10 +5,11 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, registrationSchema } from "../controllers";
-import { URI } from "../enumerations/uri";
+import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
+import { URI, URIcommit } from "../enumerations/uri";
 import { Calls } from "../types/call";
 import Header from "../components/Header";
+import '../App.css';
 
 
 function EditarCall() {
@@ -34,32 +35,36 @@ function EditarCall() {
 
   const formik = useFormik({
     initialValues: {
-      callRequester: data?.callRequester ?? "",
       callType: data?.callType ?? "",
       callEmail: data?.callEmail ?? "",
-      callPhone: data?.callPhone ?? "",
       callTitle: data?.callTitle ?? "",
       callDescription: data?.callDescription ?? "",
       callPriority: data?.callPriority ?? "",
-      callState: "Inicializado",
+      //callState: "Inicializado",
     },
-    validationSchema: registrationSchema,
-    initialErrors: { callRequester: "" },
+    validationSchema: solicitacaoValidationSchema,
+    initialErrors: { callEmail: "" },
     onSubmit: async (values) => {
       try {
         const updatedData = {
           callType: values.callType,
           callEmail: values.callEmail,
           callTitle: values.callTitle,
-          callPhone: values.callPhone,
           callDescription: values.callDescription,
           callPriority: values.callPriority,
-          callState: values.callState,
-          callRequester: values.callRequester,
+          //callState: values.callState,
           callDateCreate: data?.callDateCreate ?? new Date(),
         };
         
-        await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData);
+        await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
+          if(formik.values.callType == "feature"){
+            await axios.post(URIcommit.ENVIAR_COMITE, {id: id})
+          }else{
+            if(data?.callType == "feature"){
+              await axios.delete(`${URIcommit.DELETE_COMITE}${id}`)
+            }
+          }
+        })
       } catch (error) {
         console.log(error);
         formik.setStatus("Ocorreu um erro ao atualizar a solicitação.");
@@ -86,8 +91,9 @@ function EditarCall() {
 
   return (
     <>
-               <Header />
+    <Header /> 
     <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+
       <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
       <form
         className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
@@ -116,43 +122,14 @@ function EditarCall() {
 
         <div className="row">
           <div className="col-lg-6">
-            {/* begin::Form group Nome */}
-            <div className="fv-row mb-3">
-              <label className="form-label fw-bolder text-dark fs-6">Nome</label>
-              <input
-                type="text"
-                autoComplete="off"
-                {...formik.getFieldProps("callRequester")}
-                className={clsx(
-                  "form-control bg-transparent",
-                  {
-                    "is-invalid":
-                      formik.touched.callRequester && formik.errors.callRequester,
-                  },
-                  {
-                    "is-valid":
-                      formik.touched.callRequester &&
-                      !formik.errors.callRequester,
-                  }
-                )}
-              />
-              {formik.touched.callRequester && formik.errors.callRequester && (
-                <div className="fv-plugins-message-container">
-                  <div className="fv-help-block">
-                    <span role="alert">{formik.errors.callRequester}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-            {/* end::Form group Nome */}
-          </div>
-          <div className="col-lg-6">
             {/* begin::Form group E-mail */}
             <div className="fv-row mb-3">
               <label className="form-label fw-bolder text-dark fs-6">
                 E-mail
               </label>
               <input
+                placeholder="E-mail"
+
                 type="email"
                 autoComplete="off"
                 {...formik.getFieldProps("callEmail")}
@@ -176,43 +153,6 @@ function EditarCall() {
               )}
             </div>
             {/* end::Form group E-mail */}
-          </div>
-        </div><div className="row">
-          <div className="col-lg-6">
-            {/* begin::Form group Telefone */}
-            <div className="fv-row mb-3">
-              <label className="form-label fw-bolder text-dark fs-6">
-                Telefone
-              </label>
-              <input
-                id="fone"
-                type="number"
-                autoComplete="off"
-                onKeyDown={(event) => {
-                  if (/\+|\.|-/.test(event.key))
-                    event.preventDefault();
-                }}
-                {...formik.getFieldProps("callPhone")}
-                onChange={formik.handleChange}
-
-                className={clsx(
-                  "form-control bg-transparent",
-                  {
-                    "is-invalid": formik.touched.callPhone && formik.errors.callPhone,
-                  },
-                  {
-                    "is-valid": formik.touched.callPhone && !formik.errors.callPhone,
-                  }
-                )} />
-              {formik.touched.callPhone && formik.errors.callPhone && (
-                <div className="fv-plugins-message-container">
-                  <div className="fv-help-block">
-                    <span role="alert">{formik.errors.callPhone}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-            {/* end::Form group Telefone */}
           </div>
           <div className="col-lg-6">
             {/* begin::Form group Título */}
@@ -246,6 +186,8 @@ function EditarCall() {
             </div>
             {/* end::Form group Título */}
           </div>
+        </div><div className="row">
+          
         </div><div className="row">
           <div className="col-lg-6">
             {/* begin::Form group Tipo Chamado */}

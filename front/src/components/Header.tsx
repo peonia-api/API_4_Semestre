@@ -3,8 +3,17 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Images from "../images/logo_navbar.svg";
+import { AuthContext } from "../contexts/auth";
+import { useContext } from "react";
+import "../App.css";
 
 function Header() {
+  const { logout } = useContext(AuthContext);
+
+  const signUp = (e: any) => {
+    e.preventDefault();
+    logout();
+  };
   return (
     <>
       <Navbar
@@ -27,7 +36,7 @@ function Header() {
             <Nav>
               <CustomLink to="/listagem">CHAMADO</CustomLink>
               <CustomLink to="/listagemUser">USUÁRIO</CustomLink>
-              {/* <CustomLink to="/perfil">PERFIL</CustomLink> */}
+              <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
