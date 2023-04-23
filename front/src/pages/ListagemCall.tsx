@@ -1,4 +1,4 @@
-import {FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft} from "react-icons/fa";
+import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
 import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
 import { URI, URIattach, URIcommit } from "../enumerations/uri";
