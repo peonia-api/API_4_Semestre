@@ -29,7 +29,9 @@ body{
 .cor-logo {
   background-color: #54C5CE !important;
 }
-
+.actions{
+  cursor: pointer;
+}
 .font-padrao-titulo {
   font-family: 'Coolvetica', sans-serif;
   letter-spacing: 0.1rem;

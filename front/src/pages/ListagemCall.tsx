@@ -8,6 +8,7 @@ import { Attachment } from "../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
 import avaliacao from "../images/avaliar.png";
 import excluir from "../images/excluir.png";
+import arquivos from "../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
 import Header from "../components/Header";
 import editar from "../images/editar.png";
@@ -200,7 +201,7 @@ function ListagemCall() {
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}
-                          <strong className="dropdown-label" onClick={() => reveal(data.id)}>{data.id}</strong>
+                          <strong className="dropdown-label anexo" onClick={() => reveal(data.id)}>{data.id}</strong>
                         </td>
                         <td className="text-center">{data.callEmail}</td>
                         <td className="text-center">{data.callType}</td>
@@ -209,8 +210,9 @@ function ListagemCall() {
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
-                          <Link to={"/editarCall/" + data.id}> <img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
-                          <img style={{ width: "35px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteCall(data.id)} />
+                          <Link to={"/editarCall/" + data.id} style={{padding: "3px"}}> <img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
+                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteCall(data.id)} />
+                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(data.id)} />
                         </td>
                       </tr>
                     );
