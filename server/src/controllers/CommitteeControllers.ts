@@ -322,7 +322,7 @@ class CommitteeController {
 
 
         allCommittee.map((data) => {
-            if(data.comiRiskRt == null && data.comiRiskCso < 3){
+            if(data.comiRiskRt == null && data.comiRiskCso < 3 && data.comiRiskCso != null){
                 lista3.push({
                     id: data.id,
                     mensage: "Ainda não foi avaliado", 
@@ -363,7 +363,7 @@ class CommitteeController {
 
 
         allCommittee.map((data) => {
-            if(data.comiImpactCto == null && data.comiRiskCso < 3 && data.comiRiskRt < 3){
+            if(data.comiImpactCto == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiRiskCso != null && data.comiRiskRt != null){
                 lista3.push({
                     id: data.id,
                     mensage: "Ainda não foi avaliado", 
@@ -405,7 +405,7 @@ class CommitteeController {
 
 
         allCommittee.map((data) => {
-            if(data.comiImpactHp == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0){
+            if(data.comiImpactHp == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiRiskCso != null && data.comiRiskRt != null && data.comiImpactCto != null){
                 lista3.push({
                     id: data.id,
                     mensage: "Ainda não foi avaliado", 
@@ -447,7 +447,7 @@ class CommitteeController {
 
 
         allCommittee.map((data) => {
-            if(data.comiCostSquad == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiImpactHp > 0){
+            if(data.comiCostSquad == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiImpactHp > 0 && data.comiRiskCso != null && data.comiRiskRt != null && data.comiImpactCto != null && data.comiImpactHp != null){
                 lista3.push({
                     id: data.id,
                     mensage: "Ainda não foi avaliado", 
