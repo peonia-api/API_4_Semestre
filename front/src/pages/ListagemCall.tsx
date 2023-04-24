@@ -50,18 +50,20 @@ function ListagemCall() {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
           data.map(async (dados) => {
-            if (dados.id == id) {
+            if (dados.id == id) {              
               anexo.map(async (fil: any) => {
+                console.log(fil);
+                
                 if (fil.call.id == id) {
-                  console.log(fil);
+                  console.log(fil.id);
 
                   await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${fil.id}`).then((res) => {
-
+                    console.log("foi");
+                    
                   }).catch((err) => {
-
+                    console.log("erro");
+                    
                   })
-                } else {
-
                 }
               })
 
@@ -76,9 +78,10 @@ function ListagemCall() {
 
                 })
               } else {
-                await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
+                setTimeout(async function(){await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
                   avisoErroAoDeletar()
-                })
+                })}, 2000)
+                
               }
             }
           })

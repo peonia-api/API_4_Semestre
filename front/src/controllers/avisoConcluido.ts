@@ -49,5 +49,25 @@ function avisoConcuidoComite(): Promise<SweetAlertResult> {
   });
 }
 
+function avisoEspera(): Promise<SweetAlertResult>{
+  let timerInterval:any
+  return Swal.fire({
+  title: 'Enviando chamado!',
+  html: 'O chamado será enviado em <b></b> milissegundos.',
+  timer: 10000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b:any = Swal.getHtmlContainer()?.querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+})
+}
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail };
+
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera };

@@ -10,6 +10,8 @@ const arquivosUploads = 'https://undvejpptbowpgysnwiw.supabase.co/storage/v1/obj
 export async function uploadFile(e:any) {
     //const filesS = e.target.files
     const filesS  = e
+    console.log(filesS.length);
+    
     const list:any = []
     
     for (let index = 0; index < filesS.length; index++) {

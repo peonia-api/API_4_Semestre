@@ -18,7 +18,7 @@ class AttachmentController {
             const attachmentRep = AppDataSource.getRepository(Attachment);
             let att;
             
-            for (let index = 0; index < Number(files.length); index++) {
+            for (let index = 0; index < files.length; index++) {
                 const attachment = new Attachment()
 
                 attachment.name = files[index].name
@@ -35,7 +35,6 @@ class AttachmentController {
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
 
-        return res.json("foi")
     }
 
     public async file (req: Request, res: Response) : Promise<Response> {
