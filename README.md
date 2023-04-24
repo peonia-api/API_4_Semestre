@@ -45,9 +45,21 @@ https://user-images.githubusercontent.com/86448876/229383850-07c43960-d344-4bc1-
 
 </p>
 
-<!--<h4> Entrega da Sprint 2 </h4>
-<p align="center"> <img width="100%" src = "imagens/video - sprint2.gif"></p>
-<h4> Entrega da Sprint 3 </h4>
+<h4> Entrega da Sprint 2 </h4>
+<p align="center"> 
+
+https://user-images.githubusercontent.com/86115352/233875755-5246a1ff-8b22-466d-9b65-061e43662dbd.mp4
+
+
+
+https://user-images.githubusercontent.com/86115352/233876936-91b7e7fe-1404-4cfc-a987-a5cbba259e0d.mp4
+
+
+
+https://user-images.githubusercontent.com/86115352/233877053-97b2f78b-c03e-4a55-a84d-9995c23f0cf9.mp4
+
+</p>
+<!--<h4> Entrega da Sprint 3 </h4>
 <p align="center"> <img width="100%" src = "imagens/features3sprint.gif"></p>
 <h4> Entrega da Sprint 4 </h4>
 <p align="center"> <img width="100%" src = "imagens/sprint_4.gif"></p>
