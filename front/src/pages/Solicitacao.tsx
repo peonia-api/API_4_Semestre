@@ -5,16 +5,13 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, solicitacaoValidationSchema } from "../controllers";
+import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../controllers";
 import { URI, URIattach, URIcommit, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 //import Dropzone from "../components/Dropzone";
 import Header from "../components/Header";
 import '../App.css';
-import Dropzonee from "../components/Dropzone";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { filesize } from "filesize";
-import { uniqueId } from "lodash";
 import { supabase, uploadFile } from "../services/supabase";
 function Solicitacao() {
 
@@ -26,7 +23,7 @@ function Solicitacao() {
   
 
 
-  const data = new FormData()
+  //const data = new FormData()
 
 
   const updateFiles = (incommingFiles:any) => {
@@ -79,7 +76,12 @@ console.log(files);
           console.log("oi");
           
       })
-      onClickLimpar();
+      avisoEspera().then((res) => {
+        setTimeout(function(){avisoConcluido().then((res:any) => {
+          setTimeout(function(){window.location.assign("/listagem");}, 2000)
+          
+        })}, 3000)
+      })
     },
   });
 
@@ -92,11 +94,9 @@ console.log(files);
       avisoErro();
     } else {
       formik.submitForm();
-      setTimeout(function(){}, 2000)
-      avisoConcluido().then((res:any) => {
-        setTimeout(function(){window.location.assign("/listagem");}, 1800)
-        
-      })
+      
+      
+      
     }
   }
 

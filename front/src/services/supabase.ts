@@ -10,6 +10,8 @@ const arquivosUploads = 'https://undvejpptbowpgysnwiw.supabase.co/storage/v1/obj
 export async function uploadFile(e:any) {
     //const filesS = e.target.files
     const filesS  = e
+    console.log(filesS.length);
+    
     const list:any = []
     
     for (let index = 0; index < filesS.length; index++) {
@@ -35,3 +37,16 @@ export async function uploadFile(e:any) {
     return list
 }
   
+export async function removeFile(path:any) {
+
+  for (let i=0; i < path.length; i++){
+    console.log(path[i].src);
+    let fileSrc = path[i].src
+    let file = fileSrc.split('uploads')[1]
+    console.log(file.split('/')[1]);
+    const { data, error } = await supabase
+    .storage
+    .from('uploads')
+    .remove(file.split('/')[1])
+  }
+}

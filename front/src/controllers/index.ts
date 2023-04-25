@@ -1,4 +1,4 @@
-import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail } from './avisoConcluido';
+import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera } from './avisoConcluido';
 import { avisoErro, avisoErroAoDeletar, avisoErroLogin } from './avisoErro';
 import { solicitacaoValidationSchema } from './validateCall';
 import { VerifyType } from "./verfyTypeComm";
@@ -12,5 +12,6 @@ export {
         avisoConcuidoComite,
         VerifyType,
         senhaAlterada,
-        solicitaEmail
+        solicitaEmail,
+        avisoEspera
 } 

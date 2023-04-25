@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
 import axios from "axios";
 import '../App.css';
+import { removeFile } from "../services/supabase";
 
 
 function ListagemCall() {
@@ -50,35 +51,31 @@ function ListagemCall() {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
           data.map(async (dados) => {
-            if (dados.id == id) {
-              anexo.map(async (fil: any) => {
-                if (fil.call.id == id) {
-                  console.log(fil);
-
-                  await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${fil.id}`).then((res) => {
-
-                  }).catch((err) => {
-
-                  })
-                } else {
-
-                }
+            if (dados.id == id) {              
+              await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
+                console.log("foi");
+                removeFile(res.data.list)
+                
+              }).catch((err) => {
+                console.log("erro");
+                
               })
-
+                
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);
 
-                  await axios.delete(`${URI.DELETE_CALL}${id}`);
+                  setTimeout(async function(){ await axios.delete(`${URI.DELETE_CALL}${id}`)}, 3000)
 
                 }).catch((err) => {
                   avisoErroAoDeletar()
 
                 })
               } else {
-                await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
+                setTimeout(async function(){await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
                   avisoErroAoDeletar()
-                })
+                })}, 2000)
+                
               }
             }
           })

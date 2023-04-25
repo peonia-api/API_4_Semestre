@@ -18,7 +18,7 @@ class AttachmentController {
             const attachmentRep = AppDataSource.getRepository(Attachment);
             let att;
             
-            for (let index = 0; index < Number(files.length); index++) {
+            for (let index = 0; index < files.length; index++) {
                 const attachment = new Attachment()
 
                 attachment.name = files[index].name
@@ -35,7 +35,6 @@ class AttachmentController {
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
 
-        return res.json("foi")
     }
 
     public async file (req: Request, res: Response) : Promise<Response> {
@@ -103,6 +102,7 @@ class AttachmentController {
         return res.json(allCall)
     }
 
+    /*
     public async deleteFileSupabase (req: Request, res: Response) : Promise<Response> {
         const id:any = req.params.uuid
         const attachmentRepository = AppDataSource.getRepository(Attachment)
@@ -112,6 +112,30 @@ class AttachmentController {
 
         const allCall = await attachmentRepository.remove(findFile)
         return res.json(allCall)
+    }
+    */
+
+    public async deleteFileSupabase (req: Request, res: Response) : Promise<Response> {
+        try{
+            const id:any = req.params.uuid
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const findFile = await attachmentRepository.find()
+            let list = []
+            findFile.map(async (file) => {
+                if(file.call.id == id){
+                    list.push({
+                        id: file.id,
+                        src: file.src
+                    })
+                    const allCall = await attachmentRepository.remove(file)
+                }
+            })
+
+            return res.json({mensage: "foi", list})
+        }catch(err){
+            return res.status(400).json({mensage: "Erro"})
+        }
+        
     }
     
     public async getFileByCallId (req: Request, res: Response) : Promise<Response> {
