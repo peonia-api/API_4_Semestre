@@ -74,7 +74,7 @@ function ListagemCall() {
               } else {
                 setTimeout(async function(){await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
                   avisoErroAoDeletar()
-                })}, 2000)
+                })}, 5000)
                 
               }
             }

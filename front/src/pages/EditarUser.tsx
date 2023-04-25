@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro } from "../controllers";
+import { avisoConcluido, avisoEdicao, avisoErro } from "../controllers";
 import registrationSchemaUserEditar from "../controllers/validateUserEditar";
 import { URIuser } from "../enumerations/uri";
 import { Users } from "../types/user";
@@ -71,7 +71,7 @@ function EditarUser() {
             avisoErro();
         } else {
             formik.submitForm();
-            avisoConcluido().then((res: any) => {
+            avisoEdicao().then((res: any) => {
                 window.location.assign("/listagemUser");
             })
 
