@@ -51,27 +51,19 @@ function ListagemCall() {
         if (result.isConfirmed) {
           data.map(async (dados) => {
             if (dados.id == id) {              
-              anexo.map(async (fil: any) => {
-                console.log(fil);
+              await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
+                console.log("foi");
                 
-                if (fil.call.id == id) {
-                  console.log(fil.id);
-
-                  await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${fil.id}`).then((res) => {
-                    console.log("foi");
-                    
-                  }).catch((err) => {
-                    console.log("erro");
-                    
-                  })
-                }
+              }).catch((err) => {
+                console.log("erro");
+                
               })
-
+                
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);
 
-                  await axios.delete(`${URI.DELETE_CALL}${id}`);
+                  setTimeout(async function(){ await axios.delete(`${URI.DELETE_CALL}${id}`)}, 3000)
 
                 }).catch((err) => {
                   avisoErroAoDeletar()
