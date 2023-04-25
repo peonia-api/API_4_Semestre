@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { Calls } from "../types/call";
 import axios from "axios";
 import '../App.css';
+import { removeFile } from "../services/supabase";
 
 
 function ListagemCall() {
@@ -53,6 +54,7 @@ function ListagemCall() {
             if (dados.id == id) {              
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
                 console.log("foi");
+                removeFile(res.data.list)
                 
               }).catch((err) => {
                 console.log("erro");

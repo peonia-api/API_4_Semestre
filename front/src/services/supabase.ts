@@ -37,3 +37,16 @@ export async function uploadFile(e:any) {
     return list
 }
   
+export async function removeFile(path:any) {
+
+  for (let i=0; i < path.length; i++){
+    console.log(path[i].src);
+    let fileSrc = path[i].src
+    let file = fileSrc.split('uploads')[1]
+    console.log(file.split('/')[1]);
+    const { data, error } = await supabase
+    .storage
+    .from('uploads')
+    .remove(file.split('/')[1])
+  }
+}

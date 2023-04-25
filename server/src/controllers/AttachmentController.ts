@@ -120,14 +120,18 @@ class AttachmentController {
             const id:any = req.params.uuid
             const attachmentRepository = AppDataSource.getRepository(Attachment)
             const findFile = await attachmentRepository.find()
-
+            let list = []
             findFile.map(async (file) => {
                 if(file.call.id == id){
+                    list.push({
+                        id: file.id,
+                        src: file.src
+                    })
                     const allCall = await attachmentRepository.remove(file)
                 }
             })
 
-            return res.json({mensage: "foi"})
+            return res.json({mensage: "foi", list})
         }catch(err){
             return res.status(400).json({mensage: "Erro"})
         }
