@@ -153,7 +153,7 @@ function ListagemCall() {
       <Header />
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
-        <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+        <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
             <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">
               Listagem dos chamados
@@ -162,15 +162,15 @@ function ListagemCall() {
           <Container className="px-2 mb-5">
             <Container>
               <div className="d-flex align-items-center justify-content-between mt-4 Margin">
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/solicitacao'}>Adicionar Chamado
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill" viewBox="0 0 16 16">
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/solicitacao'}><span className="labelButton">Adicionar Chamado</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill button" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
                   </svg>
                 </button>
 
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/listagemTipoUsuario'}>Avaliação Comitê
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill" viewBox="0 0 16 16">
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/listagemTipoUsuario'}><span className="labelButton">Avaliação Comitê</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill button" viewBox="0 0 16 16">
                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
                     <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
                   </svg>

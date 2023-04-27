@@ -68,10 +68,6 @@ a.nav-link {
   margin-top: 10px;
 }
 
-.nav-link + .nav-link {
-  margin-left: 3rem;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -99,6 +95,23 @@ a.nav-link {
   .rights{
     display: none;
   }
+  .nav-link + .nav-link {
+    margin-left: 0rem !important;
+  }
+  .labelButton{
+    display: none;
+  }
+  svg.button{
+    margin-left: 0 !important;
+    font-size: larger;
+  }
+  .containerback{
+    width: 90%;
+  }
+}
+
+.nav-link + .nav-link {
+  margin-left: 3rem;
 }
 
 .btn-form {
