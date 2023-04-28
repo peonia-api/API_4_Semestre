@@ -149,5 +149,14 @@ export const VerifySQUAD = ({ children }:any) => {
 
     return children;
 }
+export const VerifyPADRAO = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo == "Padrao"){
+        return <Navigate to={"/listagem"}/>
+    }
+
+    return children;
+}
 
 

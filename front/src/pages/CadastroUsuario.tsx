@@ -247,6 +247,7 @@ function CadastroUsuario() {
                                 <option value="CTO" onChange={formik.handleChange} label="CTO (Chief Technology Officer)"> CTO (Chief Technology Officer) </option>
                                 <option value="HP" onChange={formik.handleChange} label="Head de plataforma"> Head de plataforma </option>
                                 <option value="SQUAD" onChange={formik.handleChange} label="Squad"> Squad </option>
+                                <option value="Padrao" onChange={formik.handleChange} label="Padrão"> Padrão </option>
                             </select>
                             {formik.touched.userType && formik.errors.userType && (
                                 <div className="fv-plugins-message-container">
