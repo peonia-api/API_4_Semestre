@@ -16,15 +16,13 @@ export class Group {
     @Column({ nullable: false, length: 100 })
     groupDescription: string;
 
-    @ManyToMany(() => User)
-    @JoinTable()
-    user: User[]
+    // @ManyToMany(() => User)
+    // @JoinTable()
+    // user: User[]
 
     // @ManyToMany(() => Call)
     // @JoinTable()
     // call: Call[]
-    // postToCategories: any;
-    // groupToCall: any;
 
     @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.group)
     groupToCall: GroupToCall[];
