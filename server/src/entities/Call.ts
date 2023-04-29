@@ -1,32 +1,33 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, JoinColumn } from "typeorm";
 import { Committee } from "./Committee";
 import { Attachment } from "./Attachment";
+import { GroupToCall } from "./GroupToCall";
 
-@Entity({name:"call"})
+@Entity({ name: "call" })
 export class Call {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable: false})
+    @Column({ nullable: false })
     callEmail: string;
 
-    @Column({nullable: false, length: 8})
+    @Column({ nullable: false, length: 8 })
     callType: string;
 
-    @Column({nullable: false, length: 80})
+    @Column({ nullable: false, length: 80 })
     callTitle: string;
 
-    @Column({nullable: false})
+    @Column({ nullable: false })
     callDescription: string;
 
-    @Column({nullable: false, length: 10})
+    @Column({ nullable: false, length: 10 })
     callPriority: string;
 
     // @Column({nullable: true})
     // callStatus: string;
 
-    @CreateDateColumn({ name: 'callDateCreate'})
+    @CreateDateColumn({ name: 'callDateCreate' })
     callDateCreate: Date;
 
     @OneToMany(() => Attachment, (attachment) => attachment.call)
@@ -35,8 +36,6 @@ export class Call {
     @OneToMany(() => Committee, (committee) => committee.call)
     committee: Committee[];
 
-
-
-
-
+    @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.call)
+    groupToCall: GroupToCall[];
 }

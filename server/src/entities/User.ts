@@ -1,32 +1,28 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToMany, ManyToOne } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { Call } from "./Call";
+import { GroupToUser } from "./GroupToUser";
 
-@Entity({name:"users"})
+@Entity({ name: "users" })
 export class User {
     // define a chave primária como auto incremento
     @PrimaryGeneratedColumn("uuid")
     id: number;
 
-    @Column({nullable: false, length: 100})
+    @Column({ nullable: false, length: 100 })
     userName: string;
 
-    @Column({nullable: false, length: 25})
+    @Column({ nullable: false, length: 25 })
     userPosition: string;
 
-    @Column({nullable: false, unique:true, length: 70})
+    @Column({ nullable: false, unique: true, length: 70 })
     userEmail: string;
 
-    @Column({nullable: false, select: false, length: 100})
+    @Column({ nullable: false, select: false, length: 100 })
     userPassword: string;
 
-    @Column({nullable: false, length: 70})
+    @Column({ nullable: false, length: 70 })
     userType: string;
-
-    //@Column({nullable: false, length: 25})
-    //userGroup: string;
-
-
 
     @BeforeInsert() //a função hashPassword é disparada antes do insert e update
     @BeforeUpdate()
@@ -41,4 +37,7 @@ export class User {
         // a senha fornecida em input é comparada com a senha do registro armazenado no SGBD
         return bcrypt.compare(input, this.userPassword);
     }
+
+    @OneToMany(() => GroupToUser, (groupToUser) => groupToUser.user)
+    groupToUser: GroupToUser[];
 }
