@@ -1,0 +1,18 @@
+[info]: [ 29/04/2023:11:15:5 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:15:21 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:15:42 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:15:56 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:15:56 ] - [object Object]
+[error]: [ 29/04/2023:11:15:56 ] - {"message":"Erro ao salvar o arquivo."}
+[info]: [ 29/04/2023:11:20:30 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:20:31 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:20:37 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:20:37 ] - {"name":"1682778059220-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1682778059220-imagemjpg","call":"131","id":151}
+[info]: [ 29/04/2023:11:21:54 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:22:30 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:22:36 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:22:38 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:22:40 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:22:40 ] - {"att":{"name":"1682778184462-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1682778184462-imagemjpg","call":"133","id":152},"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 29/04/2023:11:24:5 ] - Rodando na porta 3001
+[info]: [ 29/04/2023:11:24:13 ] - Rodando na porta 3001

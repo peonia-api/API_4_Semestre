@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
 import routes from "./routes";
+import { logger } from "./config/logger";
 
 dotenv.config();
 
@@ -15,5 +16,5 @@ app.use(routes);
 const PORT = process.env.PORT || 3001;
 
 // inicializa o servidor na porta especificada
-app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
+app.listen(PORT, () => logger.info(`Rodando na porta ${PORT}`));
 // define a rota para o pacote /routes
