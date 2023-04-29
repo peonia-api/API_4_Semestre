@@ -1,6 +1,7 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Attachment } from "../entities/Attachment";
+import { logger } from "../config/logger";
 const fs = require("fs")
 
 class AttachmentController {
@@ -120,7 +121,7 @@ class AttachmentController {
             const id:any = req.params.uuid
             const attachmentRepository = AppDataSource.getRepository(Attachment)
             const findFile = await attachmentRepository.find()
-            let list = []
+            let list:any = []
             findFile.map(async (file) => {
                 if(file.call.id == id){
                     list.push({
@@ -130,6 +131,10 @@ class AttachmentController {
                     const allCall = await attachmentRepository.remove(file)
                 }
             })
+            if(list.id == null){
+                logger.error(JSON.stringify({mensage: "Não possui arquivos!"}))
+                return res.json({mensage: "Não possui arquivos!"})
+            }
 
             return res.json({mensage: "foi", list})
         }catch(err){

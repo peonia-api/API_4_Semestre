@@ -3,12 +3,15 @@ import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 
 
+
 class CallController {
 
     public async getHistoricCall (req: Request, res: Response) : Promise<Response> {
         const callRepository = AppDataSource.getRepository(Call)
         const allCall = await callRepository.find()
         console.log(allCall)
+        console.log(allCall)
+        
         return res.json(allCall)
     }
 
