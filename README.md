@@ -99,7 +99,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 <h1 align="center"> 
     
-![Product Backlog](https://user-images.githubusercontent.com/86448876/233865256-1b61cd15-4214-4fdc-926d-fa6901173e2f.png)
+![Product Backlog](https://user-images.githubusercontent.com/86448876/235326440-7e85279f-43b7-4555-862a-8d9d39b96985.png)
     
 </h1>
  
