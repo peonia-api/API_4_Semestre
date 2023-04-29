@@ -24,7 +24,8 @@
         "pg": "^8.10.0",
         "sqlite3": "^5.1.4",
         "typeorm": "^0.3.10",
-        "typescript": "^5.0.4"
+        "typescript": "^5.0.4",
+        "winston": "^3.8.2"
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",
