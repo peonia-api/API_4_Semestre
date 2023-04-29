@@ -29,10 +29,11 @@ class AttachmentController {
                 console.log(index);
                 
             }
+            logger.info(JSON.stringify({att, message: "Sucesso ao salvar o arquivo."}))
             return res.json(att)
         }catch(err){
             console.log('oi');
-            
+            logger.error(JSON.stringify({message: "Erro ao salvar o arquivo."}))
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
 
@@ -57,10 +58,11 @@ class AttachmentController {
                 console.log(index);
                 
             }
+            logger.info(JSON.stringify({att, message: "Sucesso ao salvar o arquivo."}))
             return res.json(att)
         }catch(err){
             console.log('oi');
-            
+            logger.error(JSON.stringify({message: "Erro ao salvar o arquivo."}))
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
     }
