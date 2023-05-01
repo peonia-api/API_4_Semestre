@@ -31,7 +31,6 @@ class CommitteeController {
             const insertCommittee = new Committee();
             insertCommittee.id = id.id
             insertCommittee.comiImpactCto = null
-            insertCommittee.comiCostSquad = null
             insertCommittee.comiImpactHp = null
             insertCommittee.comiRiskCso = null
             insertCommittee.comiRiskRt = null
@@ -69,16 +68,16 @@ class CommitteeController {
         const allCommittee = await committeeRepository.save(findCommittee)
         return res.json(allCommittee)
     }
-    public async putCommitCostSquad (req: Request, res: Response) : Promise<Response> {
-        const createCommittee = req.body
-        const idCommittee:any = req.params.uuid
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
-        findCommittee.comiCostSquad = createCommittee.comiCostSquad
+    // public async putCommitCostSquad (req: Request, res: Response) : Promise<Response> {
+    //     const createCommittee = req.body
+    //     const idCommittee:any = req.params.uuid
+    //     const committeeRepository = AppDataSource.getRepository(Committee)
+    //     const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
+    
 
-        const allCommittee = await committeeRepository.save(findCommittee)
-        return res.json(allCommittee)
-    }
+    //     const allCommittee = await committeeRepository.save(findCommittee)
+    //     return res.json(allCommittee)
+    // }
     public async putCommitRikRt (req: Request, res: Response) : Promise<Response> {
         const createCommittee = req.body
         const idCommittee:any = req.params.uuid
@@ -126,7 +125,7 @@ class CommitteeController {
         const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: true}
         const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: true}
         
-        if(allCommittee.comiCostSquad == null || allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null){
+        if(allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null){
             return res.json({mensage: "Ainda não foi avaliado", arquivada: null})
         }
         if (allCommittee.comiRiskCso == 3) {
@@ -141,14 +140,10 @@ class CommitteeController {
         else if (allCommittee.comiImpactHp == 0) {
             return res.json(validate1)
         }
-        else if (allCommittee.comiCostSquad == 3) {
-            return res.json(validate)
-        }
         else{
             return res.json({allCommittee, arquivada: false})
 
         }
-
         
     }
 
@@ -172,10 +167,7 @@ class CommitteeController {
             else if (data.comiImpactHp == 0) {
                 lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
             }
-            else if (data.comiCostSquad == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if(data.comiCostSquad == null || data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
+            else if(data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
                 lista.push({id:data.id, mensage: "Ainda não foi avaliado", arquivada: "Em análise"})
             }
             else{
@@ -215,10 +207,7 @@ class CommitteeController {
             else if (data.comiImpactHp == 0) {
                 lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
             }
-            else if (data.comiCostSquad == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if(data.comiCostSquad == null || data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
+            else if(data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
                 lista.push({id:data.id, mensage: "Ainda não foi avaliado", arquivada: "Em análise"})
             }
             else{
@@ -435,47 +424,47 @@ class CommitteeController {
         return res.json(lista2)     
     }
 
-    public async getcomiCostSquad (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
+    // public async getcomiCostSquad (req: Request, res: Response) : Promise<Response> {
+    //     const committeeRepository = AppDataSource.getRepository(Committee)
+    //     const callRepository = AppDataSource.getRepository(Call)
+    //     const allCommittee = await committeeRepository.find()
+    //     const feature = await callRepository.findBy({ callType: "feature" })
 
-        let lista2:any = []
-        let lista3:any = []
+    //     let lista2:any = []
+    //     let lista3:any = []
 
 
-        allCommittee.map((data) => {
-            if(data.comiCostSquad == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiImpactHp > 0 && data.comiRiskCso != null && data.comiRiskRt != null && data.comiImpactCto != null && data.comiImpactHp != null){
-                lista3.push({
-                    id: data.id,
-                    mensage: "Ainda não foi avaliado", 
-                    arquivada: "Avaliar"
-                })
-            }
-        })
-        console.log(lista3);
+    //     allCommittee.map((data) => {
+    //         if(data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiImpactHp > 0 && data.comiRiskCso != null && data.comiRiskRt != null && data.comiImpactCto != null && data.comiImpactHp != null){
+    //             lista3.push({
+    //                 id: data.id,
+    //                 mensage: "Ainda não foi avaliado", 
+    //                 arquivada: "Avaliar"
+    //             })
+    //         }
+    //     })
+    //     console.log(lista3);
         
-        feature.map((data) => {
-            lista3.map((l) => {
-                if(data.id == l.id){
-                    lista2.push({
-                        id: l.id,
-                        callEmail:  data.callEmail,
-                        callDateCreate:  data.callDateCreate,
-                        callTitle:  data.callTitle,
-                        callType:  data.callType,
-                        callDescription:  data.callDescription,
-                        arquivada: l.arquivada
-                    })
-                }
-            })
-        })
+    //     feature.map((data) => {
+    //         lista3.map((l) => {
+    //             if(data.id == l.id){
+    //                 lista2.push({
+    //                     id: l.id,
+    //                     callEmail:  data.callEmail,
+    //                     callDateCreate:  data.callDateCreate,
+    //                     callTitle:  data.callTitle,
+    //                     callType:  data.callType,
+    //                     callDescription:  data.callDescription,
+    //                     arquivada: l.arquivada
+    //                 })
+    //             }
+    //         })
+    //     })
         
         
 
-        return res.json(lista2)     
-    }
+    //     return res.json(lista2)     
+    // }
 
 }
 export default new CommitteeController();
