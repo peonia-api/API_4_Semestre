@@ -6,7 +6,7 @@ import { GroupToUser } from "./GroupToUser";
 @Entity({ name: "users" })
 export class User {
     // define a chave primária como auto incremento
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column({ nullable: false, length: 100 })

@@ -8,10 +8,10 @@ export class GroupToUser {
     id: number
 
     @Column()
-    public userId: number
+    groupId: number
 
     @Column()
-    public callId: number
+    userId: number
 
     @ManyToOne(() => Group, (group) => group.groupToUser)
     group: Group
