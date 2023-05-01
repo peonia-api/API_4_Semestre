@@ -17,13 +17,15 @@ import { ComiteHp } from "./pages/Comite/ComiteHp";
 import { ComiteRt } from "./pages/Comite/ComiteRt";
 import { ComiteSquad } from "./pages/Comite/ComiteSquad";
 import RedefinirSenha from "./pages/RedefinirSenha";
+import Perfil from "./pages/Perfil";
 
 function App() {
   return (
     <>
               <AuthProvider>
                 <Routes>
-                  <Route path="/login" element={<Login />} />
+                  <Route path="/login" element={<Login />} />                  
+                  <Route path="/perfil" element={<Private><Perfil /></Private>} />
                   <Route path="/redefinirSenha/:id" element={<RedefinirSenha />} />
                   <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
                   <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
