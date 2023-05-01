@@ -78,5 +78,14 @@ function avisoEspera(): Promise<SweetAlertResult> {
   })
 }
 
+function avisoPerfil(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Sucesso",
+    text: "Informações atualizadas com sucesso!",
+    icon: "success",
+    confirmButtonColor: "#54C5CE",
+  });
+}
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao };
+
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil };
