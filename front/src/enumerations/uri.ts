@@ -21,6 +21,10 @@ export enum URIuser {
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
 }
 
+export enum URIperfil {
+    ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+}
+
 export enum URIcommit{
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
