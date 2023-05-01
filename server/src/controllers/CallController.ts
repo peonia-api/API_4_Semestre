@@ -69,7 +69,7 @@ class CallController {
             insertCall.callDescription = createCall.callDescription
             insertCall.callPriority = createCall.callPriority
             insertCall.callEmail = createCall.callEmail
-            // insertCall.callStatus = null
+            insertCall.callStatus = "em análise"
 
             const allCall = await callRepository.save(insertCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao cadastrar o chamado."}))
@@ -91,6 +91,7 @@ class CallController {
             findCall.callDescription = createCall.callDescription
             findCall.callPriority = createCall.callPriority
             findCall.callEmail = findCall.callEmail
+            findCall.callStatus = findCall.callStatus
         
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o chamado."}))
@@ -100,24 +101,6 @@ class CallController {
             return res.status(400).json({mensage: "Erro ao editar o chamado"})
         }
     }
-
-    // public async getCallStatus (req: Request, res: Response) : Promise<Response> {
-    //     try{
-    //         const callRepository = AppDataSource.getRepository(Call)
-    //         const findCall = await callRepository.find()
-    //         findCall.map((s)=>{
-    //             if (s.callStatus == arquivado)
-    //         }) 
-          
-        
-    //         const allCall = await callRepository.save(findCall)
-    //         logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o chamado."}))
-    //         return res.json(allCall)
-    //     }catch(err){
-    //         logger.error(JSON.stringify({mensage: "Erro ao editar o chamado"}))
-    //         return res.status(400).json({mensage: "Erro ao editar o chamado"})
-    //     }
-    // }
 
     public async deleteCall (req: Request, res: Response) : Promise<Response> {
         try{

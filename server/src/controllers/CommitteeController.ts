@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
 import { Attachment } from "../entities/Attachment";
+import { logger } from "../config/logger";
 
 
 class CommitteeController {
@@ -35,6 +36,10 @@ class CommitteeController {
             insertCommittee.comiRiskCso = null
             insertCommittee.comiRiskRt = null
             insertCommittee.call = id.id
+            insertCommittee.comiImpactCtoAvaliation = null
+            insertCommittee.comiImpactoHpAvaliation = null
+            insertCommittee.comiRiskCsoAvaliation = null
+            insertCommittee.comiRiskRtAvaliation = null
             const allCommittee = await committeeRepository.save(insertCommittee)
             console.log(id);
             
@@ -465,6 +470,56 @@ class CommitteeController {
 
     //     return res.json(lista2)     
     // }
+
+    public async getArchived (req: Request, res: Response) : Promise<Response> {
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const committeeRepository = AppDataSource.getRepository(Committee)
+            let lista = []
+            const findCall = await callRepository.find()
+            const findCommittee = await committeeRepository.find()
+            findCall.map((s)=>{
+                if (s.callType == "feature"){
+                    findCommittee.map((c) =>{
+                        if (s.callStatus == "Arquivada"){
+                            if (s.id == c.id){
+                                lista.push({
+                                    id:s.id,
+                                    type:s.callType,
+                                    tittle:s.callTitle,
+                                    description:s.callDescription,
+                                    priority:s.callPriority,
+                                    email:s.callEmail,
+                                    status:s.callStatus,
+                                    impactCto:c.comiImpactCto,
+                                    impactHp:c.comiImpactHp,
+                                    riskRt:c.comiRiskRt,
+                                    riskCso:c.comiRiskCso, 
+                                    avaliationCto:c.comiImpactCtoAvaliation,
+                                    avaliationHp:c.comiImpactoHpAvaliation,
+                                    avaliationCso:c.comiRiskCsoAvaliation,
+                                    avaliationRt:c.comiRiskRtAvaliation
+
+                                })
+                            }
+                       
+
+                        
+                        }
+
+                    })
+                   
+
+                }
+            }) 
+          
+            logger.info(JSON.stringify({lista, message: "Sucesso ao buscar os chamados arquivados."}))
+            return res.json(lista)
+        }catch(err){
+            logger.error(JSON.stringify({mensage: "Erro ao buscar os chamados arquivados"}))
+            return res.status(400).json({mensage: "Erro ao buscar os chamados arquivados"})
+        }
+    }
 
 }
 export default new CommitteeController();
