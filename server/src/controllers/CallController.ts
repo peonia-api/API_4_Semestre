@@ -101,6 +101,24 @@ class CallController {
         }
     }
 
+    // public async getCallStatus (req: Request, res: Response) : Promise<Response> {
+    //     try{
+    //         const callRepository = AppDataSource.getRepository(Call)
+    //         const findCall = await callRepository.find()
+    //         findCall.map((s)=>{
+    //             if (s.callStatus == arquivado)
+    //         }) 
+          
+        
+    //         const allCall = await callRepository.save(findCall)
+    //         logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o chamado."}))
+    //         return res.json(allCall)
+    //     }catch(err){
+    //         logger.error(JSON.stringify({mensage: "Erro ao editar o chamado"}))
+    //         return res.status(400).json({mensage: "Erro ao editar o chamado"})
+    //     }
+    // }
+
     public async deleteCall (req: Request, res: Response) : Promise<Response> {
         try{
             const idCall:any = req.params.uuid

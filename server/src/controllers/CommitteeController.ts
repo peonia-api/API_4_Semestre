@@ -100,7 +100,6 @@ class CommitteeController {
         return res.json(allCommittee)
     }
 
-
     public async deleteCommittee(req: Request, res: Response): Promise<Response> {
         const deleteId:any = req.params.uuid
         const committeeRep = AppDataSource.getRepository(Committee)

@@ -7,11 +7,8 @@ export class GroupToUser {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
-    public userId: number
-
-    @Column()
-    public callId: number
+    // @Column()
+    // public userId: number
 
     @ManyToOne(() => Group, (group) => group.groupToUser)
     group: Group
