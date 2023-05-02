@@ -15,7 +15,7 @@ import { removeFile, removeFileOne, supabase, uploadFile } from "../services/sup
 import { Attachment } from "../types/attachment";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { Committee } from "../types/committee";
-import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoDeletar, avisoDeletarAnexo, avisoEsperaAnexo } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
 import excluir from "../images/excluir.png";
 
@@ -148,7 +148,7 @@ function EditarCall() {
 
   async function handleDeleteFile(idFile: any) {
     try {
-      avisoDeletar().then(async (result) => {
+      avisoDeletarAnexo().then(async (result) => {
         if (result.isConfirmed) {
           await axios.delete(`${URIattach.DELETE_ANEXO_ONE_SUPABASE}${idFile}`).then(async (res) => {
             removeFileOne(res.data);
@@ -173,8 +173,11 @@ function EditarCall() {
       avisoErro();
     } else {
       formik.submitForm();
-      avisoEdicao().then((res: any) => {
-        window.location.assign("/listagem");
+      avisoEsperaAnexo().then((res) => {
+        setTimeout(function(){avisoEdicao().then((res:any) => {
+          setTimeout(function(){window.location.assign("/listagem");}, 2000)
+          
+        })}, 3000)
       })
 
     }

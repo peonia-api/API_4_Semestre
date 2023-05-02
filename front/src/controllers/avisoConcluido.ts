@@ -87,5 +87,37 @@ function avisoPerfil(): Promise<SweetAlertResult> {
   });
 }
 
+async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Deletar anexo",
+    text: "Essa ação não pode ser revertida",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, deletar",
+  });
+}
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil };
+function avisoEsperaAnexo(): Promise<SweetAlertResult> {
+  let timerInterval: any
+  return Swal.fire({
+    title: 'Atualizando chamado!',
+    html: 'O chamado será atualizado em <b></b> milissegundos.',
+    timer: 10000,
+    timerProgressBar: true,
+    didOpen: () => {
+      Swal.showLoading()
+      const b: any = Swal.getHtmlContainer()?.querySelector('b')
+      timerInterval = setInterval(() => {
+        b.textContent = Swal.getTimerLeft()
+      }, 100)
+    },
+    willClose: () => {
+      clearInterval(timerInterval)
+    }
+  })
+}
+
+
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo };
