@@ -180,7 +180,7 @@ function ListagemCall() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Número da solitição {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>

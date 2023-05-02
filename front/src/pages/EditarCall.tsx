@@ -11,10 +11,13 @@ import { Calls } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { supabase, uploadFile } from "../services/supabase";
+import { removeFile, removeFileOne, supabase, uploadFile } from "../services/supabase";
 import { Attachment } from "../types/attachment";
 import { FloatingLabel, Form } from "react-bootstrap";
 import { Committee } from "../types/committee";
+import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoErroDeletar } from "../controllers/avisoErro";
+import excluir from "../images/excluir.png";
 
 
 function EditarCall() {
@@ -33,7 +36,7 @@ function EditarCall() {
     setFiles(incommingFiles);
     //even your own upload implementation
   };
-  const removeFile = (id: any) => {
+  const removeFiles = (id: any) => {
     setFiles(files.filter((x: any) => x.id !== id));
   };
 
@@ -106,7 +109,10 @@ function EditarCall() {
             await axios.post(URIcommit.ENVIAR_COMITE, { id: id })
           } else {
             if (data?.callType == "feature") {
-              await axios.delete(`${URIcommit.DELETE_COMITE}${id}`)
+              if(formik.values.callType == "hotfix"){
+                await axios.delete(`${URIcommit.DELETE_COMITE}${id}`)
+              }
+              
             }
           }
         })
@@ -138,6 +144,28 @@ function EditarCall() {
 
   function onClickLimpar() {
     formik.resetForm();
+  }
+
+  async function handleDeleteFile(idFile: any) {
+    try {
+      avisoDeletar().then(async (result) => {
+        if (result.isConfirmed) {
+          await axios.delete(`${URIattach.DELETE_ANEXO_ONE_SUPABASE}${idFile}`).then(async (res) => {
+            removeFileOne(res.data);
+            console.log("foi");
+            removeFiles(res.data.list)
+            const response = await axios.get(`${URIattach.PEGAR_ANEXO_ESPECIFICO}${id}`);
+            setAnexo(response.data);
+          }).catch((err) => {
+            console.log("erro");
+
+          })
+        }
+      })
+    } catch (error) {
+      console.error(error);
+      avisoErroDeletar();
+    }
   }
 
   function onClickEnviar() {
@@ -412,6 +440,7 @@ function EditarCall() {
                       {anexo.map((anexo) => (
                         <>
                           <a href={anexo.src} target="_blank" rel="noopener noreferrer">Visualizar anexo</a>
+                          <img className="actions" style={{ width: "35px", marginLeft:'-25px'}} src={excluir} alt="Excluir" onClick={() => handleDeleteFile(anexo.id)} />
                         </>
                       ))}
                     </div>

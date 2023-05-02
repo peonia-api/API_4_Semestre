@@ -9,6 +9,7 @@ routes.post("/file/:uuid", upload.array("file"), AttachmentController.file) //si
 routes.get('/fileAll', AttachmentController.getAll)
 routes.delete("/fileRemove/:uuid", AttachmentController.deleteFile)
 routes.delete("/fileRemoveSupa/:uuid", AttachmentController.deleteFileSupabase)
+routes.delete("/fileRemoveOneSupa/:uuid", AttachmentController.deleteFileOneSupabase)
 routes.put("/fileReneme/:uuid", upload.single("file") , AttachmentController.putFile)
 routes.get("/fileCall/:uuid", AttachmentController.getFileByCallId)
 routes.put("/fileNameSupa/:uuid", AttachmentController.putFileSupa)
