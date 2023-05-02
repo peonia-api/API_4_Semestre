@@ -21,32 +21,36 @@ class CommitteeController {
         return res.json(allCommittee)
     }
 
-   
 
-    public async postCommittee (req: Request, res: Response) : Promise<Response> {
-        try{
+
+    public async postCommittee(req: Request, res: Response): Promise<Response> {
+        try {
             const id = req.body
-            const committeeRepository = AppDataSource.getRepository(Committee)            
-
-            const insertCommittee = new Committee();
-            insertCommittee.id = id.id
-            insertCommittee.comiImpactCto = null
-            insertCommittee.comiCostSquad = null
-            insertCommittee.comiImpactHp = null
-            insertCommittee.comiRiskCso = null
-            insertCommittee.comiRiskRt = null
-            insertCommittee.call = id.id
-            const allCommittee = await committeeRepository.save(insertCommittee)
-            console.log(id);
+            const committeeRepository = AppDataSource.getRepository(Committee)
+            const getComite = await committeeRepository.find()
+            let allCommittee;
+            const findComiteId = getComite.find(elem => elem.id == id.id);
+            console.log("linux");
             
-            return res.json({allCommittee,mensage: "Todos já estão em avaliação"})
-                 
+            if (findComiteId == undefined) {
+                const insertCommittee = new Committee();
+                insertCommittee.id = id.id
+                insertCommittee.comiImpactCto = null
+                insertCommittee.comiCostSquad = null
+                insertCommittee.comiImpactHp = null
+                insertCommittee.comiRiskCso = null
+                insertCommittee.comiRiskRt = null
+                insertCommittee.call = id.id
+                allCommittee = await committeeRepository.save(insertCommittee)
+            }
+
+            return res.json({ allCommittee, mensage: "Todos já estão em avaliação" })
+
         }
         catch(err){
             return res.status(400).json({Erro: "Erro ao criar"})
         }
     
-        
     }
 
     public async putCommitteeImpactCto (req: Request, res: Response) : Promise<Response> {

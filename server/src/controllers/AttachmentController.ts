@@ -77,11 +77,45 @@ class AttachmentController {
         findFile.src = file.path
         findFile.call = callId
 
+
         
 
         const allCall = await attachmentRepository.save(findFile)
         return res.json(allCall)
-     }
+    }
+
+    public async putFileSupa(req: Request, res: Response): Promise<Response> {
+        try {
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const attachment = await attachmentRepository.find()
+            const callId: any = req.params.uuid
+            const files = req.body
+            console.log(files);
+
+            const arquivosUploads = 'https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/'
+            //const files = req.files
+
+            let att;
+
+            attachment.map(async (data) => {
+                if (data.call.id == callId) {
+                    files.map(async (dataFile) => {
+                        data.name = dataFile.name
+                        data.src = arquivosUploads + dataFile.name
+                        data.call = callId
+                        att = await attachmentRepository.save(files)
+                    })
+                }
+            })
+
+            return res.json(att)
+        } catch (err) {
+            console.log('oi');
+
+            return res.status(400).json({ message: "Erro ao salvar o arquivo." })
+        }
+
+    }
 
 
      public async getAll (req: Request, res: Response) : Promise<Response> {
