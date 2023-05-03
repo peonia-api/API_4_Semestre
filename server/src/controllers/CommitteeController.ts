@@ -228,19 +228,31 @@ class CommitteeController {
             allcall.map((call) => {
                 
                     if(call.callType == 'feature'){
-                    lista.map((l) => {
-                        if(call.id == l.id){
-                            lista2.push({
-                                id: l.id,
-                                callEmail:  call.callEmail,
-                                callDateCreate:  call.callDateCreate,
-                                callTitle:  call.callTitle,
-                                callType:  call.callType,
-                                callDescription:  call.callDescription,
-                                arquivada: l.arquivada
-                            })
-                        }
-                    })
+                        lista.map((l) => {
+                            if(call.id == l.id){
+                                if(l.arquivada == "Arquivada" && call.callStatus == "Aprovada" || call.callStatus == "Em desenvolvimento"){
+                                    lista2.push({
+                                        id: l.id,
+                                        callEmail:  call.callEmail,
+                                        callDateCreate:  call.callDateCreate,
+                                        callTitle:  call.callTitle,
+                                        callType:  call.callType,
+                                        callDescription:  call.callDescription,
+                                        arquivada: call.callStatus
+                                    })
+                                }else{
+                                    lista2.push({
+                                        id: l.id,
+                                        callEmail:  call.callEmail,
+                                        callDateCreate:  call.callDateCreate,
+                                        callTitle:  call.callTitle,
+                                        callType:  call.callType,
+                                        callDescription:  call.callDescription,
+                                        arquivada: l.arquivada
+                                    })
+                                }
+                            }
+                        })
                     }else{
                         lista2.push({
                             id: call.id,
@@ -524,5 +536,20 @@ class CommitteeController {
         }
     }
 
+    public async putStatus(req: Request, res: Response): Promise<Response>{
+        try{
+            const uuid:any = req.params.uuid
+            const status:any = req.body
+            const callrep = AppDataSource.getRepository(Call)
+            const call = await callrep.findOneBy({id: uuid})
+            call.callStatus = status.status
+            const callS = await callrep.save(call)
+            return res.json(callS)
+        }catch(err){
+            return
+        }
+    }
+
 }
+
 export default new CommitteeController();
