@@ -21,6 +21,10 @@ export enum URIuser {
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
 }
 
+export enum URIperfil {
+    ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+}
+
 export enum URIcommit{
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
@@ -50,7 +54,9 @@ export enum URIattach{
     PEGAR_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileCall/",
     ALTERA_ANEXO_ESPECIFICO = "http://localhost:3001/file/fileReneme/",
     DELETE_ANEXO = "http://localhost:3001/file/fileRemove/",
-    DELETE_ANEXO_SUPABASE = "http://localhost:3001/file/fileRemoveSupa/"
+    DELETE_ANEXO_SUPABASE = "http://localhost:3001/file/fileRemoveSupa/",
+    DELETE_ANEXO_ONE_SUPABASE = "http://localhost:3001/file/fileRemoveOneSupa/",
+    ALTERA_ANEXO_ESPECIFICO_SUPABASE = "http://localhost:3001/file/fileNameSupa/",
 }
 
 

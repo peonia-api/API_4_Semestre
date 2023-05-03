@@ -1,10 +1,12 @@
-import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao } from './avisoConcluido';
+import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoDeletarAnexo, avisoEsperaAnexo } from './avisoConcluido';
 import { avisoErro, avisoErroAoDeletar, avisoErroLogin } from './avisoErro';
 import { solicitacaoValidationSchema } from './validateCall';
+import { perfilValidationSchema } from './validatePerfil';
 import { VerifyType } from "./verfyTypeComm";
 
 export {
         solicitacaoValidationSchema,
+        perfilValidationSchema,
         avisoErro,
         avisoConcluido,
         avisoErroAoDeletar,
@@ -14,5 +16,7 @@ export {
         senhaAlterada,
         solicitaEmail,
         avisoEspera,
-        avisoEdicao
+        avisoEdicao,
+        avisoDeletarAnexo,
+        avisoEsperaAnexo
 } 

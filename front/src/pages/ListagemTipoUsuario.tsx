@@ -152,7 +152,7 @@ function ListagemTipoUsuario() {
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
-            <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">Listagem dos chamados</h1>
+            <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos chamados</h1>
           </div>
           <Container className="px-2 mb-5">
             <Container>
@@ -168,7 +168,7 @@ function ListagemTipoUsuario() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Número da solitição {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
+                    <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>

@@ -81,8 +81,6 @@ class AttachmentController {
             findFile.src = file.path
             findFile.call = callId
 
-            
-
             const allCall = await attachmentRepository.save(findFile)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o arquivo."}))
             return res.json(allCall)
@@ -90,7 +88,40 @@ class AttachmentController {
             logger.error(JSON.stringify({message: "Erro ao editar o arquivo."}))
             return res.status(400).json({message: "Erro ao editar o arquivo."})
         }
-     }
+    }
+
+    public async putFileSupa(req: Request, res: Response): Promise<Response> {
+        try {
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const attachment = await attachmentRepository.find()
+            const callId: any = req.params.uuid
+            const files = req.body
+            console.log(files);
+
+            const arquivosUploads = 'https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/'
+            //const files = req.files
+
+            let att;
+
+            attachment.map(async (data) => {
+                if (data.call.id == callId) {
+                    files.map(async (dataFile) => {
+                        data.name = dataFile.name
+                        data.src = arquivosUploads + dataFile.name
+                        data.call = callId
+                        att = await attachmentRepository.save(files)
+                    })
+                }
+            })
+            logger.info(JSON.stringify({att, message: "Sucesso ao editar o arquivo."}))
+            return res.json(att)
+        } catch (err) {
+            console.log('oi');
+            logger.error(JSON.stringify({message: "Erro ao editar o arquivo."}))
+            return res.status(400).json({ message: "Erro ao editar o arquivo." })
+        }
+
+    }
 
 
      public async getAll (req: Request, res: Response) : Promise<Response> {
@@ -123,8 +154,8 @@ class AttachmentController {
         }
     }
 
-    /*
-    public async deleteFileSupabase (req: Request, res: Response) : Promise<Response> {
+    
+    public async deleteFileOneSupabase (req: Request, res: Response) : Promise<Response> {
         const id:any = req.params.uuid
         const attachmentRepository = AppDataSource.getRepository(Attachment)
         const findFile = await attachmentRepository.findOneBy({id: id})
@@ -134,7 +165,7 @@ class AttachmentController {
         const allCall = await attachmentRepository.remove(findFile)
         return res.json(allCall)
     }
-    */
+    
 
     public async deleteFileSupabase (req: Request, res: Response) : Promise<Response> {
         try{

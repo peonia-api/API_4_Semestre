@@ -25,7 +25,6 @@ function avisoErroAoDeletar(){
   })
 }
 
-
 function avisoErroLogin(){
   Swal.fire({
     icon: 'error',
@@ -34,4 +33,12 @@ function avisoErroLogin(){
   })
 }
 
-export { avisoErro, avisoErroDeletar, avisoErroAoDeletar, avisoErroLogin };
+function avisoErroRequisicao(){
+  Swal.fire({
+    icon: 'error',
+    title: 'Erro',
+    text: 'Houve um erro na requisição!',
+  })
+}
+
+export { avisoErro, avisoErroDeletar, avisoErroAoDeletar, avisoErroLogin, avisoErroRequisicao };

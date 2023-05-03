@@ -91,7 +91,7 @@ function EditarUser() {
             style={{ margin: "8px" }}
         >
             <div className="text-center mb-4">
-                <h1 className="text-dark fw-bolder mb-3 font-padrao-titulo">
+                <h1 className="text-dark mb-3 font-padrao-titulo">
                     Cadastrar Usuário
                 </h1>
                 <div
