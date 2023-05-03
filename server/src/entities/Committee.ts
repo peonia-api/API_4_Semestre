@@ -12,16 +12,28 @@ export class Committee {
     comiImpactCto: number;
 
     @Column({ nullable: true })
+    comiImpactCtoAvaliation: string;
+
+    @Column({ nullable: true })
     comiImpactHp: number;
 
     @Column({ nullable: true })
-    comiCostSquad: number;
+    comiImpactoHpAvaliation: string;
+
+    // @Column({ nullable: true })
+    // comiCostSquad: number;
 
     @Column({ nullable: true })
     comiRiskRt: number;
 
     @Column({ nullable: true })
+    comiRiskRtAvaliation: string;
+
+    @Column({ nullable: true })
     comiRiskCso: number;
+
+    @Column({ nullable: true })
+    comiRiskCsoAvaliation: string;
 
     // @OneToMany(() => Group, (group) => group.committee)
     // group: Group[];

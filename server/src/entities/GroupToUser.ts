@@ -7,15 +7,12 @@ export class GroupToUser {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
-    groupId: number
+    // @Column()
+    // public userId: number
 
-    @Column()
-    userId: number
-
-    @ManyToOne(() => Group, (group) => group.groupToUser)
+    @ManyToOne(() => Group, (group) => group.groupToUser, {eager:true})
     group: Group
 
-    @ManyToOne(() => User, (user) => user.groupToUser)
+    @ManyToOne(() => User, (user) => user.groupToUser, {eager:true})
     user: User
 }

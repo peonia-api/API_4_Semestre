@@ -1,5 +1,6 @@
 import AppDataSource from "../data-source"
 import { Group } from "../entities/Groups"
+import { Request, Response } from 'express';
 
 class GroupController {
 
@@ -10,9 +11,7 @@ class GroupController {
         return res.json(allGroup)
     }
 
-
-
-    public async getGroup (req: Request, res: Response) : Promise<Response> {
+    public async getGroupByOne (req: Request, res: Response) : Promise<Response> {
         const idGroup:any = req.params.uuid
         const groupRepository = AppDataSource.getRepository(Group)
         const allGroup = await groupRepository.findOneBy({id: idGroup})
@@ -23,8 +22,8 @@ class GroupController {
         const createGroup = req.body
         const groupRepository = AppDataSource.getRepository(Group)
         const insertGroup = new Group();
-        insertGroup.groupName = createGroup.groupName
-        insertGroup.user = createGroup.user
+        insertGroup.groupType = createGroup.groupType
+        insertGroup.groupDescription = createGroup.groupDescription
 
 
         const allGroup = await groupRepository.save(insertGroup)
@@ -36,17 +35,17 @@ class GroupController {
         const idGroup:any = req.params.uuid
         const groupRepository = AppDataSource.getRepository(Group)
         const findGroup = await groupRepository.findOneBy({id: idGroup})
-        findGroup.groupName = createGroup.groupName
-        findGroup.user = createGroup.user
+        findGroup.groupType = createGroup.groupType
+        findGroup.groupDescription = createGroup.groupDescription
        
     
         const allGroup = await groupRepository.save(findGroup)
         return res.json(allGroup)
     }
 
-    public async deleteCall (req: Request, res: Response) : Promise<Response> {
+    public async deleteGroup (req: Request, res: Response) : Promise<Response> {
         const idGroup:any = req.params.uuid
-        const groupRepository = AppDataSource.getRepository(Call)
+        const groupRepository = AppDataSource.getRepository(Group)
         const findGroup = await groupRepository.findOneBy({id: idGroup})
         const allGroup = await groupRepository.remove(findGroup)
         return res.json(allGroup)

@@ -69,7 +69,7 @@ class CallController {
             insertCall.callDescription = createCall.callDescription
             insertCall.callPriority = createCall.callPriority
             insertCall.callEmail = createCall.callEmail
-            // insertCall.callStatus = null
+            insertCall.callStatus = "em análise"
 
             const allCall = await callRepository.save(insertCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao cadastrar o chamado."}))
@@ -91,6 +91,7 @@ class CallController {
             findCall.callDescription = createCall.callDescription
             findCall.callPriority = createCall.callPriority
             findCall.callEmail = findCall.callEmail
+            findCall.callStatus = findCall.callStatus
         
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o chamado."}))
