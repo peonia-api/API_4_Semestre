@@ -24,7 +24,7 @@ routes.put('/impactHp/:uuid', CommitteeControllers.putCommitteeImpactHp)
 //routes.put("/costSquad/:uuid", CommitteeControllers.putCommitCostSquad)
 routes.put("/riskRt/:uuid", CommitteeControllers.putCommitRikRt)
 routes.put("/riskCso/:uuid", CommitteeControllers.putCommitRiskCso)
-
+routes.put("/alteraStatus/:uuid", CommitteeControllers.putStatus)
 routes.delete("/deletar/:uuid", CommitteeControllers.deleteCommittee)
 
 export default routes;
