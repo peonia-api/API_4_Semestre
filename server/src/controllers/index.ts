@@ -4,6 +4,7 @@ import UserController from "./UserController";
 import CommitteeControllers from "./CommitteeController";
 import GroupController from "./GroupController";
 import GroupToUserController from "./GroupToUserController";
+import GroupToCallController from "./GroupToCallController";
 
 export{
     CallController,
@@ -11,6 +12,7 @@ export{
     UserController,
     CommitteeControllers,
     GroupController,
-    GroupToUserController
+    GroupToUserController,
+    GroupToCallController
     
 };
