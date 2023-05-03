@@ -198,6 +198,61 @@ class UserController {
     return res.json(r)
   }
 
+  public async getVeficaType(req: Request, res: Response): Promise<Response> {
+    try{
+      const userRepository = AppDataSource.getRepository(User)
+      const allUser = await userRepository.find()
+      let contCSO = 0, contRT = 0, contCTO = 0, contHP = 0
+      let typeExiCSO, typeExiRT, typeExiCTO, typeExiHP
+      allUser.map((user) => {
+        if(user.userType != "Padrao"){
+          if(user.userType == "CSO"){
+            contCSO++
+          }
+          else if(user.userType == "RT"){
+            contRT++
+          }
+          else if(user.userType == "CTO"){
+            contCTO++
+          }
+          else if(user.userType == "HP"){
+            contHP++
+          }
+        }
+      })
+
+      console.log(contCSO);
+      console.log(contRT);
+      console.log(contCTO);
+      console.log(contHP);
+      
+      if(contCSO >= 1){
+        typeExiCSO = {menssagem:"O CSO já possui um usuario!", type: "CSO", possui: true}
+      }else{
+        typeExiCSO = {menssagem:"O CSO não possui um usuario!", type: "CSO", possui: false}
+      }
+      if(contRT >= 1){
+        typeExiRT = {menssagem:"O RT já possui um usuario!", type: "RT", possui: true}
+      }else{
+        typeExiRT = {menssagem:"O RT não possui um usuario!", type: "RT", possui: false}
+      }
+      if(contCTO >= 1){
+        typeExiCTO = {menssagem:"O CTO já possui um usuario!", type: "CTO", possui: true}
+      }else{
+        typeExiCTO = {menssagem:"O CTO não possui um usuario!", type: "CTO", possui: false}
+      }
+      if(contHP >= 1){
+        typeExiHP = {menssagem:"O HP já possui um usuario!", type: "HP", possui: true}
+      }else{
+        typeExiHP = {menssagem:"O HP não possui um usuario!", type: "HP", possui: false}
+      } 
+
+      return res.json({typeExiCSO, typeExiRT, typeExiCTO, typeExiHP})
+    }catch(err){
+      return res.status(400).json({menssagem: "Erro ao verificar"})
+    }
+  }
+
 }
 
 export default new UserController();

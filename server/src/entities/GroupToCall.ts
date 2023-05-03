@@ -7,15 +7,15 @@ export class GroupToCall {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
-    groupId: number
+    // @Column()
+    // groupId: number
 
-    @Column()
-    callId: number
+    // @Column()
+    // callId: number
 
-    @ManyToOne(() => Group, (group) => group.groupToCall)
+    @ManyToOne(() => Group, (group) => group.groupToCall, {eager:true})
     group: Group
 
-    @ManyToOne(() => Call, (call) => call.groupToCall)
+    @ManyToOne(() => Call, (call) => call.groupToCall, {eager:true})
     call: Call
 }

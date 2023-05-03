@@ -6,6 +6,7 @@ import user from "./user";
 import group from "./group";
 import groupToUser from "./groupToUser";
 import committee from "./committee";
+import groupToCall from "./groupToCall"
 
 const routes = Router()
 
@@ -20,6 +21,8 @@ routes.use("/committee", committee);
 routes.use("/group", group);
 
 routes.use("/groupToUser", groupToUser);
+
+routes.use("/groupToCall", groupToCall);
 
 routes.use("/user", user)
 
