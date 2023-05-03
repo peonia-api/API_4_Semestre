@@ -155,7 +155,7 @@ function ListagemCall() {
 
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
-            <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">
+            <h1 className="text-dark mb-0 font-padrao-titulo">
               Listagem dos chamados
             </h1>
           </div>

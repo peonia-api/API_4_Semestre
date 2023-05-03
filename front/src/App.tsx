@@ -18,6 +18,9 @@ import { ComiteRt } from "./pages/Comite/ComiteRt";
 import { ComiteSquad } from "./pages/Comite/ComiteSquad";
 import RedefinirSenha from "./pages/RedefinirSenha";
 import Perfil from "./pages/Perfil";
+import ListagemGrupos from "./pages/ListagemGrupos";
+import EditarGrupos from "./pages/EditarGrupos";
+import CadastroGrupos from "./pages/CadastroGrupos";
 
 function App() {
   return (
@@ -41,6 +44,9 @@ function App() {
                   <Route path="/comiteHp/:id" element={<VerifyHP> <Private> <ComiteHp/> </Private> </VerifyHP>} />
                   <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
+                  <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
+                  <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
+                  {/* <Route path="/cadastrarGrupo" element={<CadastroGrupos />}></Route> */}
                 </Routes>
               </AuthProvider>
               <Footer />

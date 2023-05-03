@@ -36,6 +36,7 @@ function Header() {
             <Nav>
               <CustomLink to="/listagem">CHAMADO</CustomLink>
               <CustomLink to="/listagemUser">USUÁRIO</CustomLink>
+              <CustomLink to="/listagemGrupos">EQUIPES</CustomLink>
               <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
