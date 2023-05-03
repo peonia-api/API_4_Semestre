@@ -1,6 +1,7 @@
 import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Attachment } from "../entities/Attachment";
+import { logger } from "../config/logger";
 const fs = require("fs")
 
 class AttachmentController {
@@ -28,10 +29,11 @@ class AttachmentController {
                 console.log(index);
                 
             }
+            logger.info(JSON.stringify({att, message: "Sucesso ao salvar o arquivo."}))
             return res.json(att)
         }catch(err){
             console.log('oi');
-            
+            logger.error(JSON.stringify({message: "Erro ao salvar o arquivo."}))
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
 
@@ -56,32 +58,36 @@ class AttachmentController {
                 console.log(index);
                 
             }
+            logger.info(JSON.stringify({att, message: "Sucesso ao salvar o arquivo."}))
             return res.json(att)
         }catch(err){
             console.log('oi');
-            
+            logger.error(JSON.stringify({message: "Erro ao salvar o arquivo."}))
             return res.status(400).json({message: "Erro ao salvar o arquivo."})
         }
     }
 
     public async putFile (req: Request, res: Response) : Promise<Response> {
-        const { name, callId } = req.body
-        const file = req.file
-        const id:any = req.params.uuid
-        console.log(file);
-        
-        const attachmentRepository = AppDataSource.getRepository(Attachment)
-        const findFile = await attachmentRepository.findOneBy({id: id})
-        fs.unlinkSync(findFile.src)
-        findFile.name = name
-        findFile.src = file.path
-        findFile.call = callId
+        try{
+            const { name, callId } = req.body
+            const file = req.file
+            const id:any = req.params.uuid
+            console.log(file);
+            
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const findFile = await attachmentRepository.findOneBy({id: id})
+            fs.unlinkSync(findFile.src)
+            findFile.name = name
+            findFile.src = file.path
+            findFile.call = callId
 
-
-        
-
-        const allCall = await attachmentRepository.save(findFile)
-        return res.json(allCall)
+            const allCall = await attachmentRepository.save(findFile)
+            logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o arquivo."}))
+            return res.json(allCall)
+        }catch(err){
+            logger.error(JSON.stringify({message: "Erro ao editar o arquivo."}))
+            return res.status(400).json({message: "Erro ao editar o arquivo."})
+        }
     }
 
     public async putFileSupa(req: Request, res: Response): Promise<Response> {
@@ -107,33 +113,45 @@ class AttachmentController {
                     })
                 }
             })
-
+            logger.info(JSON.stringify({att, message: "Sucesso ao editar o arquivo."}))
             return res.json(att)
         } catch (err) {
             console.log('oi');
-
-            return res.status(400).json({ message: "Erro ao salvar o arquivo." })
+            logger.error(JSON.stringify({message: "Erro ao editar o arquivo."}))
+            return res.status(400).json({ message: "Erro ao editar o arquivo." })
         }
 
     }
 
 
      public async getAll (req: Request, res: Response) : Promise<Response> {
-         const attachmentRepository = AppDataSource.getRepository(Attachment)
-         const allCall = await attachmentRepository.find()
-         console.log(allCall)
-         return res.json(allCall)
+        try{
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const allCall = await attachmentRepository.find()
+            console.log(allCall)
+            logger.info(JSON.stringify({allCall, message: "Sucesso ao pegar o arquivo."}))
+            return res.json(allCall)
+        }catch(err){
+            logger.error(JSON.stringify({message: "Erro ao pegar o arquivo."}))
+            return res.status(400).json({message: "Erro ao pegar o arquivo."})
+        }
     }
 
     public async deleteFile (req: Request, res: Response) : Promise<Response> {
-        const id:any = req.params.uuid
-        const attachmentRepository = AppDataSource.getRepository(Attachment)
-        const findFile = await attachmentRepository.findOneBy({id: id})
+        try{
+            const id:any = req.params.uuid
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const findFile = await attachmentRepository.findOneBy({id: id})
 
-        fs.unlinkSync(findFile.src)
+            fs.unlinkSync(findFile.src)
 
-        const allCall = await attachmentRepository.remove(findFile)
-        return res.json(allCall)
+            const allCall = await attachmentRepository.remove(findFile)
+            logger.info(JSON.stringify({allCall, message: "Sucesso ao deletar o arquivo."}))
+            return res.json(allCall)
+        }catch(err){
+            logger.error(JSON.stringify({message: "Erro ao deletar o arquivo."}))
+            return res.status(400).json({message: "Erro ao deletar o arquivo."})
+        }
     }
 
     
@@ -154,7 +172,7 @@ class AttachmentController {
             const id:any = req.params.uuid
             const attachmentRepository = AppDataSource.getRepository(Attachment)
             const findFile = await attachmentRepository.find()
-            let list = []
+            let list:any = []
             findFile.map(async (file) => {
                 if(file.call.id == id){
                     list.push({
@@ -164,28 +182,39 @@ class AttachmentController {
                     const allCall = await attachmentRepository.remove(file)
                 }
             })
-
+            if(list.id == null){
+                logger.error(JSON.stringify({mensage: "Não possui arquivos!"}))
+                return res.json({mensage: "Não possui arquivos!"})
+            }
+            logger.info(JSON.stringify({list, message: "Sucesso ao deletar o arquivo."}))
             return res.json({mensage: "foi", list})
         }catch(err){
+            logger.error(JSON.stringify({mensage: "Erro ao deletar os arquivos"}))
             return res.status(400).json({mensage: "Erro"})
         }
         
     }
     
     public async getFileByCallId (req: Request, res: Response) : Promise<Response> {
-        const callId:any = req.params.uuid
-        let listaFile = []
-        const attachmentRepository = AppDataSource.getRepository(Attachment)
-        const findFile = await attachmentRepository.find()
-        findFile.map((lin)=> {
-            if(lin.call.id == callId){
-                listaFile.push(lin)
-            }else{
-                console.log(lin);
-                
-            }
-        })
-        return res.json(listaFile)
+        try{
+            const callId:any = req.params.uuid
+            let listaFile = []
+            const attachmentRepository = AppDataSource.getRepository(Attachment)
+            const findFile = await attachmentRepository.find()
+            findFile.map((lin)=> {
+                if(lin.call.id == callId){
+                    listaFile.push(lin)
+                }else{
+                    console.log(lin);
+                    
+                }
+            })
+            logger.info(JSON.stringify({listaFile, message: "Sucesso ao pegar o arquivo."}))
+            return res.json(listaFile)
+        }catch(err){
+            logger.error(JSON.stringify({mensage: "Erro ao pegar os arquivos"}))
+            return res.status(400).json({mensage: "Erro"})
+        }
    }
 
 }

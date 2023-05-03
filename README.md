@@ -79,8 +79,8 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 |:-----:|:----------:|:---------:|:---------:|
 | 01 | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
 | 02 | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
-<!--| 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
-| 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
+| 03 |  | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint3.MD) |
+<!--| 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
 
 <span id="Documentação">
 <h2> :clipboard: Documentação</h2>
@@ -99,7 +99,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 <h1 align="center"> 
     
-![Product Backlog](https://user-images.githubusercontent.com/86448876/233865256-1b61cd15-4214-4fdc-926d-fa6901173e2f.png)
+![Product Backlog](https://user-images.githubusercontent.com/86448876/235326440-7e85279f-43b7-4555-862a-8d9d39b96985.png)
     
 </h1>
  
