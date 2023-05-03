@@ -13,15 +13,13 @@ import Header from "../components/Header";
 import '../App.css';
 import { Dropzone, FileItem } from "@dropzone-ui/react";
 import { supabase, uploadFile } from "../services/supabase";
+import { Attachment } from "../types/attachment";
 function Solicitacao() {
 
   useEffect(() => {}, []);
 
-
   const [files, setFiles] = useState([] as any);
-
-  
-
+  // const [files, setFiles] = useState<Attachment[]>([]);
 
   //const data = new FormData()
 

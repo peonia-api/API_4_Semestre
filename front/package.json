@@ -33,6 +33,7 @@
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.7.3",
     "rsuite": "^5.28.3",
     "styled-components": "^5.3.9",
     "sweetalert2": "^11.7.3",

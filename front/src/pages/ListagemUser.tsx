@@ -95,7 +95,7 @@ function ListagemUser() {
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <Container className="px-2 mb-5">
             <div className="text-center">
-              <h1 className="text-dark fw-bolder mb-0 font-padrao-titulo">Listagem dos Usuários</h1>
+              <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos Usuários</h1>
             </div>
             <Container>
               <div className="d-flex align-items-center justify-content-between mt-4 Margin" >

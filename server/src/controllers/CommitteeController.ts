@@ -27,22 +27,25 @@ class CommitteeController {
     public async postCommittee (req: Request, res: Response) : Promise<Response> {
         try{
             const id = req.body
-            const committeeRepository = AppDataSource.getRepository(Committee)            
-
+            const committeeRepository = AppDataSource.getRepository(Committee)       
+            const getComite = await committeeRepository.find()
+            let allCommittee;
+            const findComiteId = getComite.find(elem => elem.id == id.id);     
+            if (findComiteId == undefined) {
             const insertCommittee = new Committee();
-            insertCommittee.id = id.id
-            insertCommittee.comiImpactCto = null
-            insertCommittee.comiImpactHp = null
-            insertCommittee.comiRiskCso = null
-            insertCommittee.comiRiskRt = null
-            insertCommittee.call = id.id
-            insertCommittee.comiImpactCtoAvaliation = null
-            insertCommittee.comiImpactoHpAvaliation = null
-            insertCommittee.comiRiskCsoAvaliation = null
-            insertCommittee.comiRiskRtAvaliation = null
-            const allCommittee = await committeeRepository.save(insertCommittee)
-            console.log(id);
-            
+                insertCommittee.id = id.id
+                insertCommittee.comiImpactCto = null
+                insertCommittee.comiImpactHp = null
+                insertCommittee.comiRiskCso = null
+                insertCommittee.comiRiskRt = null
+                insertCommittee.call = id.id
+                insertCommittee.comiImpactCtoAvaliation = null
+                insertCommittee.comiImpactoHpAvaliation = null
+                insertCommittee.comiRiskCsoAvaliation = null
+                insertCommittee.comiRiskRtAvaliation = null
+                allCommittee = await committeeRepository.save(insertCommittee)
+                console.log(id);
+            }
             return res.json({allCommittee,mensage: "Todos já estão em avaliação"})
                  
         }
