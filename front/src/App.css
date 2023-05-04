@@ -198,3 +198,7 @@ input::-webkit-inner-spin-button {
 .pagination li.active a {
   border-bottom: 2px solid #212529
 }
+
+.perfil .dropdown-toggle::after {
+  display: none !important; 
+}

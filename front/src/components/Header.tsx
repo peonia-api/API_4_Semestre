@@ -7,6 +7,7 @@ import { AuthContext } from "../contexts/auth";
 import { useContext } from "react";
 import "../App.css";
 import { NavDropdown } from "react-bootstrap";
+import perfil from "../images/do-utilizador.png";
 
 function Header() {
   const { logout } = useContext(AuthContext);
@@ -15,6 +16,9 @@ function Header() {
     e.preventDefault();
     logout();
   };
+
+  const tipoUsuario = localStorage.getItem("userType")
+
   return (
     <>
       <Navbar
@@ -34,18 +38,33 @@ function Header() {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav>
-              <CustomLink to="/listagem">CHAMADO</CustomLink>
-              <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">USUÁRIO</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  GRUPOS
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action5">
-                  COMITÊ
-                </NavDropdown.Item>
+            <Nav className="d-flex" style={{alignItems:"center"}}>
+              <CustomLink to="/listagem">CHAMADOS</CustomLink>
+              {tipoUsuario !== "Padrao" ? 
+                <>
+                  <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
+
+                      <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
+                      <NavDropdown.Item href="/listagemGrupos">
+                      Grupos
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/listagemTipoUsuario">
+                      Comitê
+                      </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+                : ""
+               }
+              <NavDropdown 
+                className="me-2 perfil" 
+                title={
+                  <>
+                    <img src={perfil} alt="Meu Perfil" width="40%" />
+                  </>
+                }>
+                  <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
+                  <NavDropdown.Item className="itemPerfil" onClick={signUp}>Sair</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
