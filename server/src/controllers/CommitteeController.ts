@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
 import { logger } from "../config/logger";
-import { getComiteTipo, validateCommitteeFilter } from "../utils/funcao";
+import { validateCommitteeFilter } from "../utils/funcao";
 
 
 class CommitteeController {

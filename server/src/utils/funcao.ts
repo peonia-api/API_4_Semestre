@@ -55,25 +55,3 @@ export const validateCommitteeFilter = async (idCommittee) => {
         }
     }
 }
-
-export const getComiteTipo = async (tipo) => {
-    const committeeRepository = AppDataSource.getRepository(Committee)
-    const callRepository = AppDataSource.getRepository(Call)
-   
-    if(tipo == "CSO"){
-        const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "CSO" })
-        return feature
-    }else if(tipo == "RT"){
-        const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "RT" })
-        return feature
-    }
-    else if(tipo == "CTO"){
-        const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "CTO" })
-        return feature
-    }
-    else if(tipo == "HP"){
-        const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
-        return feature
-    }
-    
-}
