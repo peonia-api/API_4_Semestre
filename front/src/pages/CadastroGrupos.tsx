@@ -14,7 +14,8 @@ import { Users } from "../types/user";
 
 function CadastroGrupos() {
     const [data, setData] = useState<Users[]>([]);
-    const [checkedItems, setCheckedItems] = useState({});
+    const [checkedItems, setCheckedItems] = useState({} as any);
+    const [selectedUsers, setSelectedUsers] = useState([] as any);
 
     useEffect(() => {
       async function fetchUsers() {
@@ -39,26 +40,33 @@ function CadastroGrupos() {
         await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
           .then(async (res) => {
             const groupId = res.data.id;
-            await axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group : groupId, user: checkedItems}) 
+            for (let i = 0; i < selectedUsers.length; i++) {
+              await axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group : groupId, user: selectedUsers[i]}) 
+            }
           });
         onClickLimpar();
+        setCheckedItems({});
+        setSelectedUsers([]);
       },      
     });
 
-
-  
     const handleCheckboxChange = (event: any) => {
       const { id } = event.target;
+      if (checkedItems[id]) {
+        setSelectedUsers(selectedUsers.filter((user:any) => user !== id));
+      } else {
+        setSelectedUsers([...selectedUsers, id]);
+      }
       setCheckedItems({
-        ...checkedItems, id
+        ...checkedItems, [id]: !checkedItems[id]
       });
     };
-    
+
+
     console.log(checkedItems);
     
 
     function onClickLimpar() {
-      setCheckedItems({})
       formik.resetForm();
     }
   
