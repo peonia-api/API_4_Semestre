@@ -30,6 +30,9 @@ export class Call {
     @CreateDateColumn({ name: 'callDateCreate' })
     callDateCreate: Date;
 
+    @Column({ nullable: true })
+    avaliar: string;
+
     @OneToMany(() => Attachment, (attachment) => attachment.call)
     attachment: Attachment[];
 

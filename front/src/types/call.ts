@@ -27,11 +27,11 @@ export interface Calls {
     callDateCreate: Date;
     callRequesterId: number
     callFiles: []
-    arquivada: string;
+    callStatus: string;
 }
 
 export interface Status {
     id: number;
     mensage: string;
-    arquivada: string;
+    callStatus: string;
 }

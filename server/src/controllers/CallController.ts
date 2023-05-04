@@ -69,8 +69,12 @@ class CallController {
             insertCall.callDescription = createCall.callDescription
             insertCall.callPriority = createCall.callPriority
             insertCall.callEmail = createCall.callEmail
-            insertCall.callStatus = "em análise"
-
+            insertCall.callStatus = "Em análise"
+            if (insertCall.callType == "feature"){
+                insertCall.avaliar = "CSO"
+            }else{
+                insertCall.avaliar = null
+            }
             const allCall = await callRepository.save(insertCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao cadastrar o chamado."}))
             return res.json(allCall)
