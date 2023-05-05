@@ -44,19 +44,22 @@ function ListagemGrupos() {
   
     }, []);
   
+
+
     //delete  
     async function handleDeleteGroupUser(id: number) {
-
       try {
         data.map((dataGroup)=>{
         avisoDeletar().then(async (result) => {
           let idGroup = dataGroup.group.id
-          console.log(idGroup);
           if (result.isConfirmed) {
-            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`).then(async() => {
-              console.log({id});
+            for (let i = 0; i < grupo.usuarioIDs.length; i++) {
+              console.log(grupo.usuarioIDs);
+            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`)
+            }
               await axios.delete(`${URIgroup.DELETE_GROUP}${idGroup}`)
-            })
+              console.log({idGroup});
+            
           }
         })
         });
@@ -98,13 +101,18 @@ function ListagemGrupos() {
         // Se este for o primeiro usuário, armazene as informações do grupo
         grupo = {
           id: user.group.id,
-          usuarios: []
+          usuarios: [],
+          usuarioIDs: []
         };
         grupo.usuarios.push(user.user.userName);
+        grupo.usuarioIDs.push(user.user.id);
       } else if (user.group.id === grupo.id) {
         // Se o ID do grupo deste usuário for igual ao ID do grupo armazenado, adicione o nome do usuário ao array de usuários
         grupo.usuarios.push(user.user.userName);
+        grupo.usuarioIDs.push(user.user.id);
+        console.log(grupo.usuarioIDs);
       }
+      
     });
     
     const groupedData = data.reduce((result: any, item: any) => {
