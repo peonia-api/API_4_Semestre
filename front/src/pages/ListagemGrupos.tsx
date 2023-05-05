@@ -48,13 +48,19 @@ function ListagemGrupos() {
     async function handleDeleteGroupUser(id: number) {
 
       try {
+        data.map((dataGroup)=>{
         avisoDeletar().then(async (result) => {
+          let idGroup = dataGroup.group.id
+          console.log(idGroup);
           if (result.isConfirmed) {
-            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`)
-            const updatedGroupToUser = data.filter((groupToUser) => groupToUser.id !== id);
-            setData(updatedGroupToUser);
+            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`).then(async() => {
+              console.log({id});
+              await axios.delete(`${URIgroup.DELETE_GROUP}${idGroup}`)
+            })
           }
+        })
         });
+        
       } catch (error) {
         console.error(error);
         avisoErroDeletar();
