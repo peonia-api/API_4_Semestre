@@ -14,7 +14,7 @@ import { removeFile } from "../services/supabase";
 import { Calls } from "../types/call";
 import editar from "../images/editar.png";
 import excluir from "../images/excluir.png";
-import grupo from "../images/grupo.png";
+import grupoImag from "../images/grupo.png";
 import "../App.css";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
@@ -160,7 +160,7 @@ function ListagemGrupos() {
                     onChange={(event) => setSearchQuery(event.target.value)}
                   />
                 <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Equipe
-                <img src={grupo} alt="Botão para adicionar grupos" style={{width:"25px", height:"25px", marginLeft:"7px"}}/>
+                <img src={grupoImag} alt="Botão para adicionar grupos" style={{width:"25px", height:"25px", marginLeft:"7px"}}/>
                 </button>
                 </div>
                 <Table bordered hover responsive>
