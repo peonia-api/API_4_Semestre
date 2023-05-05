@@ -30,6 +30,8 @@ function CadastroGrupos() {
       }
       fetchUsers();
     }, []);
+    console.log(checkedItems);
+    
   
     const formik = useFormik({
       initialValues,

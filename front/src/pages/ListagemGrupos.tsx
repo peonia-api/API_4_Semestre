@@ -9,26 +9,29 @@ import Header from "../components/Header";
 import { avisoErroAoDeletar } from "../controllers";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../controllers/avisoErro";
-import { URIcommit, URIattach, URI } from "../enumerations/uri";
+import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../enumerations/uri";
 import { removeFile } from "../services/supabase";
 import { Calls } from "../types/call";
 import editar from "../images/editar.png";
 import excluir from "../images/excluir.png";
 import grupo from "../images/grupo.png";
 import "../App.css";
+import { GroupsToUser } from "../types/groupToUser";
+import { Groups } from "../types/group";
 
 function ListagemGrupos() {
 
     const url_atual = window.location.href;
     const id = window.location.href.split("/")[4]
   
-    const [data, setData] = useState<Calls[]>([]);
+    const [data, setData] = useState<GroupsToUser[]>([]);
+
   
     //axios get
     useEffect(() => {
       async function fetchCalls() {
         axios
-          .get(URIcommit.PEGAR_COMITE_STATUS)
+          .get(URIgroupToUser.PEGAR_GROUP_TO_USER)
           .then((response) => {
             setData(response.data);
           })
@@ -41,53 +44,27 @@ function ListagemGrupos() {
     }, []);
   
     //delete
-    async function handleDeleteCall(id: number) {
-      try {
-        avisoDeletar().then(async (result) => {
-          if (result.isConfirmed) {
-            data.map(async (dados) => {
-              if (dados.id == id) {              
-                await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-                  console.log("foi");
-                  removeFile(res.data.list)
+      async function handleDeleteGroupUser(id: number) {
+        data.map((dataGroup)=>{
+        try {
+          avisoDeletar().then(async (result) => {
+            let idGroup = dataGroup.group.id
+              if (result.isConfirmed) {
+                await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`).then(async() => {
+                  console.log({id});
                   
-                }).catch((err) => {
-                  console.log("erro");
-                  
+                  await axios.delete(`${URIgroup.DELETE_GROUP}${idGroup}`)
                 })
-                  
-                if (dados.callType === "feature") {
-                  await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
-                    console.log(res);
-  
-                    setTimeout(async function(){ await axios.delete(`${URI.DELETE_CALL}${id}`)}, 3000)
-  
-                  }).catch((err) => {
-                    avisoErroAoDeletar()
-  
-                  })
-                } else {
-                  setTimeout(async function(){await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
-                    avisoErroAoDeletar()
-                  })}, 5000)
-                  
-                }
-              }
-            })
-  
-            const updatedCalls = data.filter((call) => call.id !== id);
-            setData(updatedCalls);
-          }
-  
+                const updatedGroupToUser = data.filter((groupToUser) => groupToUser.id !== id)
+                setData(updatedGroupToUser)
+            }
+          })
+        } catch (error) {
+          console.error(error);
+          avisoErroDeletar();
+        }
         })
-  
-      } catch (error) {
-        console.error(error);
-        avisoErroDeletar();
-      }
-    }
-  
-  
+      } 
     //sort
     const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
     const sorting = (col: keyof typeof data[0]) => {
@@ -111,7 +88,37 @@ function ListagemGrupos() {
       }
     };
   
-    //pagination
+  
+    let grupo: any = null;
+  
+    data.forEach((user) => {
+      if (grupo === null) {
+        // Se este for o primeiro usuário, armazene as informações do grupo
+        grupo = {
+          id: user.group.id,
+          usuarios: []
+        };
+        grupo.usuarios.push(user.user.userName);
+      } else if (user.group.id === grupo.id) {
+        // Se o ID do grupo deste usuário for igual ao ID do grupo armazenado, adicione o nome do usuário ao array de usuários
+        grupo.usuarios.push(user.user.userName);
+      }
+    });
+    
+    const groupedData = data.reduce((result: any, item: any) => {
+      if (!result[item.group.id]) {
+        result[item.group.id] = {
+          id: item.group.id,
+          groupType: item.group.groupType,
+          usuarios: []
+        };
+      }
+      result[item.group.id].usuarios.push(item.user.userName);
+      return result;
+    }, {});
+    const groupList = Object.values(groupedData);
+
+
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 10;
   
@@ -165,28 +172,23 @@ function ListagemGrupos() {
                     <tr>
                       {/*cabeçalho tabela*/}
                       <th onClick={() => sorting("id")} className="text-center">Nome da Equipe {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                      <th onClick={() => sorting("callEmail")} className="text-center">Membros</th>
+                      <th onClick={() => sorting("group")} className="text-center">Membros</th>
                       <th className="text-center">Ações</th>
                       {/*fim cabeçalho tabela*/}
                     </tr>
                   </thead>
-  
                   <tbody>
-                    {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
-                      return (
-                        <tr key={data.id}>
-                          {/*corpo tabela*/}
-                          <td className="text-center">
-                            {/*animate*/}
-                          </td>
-                          <td className="text-center"></td>
-                          <td className="text-center">
-                            <Link to={"/editarGrupos/"} style={{padding: "3px"}}><img src={editar} style={{ width: '25px' }} alt='Editar' /> </Link>
-                            <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteCall(data.id)} />
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {groupList.map((grupo: any) => (
+                      <tr key={grupo.id}>
+                        {/*corpo tabela*/}
+                        <td className="text-center">{grupo.groupType}</td>
+                        <td className="text-center">{grupo.usuarios.join(", ")}</td>
+                        <td className="text-center">
+                          <Link to={"/editarGrupos/"} style={{padding: "3px"}}><img src={editar} style={{ width: '25px' }} alt='Editar' /> </Link>
+                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteGroupUser(grupo.id)} />
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
                 <ReactPaginate
