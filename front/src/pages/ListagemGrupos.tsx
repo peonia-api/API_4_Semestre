@@ -18,6 +18,7 @@ import grupo from "../images/grupo.png";
 import "../App.css";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
+import { group } from "console";
 
 function ListagemGrupos() {
 
@@ -43,28 +44,23 @@ function ListagemGrupos() {
   
     }, []);
   
-    //delete
-      async function handleDeleteGroupUser(id: number) {
-        data.map((dataGroup)=>{
-        try {
-          avisoDeletar().then(async (result) => {
-            let idGroup = dataGroup.group.id
-              if (result.isConfirmed) {
-                await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`).then(async() => {
-                  console.log({id});
-                  
-                  await axios.delete(`${URIgroup.DELETE_GROUP}${idGroup}`)
-                })
-                const updatedGroupToUser = data.filter((groupToUser) => groupToUser.id !== id)
-                setData(updatedGroupToUser)
-            }
-          })
-        } catch (error) {
-          console.error(error);
-          avisoErroDeletar();
-        }
-        })
-      } 
+    //delete  
+    async function handleDeleteGroupUser(id: number) {
+
+      try {
+        avisoDeletar().then(async (result) => {
+          if (result.isConfirmed) {
+            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${id}`)
+            const updatedGroupToUser = data.filter((groupToUser) => groupToUser.id !== id);
+            setData(updatedGroupToUser);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        avisoErroDeletar();
+      }
+    }
+
     //sort
     const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
     const sorting = (col: keyof typeof data[0]) => {
@@ -90,7 +86,7 @@ function ListagemGrupos() {
   
   
     let grupo: any = null;
-  
+    
     data.forEach((user) => {
       if (grupo === null) {
         // Se este for o primeiro usuário, armazene as informações do grupo
@@ -177,6 +173,7 @@ function ListagemGrupos() {
                       {/*fim cabeçalho tabela*/}
                     </tr>
                   </thead>
+                
                   <tbody>
                     {groupList.map((grupo: any) => (
                       <tr key={grupo.id}>
@@ -185,10 +182,12 @@ function ListagemGrupos() {
                         <td className="text-center">{grupo.usuarios.join(", ")}</td>
                         <td className="text-center">
                           <Link to={"/editarGrupos/"} style={{padding: "3px"}}><img src={editar} style={{ width: '25px' }} alt='Editar' /> </Link>
-                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteGroupUser(grupo.id)} />
-                        </td>
+                          {data.map((dddd)=>(
+                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteGroupUser(dddd.id)} />
+                          ))}
+                        </td> 
                       </tr>
-                    ))}
+                     ))}
                   </tbody>
                 </Table>
                 <ReactPaginate
