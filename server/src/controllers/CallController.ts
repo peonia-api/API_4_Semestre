@@ -73,7 +73,7 @@ class CallController {
             if (insertCall.callType == "feature"){
                 insertCall.avaliar = "CSO"
             }else{
-                insertCall.avaliar = null
+                insertCall.avaliar = "hotfix"
             }
             const allCall = await callRepository.save(insertCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao cadastrar o chamado."}))
@@ -90,12 +90,14 @@ class CallController {
             const idCall:any = req.params.uuid
             const callRepository = AppDataSource.getRepository(Call)
             const findCall = await callRepository.findOneBy({id: idCall})
+            if(findCall.callType == "hotfix" && createCall.callType == "feature"){findCall.avaliar = "CSO"}
+            else if(findCall.callType == "feature" && createCall.callType == "hotfix"){findCall.avaliar = "hotfix"}
             findCall.callType = createCall.callType
             findCall.callTitle = createCall.callTitle
             findCall.callDescription = createCall.callDescription
             findCall.callPriority = createCall.callPriority
-            findCall.callEmail = findCall.callEmail
-            findCall.callStatus = findCall.callStatus
+            findCall.callEmail = createCall.callEmail
+            //findCall.callStatus = findCall.callStatus
         
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao editar o chamado."}))
