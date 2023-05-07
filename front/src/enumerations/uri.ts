@@ -22,7 +22,7 @@ export enum URIgroupToUser {
     ALTERA_GROUP_TO_USER = "http://localhost:3001/groupToUser/modify/",
     DELETE_GROUP_TO_USER = "http://localhost:3001/groupToUser/delete/",
     PEGAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/historic",
-    PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/especificoGroup/",
+    PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
 }
 
 export enum URIuser {

@@ -126,6 +126,8 @@ function ListagemGrupos() {
   }, {});
   const groupList = Object.values(groupedData);
 
+  console.log(groupedData);
+  
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
@@ -133,13 +135,6 @@ function ListagemGrupos() {
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
   };
-
-  //animate
-  const [show, setShow] = useState<number | null>(null);
-  const parent = useRef(null);
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current);
-  }, [parent]);
 
   //search
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -150,6 +145,7 @@ function ListagemGrupos() {
 
   // );
 
+  
   return (
     <>
       <Header />
@@ -193,7 +189,7 @@ function ListagemGrupos() {
                       <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">{grupo.usuarios.join(", ")}</td>
                       <td className="text-center">
-                        <Link to={"/editarGrupos/"} style={{ padding: "3px" }}>
+                        <Link to={"/editarGrupos/" + grupo.id} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />
                         </Link>
                         {grupo.usuarios.length <= 5 ? (
@@ -226,6 +222,7 @@ function ListagemGrupos() {
       </div>
     </>
   );
+  
 }
 
 export default ListagemGrupos;

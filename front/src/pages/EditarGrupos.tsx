@@ -4,57 +4,59 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Users } from "../types/user";
 import axios from "axios";
-import { URIuser } from "../enumerations/uri";
+import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
 import registrationSchemaUserEditar from "../controllers/validateUserEditar";
 import { avisoErro } from "../controllers/avisoErro";
 import { avisoEdicao } from "../controllers";
 import clsx from "clsx";
 import Select from 'react-select';
 import salvar from "../images/salvar.png";
+import { GroupsToUser } from "../types/groupToUser";
+import { Groups } from "../types/group";
 
 function EditarGrupos() {
 
     const id = window.location.href.split("/")[4];
 
-    const [data, setData] = useState<Users>();
+    const [data, setData] = useState<GroupsToUser>();
 
     useEffect(() => {
-        async function fetchUsers(id: string) {
+        async function fetchGroupToUser(id: string) {
+            console.log("Fetching data for ID:", id);
             axios
-                .get(`${URIuser.PEGAR_USER_ESPECIFICO}${id}`)
+                .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
                 .then((response) => {
                     const fetchedData = response.data;
+                    console.log("Fetched data:", fetchedData);
                     setData(fetchedData);
                     formik.setValues(fetchedData);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-        }
-        fetchUsers(id);
+        }        
+        fetchGroupToUser(id);
+        console.log(id);
+        
     }, []);
+
+    console.log("ID:", id);
 
     const formik = useFormik({
         initialValues: {
-            userName: data?.userName ?? "",
-            userEmail: data?.userEmail ?? "",
-            userPosition: data?.userPosition ?? "",
-            userType: data?.userType ?? "",
-
-
+            groupType: data?.group?.groupType ?? "",
+            user: data?.user ?? "",
         },
         validationSchema: registrationSchemaUserEditar,
-        initialErrors: { userName: "" },
+        initialErrors: { groupType: "" },
         onSubmit: async (values) => {
             try {
                 const updatedData = {
-                    userName: values.userName,
-                    userEmail: values.userEmail,
-                    userPosition: values.userPosition,
-                    userType: values.userType,
+                    groupType: values.groupType,
+                    user: values.user,
                 };
 
-                await axios.put(`${URIuser.ALTERA_USER}${id}`, updatedData);
+                await axios.put(`${URIgroupToUser.ALTERA_GROUP_TO_USER}${id}`, updatedData);
             } catch (error) {
                 console.log(error);
                 formik.setStatus("Ocorreu um erro ao atualizar a equipe.");
@@ -74,7 +76,6 @@ function EditarGrupos() {
             avisoEdicao().then((res: any) => {
                 window.location.assign("/listagemGrupos");
             })
-
         }
     }
 
@@ -108,26 +109,26 @@ function EditarGrupos() {
                                 placeholder="Nome da equipe"
                                 type="text"
                                 autoComplete="off"
-                                {...formik.getFieldProps("userName")}
+                                {...formik.getFieldProps("groupType")}
                                 onChange={formik.handleChange}
-                                value={formik.values.userName}
+                                value={formik.values.groupType}
                                 className={clsx(
                                     "form-control bg-transparent",
                                     {
                                         "is-invalid":
-                                            formik.touched.userName && formik.errors.userName,
+                                            formik.touched.groupType && formik.errors.groupType,
                                     },
                                     {
                                         "is-valid":
-                                            formik.touched.userName &&
-                                            !formik.errors.userName,
+                                            formik.touched.groupType &&
+                                            !formik.errors.groupType,
                                     }
                                 )}
                             />
-                            {formik.touched.userName && formik.errors.userName && (
+                            {formik.touched.groupType && formik.errors.groupType && (
                                 <div className="fv-plugins-message-container">
                                     <div className="fv-help-block">
-                                        <span role="alert">{formik.errors.userName}</span>
+                                        <span role="alert">{formik.errors.groupType}</span>
                                     </div>
                                 </div>
                             )}
