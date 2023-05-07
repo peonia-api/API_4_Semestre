@@ -51,6 +51,9 @@ function Header() {
                       <NavDropdown.Item href="/listagemTipoUsuario">
                       Comitê
                       </NavDropdown.Item>
+                      <NavDropdown.Item href="/logAvaliacoes">
+                      Logs
+                      </NavDropdown.Item>
                   </NavDropdown>
                 </>
                 : ""

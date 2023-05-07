@@ -156,7 +156,7 @@ function ListagemGrupos() {
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
                   />
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Equipe
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastrarGrupos'}>Adicionar Equipe
                 <img src={grupo} alt="Botão para adicionar grupos" style={{width:"25px", height:"25px", marginLeft:"7px"}}/>
                 </button>
                 </div>

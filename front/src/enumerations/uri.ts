@@ -19,6 +19,7 @@ export enum URIuser {
     LOGIN_USER = "http://localhost:3001/user/login/",
     ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
+    PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
 }
 
 export enum URIperfil {
