@@ -23,6 +23,7 @@ function EditarGrupos() {
     const [status, setStatus] = useState("");
     const [data, setData] = useState<Users[]>([]);
     const [userOptions, setUserOptions] = useState<string[]>([]);
+    const [user, setUser] = useState<string[]>([]);
   
     useEffect(() => {
       async function fetchGroupToUser(id: any) {
@@ -50,6 +51,7 @@ function EditarGrupos() {
           .get(URIuser.PEGAR_USER)
           .then((response) => {
             const users = response.data.map((item: any) => ({
+                id: item.id,
               value: item.userName,
               label: item.userName,
             }));
@@ -106,13 +108,11 @@ function EditarGrupos() {
         setGroupDescription(event.target.value);
     }
 
-    console.log(data.filter(({value}:any) => userOptions.includes(value)));
-    
-
-    const options = [{value: "opcao1", label: "Opção 1"}, {value: "opcao2", label: "Opção 2"}, {value: "opcao3", label: "Opção 3"}] 
-
-
-    const values = ["opcao1", "opcao2"]
+    function handleChangeUser(event:any) {
+        console.log(event);
+        
+        setUser(event);
+    }
     
     return(
         <>
@@ -178,6 +178,7 @@ function EditarGrupos() {
                         className="basic-multi-select"
                         classNamePrefix="select"
                         options={data}
+                        onChange={(e) => handleChangeUser(e)}
                         />
                     )}
                     </div>
