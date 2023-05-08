@@ -15,7 +15,10 @@ class GroupToUserController {
     public async getGroupByOne (req: Request, res: Response) : Promise<Response> {
         const idGroupToUser:any = req.params.uuid
         const groupToUserRepository = AppDataSource.getRepository(GroupToUser)
-        const allGroupToUser = await groupToUserRepository.findOneBy({id: idGroupToUser})
+        const allGroupToUser = await groupToUserRepository.find({relations: { group: true },
+            where: {
+                group: { id: idGroupToUser },
+            },}) //{id: idGroupToUser}
         return res.json(allGroupToUser)
     }
 
