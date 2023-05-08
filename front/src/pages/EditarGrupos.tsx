@@ -18,13 +18,17 @@ function EditarGrupos() {
     const id = window.location.href.split("/")[4];
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
-    const [userName, setUserName] = useState("");
-    const [groupId, setGroupId] = useState("");
+    //const [userName, setUserName] = useState("");
+    //const [groupId, setGroupId] = useState("");
     const [status, setStatus] = useState("");
     const [data, setData] = useState<Users[]>([]);
     const [userOptions, setUserOptions] = useState<string[]>([]);
     const [user, setUser] = useState<string[]>([]);
-  
+    const [ids, setIds] = useState([]);
+    const [arleyid, setArleyid] = useState<any[]>([]);
+
+    const [selectedValues, setSelectedValues] = useState<any[]>([]);
+
     useEffect(() => {
       async function fetchGroupToUser(id: any) {
         axios
@@ -33,12 +37,10 @@ function EditarGrupos() {
             console.log(response.data);
             setGroupType(response.data[0].group.groupType);
             setGroupDescription(response.data[0].group.groupDescription);
-            setUserName(response.data[0].user.userName);
-            setGroupId(response.data[0].group.id);
-            const users = response.data.map((item: any) => ({
-              value: item.user.userName,
-              label: item.user.userName,
-            }));
+            //setUserName(response.data[0].user.userName);
+            //setGroupId(response.data[0].group.id);
+            
+            setIds(response.data.map((item:any) => item.id))
             setUserOptions(response.data.map((item: any) => item.user.userName));
           })
           .catch((error) => {
@@ -68,8 +70,8 @@ function EditarGrupos() {
   
 
     console.log(userOptions);
-    console.log(groupId);
-    console.log(userName);
+    //console.log(groupId);
+    console.log(ids);
     console.log(data);
     
     
@@ -81,8 +83,17 @@ function EditarGrupos() {
             groupDescription: groupDescription
         };
 
-        axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData)
-        axios.put(URIgroupToUser.ALTERA_GROUP_TO_USER, { group: groupId})
+        axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData).then((res) => {
+            for (let i = 0; i < user.length; i++) {
+                
+                    if(arleyid.find(tes => tes.id == user[i]) == undefined){
+                        axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: id, user: user[i]})
+                    }
+                   
+                    //axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[ids.length]}`)              
+            }
+
+        })
         .then(() => {
                 avisoEdicao().then((res: any) => {
                     window.location.assign("/listagemGrupos");
@@ -97,7 +108,7 @@ function EditarGrupos() {
      const handleClear = () => {
         setGroupType("");
         setGroupDescription("");
-        setUserName("");
+        //setUserName("");
     }
 
     function handleGroupTypeChange(event:any) {
@@ -109,9 +120,13 @@ function EditarGrupos() {
     }
 
     function handleChangeUser(event:any) {
-        console.log(event);
         
-        setUser(event);
+        const verifica = userOptions.map((test) => event.find((item:any) => item.value == test))
+        console.log(verifica);
+        verifica.forEach(test => test )
+        console.log(event.map((item:any) => item.id));
+        setArleyid(userOptions.map((test) => event.find((item:any) => item.value == test)))
+        setUser(event.map((item:any) => item.id));
     }
     
     return(
