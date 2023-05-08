@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import '../App.css';
-import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Users } from "../types/user";
 import axios from "axios";
@@ -18,184 +17,207 @@ function EditarGrupos() {
 
     const id = window.location.href.split("/")[4];
 
-    const [data, setData] = useState<GroupsToUser>();
+    const [groupType, setGroupType] = useState("");
+    const [groupDescription, setGroupDescription] = useState("");
+    const [userName, setUserName] = useState("");
+    const [groupId, setGroupId] = useState("");
+    const [status, setStatus] = useState("");
+    const [data, setData] = useState<Users[]>([]);
+    const [userOptions, setUserOptions] = useState<string[]>([]);
 
     useEffect(() => {
-        async function fetchGroupToUser(id: string) {
-            console.log("Fetching data for ID:", id);
+        async function fetchGroupToUser(id: any) {
             axios
                 .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
                 .then((response) => {
-                    const fetchedData = response.data;
-                    console.log("Fetched data:", fetchedData);
-                    setData(fetchedData);
-                    formik.setValues(fetchedData);
+                    console.log(response.data);
+                    setGroupType(response.data[0].group.groupType);
+                    setGroupDescription(response.data[0].group.groupDescription);
+                    setUserName(response.data[0].user.userName);
+                    setGroupId(response.data[0].group.id);
+                    const users = response.data.map((item: any) => ({
+                        value: item.user.userName,
+                        label: item.user.userName,
+                      }));
+                    setUserOptions(response.data.map((item: any) => item.user.userName));
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-        }        
-        fetchGroupToUser(id);
-        console.log(id);
-        
-    }, []);
+        }     
+                fetchGroupToUser(id);   
+                async function fetchUsers() {
+                    axios
+                    .get(URIuser.PEGAR_USER)
+                    .then((response) => {
+                        const users = response.data.map((item: any) => ({
+                            value: item.userName,
+                            label: item.userName,
+                          }));
+                        setData(users);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
 
-    console.log("ID:", id);
+                fetchUsers();    
+            }, []);
 
-    const formik = useFormik({
-        initialValues: {
-            groupType: data?.group?.groupType ?? "",
-            user: data?.user ?? "",
-        },
-        validationSchema: registrationSchemaUserEditar,
-        initialErrors: { groupType: "" },
-        onSubmit: async (values) => {
-            try {
-                const updatedData = {
-                    groupType: values.groupType,
-                    user: values.user,
-                };
+    console.log(userOptions);
+    console.log(groupId);
+    console.log(userName);
+    console.log(data);
+    
+    
+    function handleSubmit(event:any) {
+        event.preventDefault();
 
-                await axios.put(`${URIgroupToUser.ALTERA_GROUP_TO_USER}${id}`, updatedData);
-            } catch (error) {
-                console.log(error);
-                formik.setStatus("Ocorreu um erro ao atualizar a equipe.");
-            }
-        },
-    });
+        const updatedData = {
+            groupType: groupType,
+            groupDescription: groupDescription
+        };
 
-    function onClickLimpar() {
-        formik.resetForm();
-    }
-
-    function onClickEnviar() {
-        if (!formik.isValid) {
-            avisoErro();
-        } else {
-            formik.submitForm();
-            avisoEdicao().then((res: any) => {
-                window.location.assign("/listagemGrupos");
+        axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData)
+        axios.put(URIgroupToUser.ALTERA_GROUP_TO_USER, { group: groupId})
+        .then(() => {
+                avisoEdicao().then((res: any) => {
+                    window.location.assign("/listagemGrupos");
+                })
             })
-        }
+            .catch((error) => {
+                console.log(error);
+                setStatus("Ocorreu um erro ao atualizar a equipe.");
+            });
     }
+    
+     const handleClear = () => {
+        setGroupType("");
+        setGroupDescription("");
+        setUserName("");
+    }
+
+    function handleGroupTypeChange(event:any) {
+        setGroupType(event.target.value);
+    }
+
+    function handleGroupDescriptionChange(event:any) {
+        setGroupDescription(event.target.value);
+    }
+
+    console.log(data.filter(({value}:any) => userOptions.includes(value)));
+    
 
     const options = [{value: "opcao1", label: "Opção 1"}, {value: "opcao2", label: "Opção 2"}, {value: "opcao3", label: "Opção 3"}]
-
     const values = ["opcao1", "opcao2"]
-
+    
     return(
         <>
-        <Header /> 
-        <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
-            <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-                <div className="text-center mb-4">
-                    <h1 className="text-dark fw-semi-bold mb-3 font-padrao-titulo">
-                        Editar Equipe
-                    </h1>
+            <Header />
+            <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
+                <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+                    <div className="text-center mb-4">
+                        <h1 className="text-dark fw-semi-bold mb-3 font-padrao-titulo">
+                            Editar Equipe
+                        </h1>
+                    </div>
+
+                    {status && (
+                <div className="mb-5 alert alert-danger">
+                    <div className="alert-text font-weight-bold">{status}</div>
                 </div>
+            )}
 
-                {formik.status && (
-                    <div className="mb-5 alert alert-danger">
-                        <div className="alert-text font-weight-bold">{formik.status}</div>
-                    </div>
-                )}
-
-                <div className="row">
-                    <div className="col-lg-12">
-                        {/* begin::Form group Nome do time */}
-                        <div className="fv-row mb-3 col-lg-6">
-                            <label className="form-label fw-bolder text-dark fs-6">Nome da equipe</label>
-                            <input
-                                placeholder="Nome da equipe"
-                                type="text"
-                                autoComplete="off"
-                                {...formik.getFieldProps("groupType")}
-                                onChange={formik.handleChange}
-                                value={formik.values.groupType}
-                                className={clsx(
-                                    "form-control bg-transparent",
-                                    {
-                                        "is-invalid":
-                                            formik.touched.groupType && formik.errors.groupType,
-                                    },
-                                    {
-                                        "is-valid":
-                                            formik.touched.groupType &&
-                                            !formik.errors.groupType,
-                                    }
-                                )}
-                            />
-                            {formik.touched.groupType && formik.errors.groupType && (
-                                <div className="fv-plugins-message-container">
-                                    <div className="fv-help-block">
-                                        <span role="alert">{formik.errors.groupType}</span>
-                                    </div>
-                                </div>
+            <div className="row">
+                <div className="col-lg-12">
+                    {/* begin::Form group Nome do time */}
+                    <div className="fv-row mb-3 col-lg-6">
+                        <label className="form-label fw-bolder text-dark fs-6">Nome da equipe</label>
+                        <input
+                            placeholder="Nome da equipe"
+                            type="text"
+                            autoComplete="off"
+                            value={groupType}
+                            onChange={handleGroupTypeChange}
+                            className={clsx(
+                                "form-control bg-transparent",
+                                {
+                                    "is-invalid":
+                                        groupType === "",
+                                },
+                                {
+                                    "is-valid":
+                                        groupType !== "",
+                                }
                             )}
-                        </div>
-                        {/* end::Form group Nome do time */}
+                        />
+                        {groupType === "" && (
+                            <div className="fv-plugins-message-container">
+                                <div className="fv-help-block">
+                                    <span role="alert">Campo obrigatório</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
+                    {/* end::Form group Nome do time */}
+                </div>
                     <div className="col-lg-12">
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                             <label className="form-label fw-bolder text-dark fs-6">
                                 Membros
-                            </label>
+                            </label>    
                             <Select
-                                defaultValue={options.filter(({value}) => values.includes(value))}
-                                isMulti
-                                name="users"
-                                options={options}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
+                            defaultValue={data.filter(({value}:any) => userOptions.includes(value))}   
+                            isMulti
+                            name="users"
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                            options={data}  
                             />
                         </div>
                         {/* end::Form group Membros*/}
                     </div>
-                </div>
+            </div>
+            <div className="row">
                 <div className="row">
-                    <div className="row">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                        Descrição
-                        </label>
-                    </div>
-                    {/* begin::Form group Descrição */}
-                        <div className="fv-row mb-3 col-md-12">
-                            <textarea
-                                className="form-control"
-                                placeholder="Descrição da equipe"
-                                rows={5}
-                                autoComplete="off"
-                                // {...formik.getFieldProps("callDescription")}
-                                // onChange={formik.handleChange}
-                                // value={formik.values.callDescription}
-                                // className={clsx(
-                                //     "form-control bg-transparent",
-                                //     {
-                                //     "is-invalid":
-                                //         formik.touched.callDescription &&
-                                //         formik.errors.callDescription,
-                                //     },
-                                //     {
-                                //     "is-valid":
-                                //         formik.touched.callDescription &&
-                                //         !formik.errors.callDescription,
-                                //     }
-                                // )}
-                            />
-                            {/* {formik.touched.callDescription &&
-                                formik.errors.callDescription && (
-                                    <div className="fv-plugins-message-container">
-                                        <div className="fv-help-block">
-                                            <span role="alert">{formik.errors.callDescription}</span>
-                                        </div>
-                                    </div>
-                            )} */}
-                        </div>
+                    <label className="form-label fw-bolder text-dark fs-6">
+                    Descrição
+                    </label>
                 </div>
+                {/* begin::Form group Descrição */}
+                    <div className="fv-row mb-3 col-md-12">
+                        <textarea
+                            placeholder="Descrição da equipe"
+                            rows={5}
+                            autoComplete="off"
+                            value={groupDescription}
+                            onChange={handleGroupDescriptionChange}
+                            className={clsx(
+                                "form-control bg-transparent",
+                                {
+                                "is-invalid":
+                                    groupDescription === "",
+                                },
+                                {
+                                "is-valid":
+                                    groupDescription !== "",
+                                }
+                            )}
+                        />
+                         {groupDescription === "" && (
+                                <div className="fv-plugins-message-container">
+                                    <div className="fv-help-block">
+                                        <span role="alert">Campo obrigatório</span>
+                                    </div>
+                                </div>
+                            )}
+                    </div>
+                    {/* end::Form group Descrição */}
+            </div>
                 {/* begin::Form group */}
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                    <button type="button" className="btn btn-form" onClick={onClickLimpar}>
+                    <button type="button" className="btn btn-form" onClick={handleClear}>
                         Limpar
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -211,8 +233,7 @@ function EditarGrupos() {
                     <button
                         type="button"
                         className="btn btn-form"
-                        onClick={onClickEnviar}
-                        disabled={formik.isSubmitting}
+                        onClick={(e) => (handleSubmit (e))}
                     >
                         Salvar
                         <img src={salvar} alt="icone salvar" style={{height:"20px", width:"20px", marginLeft:"5px"}}/>

@@ -46,7 +46,7 @@ function App() {
                   <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
-                  <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
+                  <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />
