@@ -143,9 +143,9 @@ function LogAvaliacoes(){
                                 <tr>
                                 {/*corpo tabela*/}
                                 <td className="text-center">{data.id}</td>
-                                <td className="text-center">{data.callPriority}</td>
+                                <td className="text-center">{data.callRequesterId}</td>
                                 <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("pt-BR")}</td>
-                                <td className="text-center">{data.callPriority}</td>
+                                <td className="text-center">{}</td>
                                 <td className="text-center">
                                     <Button onClick={() => handleDisplay(data.id)}>Visualizar</Button>
                                 </td>

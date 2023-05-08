@@ -22,7 +22,6 @@ import ListagemGrupos from "./pages/ListagemGrupos";
 import EditarGrupos from "./pages/EditarGrupos";
 import CadastroGrupos from "./pages/CadastroGrupos";
 import LogAvaliacoes from "./pages/Comite/LogAvaliacoes";
-import ModalLog from "./components/Modal";
 
 function App() {
   return (
@@ -50,7 +49,6 @@ function App() {
                   <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
                   <Route path="/cadastrarGrupos" element={<CadastroGrupos />}></Route>
                   <Route path="/logAvaliacoes" element={<LogAvaliacoes />}></Route>
-                  <Route path="/modalLog" element={<ModalLog/>}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />
