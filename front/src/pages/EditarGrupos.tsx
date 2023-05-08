@@ -84,15 +84,20 @@ function EditarGrupos() {
         };
 
         axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData).then((res) => {
+            let cont = 0 
+            arleyid.map((idA) => {
+                if(idA == undefined){
+                    axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`)              
+                    arleyid.splice(cont, 1)
+                }
+                cont++
+            })
             for (let i = 0; i < user.length; i++) {
-                
-                    if(arleyid.find(tes => tes.id == user[i]) == undefined){
-                        axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: id, user: user[i]})
-                    }
-                   
-                    //axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[ids.length]}`)              
+                if(arleyid.find(tes => tes.id == user[i]) == undefined){
+                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: id, user: user[i]})
+                }
             }
-
+            
         })
         .then(() => {
                 avisoEdicao().then((res: any) => {
@@ -121,12 +126,11 @@ function EditarGrupos() {
 
     function handleChangeUser(event:any) {
         
-        const verifica = userOptions.map((test) => event.find((item:any) => item.value == test))
-        console.log(verifica);
-        verifica.forEach(test => test )
+        console.log(userOptions.map((test) => event.find((item:any) => item.value == test)));
         console.log(event.map((item:any) => item.id));
         setArleyid(userOptions.map((test) => event.find((item:any) => item.value == test)))
         setUser(event.map((item:any) => item.id));
+       
     }
     
     return(
