@@ -16,7 +16,6 @@ import { Groups } from "../types/group";
 function EditarGrupos() {
 
     const id = window.location.href.split("/")[4];
-
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
     const [userName, setUserName] = useState("");
@@ -24,45 +23,47 @@ function EditarGrupos() {
     const [status, setStatus] = useState("");
     const [data, setData] = useState<Users[]>([]);
     const [userOptions, setUserOptions] = useState<string[]>([]);
-
+  
     useEffect(() => {
-        async function fetchGroupToUser(id: any) {
-            axios
-                .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
-                .then((response) => {
-                    console.log(response.data);
-                    setGroupType(response.data[0].group.groupType);
-                    setGroupDescription(response.data[0].group.groupDescription);
-                    setUserName(response.data[0].user.userName);
-                    setGroupId(response.data[0].group.id);
-                    const users = response.data.map((item: any) => ({
-                        value: item.user.userName,
-                        label: item.user.userName,
-                      }));
-                    setUserOptions(response.data.map((item: any) => item.user.userName));
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }     
-                fetchGroupToUser(id);   
-                async function fetchUsers() {
-                    axios
-                    .get(URIuser.PEGAR_USER)
-                    .then((response) => {
-                        const users = response.data.map((item: any) => ({
-                            value: item.userName,
-                            label: item.userName,
-                          }));
-                        setData(users);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                }
-
-                fetchUsers();    
-            }, []);
+      async function fetchGroupToUser(id: any) {
+        axios
+          .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
+          .then((response) => {
+            console.log(response.data);
+            setGroupType(response.data[0].group.groupType);
+            setGroupDescription(response.data[0].group.groupDescription);
+            setUserName(response.data[0].user.userName);
+            setGroupId(response.data[0].group.id);
+            const users = response.data.map((item: any) => ({
+              value: item.user.userName,
+              label: item.user.userName,
+            }));
+            setUserOptions(response.data.map((item: any) => item.user.userName));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+  
+      async function fetchUsers() {
+        axios
+          .get(URIuser.PEGAR_USER)
+          .then((response) => {
+            const users = response.data.map((item: any) => ({
+              value: item.userName,
+              label: item.userName,
+            }));
+            setData(users);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+  
+      fetchGroupToUser(id);
+      fetchUsers();
+    }, []);
+  
 
     console.log(userOptions);
     console.log(groupId);
@@ -108,7 +109,9 @@ function EditarGrupos() {
     console.log(data.filter(({value}:any) => userOptions.includes(value)));
     
 
-    const options = [{value: "opcao1", label: "Opção 1"}, {value: "opcao2", label: "Opção 2"}, {value: "opcao3", label: "Opção 3"}]
+    const options = [{value: "opcao1", label: "Opção 1"}, {value: "opcao2", label: "Opção 2"}, {value: "opcao3", label: "Opção 3"}] 
+
+
     const values = ["opcao1", "opcao2"]
     
     return(
@@ -164,18 +167,20 @@ function EditarGrupos() {
                     <div className="col-lg-12">
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
-                            <label className="form-label fw-bolder text-dark fs-6">
-                                Membros
-                            </label>    
-                            <Select
-                            defaultValue={data.filter(({value}:any) => userOptions.includes(value))}   
-                            isMulti
-                            name="users"
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            options={data}  
-                            />
-                        </div>
+                    <label className="form-label fw-bolder text-dark fs-6">Membros</label>
+                    {data.length > 0 && userOptions.length > 0 && (
+                        <Select
+                        defaultValue={data.filter(({ value }: any) =>
+                            userOptions.includes(value)
+                        )}
+                        isMulti
+                        name="users"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={data}
+                        />
+                    )}
+                    </div>
                         {/* end::Form group Membros*/}
                     </div>
             </div>
