@@ -150,6 +150,18 @@ class UserController {
     return res.json(usuario)
   }
 
+  public async getEmail(req: Request, res: Response): Promise<Response> {
+    const userEmail: any = req.params.email
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.findOneBy({ userEmail: userEmail })
+    if (allUser == undefined) {
+      return res.json({ Existe: false })
+    }
+    else {
+      return res.json({ Existe: true })
+    }
+  }
+
   public async postUser(req: Request, res: Response): Promise<Response> {
     const createUser = req.body
     const userRepository = AppDataSource.getRepository(User)

@@ -35,6 +35,7 @@ export enum URIuser {
     ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
     PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
+    PEGA_EMAIL_ESPECIFICO = "http://localhost:3001/user/especificoEmail/",
     VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
 }
 
@@ -43,7 +44,7 @@ export enum URIperfil {
     ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
 }
 
-export enum URIcommit{
+export enum URIcommit {
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
     PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
@@ -68,7 +69,7 @@ export enum URIcommit{
     DELETE_COMITE = "http://localhost:3001/committee/deletar/"
 }
 
-export enum URIattach{
+export enum URIattach {
     ENVIAR_ANEXO = "http://localhost:3001/file/file/",
     ENVIAR_ANEXO_SUPABASE = "http://localhost:3001/file/fun/",
     PEGAR_TODOS_ANEXO = "http://localhost:3001/file/fileAll/",
@@ -84,4 +85,4 @@ export enum URIattach{
 export const api = axios.create({
     baseURL: 'http://localhost:3000',
     withCredentials: true
-  })
+})

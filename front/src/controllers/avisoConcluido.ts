@@ -30,9 +30,9 @@ function senhaAlterada(): Promise<SweetAlertResult> {
 function solicitaEmail(): Promise<SweetAlertResult> {
   return Swal.fire({
     title:
-      "Para recuperar a senha, favor inserir abaixo o seu E-mail cadastrado:",
+      "Para redefinir a senha, favor inserir abaixo o seu E-mail:",
     input: "email",
-    inputPlaceholder: "Insira o E-mail cadastrado aqui",
+    inputPlaceholder: "E-mail",
     allowOutsideClick: false,
   });
 }

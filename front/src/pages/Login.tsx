@@ -5,6 +5,9 @@ import { AuthContext } from "../contexts/auth";
 //import emailjs from "emailjs-com";
 import  emailjs  from  '@emailjs/browser'
 import { solicitaEmail } from "../controllers";
+import { URIuser } from "../enumerations/uri";
+import { Users } from "../types/user";
+import axios from "axios";
 const Swal = require("sweetalert2");
 
 function Login() {
@@ -16,13 +19,15 @@ function Login() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submint", { email, password });
+    console.log("submit", { email, password });
 
     login(email, password);
   };
   const changeInput = (e: any) => {
     e.style.backgroundColor = "#54C5CE";
   };
+
+
 
   let paramsEmail = {
     email: EmailRecovery,
@@ -34,15 +39,28 @@ function Login() {
     const emailRecebido = emailRecovery;
     console.log(emailRecebido);
 
-    if (emailRecebido !== "") {
-      enviarLink(emailRecebido);
+    const localizaBanco = await axios.get(`${URIuser.PEGA_EMAIL_ESPECIFICO}${emailRecebido}`);
+    
+    const emailBanco = localizaBanco.data.Existe;
+    console.log(emailBanco);
+
+    if (emailBanco == true) {
+       enviarLink(emailRecebido);
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não foi possível localizar o e-mail na base dados. Verifique e tente novamente',
+      })
     }
   }
 
   function enviarLink(email: string) {
-    Swal.fire(
-      `Em alguns instantes você receberá um e-mail contendo as instruções para redefinir sua senha.`
-    );
+    Swal.fire({
+      title: 'Sucesso!!',
+      text: 'Em breve você receberá um e-mail contendo as instruções para redefiir a senha',
+    })
 
     var templateParams = {
       email: email,
