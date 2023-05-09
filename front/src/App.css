@@ -199,24 +199,6 @@ input::-webkit-inner-spin-button {
   border-bottom: 2px solid #212529
 }
 
-/* CSS ChechBox Inicio */
-.form-check-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 3px;
-  background-color: #424242;
+.perfil .dropdown-toggle::after {
+  display: none !important; 
 }
-
-.form-check-input[type="checkbox"]:checked {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.container-checkbox{
-  margin-top: 50px;
-}
-
-.form-check-label {
-  font-weight: normal;
-}
-/* CSS ChechBox  Fim */

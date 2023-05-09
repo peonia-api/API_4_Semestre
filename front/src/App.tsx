@@ -21,6 +21,7 @@ import Perfil from "./pages/Perfil";
 import ListagemGrupos from "./pages/ListagemGrupos";
 import EditarGrupos from "./pages/EditarGrupos";
 import CadastroGrupos from "./pages/CadastroGrupos";
+import LogAvaliacoes from "./pages/Comite/LogAvaliacoes";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
                   <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
+                  <Route path="/logAvaliacoes" element={<LogAvaliacoes />}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />

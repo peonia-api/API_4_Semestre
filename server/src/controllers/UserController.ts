@@ -128,6 +128,13 @@ class UserController {
     return res.json(allUser)
   }
 
+  public async getAllUser(req: Request, res: Response): Promise<Response> {
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.query("SELECT id, userName FROM User")
+    console.log(allUser)
+    return res.json(allUser)
+  }
+
   public async getId(req: Request, res: Response): Promise<Response> {
     const { userEmail } = req.body
     const usuario: any = await AppDataSource
