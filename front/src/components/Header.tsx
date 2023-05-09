@@ -37,13 +37,9 @@ function Header() {
             <Nav>
               <CustomLink to="/listagem">CHAMADO</CustomLink>
               <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">USUÁRIO</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  GRUPOS
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action5">
-                  COMITÊ
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/listagemUser"> USUÁRIO </NavDropdown.Item>
+                <NavDropdown.Item href="/listagemGrupos"> GRUPOS </NavDropdown.Item>
+                <NavDropdown.Item href="#action5"> COMITÊ </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link onClick={signUp}>LOGOUT</Nav.Link>
             </Nav>

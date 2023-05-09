@@ -2,17 +2,20 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
-import { Attachment } from "../entities/Attachment";
 import { logger } from "../config/logger";
+import { validateCommitteeFilter } from "../utils/funcao";
 
 
 class CommitteeController {
 
 
+    
+
     public async getCommittee (req: Request, res: Response) : Promise<Response> {
         const idCommittee:any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const allCommittee = await committeeRepository.findOneBy({id: idCommittee})
+        validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
     }
 
@@ -62,8 +65,9 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
         findCommittee.comiImpactCto = createCommittee.comiImpactCto
-
         const allCommittee = await committeeRepository.save(findCommittee)
+        validateCommitteeFilter(idCommittee)
+
         return res.json(allCommittee)
     }
     public async putCommitteeImpactHp (req: Request, res: Response) : Promise<Response> {
@@ -72,8 +76,8 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
         findCommittee.comiImpactHp = createCommittee.comiImpactHp
-
         const allCommittee = await committeeRepository.save(findCommittee)
+        validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
     }
     // public async putCommitCostSquad (req: Request, res: Response) : Promise<Response> {
@@ -92,8 +96,8 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
         findCommittee.comiRiskRt = createCommittee.comiRiskRt
-
         const allCommittee = await committeeRepository.save(findCommittee)
+        validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
     }
     public async putCommitRiskCso (req: Request, res: Response) : Promise<Response> {
@@ -102,8 +106,9 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({id: idCommittee})
         findCommittee.comiRiskCso = createCommittee.comiRiskCso
-
         const allCommittee = await committeeRepository.save(findCommittee)
+        validateCommitteeFilter(idCommittee)
+
         return res.json(allCommittee)
     }
 
@@ -126,322 +131,75 @@ class CommitteeController {
     }
    */
 
-    public async getCommitteeFilter (req: Request, res: Response) : Promise<Response> {
-        const idCommittee:any = req.params.uuid
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const allCommittee = await committeeRepository.findOneBy({id: idCommittee})
-        const validate = {mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: true}
-        const validate1 = {mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: true}
-        
-        if(allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null){
-            return res.json({mensage: "Ainda não foi avaliado", arquivada: null})
-        }
-        if (allCommittee.comiRiskCso == 3) {
-            return res.json(validate)
-        }
-        else if (allCommittee.comiRiskRt == 3) {
-            return res.json(validate)
-        }
-        else if (allCommittee.comiImpactCto == 0) {
-            return res.json(validate1)
-        }
-        else if (allCommittee.comiImpactHp == 0) {
-            return res.json(validate1)
-        }
-        else{
-            return res.json({allCommittee, arquivada: false})
-
-        }
-        
-    }
+    
 
     public async getCommitteeFilterAll (req: Request, res: Response) : Promise<Response> {
-        const idCommittee:any = req.params.uuid
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const allCommittee = await committeeRepository.find()
+        try{
+            const committeeRepository = AppDataSource.getRepository(Committee)
+            const allCommittee = await committeeRepository.find()
 
-        let lista:any = []
-
-        allCommittee.map((data) => {
-            if (data.comiRiskCso == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiRiskRt == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiImpactCto == 0) {
-                lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiImpactHp == 0) {
-                lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if(data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
-                lista.push({id:data.id, mensage: "Ainda não foi avaliado", arquivada: "Em análise"})
-            }
-            else{
-                lista.push({id: data.id, arquivada: "Aprovada"})
-            }
-        })  
-        return res.json(lista)     
+            allCommittee.map((data) => {
+                validateCommitteeFilter(data.id)
+            })  
+            return res.json(allCommittee)
+        }catch(err){
+            return res.status(400).json(err)
+        }
+             
     }
 
     public async getCommitteeStatus (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const filesRep = AppDataSource.getRepository(Attachment)
-        const allFiles = await filesRep.find()
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
-        const allcall = await callRepository.find()
-        
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const allcall = await callRepository.find()
 
-        let lista:any = []
-        let lista2:any = []
-        let lista3:any = []
-
-        allCommittee.map((data) => {
-            if(allCommittee == null){
-                lista.push({arquivada: null})
-            }
-            if (data.comiRiskCso == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiRiskRt == 3) {
-                lista.push({id: data.id, mensage:"Nota com alto risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiImpactCto == 0) {
-                lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if (data.comiImpactHp == 0) {
-                lista.push({id: data.id, mensage:"Nota com baixo risco, a feature deve ser arquivada!", arquivada: "Arquivada"})
-            }
-            else if(data.comiImpactCto == null || data.comiImpactHp == null || data.comiRiskCso == null || data.comiRiskRt == null){
-                lista.push({id:data.id, mensage: "Ainda não foi avaliado", arquivada: "Em análise"})
-            }
-            else{
-                lista.push({id: data.id, arquivada: "Aprovada"})
-            }
-        })  
-        console.log(lista);
-        
-        //for (let index = 0; index < allcall.length; index++) {
-            allcall.map((call) => {
-                
-                    if(call.callType == 'feature'){
-                        lista.map((l) => {
-                            if(call.id == l.id){
-                                if(l.arquivada == "Arquivada" && call.callStatus == "Aprovada" || call.callStatus == "Em desenvolvimento"){
-                                    lista2.push({
-                                        id: l.id,
-                                        callEmail:  call.callEmail,
-                                        callDateCreate:  call.callDateCreate,
-                                        callTitle:  call.callTitle,
-                                        callType:  call.callType,
-                                        callDescription:  call.callDescription,
-                                        arquivada: call.callStatus
-                                    })
-                                }else{
-                                    lista2.push({
-                                        id: l.id,
-                                        callEmail:  call.callEmail,
-                                        callDateCreate:  call.callDateCreate,
-                                        callTitle:  call.callTitle,
-                                        callType:  call.callType,
-                                        callDescription:  call.callDescription,
-                                        arquivada: l.arquivada
-                                    })
-                                }
-                            }
-                        })
-                    }else{
-                        lista2.push({
-                            id: call.id,
-                            callEmail:  call.callEmail,
-                            callDateCreate:  call.callDateCreate,
-                            callTitle:  call.callTitle,
-                            callType:  call.callType,
-                            callDescription:  call.callDescription,
-                            arquivada: "Em desenvolvimento"
-                        })
-                    }
-                
-            })
-            
-            
-        //}
-
-        
-        
-
-        return res.json(lista2)     
+            return res.json(allcall)
+        }catch(err){
+            return res.json({menssagem: "Erro"})
+        }
+             
     }
 
 
     public async getcomiRisCso (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
-
-        let lista2:any = []
-        let lista3:any = []
-
-
-        allCommittee.map((data) => {
-            if(data.comiRiskCso == null){
-                lista3.push({
-                    id: data.id,
-                    mensage: "Ainda não foi avaliado", 
-                    arquivada: "Avaliar"
-                })
-            }
-        })
-        console.log(lista3);
-        
-        feature.map((data) => {
-            lista3.map((l) => {
-                if(data.id == l.id){
-                    lista2.push({
-                        id: l.id,
-                        callEmail:  data.callEmail,
-                        callDateCreate:  data.callDateCreate,
-                        callTitle:  data.callTitle,
-                        callType:  data.callType,
-                        callDescription:  data.callDescription,
-                        arquivada: l.arquivada
-                    })
-                }
-            })
-        })
-        
-        
-
-        return res.json(lista2)     
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "CSO" })
+            
+            return res.json(feature)
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro"})
+        }    
     }
 
     public async getcomiRiskRt (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
-
-        let lista2:any = []
-        let lista3:any = []
-
-
-        allCommittee.map((data) => {
-            if(data.comiRiskRt == null && data.comiRiskCso < 3 && data.comiRiskCso != null){
-                lista3.push({
-                    id: data.id,
-                    mensage: "Ainda não foi avaliado", 
-                    arquivada: "Avaliar"
-                })
-            }
-        })
-
-        feature.map((data) => {
-            lista3.map((l) => {
-                if(data.id == l.id){
-                    lista2.push({
-                        id: l.id,
-                        callEmail:  data.callEmail,
-                        callDateCreate:  data.callDateCreate,
-                        callTitle:  data.callTitle,
-                        callType:  data.callType,
-                        callDescription:  data.callDescription,
-                        arquivada: l.arquivada
-                    })
-                }
-            })
-        })
-        
-        
-
-        return res.json(lista2)     
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "RT" })
+            return res.json(feature) 
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro"})
+        }
     }
 
     public async getcomiImpactCto (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
-
-        let lista2:any = []
-        let lista3:any = []
-
-
-        allCommittee.map((data) => {
-            if(data.comiImpactCto == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiRiskCso != null && data.comiRiskRt != null){
-                lista3.push({
-                    id: data.id,
-                    mensage: "Ainda não foi avaliado", 
-                    arquivada: "Avaliar"
-                })
-            }
-        })
-        console.log(lista3);
-        
-        feature.map((data) => {
-            lista3.map((l) => {
-                if(data.id == l.id){
-                    lista2.push({
-                        id: l.id,
-                        callEmail:  data.callEmail,
-                        callDateCreate:  data.callDateCreate,
-                        callTitle:  data.callTitle,
-                        callType:  data.callType,
-                        callDescription:  data.callDescription,
-                        arquivada: l.arquivada
-                    })
-                }
-            })
-        })
-        
-        
-
-        return res.json(lista2)     
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "CTO" })
+            return res.json(feature)     
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro"})
+        }
     }
 
     public async getcomiImpactHp (req: Request, res: Response) : Promise<Response> {
-        const committeeRepository = AppDataSource.getRepository(Committee)
-        const callRepository = AppDataSource.getRepository(Call)
-        const allCommittee = await committeeRepository.find()
-        const feature = await callRepository.findBy({ callType: "feature" })
-
-        let lista2:any = []
-        let lista3:any = []
-
-
-        allCommittee.map((data) => {
-            if(data.comiImpactHp == null && data.comiRiskCso < 3 && data.comiRiskRt < 3 && data.comiImpactCto > 0 && data.comiRiskCso != null && data.comiRiskRt != null && data.comiImpactCto != null){
-                lista3.push({
-                    id: data.id,
-                    mensage: "Ainda não foi avaliado", 
-                    arquivada: "Avaliar"
-                })
-            }
-        })
-        console.log(lista3);
-        
-        feature.map((data) => {
-            lista3.map((l) => {
-                if(data.id == l.id){
-                    lista2.push({
-                        id: l.id,
-                        callEmail:  data.callEmail,
-                        callDateCreate:  data.callDateCreate,
-                        callTitle:  data.callTitle,
-                        callType:  data.callType,
-                        callDescription:  data.callDescription,
-                        arquivada: l.arquivada
-                    })
-                }
-            })
-        })
-        
-        
-
-        return res.json(lista2)     
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
+            return res.json(feature)     
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro"})
+        }
     }
 
     // public async getcomiCostSquad (req: Request, res: Response) : Promise<Response> {
@@ -490,46 +248,14 @@ class CommitteeController {
         try{
             const callRepository = AppDataSource.getRepository(Call)
             const committeeRepository = AppDataSource.getRepository(Committee)
-            let lista = []
-            const findCall = await callRepository.find()
-            const findCommittee = await committeeRepository.find()
-            findCall.map((s)=>{
-                if (s.callType == "feature"){
-                    findCommittee.map((c) =>{
-                        if (s.callStatus == "Arquivada"){
-                            if (s.id == c.id){
-                                lista.push({
-                                    id:s.id,
-                                    type:s.callType,
-                                    tittle:s.callTitle,
-                                    description:s.callDescription,
-                                    priority:s.callPriority,
-                                    email:s.callEmail,
-                                    status:s.callStatus,
-                                    impactCto:c.comiImpactCto,
-                                    impactHp:c.comiImpactHp,
-                                    riskRt:c.comiRiskRt,
-                                    riskCso:c.comiRiskCso, 
-                                    avaliationCto:c.comiImpactCtoAvaliation,
-                                    avaliationHp:c.comiImpactoHpAvaliation,
-                                    avaliationCso:c.comiRiskCsoAvaliation,
-                                    avaliationRt:c.comiRiskRtAvaliation
-
-                                })
-                            }
-                       
-
-                        
-                        }
-
-                    })
-                   
-
-                }
-            }) 
+            const findCall = await callRepository.findBy({callType: "feature"})
+            const findCommittee = await committeeRepository.find({relations: { call: true },
+                where: {
+                    call: { callStatus: "Arquivada" },
+                },})
           
-            logger.info(JSON.stringify({lista, message: "Sucesso ao buscar os chamados arquivados."}))
-            return res.json(lista)
+            logger.info(JSON.stringify({findCommittee, message: "Sucesso ao buscar os chamados arquivados."}))
+            return res.json(findCommittee)
         }catch(err){
             logger.error(JSON.stringify({mensage: "Erro ao buscar os chamados arquivados"}))
             return res.status(400).json({mensage: "Erro ao buscar os chamados arquivados"})

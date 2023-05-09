@@ -35,6 +35,7 @@ function App() {
                   <Route path="/listagemUser" element={<VerifyPADRAO><Private><ListagemUser /></Private></VerifyPADRAO>} />
                   <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
                   <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />
+                  <Route path="/cadastroGrupo" element={<Private><CadastroGrupos /></Private>} />
                   <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
                   <Route path="/listagemTipoUsuario" element={<VerifyPADRAO> <Private><ListagemTipoUsuario  /></Private></VerifyPADRAO>} />
                   {/* <Route path="/comite/:id" element={<Private><Comite /></Private>} /> */}
@@ -45,8 +46,7 @@ function App() {
                   <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
-                  <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
-                  {/* <Route path="/cadastrarGrupo" element={<CadastroGrupos />}></Route> */}
+                  <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />
