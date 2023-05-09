@@ -54,8 +54,7 @@ function Perfil() {
   const formik = useFormik({
     initialValues: {
       userName: localStorage.getItem("userName")?? "",
-            userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "",
-            userPassword: ""
+      userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
     },
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {

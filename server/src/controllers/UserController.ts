@@ -208,16 +208,12 @@ class UserController {
 
   public async getVeficaType(req: Request, res: Response): Promise<Response> {
     try{
-      const userRepository = AppDataSource.getRepository(User).createQueryBuilder('user').select('DISTINCT user.userType').getRawMany()
-      let type = [{type: "CSO", possui: false}, {type: "RT", possui: false},{type: "CTO", possui: false},{type: "HP", possui: false},{type: "Padrao", possui: false}]
-      const user = (await userRepository).forEach((resp)=> {
-        if(resp.userType != "Padrao"){
-          const list = type.find((types) => types.type == resp.userType)
-          list.possui = true
-        }
-        
-      })
-      return res.json(type)
+      const userRepository = await AppDataSource.getRepository(User)
+        .createQueryBuilder('user')
+        .select('DISTINCT user.userType')
+        .where("user.userType  != 'Padrao'")
+        .getRawMany()
+      return res.json(userRepository)
     }catch(err){
       return res.status(400).json({menssagem: "Erro ao verificar"})
     }
