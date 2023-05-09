@@ -1,4 +1,4 @@
-import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoDeletarAnexo, avisoEsperaAnexo } from './avisoConcluido';
+import { avisoConcluido, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar } from './avisoConcluido';
 import { avisoErro, avisoErroAoDeletar, avisoErroLogin } from './avisoErro';
 import { solicitacaoValidationSchema } from './validateCall';
 import { perfilValidationSchema } from './validatePerfil';
@@ -18,5 +18,6 @@ export {
         avisoEspera,
         avisoEdicao,
         avisoDeletarAnexo,
-        avisoEsperaAnexo
+        avisoEsperaAnexo,
+        avisoDesarquivar
 } 

@@ -19,6 +19,7 @@ function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)
   const [avatarSRC, setAvatarSRC] = useState(avatar)
   const inputFile = useRef<HTMLInputElement>(null)
+  
 
   const handleCloseMdlAlterarSenha = () => setShowMdlAlterarSenha(false)
 
@@ -48,9 +49,13 @@ function Perfil() {
       inputFile.current.value = ''
     }
   }
+  console.log(localStorage.getItem("userName"));
   
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: {
+      userName: localStorage.getItem("userName")?? "",
+      userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
+    },
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);

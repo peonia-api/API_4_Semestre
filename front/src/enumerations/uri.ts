@@ -50,6 +50,8 @@ export enum URIcommit {
     PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
     PEGAR_COMITE_STATUS = "http://localhost:3001/committee/filterAllStatus/",
     PEGAR_comiRiskRt_STATUS = "http://localhost:3001/committee/comiRiskRtStatus/",
+    PEGAR_ARCHIVED_STATUS = "http://localhost:3001/committee/archived/",
+    
 
     PEGAR_comiRiskCso_STATUS = "http://localhost:3001/committee//comiRiskCsoStatus/",
     PEGAR_comiImpactCto_STATUS = "http://localhost:3001/committee/comiImpactCtoStatus/",
@@ -63,6 +65,7 @@ export enum URIcommit {
     ALTERA_COMITE_SQUAD = "http://localhost:3001/committee/costSquad/",
     ALTERA_COMITE_RT = "http://localhost:3001/committee/riskRt/",
     ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/",
+    ALTERA_ARCHIVED_STATUS = "http://localhost:3001/committee/alteraStatus/",
     DELETE_COMITE = "http://localhost:3001/committee/deletar/"
 }
 

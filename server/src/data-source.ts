@@ -19,6 +19,7 @@ import { DataSource } from "typeorm";
 
 // //versão para PostgreSQL
 const AppDataSource = new DataSource({
+
     database: 'postgres', // se for SQLite, então use bdaula.sqlite
     type: "postgres", // se for SQLite, então use sqlite
     host: 'db.undvejpptbowpgysnwiw.supabase.co', // não use esta propriedade se for sqlite
