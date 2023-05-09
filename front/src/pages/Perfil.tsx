@@ -16,6 +16,7 @@ import "../App.css";
 function Perfil() {
   const [avatarSRC, setAvatarSRC] = useState(avatar)
   const inputFile = useRef<HTMLInputElement>(null)
+  
 
   const onChangeInputFile = (e: any) =>{
     const files = e.target.files;
@@ -39,9 +40,14 @@ function Perfil() {
       inputFile.current.value = ''
     }
   }
+  console.log(localStorage.getItem("userName"));
   
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: {
+      userName: localStorage.getItem("userName")?? "",
+            userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "",
+            userPassword: ""
+    },
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {
       console.log(values)
