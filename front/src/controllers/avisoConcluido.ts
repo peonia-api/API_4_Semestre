@@ -87,6 +87,15 @@ function avisoPerfil(): Promise<SweetAlertResult> {
   });
 }
 
+function avisoAlterarSenha(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Sucesso",
+    text: "Senha alterada com sucesso!",
+    icon: "success",
+    confirmButtonColor: "#54C5CE",
+  });
+}
+
 async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar anexo",
@@ -132,4 +141,8 @@ function avisoEsperaAnexo(): Promise<SweetAlertResult> {
 }
 
 
+<<<<<<< HEAD
 export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar };
+=======
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoAlterarSenha };
+>>>>>>> bd21b22dbae4442c2d97219c475ed2b3936c3ec6

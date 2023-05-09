@@ -240,6 +240,7 @@
 [info]: [ 03/05/2023:17:9:8 ] - Rodando na porta 3001
 [info]: [ 03/05/2023:17:9:10 ] - Rodando na porta 3001
 [info]: [ 03/05/2023:17:12:20 ] - Rodando na porta 3001
+<<<<<<< HEAD
 [info]: [ 03/05/2023:17:19:48 ] - Rodando na porta 3001
 [info]: [ 04/05/2023:14:51:29 ] - Rodando na porta 3001
 [info]: [ 04/05/2023:14:54:48 ] - Rodando na porta 3001
@@ -653,3 +654,34 @@
 [info]: [ 09/05/2023:11:45:16 ] - {"findCommittee":[],"message":"Sucesso ao buscar os chamados arquivados."}
 [info]: [ 09/05/2023:11:45:16 ] - {"findFile":[{"id":6,"name":"1683643569109-4233c5fe9ffe484ba5ad8d16d21dd618jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683643569109-4233c5fe9ffe484ba5ad8d16d21dd618jpg","call":{"id":10,"callEmail":"jeniffer.pereira01@fatec.sp.gov.br","callType":"feature","callTitle":"teste","callDescription":"dufeiwfhriufhiasuehvfauiefgfhh","callPriority":"media","callStatus":"Em análise","callDateCreate":"2023-05-09T17:46:08.288Z","avaliar":"CSO"}}],"message":"Sucesso ao pegar o arquivo."}
 [info]: [ 09/05/2023:11:45:16 ] - {"findFile":[{"id":6,"name":"1683643569109-4233c5fe9ffe484ba5ad8d16d21dd618jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683643569109-4233c5fe9ffe484ba5ad8d16d21dd618jpg","call":{"id":10,"callEmail":"jeniffer.pereira01@fatec.sp.gov.br","callType":"feature","callTitle":"teste","callDescription":"dufeiwfhriufhiasuehvfauiefgfhh","callPriority":"media","callStatus":"Em análise","callDateCreate":"2023-05-09T17:46:08.288Z","avaliar":"CSO"}}],"message":"Sucesso ao pegar o arquivo."}
+=======
+[info]: [ 08/05/2023:17:29:18 ] - Rodando na porta 3001
+[info]: [ 08/05/2023:17:46:29 ] - Rodando na porta 3001
+[info]: [ 08/05/2023:18:54:13 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:7:41:19 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:7:42:33 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:7:44:42 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:7:48:56 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:9:30:19 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:9:31:23 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:9:49:46 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:10:0:50 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:10:18:41 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:5:53 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:8:4 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:17:31 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:19:43 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:23:14 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:23:37 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:27:21 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:27:50 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:27:58 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:28:4 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:26 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:30 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:37 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:41 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:44 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:51 ] - Rodando na porta 3001
+[info]: [ 09/05/2023:11:30:59 ] - Rodando na porta 3001
+>>>>>>> bd21b22dbae4442c2d97219c475ed2b3936c3ec6

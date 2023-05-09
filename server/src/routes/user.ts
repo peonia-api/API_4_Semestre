@@ -10,6 +10,8 @@ routes.get('/historicUser', UserController.getHistoricUser);
 
 routes.get('/especificoUser/:uuid', UserController.getUser);
 
+routes.get('/getAllUser', UserController.getAllUser);
+
 routes.get('/especificoId/', UserController.getId);
 
 routes.get('/veficaType/', UserController.getVeficaType);

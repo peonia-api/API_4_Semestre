@@ -34,11 +34,13 @@ export enum URIuser {
     LOGIN_USER = "http://localhost:3001/user/login/",
     ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
+    PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
     VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
 }
 
 export enum URIperfil {
     ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
 }
 
 export enum URIcommit{
