@@ -48,6 +48,7 @@ function App() {
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
                   <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
+                  <Route path="/logAvaliacoes" element={<LogAvaliacoes />}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />
