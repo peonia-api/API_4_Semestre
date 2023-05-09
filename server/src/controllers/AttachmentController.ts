@@ -198,19 +198,13 @@ class AttachmentController {
     public async getFileByCallId (req: Request, res: Response) : Promise<Response> {
         try{
             const callId:any = req.params.uuid
-            let listaFile = []
             const attachmentRepository = AppDataSource.getRepository(Attachment)
-            const findFile = await attachmentRepository.find()
-            findFile.map((lin)=> {
-                if(lin.call.id == callId){
-                    listaFile.push(lin)
-                }else{
-                    console.log(lin);
-                    
-                }
-            })
-            logger.info(JSON.stringify({listaFile, message: "Sucesso ao pegar o arquivo."}))
-            return res.json(listaFile)
+            const findFile = await attachmentRepository.find({relations: { call: true },
+                where: {
+                    call: { id: callId },
+                },})
+            logger.info(JSON.stringify({findFile, message: "Sucesso ao pegar o arquivo."}))
+            return res.json(findFile)
         }catch(err){
             logger.error(JSON.stringify({mensage: "Erro ao pegar os arquivos"}))
             return res.status(400).json({mensage: "Erro"})

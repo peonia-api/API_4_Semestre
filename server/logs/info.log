@@ -136,10 +136,110 @@
 [info]: [ 03/05/2023:13:23:19 ] - Rodando na porta 3001
 [info]: [ 03/05/2023:13:27:58 ] - Rodando na porta 3001
 [info]: [ 03/05/2023:13:39:13 ] - Rodando na porta 3001
-[info]: [ 04/05/2023:10:29:17 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:14:25:27 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:20:5:18 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:20:23:26 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:20:24:1 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:20:30:23 ] - Rodando na porta 3001
-[info]: [ 07/05/2023:20:35:35 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:13:39:13 ] - {"allCall":{"callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callEmail":"mateushls01@gmail.com","callStatus":"em análise","id":1,"callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao cadastrar o chamado."}
+[info]: [ 03/05/2023:13:39:13 ] - {"att":{"name":"1683132561358-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132561358-imagemjpg","call":"1","id":2},"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":2,"name":"1683132561358-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132561358-imagemjpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"allCall":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao pegar os chamados."}
+[info]: [ 03/05/2023:13:39:13 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":2,"name":"1683132561358-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132561358-imagemjpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"allCall":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao pegar os chamados."}
+[info]: [ 03/05/2023:13:39:13 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":2,"name":"1683132561358-imagemjpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132561358-imagemjpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"allCall":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao editar o chamado."}
+[info]: [ 03/05/2023:13:39:13 ] - {"message":"Sucesso ao editar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"att":{"name":"1683132654963-MateusHenriqueLimadaSilvapdf","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132654963-MateusHenriqueLimadaSilvapdf","call":"1","id":3},"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 03/05/2023:13:39:13 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":3,"name":"1683132654963-MateusHenriqueLimadaSilvapdf","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132654963-MateusHenriqueLimadaSilvapdf","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:14:30:28 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:30:28 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":3,"name":"1683132654963-MateusHenriqueLimadaSilvapdf","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132654963-MateusHenriqueLimadaSilvapdf","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:14:30:28 ] - {"allCall":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao pegar os chamados."}
+[info]: [ 03/05/2023:14:30:28 ] - {"listaFile":[{"id":1,"name":"1683132559697-569800jpg","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132559697-569800jpg","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}},{"id":3,"name":"1683132654963-MateusHenriqueLimadaSilvapdf","src":"https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/uploads/1683132654963-MateusHenriqueLimadaSilvapdf","call":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"hotfix","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}}],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:14:30:28 ] - {"allCall":{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"},"message":"Sucesso ao editar o chamado."}
+[info]: [ 03/05/2023:14:30:28 ] - {"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 03/05/2023:14:30:28 ] - {"message":"Sucesso ao editar o arquivo."}
+[info]: [ 03/05/2023:14:30:28 ] - {"message":"Sucesso ao editar o arquivo."}
+[info]: [ 03/05/2023:14:32:54 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:33:23 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:33:31 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:33:35 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:33:46 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:33:56 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:34:32 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:50:19 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:50:19 ] - {"allCall":[{"id":1,"callEmail":"mateushls01@gmail.com","callType":"feature","callTitle":"Teste","callDescription":"dsadsadsadsadsadsadsadasdsadsadsa","callPriority":"alta","callStatus":"em análise","callDateCreate":"2023-05-03T19:49:19.486Z"}],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 03/05/2023:14:55:50 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:56:27 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:56:37 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:14:56:40 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:2:23 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:2:33 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:29:50 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:29:50 ] - {"allCall":{"callType":"feature","callTitle":"sadsadsad","callDescription":"sadsad sad sad sads adsad sad sa dsa dsad sad sa dsa d","callPriority":"alta","callEmail":"dsdsass@sds","callStatus":"em análise","id":2,"callDateCreate":"2023-05-03T21:30:27.267Z"},"message":"Sucesso ao cadastrar o chamado."}
+[info]: [ 03/05/2023:15:29:50 ] - {"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 03/05/2023:15:29:50 ] - {"listaFile":[],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:15:29:50 ] - {"allCall":{"callType":"hotfix","callTitle":"sdsads","callDescription":"sad sad sad                  sad sasad s sadsa sa sd","callPriority":"alta","callEmail":"fffffffffffffdfdfd@sfsf","callStatus":"em análise","id":3,"callDateCreate":"2023-05-03T21:31:14.685Z"},"message":"Sucesso ao cadastrar o chamado."}
+[info]: [ 03/05/2023:15:29:50 ] - {"message":"Sucesso ao salvar o arquivo."}
+[info]: [ 03/05/2023:15:29:50 ] - {"listaFile":[],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 03/05/2023:15:32:33 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:32:45 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:37:41 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:37:42 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:37:43 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:37:46 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:37:48 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:6 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:12 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:14 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:19 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:24 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:26 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:30 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:34 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:43 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:44 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:49 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:51 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:38:56 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:39:5 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:39:50 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:39:51 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:39:55 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:39:58 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:40:31 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:40:38 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:40:40 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:41:2 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:41:3 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:41:5 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:41:8 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:41:59 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:15:42:2 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:6:35 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:8:9 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:8:13 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:8:38 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:8:41 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:6 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:17 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:20 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:31 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:37 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:41 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:9:44 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:45:16 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:47:3 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:58:56 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:58:59 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:59:4 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:16:59:8 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:13 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:36 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:38 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:49 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:53 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:0:58 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:4:56 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:9:8 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:9:10 ] - Rodando na porta 3001
+[info]: [ 03/05/2023:17:12:20 ] - Rodando na porta 3001
+[info]: [ 08/05/2023:17:29:18 ] - Rodando na porta 3001
+[info]: [ 08/05/2023:17:46:29 ] - Rodando na porta 3001
+[info]: [ 08/05/2023:18:54:13 ] - Rodando na porta 3001

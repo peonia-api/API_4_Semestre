@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import "../App.css";
@@ -12,8 +12,9 @@ import { initialValues } from "../types/user";
 import Header from "../components/Header";
 import '../App.css';
 
-
 function CadastroUsuario() {
+    const [type, setType] = useState({} as any);
+    let options = null;
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchemaUser,
@@ -38,7 +39,32 @@ function CadastroUsuario() {
         }
     }
 
-    useEffect(() => { }, []);
+
+
+    useEffect(() => {
+        function typeUser(){
+            axios.get(URIuser.VERIFICA_TYPE).then((res) => {
+                setType(res.data)
+            })
+        }
+        typeUser()
+        
+     }, []);
+     if(type){
+        for (let i = 0; i < type.length; i++) {
+            console.log(type[i].type);
+            options = <option key={type[i]}>{type[i].type}</option>
+            console.log(options);
+            
+            
+        }
+        // type.map((res:any) => {
+        //     console.log(res);
+            
+        // })
+        //options = type.map((el:any) => <option key={el}>{el}</option>);
+     }
+     
 
     return (
         <>
@@ -246,7 +272,7 @@ function CadastroUsuario() {
                                 <option value="RT" onChange={formik.handleChange} label="RT (Responsável Técnico)" > RT (Responsável Técnico) </option>
                                 <option value="CTO" onChange={formik.handleChange} label="CTO (Chief Technology Officer)"> CTO (Chief Technology Officer) </option>
                                 <option value="HP" onChange={formik.handleChange} label="Head de plataforma"> Head de plataforma </option>
-                                <option value="SQUAD" onChange={formik.handleChange} label="Squad"> Squad </option>
+                                {/* <option value="SQUAD" onChange={formik.handleChange} label="Squad"> Squad </option> */}
                                 <option value="Padrao" onChange={formik.handleChange} label="Padrão"> Padrão </option>
                             </select>
                             {formik.touched.userType && formik.errors.userType && (

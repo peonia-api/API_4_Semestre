@@ -394,7 +394,8 @@ function EditarCall() {
                 </div>
                 {/* end::Form group Tipo Prioridade*/}
               </div>
-            </div><div className="row">
+            </div>
+            <div className="row">
               <div className="col-lg-12">
                 {/* begin::Form group Descrição */}
                 <div className="fv-row mb-3">

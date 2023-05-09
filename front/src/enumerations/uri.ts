@@ -10,6 +10,21 @@ export enum URI {
     PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature"
 }
 
+export enum URIgroup {
+    ENVIAR_GROUP = "http://localhost:3001/group/create",
+    ALTERA_GROUP = "http://localhost:3001/group/modify/",
+    DELETE_GROUP = "http://localhost:3001/group/delete/",
+    PEGAR_GROUP = "http://localhost:3001/group/historic",
+    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/especificoGroup/",
+}
+export enum URIgroupToUser {
+    ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",
+    ALTERA_GROUP_TO_USER = "http://localhost:3001/groupToUser/modify/",
+    DELETE_GROUP_TO_USER = "http://localhost:3001/groupToUser/delete/",
+    PEGAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/historic",
+    PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
+}
+
 export enum URIuser {
     ENVIAR_USER = "http://localhost:3001/user/createUser",
     ALTERA_USER = "http://localhost:3001/user/modifyUser/",
@@ -20,11 +35,13 @@ export enum URIuser {
     ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
     PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
-    PEGA_EMAIL_ESPECIFICO = "http://localhost:3001/user/especificoEmail/"
+    PEGA_EMAIL_ESPECIFICO = "http://localhost:3001/user/especificoEmail/",
+    VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
 }
 
 export enum URIperfil {
     ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
 }
 
 export enum URIcommit {
