@@ -190,6 +190,17 @@ class UserController {
     return res.json(allUser)
   }
 
+  public async putUserPerfil(req: Request, res: Response): Promise<Response> {
+    const createUser = req.body
+    const idUser: any = req.params.uuid
+    const userRepository = AppDataSource.getRepository(User)
+    const findUser = await userRepository.findOneBy({ userEmail: idUser })
+    findUser.userName = createUser.userName
+    findUser.userEmail = createUser.userEmail
+    const allUser = await userRepository.save(findUser)
+    return res.json(allUser)
+  }
+
   public async deleteUser(req: Request, res: Response): Promise<Response> {
     const idUser: any = req.params.uuid
     const userRepository = AppDataSource.getRepository(User)

@@ -37,6 +37,7 @@ export enum URIuser {
     PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
     PEGA_EMAIL_ESPECIFICO = "http://localhost:3001/user/especificoEmail/",
     VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
+    ALTERA_PERFIL = "http://localhost:3001/user/perfil/",
 }
 
 export enum URIperfil {

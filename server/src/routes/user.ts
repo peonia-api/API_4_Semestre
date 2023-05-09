@@ -24,6 +24,8 @@ routes.put('/modifyUser/:uuid', UserController.putUser);
 
 routes.put('/redefinirSenha/', UserController.putPassword);
 
+routes.put("/perfil/:uuid", UserController.putUserPerfil)
+
 routes.delete('/delete/:uuid', UserController.deleteUser);
 
 export default routes;
