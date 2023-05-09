@@ -37,6 +37,7 @@ export class Committee {
 
     // @OneToMany(() => Group, (group) => group.committee)
     // group: Group[];
+   
 
     @ManyToOne(() => Call, (call) => call.committee, { eager: true })
     call: Call;

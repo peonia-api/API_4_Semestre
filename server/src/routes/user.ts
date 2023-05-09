@@ -14,6 +14,8 @@ routes.get('/getAllUser', UserController.getAllUser);
 
 routes.get('/especificoId/', UserController.getId);
 
+routes.get('/veficaType/', UserController.getVeficaType);
+
 routes.post('/createUser', UserController.postUser);
 
 routes.put('/modifyUser/:uuid', UserController.putUser);

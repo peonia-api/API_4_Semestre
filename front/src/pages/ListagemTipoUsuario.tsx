@@ -172,7 +172,6 @@ function ListagemTipoUsuario() {
                     <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
-                    <th onClick={() => sorting("callPriority")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th className="text-center">Ações</th>
                   </tr>
@@ -189,7 +188,6 @@ function ListagemTipoUsuario() {
                         <td className="text-center">{data.callEmail}</td>
                         <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callTitle}</td>
-                        <td className="text-center">{data.arquivada}</td>
                         <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("en-GB")}</td>
                         <td className="text-center"> <Link to={linkCom + data.id}><img style={{ width: '25px' }} src={avaliacao} alt='Comitê' /> </Link>
                         </td>
