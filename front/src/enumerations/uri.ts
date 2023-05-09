@@ -24,6 +24,7 @@ export enum URIuser {
 
 export enum URIperfil {
     ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
 }
 
 export enum URIcommit{
