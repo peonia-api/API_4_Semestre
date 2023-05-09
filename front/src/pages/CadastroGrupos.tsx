@@ -55,12 +55,12 @@ function CadastroGrupos() {
   }
 
   function onClickEnviar() {
-    if (!formik.isValid) {
-      avisoErro();
-    } else {
+    if(selectedUsers.length > 0 && formik.isValid) {
       formik.submitForm();
       avisoConcluido();
-    }
+    }else{
+      avisoErro();
+    } 
   }
 
   const handleSelectChange = (selectedOptions: any) => {
@@ -147,7 +147,6 @@ function CadastroGrupos() {
                   isMulti
                   name="users"
                   options={options}
-                  className="basic-multi-select"
                   classNamePrefix="select"
                   onChange={handleSelectChange}
                 />
