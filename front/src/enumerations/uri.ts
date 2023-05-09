@@ -34,19 +34,24 @@ export enum URIuser {
     LOGIN_USER = "http://localhost:3001/user/login/",
     ALTERA_SENHA = "http://localhost:3001/user/redefinirSenha/",
     PEGAR_ID_ESPECIFICO = "http://localhost:3001/user/especificoId/",
+    PEGAR_ALL_USERS = "http://localhost:3001/user/getAllUser/",
+    PEGA_EMAIL_ESPECIFICO = "http://localhost:3001/user/especificoEmail/",
     VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
 }
 
 export enum URIperfil {
     ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
+    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
 }
 
-export enum URIcommit{
+export enum URIcommit {
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",
     PEGAR_COMITE = "http://localhost:3001/committee/filter/",
     PEGAR_COMITE_ALL = "http://localhost:3001/committee/filterAll/",
     PEGAR_COMITE_STATUS = "http://localhost:3001/committee/filterAllStatus/",
     PEGAR_comiRiskRt_STATUS = "http://localhost:3001/committee/comiRiskRtStatus/",
+    PEGAR_ARCHIVED_STATUS = "http://localhost:3001/committee/archived/",
+    
 
     PEGAR_comiRiskCso_STATUS = "http://localhost:3001/committee//comiRiskCsoStatus/",
     PEGAR_comiImpactCto_STATUS = "http://localhost:3001/committee/comiImpactCtoStatus/",
@@ -60,10 +65,11 @@ export enum URIcommit{
     ALTERA_COMITE_SQUAD = "http://localhost:3001/committee/costSquad/",
     ALTERA_COMITE_RT = "http://localhost:3001/committee/riskRt/",
     ALTERA_COMITE_CSO = "http://localhost:3001/committee/riskCso/",
+    ALTERA_ARCHIVED_STATUS = "http://localhost:3001/committee/alteraStatus/",
     DELETE_COMITE = "http://localhost:3001/committee/deletar/"
 }
 
-export enum URIattach{
+export enum URIattach {
     ENVIAR_ANEXO = "http://localhost:3001/file/file/",
     ENVIAR_ANEXO_SUPABASE = "http://localhost:3001/file/fun/",
     PEGAR_TODOS_ANEXO = "http://localhost:3001/file/fileAll/",
@@ -79,4 +85,4 @@ export enum URIattach{
 export const api = axios.create({
     baseURL: 'http://localhost:3000',
     withCredentials: true
-  })
+})

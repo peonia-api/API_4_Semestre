@@ -21,6 +21,11 @@ import Perfil from "./pages/Perfil";
 import ListagemGrupos from "./pages/ListagemGrupos";
 import EditarGrupos from "./pages/EditarGrupos";
 import CadastroGrupos from "./pages/CadastroGrupos";
+<<<<<<< HEAD
+import ArchivedList from "./pages/Archived";
+=======
+import LogAvaliacoes from "./pages/Comite/LogAvaliacoes";
+>>>>>>> bd21b22dbae4442c2d97219c475ed2b3936c3ec6
 
 function App() {
   return (
@@ -46,7 +51,13 @@ function App() {
                   <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
+<<<<<<< HEAD
+                  <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
+                  <Route path="/arquivar" element={<ArchivedList />}></Route>
+=======
                   <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
+                  <Route path="/logAvaliacoes" element={<LogAvaliacoes />}></Route>
+>>>>>>> bd21b22dbae4442c2d97219c475ed2b3936c3ec6
                 </Routes>
               </AuthProvider>
               <Footer />
