@@ -47,6 +47,10 @@ a:link, a:visited {
   display: inline-block;
 }
 
+.responsive-navbar-nav .dropdown a:link, a:visited {
+  text-align: left;
+}
+
 a:hover, a:active {
 color: white;
 }

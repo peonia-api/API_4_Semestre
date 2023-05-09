@@ -30,6 +30,7 @@ class UserController {
         // retorna o token para o cliente
         return res.json({
           id: usuario.id,
+          userName: usuario.userName,
           userType: usuario.userType,
           userEmail: usuario.userEmail,
           token
@@ -127,6 +128,13 @@ class UserController {
     return res.json(allUser)
   }
 
+  public async getAllUser(req: Request, res: Response): Promise<Response> {
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.query("SELECT id, userName FROM User")
+    console.log(allUser)
+    return res.json(allUser)
+  }
+
   public async getId(req: Request, res: Response): Promise<Response> {
     const { userEmail } = req.body
     const usuario: any = await AppDataSource
@@ -140,6 +148,18 @@ class UserController {
     // const allUser = await usuario.findBy({ userEmail: userEmail })
     console.log(usuario);
     return res.json(usuario)
+  }
+
+  public async getEmail(req: Request, res: Response): Promise<Response> {
+    const userEmail: any = req.params.email
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.findOneBy({ userEmail: userEmail })
+    if (allUser == undefined) {
+      return res.json({ Existe: false })
+    }
+    else {
+      return res.json({ Existe: true })
+    }
   }
 
   public async postUser(req: Request, res: Response): Promise<Response> {
@@ -166,6 +186,17 @@ class UserController {
     findUser.userEmail = createUser.userEmail
     findUser.userType = createUser.userType
 
+    const allUser = await userRepository.save(findUser)
+    return res.json(allUser)
+  }
+
+  public async putUserPerfil(req: Request, res: Response): Promise<Response> {
+    const createUser = req.body
+    const idUser: any = req.params.uuid
+    const userRepository = AppDataSource.getRepository(User)
+    const findUser = await userRepository.findOneBy({ userEmail: idUser })
+    findUser.userName = createUser.userName
+    findUser.userEmail = createUser.userEmail
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)
   }
@@ -200,16 +231,12 @@ class UserController {
 
   public async getVeficaType(req: Request, res: Response): Promise<Response> {
     try{
-      const userRepository = AppDataSource.getRepository(User).createQueryBuilder('user').select('DISTINCT user.userType').getRawMany()
-      let type = [{type: "CSO", possui: false}, {type: "RT", possui: false},{type: "CTO", possui: false},{type: "HP", possui: false},{type: "Padrao", possui: false}]
-      const user = (await userRepository).forEach((resp)=> {
-        if(resp.userType != "Padrao"){
-          const list = type.find((types) => types.type == resp.userType)
-          list.possui = true
-        }
-        
-      })
-      return res.json(type)
+      const userRepository = await AppDataSource.getRepository(User)
+        .createQueryBuilder('user')
+        .select('DISTINCT user.userType')
+        .where("user.userType  != 'Padrao'")
+        .getRawMany()
+      return res.json(userRepository)
     }catch(err){
       return res.status(400).json({menssagem: "Erro ao verificar"})
     }
