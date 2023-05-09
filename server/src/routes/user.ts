@@ -3,6 +3,7 @@ import { UserController } from "../controllers";
 const routes = Router();
 
 routes.post('/create', UserController.create);
+
 routes.post("/login", UserController.login)
 
 
@@ -13,6 +14,8 @@ routes.get('/especificoUser/:uuid', UserController.getUser);
 routes.get('/getAllUser', UserController.getAllUser);
 
 routes.get('/especificoId/', UserController.getId);
+
+routes.get('/especificoEmail/:email', UserController.getEmail);
 
 routes.post('/createUser', UserController.postUser);
 

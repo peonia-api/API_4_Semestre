@@ -19,31 +19,31 @@ import { DataSource } from "typeorm";
 
 // //versão para PostgreSQL
 const AppDataSource = new DataSource({
-     database: 'postgres', // se for SQLite, então use bdaula.sqlite
-     type: "postgres", // se for SQLite, então use sqlite
-     host: 'db.undvejpptbowpgysnwiw.supabase.co', // não use esta propriedade se for sqlite
-     port: 5432, // não use esta propriedade se for sqlite
-     username: 'postgres', // não use esta propriedade se for sqlite
-     password:'djmr1234@fatec', // não use esta propriedade se for sqlite
-     // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
-     // deixe false ao usar migrations
-     synchronize: false, 
-     logging: false, // true indica que as consultas e erros serão exibidas no terminal
-     entities: ["src/entities/*.ts"], // entidades que serão convertidas em tabelas
-     migrations: ["src/migrations/*.ts"], // local onde estarão os arquivos de migração
-     subscribers: [],
-     maxQueryExecutionTime: 2000 // 2 seg.
+    database: 'postgres', // se for SQLite, então use bdaula.sqlite
+    type: "postgres", // se for SQLite, então use sqlite
+    host: 'db.undvejpptbowpgysnwiw.supabase.co', // não use esta propriedade se for sqlite
+    port: 5432, // não use esta propriedade se for sqlite
+    username: 'postgres', // não use esta propriedade se for sqlite
+    password: 'djmr1234@fatec', // não use esta propriedade se for sqlite
+    // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
+    // deixe false ao usar migrations
+    synchronize: false,
+    logging: false, // true indica que as consultas e erros serão exibidas no terminal
+    entities: ["src/entities/*.ts"], // entidades que serão convertidas em tabelas
+    migrations: ["src/migrations/*.ts"], // local onde estarão os arquivos de migração
+    subscribers: [],
+    maxQueryExecutionTime: 2000 // 2 seg.
 
-    
+
     // database: 'callbd', // se for SQLite, então use bdaula.sqlite
     // type: "mysql", // se for SQLite, então use sqlite
     // host: 'localhost', // não use esta propriedade se for sqlite
     // port: 3306, // não use esta propriedade se for sqlite
     // username: 'root', // não use esta propriedade se for sqlite
-    // password:'africas2lucas', // não use esta propriedade se for sqlite
+    // password: 'password', // não use esta propriedade se for sqlite
     // // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
     // // deixe false ao usar migrations
-    // synchronize: false, 
+    // synchronize: false,
     // logging: false, // true indica que as consultas e erros serão exibidas no terminal
     // entities: ["src/entities/*.ts"], // entidades que serão convertidas em tabelas
     // migrations: ["src/migrations/*.ts"], // local onde estarão os arquivos de migração
