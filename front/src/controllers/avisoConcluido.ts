@@ -99,6 +99,18 @@ async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
   });
 }
 
+async function avisoDesarquivar(): Promise<SweetAlertResult>{
+  return Swal.fire({
+    title: "Tem certeza?",
+    text: "Você gostaria de reativar o chamado?",
+    icon: "warning",
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Confirmar",
+    cancelButtonText: "Cancelar"
+  });
+}
+
 function avisoEsperaAnexo(): Promise<SweetAlertResult> {
   let timerInterval: any
   return Swal.fire({
@@ -120,4 +132,4 @@ function avisoEsperaAnexo(): Promise<SweetAlertResult> {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo };
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar };

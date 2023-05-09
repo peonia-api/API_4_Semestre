@@ -121,6 +121,18 @@ class CallController {
             return res.status(400).json({mensage: "Erro ao deletar o chamado"})
         }
     }
+    
+    public async getUnarchived (req: Request, res: Response) : Promise<Response> {
+        try{
+            const callRepository = AppDataSource.getRepository(Call)
+            const allCall = await callRepository.findBy({ callStatus: "Arquivada" })
+            logger.info(JSON.stringify({allCall, message: "Sucesso ao pegar os chamados arquivados."}))
+            return res.json(allCall)
+        }catch(err){
+            logger.error(JSON.stringify({mensage: "Erro ao pegar os chamados arquivados"}))
+            return res.status(400).json({mensage: "Erro ao pegar os chamados arquivados"})
+        }
+    }
 
 }
 export default new CallController();
