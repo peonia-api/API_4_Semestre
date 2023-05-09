@@ -241,7 +241,6 @@ class UserController {
       return res.status(400).json({menssagem: "Erro ao verificar"})
     }
   }
-
 }
 
 export default new UserController();
