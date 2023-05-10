@@ -11,7 +11,7 @@ export const validateCommitteeFilter = async (idCommittee) => {
     if (allCommittee.call.callStatus == "Em análise") {
         if (allCommittee.comiRiskCso == 3 || allCommittee.comiRiskRt == 3 || allCommittee.comiImpactCto == 0 || allCommittee.comiImpactHp == 0) {
             call.callStatus = "Arquivada"
-            call.callDateFinalization = newDate();
+            call.callDateFinalization = new Date();
             await callRep.save(call)
         }
         else if (allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null) {
@@ -35,8 +35,5 @@ export const validateCommitteeFilter = async (idCommittee) => {
             await callRep.save(call)
         }
     }
-}
-function newDate(): Date {
-    throw new Error("Function not implemented.");
 }
 

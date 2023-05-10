@@ -40,6 +40,9 @@ function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
               <CustomLink to="/listagem">CHAMADOS</CustomLink>
+              <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
+              <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
+
               {tipoUsuario !== "Padrao" ? 
                 <>
                   <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
@@ -50,9 +53,6 @@ function Header() {
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/listagemTipoUsuario">
                       Comitê
-                      </NavDropdown.Item>
-                      <NavDropdown.Item href="/logAvaliacoes">
-                      Logs
                       </NavDropdown.Item>
                   </NavDropdown>
                 </>

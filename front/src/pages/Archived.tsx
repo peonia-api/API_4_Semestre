@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 import axios from "axios";
 import '../App.css';
 
-import { Archived } from "../types/archived"; 
+import { Archived } from "../types/archived";
 import Swal from "sweetalert2";
 import { icons } from "react-icons/lib";
 import { avisoDesarquivar } from "../controllers";
@@ -42,50 +42,50 @@ function ArchivedList() {
     }
     fetchCalls();
   }, []);
-  function Unarchived(callId: any){
+  function Unarchived(callId: any) {
     avisoDesarquivar()
-    .then((result)=>{
-      if (result.isConfirmed){
-        axios.put(`${URIcommit.ALTERA_ARCHIVED_STATUS}${callId}`,{
-          status: "Aprovada"
-        }).then(() =>{
-          Swal.fire({
-            title: "Reativação concluida com sucesso!",
-            icon: "success",
-            showConfirmButton: true,
-            confirmButtonText: "OK"
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios.put(`${URIcommit.ALTERA_ARCHIVED_STATUS}${callId}`, {
+            status: "Aprovada"
           }).then(() => {
+            Swal.fire({
+              title: "Reativação concluida com sucesso!",
+              icon: "success",
+              showConfirmButton: true,
+              confirmButtonText: "OK"
+            }).then(() => {
               window.location.reload();
+            })
           })
-        })
-      }
-    });
+        }
+      });
   }
-  
 
 
-//   //sort
-//   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-//   const sorting = (col: keyof typeof data[0]) => {
-//     if (order === "ASC") {
-//       const sorted = [...data].sort((a, b) =>
-//         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
-//           ? 1
-//           : -1
-//       );
-//       setData(sorted);
-//       setOrder("DSC");
-//     }
-//     if (order === "DSC") {
-//       const sorted = [...data].sort((a, b) =>
-//         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
-//           ? 1
-//           : -1
-//       );
-//       setData(sorted);
-//       setOrder("ASC");
-//     }
-//   };
+
+  //sort
+  const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
+  const sorting = (col: keyof typeof data[0]['call']) => {
+    if (order === "ASC") {
+      const sorted = [...data].sort((a, b) =>
+        a.call[col].toString().toLowerCase() > b.call[col].toString().toLowerCase()
+          ? 1
+          : -1
+      );
+      setData(sorted);
+      setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...data].sort((a, b) =>
+        a.call[col].toString().toLowerCase() < b.call[col].toString().toLowerCase()
+          ? 1
+          : -1
+      );
+      setData(sorted);
+      setOrder("ASC");
+    }
+  };
 
   //pagination
   const [currentPage, setCurrentPage] = useState(0);
@@ -119,7 +119,7 @@ function ArchivedList() {
       console.log(error);
     }
   }
-//tabela
+  //tabela
   return (
     <>
       <Header />
@@ -133,16 +133,16 @@ function ArchivedList() {
           </div>
           <Container className="px-2 mb-5">
             <Container>
-              
+
               <Table bordered hover responsive>
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th className="text-center">Número da solicitação  </th>
-                    <th className="text-center">Tipo  </th>
-                    <th className="text-center">Título  </th>
-                    <th className="text-center">Data de criação  </th>
-                    <th className="text-center">Data de finalização  </th>
+                    <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callType")} className="text-center">Tipo  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callTitle")} className="text-center">Título  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callDateCreate")} className="text-center">Data de finalização {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
