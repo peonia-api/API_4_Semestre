@@ -138,6 +138,20 @@ function CadastroGrupos() {
                   )}
                 </div>
               </div>
+              <div className="col-lg-6">
+                <div className="fv-row mb-4">
+                  <label className="form-label fw-bolder text-dark fs-6">Tipo do Grupo</label>
+                  <select className="form-control form-control-solid" name="slcGroup" id="">
+                    <option value="" selected disabled>Selecione o tipo do grupo</option>
+                    <option value="Cliente">
+                      Cliente
+                    </option>
+                    <option value="Empresa">
+                      Empresa
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div className="row">
@@ -150,7 +164,29 @@ function CadastroGrupos() {
                   className="basic-multi-select"
                   classNamePrefix="select"
                   onChange={handleSelectChange}
+                  id="slcMembros"
+                  placeholder="Selecione os membros do grupo"
                 />
+                <input
+                    placeholder="Nomes dos membros"
+                    type="text"
+                    autoComplete="off"
+                    {...formik.getFieldProps("groupType")}
+                    onChange={formik.handleChange}
+                    value={formik.values.groupType}
+                    className={clsx(
+                      "form-control bg-transparent d-none",
+                      {
+                        "is-invalid d-none":
+                          formik.touched.groupType && formik.errors.groupType,
+                      },
+                      {
+                        "is-valid d-none":
+                          formik.touched.groupType &&
+                          !formik.errors.groupType,
+                      }
+                    )}
+                  />
               </div>
 
             </div>

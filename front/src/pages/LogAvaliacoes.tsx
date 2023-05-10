@@ -2,12 +2,12 @@ import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../components/Header";
 import { useEffect, useRef, useState } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import axios from "axios";
-import { URIcommit, URIattach, URI } from "../../enumerations/uri";
-import { Calls } from "../../types/call";
+import { URIcommit, URIattach, URI } from "../enumerations/uri";
+import { Calls } from "../types/call";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
