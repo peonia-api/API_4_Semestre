@@ -55,11 +55,11 @@ function CadastroGrupos() {
   }
 
   function onClickEnviar() {
-    if(selectedUsers.length > 0 && formik.isValid) {
+    if(!formik.isValid) {
+      avisoErro();
+    }else{
       formik.submitForm();
       avisoConcluido();
-    }else{
-      avisoErro();
     } 
   }
 

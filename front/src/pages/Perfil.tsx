@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import axios from "axios";
 import { avisoErro, perfilValidationSchema } from "../controllers";
-import { URIperfil, URIuser } from "../enumerations/uri";
+import { URIuser } from "../enumerations/uri";
 import { initialValues, initialValuesAlterarSenha } from "../types/perfil";
 import Header from "../components/Header";
 import avatar from "../images/avatar.png";

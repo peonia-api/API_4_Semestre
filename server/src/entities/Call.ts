@@ -21,7 +21,7 @@ export class Call {
     @Column({ nullable: false })
     callDescription: string;
 
-    @Column({ nullable: false, length: 10 })
+    @Column({ nullable: true, length: 10 })
     callPriority: string;
 
     @Column({ nullable: true })

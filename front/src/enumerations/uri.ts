@@ -26,6 +26,14 @@ export enum URIgroupToUser {
     PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
 }
 
+export enum URIgroupToCall {
+    ENVIAR_GROUP_TO_CALL = "http://localhost:3001/groupToCall/create",
+    ALTERA_GROUP_TO_CALL = "http://localhost:3001/groupToCall/modify/",
+    DELETE_GROUP_TO_CALL = "http://localhost:3001/groupToCall/delete/",
+    PEGAR_GROUP_TO_CALL = "http://localhost:3001/groupToCall/historic",
+    PEGAR_GROUP_TO_CALL_ESPECIFICO = "http://localhost:3001/groupToCall/specific/",
+}
+
 export enum URIuser {
     ENVIAR_USER = "http://localhost:3001/user/createUser",
     ALTERA_USER = "http://localhost:3001/user/modifyUser/",
@@ -41,10 +49,6 @@ export enum URIuser {
     ALTERA_PERFIL = "http://localhost:3001/user/perfil/",
 }
 
-export enum URIperfil {
-    ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
-    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
-}
 
 export enum URIcommit {
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",

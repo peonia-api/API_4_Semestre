@@ -13,8 +13,8 @@ const solicitacaoValidationSchema = Yup.object().shape({
   callType: Yup.string()
     .required('O tipo do chamado é obrigatório'),
 
-  callPriority: Yup.string()
-    .required('A prioridade é obrigatória'),
+  // callPriority: Yup.string()
+  //   .required('A prioridade é obrigatória'),
 
   callDescription: Yup.string()
     .min(30, 'A descrição deve ter no mínimo 30 caracteres')   

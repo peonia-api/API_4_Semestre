@@ -11,8 +11,6 @@ class CallController {
         try{
             const callRepository = AppDataSource.getRepository(Call)
             const allCall = await callRepository.find()
-            console.log(allCall)
-            console.log(allCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao pegar os chamados."}))
             return res.json(allCall)
         }catch(err){
@@ -26,8 +24,6 @@ class CallController {
             const email = req.params.email
             const callRepository = AppDataSource.getRepository(Call)
             const allCall = await callRepository.findBy({callEmail: email})
-            console.log(allCall)
-            console.log(allCall)
             logger.info(JSON.stringify({allCall, message: "Sucesso ao pegar os chamados."}))
             return res.json(allCall)
         }catch(err){

@@ -6,7 +6,7 @@ import clsx from "clsx";
 import "../App.css";
 import axios from "axios";
 import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIcommit, URIuser } from "../enumerations/uri";
+import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall, URIgroupToUser, URIuser } from "../enumerations/uri";
 import { solicitacaoInitialValues } from "../types/call";
 //import Dropzone from "../components/Dropzone";
 import Header from "../components/Header";
@@ -14,14 +14,27 @@ import '../App.css';
 import { Dropzone, FileItem } from "@dropzone-ui/react";
 import { supabase, uploadFile } from "../services/supabase";
 import { Attachment } from "../types/attachment";
+import { Groups } from "../types/group";
+import Select from "react-select";
 function Solicitacao() {
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function fetchUsers() {
+      axios
+        .get(URIgroup.PEGAR_GROUP)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchUsers();
+  }, []);
 
   const [files, setFiles] = useState([] as any);
-  // const [files, setFiles] = useState<Attachment[]>([]);
-
-  //const data = new FormData()
+  const [selectedGroup, setSelectedGroup] = useState([] as any);
+  const [data, setData] = useState<Groups[]>([]);
 
 
   const updateFiles = (incommingFiles:any) => {
@@ -34,6 +47,16 @@ function Solicitacao() {
   };
 console.log(files);
 
+const handleSelectChange = (selectedOptions: any) => {
+  const selectedValues = selectedOptions.map((option: any) => option.value);
+  setSelectedGroup(selectedValues);
+};
+
+const options = data.map((data) => ({
+  value: data.id,
+  label: data.groupType
+}));
+
   //uploadFile(files)
   
   const formik = useFormik({
@@ -42,20 +65,14 @@ console.log(files);
     initialErrors: { callTitle: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      //console.log(formik.values.callFiles);
-      
       await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
+        for (let i = 0; i < selectedGroup.length; i++) {
+          await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
+        }
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
         if(files){
-          // for (let index = 0; index < files.length; index++) {
-          //   console.log(files[index]);
-            
-          //   data.append('file', files[index].file)
-          // }
-          // //data.append('file', files)
-          // console.log(data);
           uploadFile(files).then(async (rest) => {
             console.log(rest);
             await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${res.data.id}`, rest ).then((s) => {
@@ -89,6 +106,7 @@ console.log(files);
 
   function onClickEnviar() {
     formik.values.callEmail = localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
+    formik.values.callPriority = "avaliar"
     if (!formik.isValid) {
       avisoErro();
     } else {
@@ -131,7 +149,7 @@ console.log(files);
       )}
 
       <div className="row">
-        <div className="col-lg-6">
+        {/* <div className="col-lg-6">*/}
           {/* begin::Form group E-mail */}
           {/* <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
@@ -162,9 +180,10 @@ console.log(files);
               </div>
             )}
           </div> */}
+          
           {/* end::Form group Nome */}
-        </div>        
-        <div className="col-lg-6">
+       {/* </div>         */}
+        {/* <div className="col-lg-6"> */}
           {/* begin::Form group Título */}
           <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">
@@ -196,7 +215,7 @@ console.log(files);
                 </div>
               </div>
             )}
-          </div>
+          {/* </div> */}
           {/* end::Form group Título */}
         </div>
       </div>
@@ -255,8 +274,20 @@ console.log(files);
           {/* end::Form group Tipo Chamado*/}
         </div>
         <div className="col-lg-6">
+          <label className="form-label fw-bolder text-dark fs-6">
+                Grupos
+              </label>
+                <Select
+                  defaultValue={options.filter(({ value }) => selectedGroup.includes(value))}
+                  isMulti
+                  name="users"
+                  options={options}
+                  classNamePrefix="select"
+                  onChange={handleSelectChange}
+                />
+              
           {/* begin::Form group Prioridade */}
-          <div className="fv-row mb-3">
+          {/* <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">
               Prioridade
             </label>
@@ -310,9 +341,11 @@ console.log(files);
                 </div>
               </div>
             )}
-          </div>
+          </div>*/}
           {/* end::Form group Tipo Prioridade*/}
-        </div>
+
+
+        </div> 
       </div>
 
       <div className="row">
