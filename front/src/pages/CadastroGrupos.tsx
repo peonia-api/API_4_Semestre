@@ -110,7 +110,7 @@ function CadastroGrupos() {
                 <div className="fv-row mb-4">
                   <label className="form-label fw-bolder text-dark fs-6">Nome</label>
                   <input
-                    placeholder="Nome do usuário"
+                    placeholder="Nome do grupo"
                     type="text"
                     autoComplete="off"
                     {...formik.getFieldProps("groupType")}
@@ -160,7 +160,7 @@ function CadastroGrupos() {
                 <div className="fv-row mb-3">
                   <label className="form-label fw-bolder text-dark fs-6"> Descrição </label>
                   <textarea
-                    placeholder="Descrição da solicitação"
+                    placeholder="Descrição do grupo"
                     rows={5}
                     autoComplete="off"
                     {...formik.getFieldProps("groupDescription")}
