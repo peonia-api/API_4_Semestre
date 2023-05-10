@@ -117,6 +117,7 @@ function EditarUser() {
       if (option.value === "RT" && rt) return false;
       if (option.value === "CTO" && cto) return false;
       if (option.value === "HP" && hp) return false;
+      if (option.value ===  formik.values.userType) return false;
       return true;
     });
     
