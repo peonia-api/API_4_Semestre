@@ -25,6 +25,7 @@ export interface Calls {
     callDescription: string;
     callPriority: number;
     callDateCreate: Date;
+    callDateFinalization: Date;
     callRequesterId: number
     callFiles: []
     callStatus: string;
