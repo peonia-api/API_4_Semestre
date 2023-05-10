@@ -249,12 +249,13 @@ class CommitteeController {
             const callRepository = AppDataSource.getRepository(Call)
             const committeeRepository = AppDataSource.getRepository(Committee)
             const findCall = await callRepository.findBy({ callType: "feature" })
-            const findCommittee = await committeeRepository.find({
-                relations: { call: true },
-                where: {
-                    call: { callStatus: "Arquivada" },
-                },
-            })
+            const findCommittee = await committeeRepository.find()
+            //{
+            //     relations: { call: true },
+            //     where: {
+            //         call: { callStatus: "Arquivada" },
+            //     },
+            // }
 
             logger.info(JSON.stringify({ findCommittee, message: "Sucesso ao buscar os chamados arquivados." }))
             return res.json(findCommittee)

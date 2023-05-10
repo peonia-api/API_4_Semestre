@@ -31,6 +31,13 @@ export interface Calls {
     callStatus: string;
 }
 
+export interface LogCall{
+    id: number;
+    type: string;
+    nota: number;
+    descricao: string;
+}
+
 export interface Status {
     id: number;
     mensage: string;
