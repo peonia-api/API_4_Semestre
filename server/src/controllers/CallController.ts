@@ -21,6 +21,21 @@ class CallController {
         }
     }
 
+    public async getHistoricCallUser (req: Request, res: Response) : Promise<Response> {
+        try{
+            const email = req.params.email
+            const callRepository = AppDataSource.getRepository(Call)
+            const allCall = await callRepository.findBy({callEmail: email})
+            console.log(allCall)
+            console.log(allCall)
+            logger.info(JSON.stringify({allCall, message: "Sucesso ao pegar os chamados."}))
+            return res.json(allCall)
+        }catch(err){
+            logger.error(JSON.stringify({mensage: "Erro ao pegar os chamados"}))
+            return res.status(400).json({mensage: "Erro ao pegar os chamados"})
+        }
+    }
+
     public async getHistoricHotfix (req: Request, res: Response) : Promise<Response> {
         try{
             const callRepository = AppDataSource.getRepository(Call)

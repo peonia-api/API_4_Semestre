@@ -1,9 +1,9 @@
 import * as Yup from 'yup'
 
 const solicitacaoValidationSchema = Yup.object().shape({
-  callEmail: Yup.string()
-    .email('O e-mail deve ser em um formato válido')
-    .required('O e-mail é obrigatório'),
+  // callEmail: Yup.string()
+  //   .email('O e-mail deve ser em um formato válido')
+  //   .required('O e-mail é obrigatório'),
 
   callTitle: Yup.string()
     .min(3, 'O título deve ter no mínimo 3 caracteres')

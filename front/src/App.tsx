@@ -23,6 +23,7 @@ import EditarGrupos from "./pages/EditarGrupos";
 import CadastroGrupos from "./pages/CadastroGrupos";
 import ArchivedList from "./pages/Archived";
 import LogAvaliacoes from "./pages/Comite/LogAvaliacoes";
+import ListagemCallUser from "./pages/ListagemCallDoUsuario";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/redefinirSenha/:id" element={<RedefinirSenha />} />
                   <Route path="/solicitacao" element={<Private><Solicitacao /></Private>} />
                   <Route path="/listagem" element={<Private><ListagemCall /></Private>} />
+                  <Route path="/listagemCall" element={<Private><ListagemCallUser /></Private>} />
                   <Route path="/listagemUser" element={<VerifyPADRAO><Private><ListagemUser /></Private></VerifyPADRAO>} />
                   <Route path="/editarCall/:id" element={<Private><EditarCall /></Private>} />
                   <Route path="/cadastroUsuario" element={<Private><CadastroUsuario /></Private>} />

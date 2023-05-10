@@ -6,6 +6,7 @@ routes.get('/historic', CallController.getHistoricCall);
 routes.get('/hotfix', CallController.getHistoricHotfix);
 routes.get('/feature', CallController.getHistoricFeature);
 routes.get('/especificoCall/:uuid', CallController.getCall);
+routes.get('/callUser/:email', CallController.getHistoricCallUser);
 
 routes.post('/createCall', CallController.postCall);
 

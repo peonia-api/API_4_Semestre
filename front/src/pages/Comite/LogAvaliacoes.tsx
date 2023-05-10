@@ -22,7 +22,7 @@ function LogAvaliacoes(){
     useEffect(() => {
       async function fetchCalls() {
         axios
-          .get(URIcommit.PEGAR_COMITE_STATUS)
+          .get(URIcommit.PEGAR_ARCHIVED_STATUS)
           .then((response) => {
             setData(response.data);
           })

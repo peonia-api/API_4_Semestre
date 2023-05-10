@@ -39,7 +39,7 @@ console.log(files);
   const formik = useFormik({
     initialValues: solicitacaoInitialValues,
     validationSchema: solicitacaoValidationSchema,
-    initialErrors: { callEmail: '' },
+    initialErrors: { callTitle: '' },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       //console.log(formik.values.callFiles);
@@ -88,6 +88,7 @@ console.log(files);
   }
 
   function onClickEnviar() {
+    formik.values.callEmail = localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
     if (!formik.isValid) {
       avisoErro();
     } else {
@@ -132,7 +133,7 @@ console.log(files);
       <div className="row">
         <div className="col-lg-6">
           {/* begin::Form group E-mail */}
-          <div className="fv-row mb-3">
+          {/* <div className="fv-row mb-3">
             <label className="form-label fw-bolder text-dark fs-6">E-mail</label>
             <input
               placeholder="E-mail"
@@ -160,7 +161,7 @@ console.log(files);
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
           {/* end::Form group Nome */}
         </div>        
         <div className="col-lg-6">

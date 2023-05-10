@@ -39,7 +39,7 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
-              <CustomLink to="/listagem">CHAMADOS</CustomLink>
+              <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
               <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
               <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
 
@@ -54,6 +54,7 @@ function Header() {
                       <NavDropdown.Item href="/listagemTipoUsuario">
                       Comitê
                       </NavDropdown.Item>
+                      <NavDropdown.Item href="/listagem">CHAMADOS</NavDropdown.Item>
                   </NavDropdown>
                 </>
                 : ""
