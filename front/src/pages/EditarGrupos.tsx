@@ -6,12 +6,13 @@ import axios from "axios";
 import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
 import registrationSchemaUserEditar from "../controllers/validateUserEditar";
 import { avisoErro } from "../controllers/avisoErro";
-import { avisoEdicao } from "../controllers";
+import { avisoConcluido, avisoEdicao } from "../controllers";
 import clsx from "clsx";
 import Select from 'react-select';
 import salvar from "../images/salvar.png";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
+import { useNavigate } from "react-router-dom";
 
 function EditarGrupos() {
 
@@ -28,6 +29,11 @@ function EditarGrupos() {
     const [arleyid, setArleyid] = useState<any[]>([]);
 
     const [selectedValues, setSelectedValues] = useState<any[]>([]);
+
+    let location = useNavigate();
+    function voltar (){
+      location('/listagemGrupos')
+    }
 
     useEffect(() => {
       async function fetchGroupToUser(id: any) {
@@ -100,9 +106,7 @@ function EditarGrupos() {
             
         })
         .then(() => {
-                avisoEdicao().then((res: any) => {
-                    window.location.assign("/listagemGrupos");
-                })
+            avisoConcluido().then((result) => result.isConfirmed ? voltar() : '');
             })
             .catch((error) => {
                 console.log(error);
@@ -113,7 +117,6 @@ function EditarGrupos() {
      const handleClear = () => {
         setGroupType("");
         setGroupDescription("");
-        //setUserName("");
     }
 
     function handleGroupTypeChange(event:any) {
