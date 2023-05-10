@@ -162,7 +162,7 @@ function ArchivedList() {
                         <td className="text-center">{d.call.callType}</td>
                         <td className="text-center">{d.call.callTitle}</td>
                         <td className="text-center"> {new Date(d.call.callDateCreate).toLocaleDateString("en-GB")}</td>
-                        <td className="text-center"> {new Date(d.call.callDateCreate).toLocaleDateString("en-GB")}
+                        <td className="text-center"> {new Date(d.call.callDateFinalization).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
                           <a onClick={() => Unarchived(d.call.id)}>
