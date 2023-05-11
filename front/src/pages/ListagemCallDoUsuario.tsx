@@ -19,7 +19,7 @@ import '../App.css';
 import { removeFile } from "../services/supabase";
 
 
-function ListagemCall() {
+function ListagemCallUser() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -33,7 +33,7 @@ function ListagemCall() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(URIcommit.PEGAR_COMITE_STATUS)
+        .get(`${URI.PEGAR_CAll_User}${localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""}`)
         .then((response) => {
           setData(response.data);
         })
@@ -174,9 +174,8 @@ function ListagemCall() {
                   <tr>
                     {/*cabeçalho tabela*/}
                     <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th className="text-center">Ações</th>
@@ -193,9 +192,8 @@ function ListagemCall() {
                           {/*animate*/}
                           <strong className="dropdown-label anexo" onClick={() => reveal(data.id)}>{data.id}</strong>
                         </td>
-                        <td className="text-center">{data.callEmail}</td>
-                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callTitle}</td>
+                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
                         </td>
@@ -240,4 +238,4 @@ function ListagemCall() {
   );
 }
 
-export default ListagemCall;
+export default ListagemCallUser;

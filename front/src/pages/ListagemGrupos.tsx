@@ -4,7 +4,7 @@ import autoAnimate from "@formkit/auto-animate";
 import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { avisoErroAoDeletar } from "../controllers";
 import { avisoDeletar } from "../controllers/avisoConcluido";
@@ -26,7 +26,6 @@ function ListagemGrupos() {
   const id = window.location.href.split("/")[4]
 
   const [data, setData] = useState<GroupsToUser[]>([]);
-
 
   //axios get
   useEffect(() => {
@@ -153,12 +152,16 @@ function ListagemGrupos() {
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
             <h1 className="text-dark mb-0 font-padrao-titulo">
-              Listagem de Equipes
+              Listagem de Grupos
             </h1>
           </div>
           <Container className="px-2 mb-5">
             <Container>
               <div className="box-search d-flex align-items-center justify-content-between mt-4 Margin">
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
+                  <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
+                </button>
+                
                 <input
                   className="input-search"
                   type="text"
@@ -166,16 +169,12 @@ function ListagemGrupos() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                 />
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Equipe
-                  <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
-                </button>
               </div>
               <Table bordered hover responsive>
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
                     <th onClick={() => sorting("id")} className="text-center">Nome da Equipe {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("group")} className="text-center">Membros</th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
@@ -186,7 +185,6 @@ function ListagemGrupos() {
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupType}</td>
-                      <td className="text-center">{grupo.usuarios.join(", ")}</td>
                       <td className="text-center">
                         <Link to={"/editarGrupo/" + grupo.id} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />

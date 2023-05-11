@@ -6,12 +6,14 @@ import axios from "axios";
 import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
 import registrationSchemaUserEditar from "../controllers/validateUserEditar";
 import { avisoErro } from "../controllers/avisoErro";
-import { avisoEdicao } from "../controllers";
+import { avisoConcluido, avisoEdicao } from "../controllers";
 import clsx from "clsx";
 import Select from 'react-select';
 import salvar from "../images/salvar.png";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
+import { useNavigate } from "react-router-dom";
+import * as Yup from 'yup';
 
 function EditarGrupo() {
 
@@ -28,6 +30,18 @@ function EditarGrupo() {
     const [arleyid, setArleyid] = useState<any[]>([]);
 
     const [selectedValues, setSelectedValues] = useState<any[]>([]);
+
+
+    const schema = Yup.object().shape({
+    groupType: Yup.string().required(),
+    groupDescription: Yup.string().required(),
+    user: Yup.array().min(1),
+    });
+
+    let location = useNavigate();
+    function voltar (){
+      location('/listagemGrupos')
+    }
 
     useEffect(() => {
       async function fetchGroupToUser(id: any) {
@@ -77,43 +91,54 @@ function EditarGrupo() {
     
     function handleSubmit(event:any) {
         event.preventDefault();
-
-        const updatedData = {
+      
+        schema.validate({ groupType, groupDescription, user }).then(() => {
+          const updatedData = {
             groupType: groupType,
-            groupDescription: groupDescription
-        };
-
-        axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData).then((res) => {
-            let cont = 0 
-            arleyid.map((idA) => {
-                if(idA == undefined){
-                    axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`)              
-                    arleyid.splice(cont, 1)
+            groupDescription: groupDescription,
+          };
+      
+          axios
+            .put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData)
+            .then((res) => {
+              let cont = 0;
+              arleyid.map((idA) => {
+                if (idA == undefined) {
+                  axios.delete(
+                    `${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`
+                  );
+                  arleyid.splice(cont, 1);
                 }
-                cont++
+                cont++;
+              });
+              for (let i = 0; i < user.length; i++) {
+                if (
+                  arleyid.find((tes) => tes.id == user[i]) == undefined
+                ) {
+                  axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
+                    group: id,
+                    user: user[i],
+                  });
+                }
+              }
             })
-            for (let i = 0; i < user.length; i++) {
-                if(arleyid.find(tes => tes.id == user[i]) == undefined){
-                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: id, user: user[i]})
-                }
-            }
-            
-        })
-        .then(() => {
-                avisoEdicao().then((res: any) => {
-                    window.location.assign("/listagemGrupos");
-                })
+            .then(() => {
+              avisoConcluido().then((result) =>
+                result.isConfirmed ? voltar() : ""
+              );
             })
             .catch((error) => {
-                console.log(error);
-                setStatus("Ocorreu um erro ao atualizar a equipe.");
+              console.log(error);
+              setStatus("Ocorreu um erro ao atualizar a equipe.");
             });
-    }
+        }).catch((err:any) => {
+          avisoErro();
+        });
+      }
     
      const handleClear = () => {
         setGroupType("");
         setGroupDescription("");
-        //setUserName("");
     }
 
     function handleGroupTypeChange(event:any) {
@@ -132,6 +157,8 @@ function EditarGrupo() {
         setUser(event.map((item:any) => item.id));
        
     }
+
+    
     
     return(
         <>
@@ -176,7 +203,7 @@ function EditarGrupo() {
                         {groupType === "" && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">Campo obrigatório</span>
+                                    <span role="alert">O campo Tipo de Equipe é obrigatório</span>
                                 </div>
                             </div>
                         )}
@@ -194,12 +221,29 @@ function EditarGrupo() {
                         )}
                         isMulti
                         name="users"
-                        className="basic-multi-select"
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
+                        className={clsx(
+                            "basic-multi-select",
+                            {
+                                "is-invalid":
+                                userOptions === null,
+                            },
+                            {
+                                "is-valid":
+                                userOptions !== null,
+                            }
+                        )}
                         />
                     )}
+                        {userOptions === null && (
+                            <div className="fv-plugins-message-container">
+                                <div className="fv-help-block">
+                                    <span role="alert">Selecione pelo menos um usuário</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
                         {/* end::Form group Membros*/}
                     </div>
@@ -233,7 +277,7 @@ function EditarGrupo() {
                          {groupDescription === "" && (
                                 <div className="fv-plugins-message-container">
                                     <div className="fv-help-block">
-                                        <span role="alert">Campo obrigatório</span>
+                                        <span role="alert">O campo Descrição é obrigatório</span>
                                     </div>
                                 </div>
                             )}

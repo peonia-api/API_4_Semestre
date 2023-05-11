@@ -39,11 +39,12 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
-              <CustomLink to="/listagem">CHAMADOS</CustomLink>
+              <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
               {tipoUsuario !== "Padrao" ? 
                 <>
+                  <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
+                  <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
                   <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-
                       <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
                       <NavDropdown.Item href="/listagemGrupos">
                       Grupos
@@ -51,9 +52,7 @@ function Header() {
                       <NavDropdown.Item href="/listagemTipoUsuario">
                       Comitê
                       </NavDropdown.Item>
-                      <NavDropdown.Item href="/logAvaliacoes">
-                      Logs
-                      </NavDropdown.Item>
+                      <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
                   </NavDropdown>
                 </>
                 : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>

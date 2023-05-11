@@ -61,12 +61,12 @@ function CadastroGrupo() {
   }
 
   function onClickEnviar() {
-    if (!formik.isValid) {
+    if(!formik.isValid) {
       avisoErro();
-    } else {
+    }else{
       formik.submitForm();
       avisoConcluido();
-    }
+    } 
   }
 
   const handleSelectChange = (selectedOptions: any) => {
@@ -116,7 +116,7 @@ function CadastroGrupo() {
                 <div className="fv-row mb-4">
                   <label className="form-label fw-bolder text-dark fs-6">Nome</label>
                   <input
-                    placeholder="Nome do usuário"
+                    placeholder="Nome do grupo"
                     type="text"
                     autoComplete="off"
                     {...formik.getFieldProps("groupType")}
@@ -154,7 +154,6 @@ function CadastroGrupo() {
                   isMulti
                   name="members"
                   options={options}
-                  className="basic-multi-select"
                   classNamePrefix="select"
                   onChange={handleSelectChange}
                   id="slcMembros"

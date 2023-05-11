@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 import axios from "axios";
 import '../App.css';
 
-import { Archived } from "../types/archived"; 
+import { Archived } from "../types/archived";
 import Swal from "sweetalert2";
 import { icons } from "react-icons/lib";
 import { avisoDesarquivar } from "../controllers";
@@ -42,50 +42,50 @@ function ArchivedList() {
     }
     fetchCalls();
   }, []);
-  function Unarchived(callId: any){
+  function Unarchived(callId: any) {
     avisoDesarquivar()
-    .then((result)=>{
-      if (result.isConfirmed){
-        axios.put(`${URIcommit.ALTERA_ARCHIVED_STATUS}${callId}`,{
-          status: "Aprovada"
-        }).then(() =>{
-          Swal.fire({
-            title: "Reativação concluida com sucesso!",
-            icon: "success",
-            showConfirmButton: true,
-            confirmButtonText: "OK"
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios.put(`${URIcommit.ALTERA_ARCHIVED_STATUS}${callId}`, {
+            status: "Aprovada"
           }).then(() => {
+            Swal.fire({
+              title: "Reativação concluida com sucesso!",
+              icon: "success",
+              showConfirmButton: true,
+              confirmButtonText: "OK"
+            }).then(() => {
               window.location.reload();
+            })
           })
-        })
-      }
-    });
+        }
+      });
   }
-  
 
 
-//   //sort
-//   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-//   const sorting = (col: keyof typeof data[0]) => {
-//     if (order === "ASC") {
-//       const sorted = [...data].sort((a, b) =>
-//         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
-//           ? 1
-//           : -1
-//       );
-//       setData(sorted);
-//       setOrder("DSC");
-//     }
-//     if (order === "DSC") {
-//       const sorted = [...data].sort((a, b) =>
-//         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
-//           ? 1
-//           : -1
-//       );
-//       setData(sorted);
-//       setOrder("ASC");
-//     }
-//   };
+
+  //sort
+  const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
+  const sorting = (col: keyof typeof data[0]['call']) => {
+    if (order === "ASC") {
+      const sorted = [...data].sort((a, b) =>
+        a.call[col].toString().toLowerCase() > b.call[col].toString().toLowerCase()
+          ? 1
+          : -1
+      );
+      setData(sorted);
+      setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...data].sort((a, b) =>
+        a.call[col].toString().toLowerCase() < b.call[col].toString().toLowerCase()
+          ? 1
+          : -1
+      );
+      setData(sorted);
+      setOrder("ASC");
+    }
+  };
 
   //pagination
   const [currentPage, setCurrentPage] = useState(0);
@@ -119,30 +119,30 @@ function ArchivedList() {
       console.log(error);
     }
   }
-//tabela
+  //tabela
   return (
     <>
       <Header />
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
         <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-          <div className="text-center">
+          <div className="text-center p-4">
             <h1 className="text-dark mb-0 font-padrao-titulo">
               Listagem de chamados arquivados
             </h1>
           </div>
           <Container className="px-2 mb-5">
             <Container>
-              
+
               <Table bordered hover responsive>
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th className="text-center">Número da solicitação  </th>
-                    <th className="text-center">Tipo  </th>
-                    <th className="text-center">Título  </th>
-                    <th className="text-center">Data de criação  </th>
-                    <th className="text-center">Data de finalização  </th>
+                    <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callType")} className="text-center">Tipo  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callTitle")} className="text-center">Título  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação  {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callDateCreate")} className="text-center">Data de finalização {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
@@ -162,15 +162,15 @@ function ArchivedList() {
                         <td className="text-center">{d.call.callType}</td>
                         <td className="text-center">{d.call.callTitle}</td>
                         <td className="text-center"> {new Date(d.call.callDateCreate).toLocaleDateString("en-GB")}</td>
-                        <td className="text-center"> {new Date(d.call.callDateCreate).toLocaleDateString("en-GB")}
+                        <td className="text-center"> {new Date(d.call.callDateFinalization).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
-                          <a onClick={() => Unarchived(d.call.id)}>
+                          <a href="" onClick={() => Unarchived(d.call.id)} title="Desarquivar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
                             </svg>
                           </a>
-                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.call.id)} />
+                          <img title="Ver Anexo" className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.call.id)} />
                         </td>
                       </tr>
                     );
