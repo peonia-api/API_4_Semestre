@@ -126,7 +126,7 @@ function ArchivedList() {
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
         <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
-          <div className="text-center">
+          <div className="text-center p-4">
             <h1 className="text-dark mb-0 font-padrao-titulo">
               Listagem de chamados arquivados
             </h1>
@@ -165,12 +165,12 @@ function ArchivedList() {
                         <td className="text-center"> {new Date(d.call.callDateFinalization).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
-                          <a onClick={() => Unarchived(d.call.id)}>
+                          <a href="" onClick={() => Unarchived(d.call.id)} title="Desarquivar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
                             </svg>
                           </a>
-                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.call.id)} />
+                          <img title="Ver Anexo" className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.call.id)} />
                         </td>
                       </tr>
                     );

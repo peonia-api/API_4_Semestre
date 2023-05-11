@@ -110,8 +110,15 @@ a.nav-link {
   }
 }
 
-.nav-link + .nav-link {
-  margin-left: 3rem;
+.navbar-nav a.nav-link {
+  margin-left: 2rem;
+  margin-right: 1rem;
+}
+
+div.perfil a.nav-link {
+  margin-left: 0;
+  margin-right: 0;
+  justify-content: right;
 }
 
 .btn-form {
