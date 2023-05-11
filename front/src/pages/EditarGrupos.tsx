@@ -33,9 +33,7 @@ function EditarGrupo() {
 
 
     const schema = Yup.object().shape({
-    groupType: Yup.string().required(),
-    groupDescription: Yup.string().required(),
-    user: Yup.array().min(1),
+        groupType: Yup.string().required(),
     });
 
     let location = useNavigate();
@@ -168,7 +166,7 @@ function EditarGrupo() {
                 <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
                     <div className="text-center mb-4">
                         <h1 className="text-dark fw-semi-bold mb-3 font-padrao-titulo">
-                            Editar Equipe
+                            Editar Grupo
                         </h1>
                     </div>
 
@@ -182,9 +180,9 @@ function EditarGrupo() {
                 <div className="col-lg-12">
                     {/* begin::Form group Nome do time */}
                     <div className="fv-row mb-3 col-lg-6">
-                        <label className="form-label fw-bolder text-dark fs-6">Nome da equipe</label>
+                        <label className="form-label fw-bolder text-dark fs-6">Nome do Grupo</label>
                         <input
-                            placeholder="Nome da equipe"
+                            placeholder="Nome do Grupo"
                             type="text"
                             autoComplete="off"
                             value={groupType}
@@ -204,7 +202,7 @@ function EditarGrupo() {
                         {groupType === "" && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">O campo Tipo de Equipe é obrigatório</span>
+                                    <span role="alert">Grupo é obrigatório</span>
                                 </div>
                             </div>
                         )}
@@ -225,17 +223,7 @@ function EditarGrupo() {
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
-                        className={clsx(
-                            "basic-multi-select",
-                            {
-                                "is-invalid":
-                                userOptions === null,
-                            },
-                            {
-                                "is-valid":
-                                userOptions !== null,
-                            }
-                        )}
+                        className="basic-multi-select"
                         />
                     )}
                         {userOptions === null && (
@@ -263,25 +251,9 @@ function EditarGrupo() {
                             autoComplete="off"
                             value={groupDescription}
                             onChange={handleGroupDescriptionChange}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                "is-invalid":
-                                    groupDescription === "",
-                                },
-                                {
-                                "is-valid":
-                                    groupDescription !== "",
-                                }
-                            )}
+                            className="form-control bg-transparent"
                         />
-                         {groupDescription === "" && (
-                                <div className="fv-plugins-message-container">
-                                    <div className="fv-help-block">
-                                        <span role="alert">O campo Descrição é obrigatório</span>
-                                    </div>
-                                </div>
-                            )}
+
                     </div>
                     {/* end::Form group Descrição */}
             </div>
