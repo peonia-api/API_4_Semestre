@@ -18,18 +18,31 @@ import grupoImag from "../images/grupo.png";
 import "../App.css";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
-import { group } from "console";
+import { group, log } from "console";
 
 function ListagemGrupos() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
 
+  const [dataGroup, setGroup] = useState<Groups[]>([]);
   const [data, setData] = useState<GroupsToUser[]>([]);
 
   //axios get
   useEffect(() => {
-    async function fetchCalls() {
+    async function fetchGroup() {
+      axios
+        .get(URIgroup.PEGAR_GROUP)
+        .then((response) => {
+          setGroup(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    fetchGroup();
+    async function fetchGroupToUser() {
       axios
         .get(URIgroupToUser.PEGAR_GROUP_TO_USER)
         .then((response) => {
@@ -39,28 +52,36 @@ function ListagemGrupos() {
           console.log(error);
         });
     }
-    fetchCalls();
+    fetchGroupToUser();
 
   }, []);
 
-
+  console.log(data);
+  console.log(dataGroup);
+  
 
   //delete  
   async function handleDeleteGroupUser(id: number) {
     try {
       const groupToUserEntries = data.filter(dataGroup => dataGroup.group.id === id);
-
+      console.log(groupToUserEntries);
+      
       const shouldDelete = await avisoDeletar();
       if (shouldDelete.isConfirmed) {
-        await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {
-          const { id: groupToUserId, group: { id: groupId }, user: { id: userId } } = groupToUserEntry;
-          await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
-          console.log(`Entrada GrupoToUser ${groupToUserId} excluída`);
-        }));
-
+        if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
+          await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {
+            const { id: groupToUserId} = groupToUserEntry;
+            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
+          }));
+        }
         await axios.delete(`${URIgroup.DELETE_GROUP}${id}`);
-        console.log(`Grupo ${id} excluído`);
+      
+        // Recarrega a página após a exclusão
+        setTimeout(() => {
+          window.location.reload();
+        }, 200);
       }
+
     } catch (error) {
       console.error(error);
       avisoErroDeletar();
@@ -92,10 +113,8 @@ function ListagemGrupos() {
 
 
   let grupo: any = null;
-
   data.forEach((user) => {
     if (grupo === null) {
-      // Se este for o primeiro usuário, armazene as informações do grupo
       grupo = {
         id: user.group.id,
         usuarios: [],
@@ -104,7 +123,6 @@ function ListagemGrupos() {
       grupo.usuarios.push(user.user.userName);
       grupo.usuarioIDs.push(user.user.id);
     } else if (user.group.id === grupo.id) {
-      // Se o ID do grupo deste usuário for igual ao ID do grupo armazenado, adicione o nome do usuário ao array de usuários
       grupo.usuarios.push(user.user.userName);
       grupo.usuarioIDs.push(user.user.id);
       console.log(grupo.usuarioIDs);
@@ -124,7 +142,6 @@ function ListagemGrupos() {
     return result;
   }, {});
   const groupList = Object.values(groupedData);
-
   console.log(groupedData);
   
 
@@ -181,15 +198,14 @@ function ListagemGrupos() {
                 </thead>
 
                 <tbody>
-                  {groupList.map((grupo: any) => (
+                  {dataGroup.map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
-                      <td className="text-center">{grupo.groupType}</td>
+                      <td className="text-center">{grupo.groupName}</td>
                       <td className="text-center">
                         <Link to={"/editarGrupo/" + grupo.id} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />
                         </Link>
-                        {grupo.usuarios.length <= 5 ? (
                           <img
                             className="actions"
                             style={{ width: "35px", padding: "3px" }}
@@ -197,9 +213,6 @@ function ListagemGrupos() {
                             alt="Excluir"
                             onClick={() => handleDeleteGroupUser(grupo.id)}
                           />
-                        ) : (
-                          <span>{`${grupo.usuarios.length} usuários`}</span>
-                        )}
                       </td>
                     </tr>
                   ))}
