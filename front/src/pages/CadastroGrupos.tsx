@@ -12,6 +12,7 @@ import '../App.css';
 import { Users } from "../types/user";
 import Select from 'react-select';
 import CreatableSelect from "react-select/creatable";
+import { useNavigate } from "react-router-dom";
 
 
 function CadastroGrupo() {
@@ -64,6 +65,11 @@ function CadastroGrupo() {
     },
   });
 
+  let location = useNavigate();
+  function voltar (){
+    location('/listagemGrupos')
+  }
+
   function onClickLimpar() {
     formik.resetForm();
     setSelectedUsers([]);
@@ -74,7 +80,7 @@ function CadastroGrupo() {
       avisoErro();
     }else{
       formik.submitForm();
-      avisoConcluido();
+      avisoConcluido().then((result) => result.isConfirmed ? voltar() : '');
     } 
   }
 

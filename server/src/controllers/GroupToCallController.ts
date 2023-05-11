@@ -19,7 +19,13 @@ class GroupToCallController {
         try {
             const idgroupToCall: any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const allgroupToCall = await groupToCallRepository.findOneBy({ id: idgroupToCall })
+            const allgroupToCall = await groupToCallRepository.find(
+                {
+                    relations: { call: true },
+                    where: {
+                        call: { id: idgroupToCall },
+                    },
+                })
             return res.json(allgroupToCall)
         } catch (err) {
             return res.status(400).json({ menssagem: "Erro ao pegar" })
@@ -90,16 +96,6 @@ class GroupToCallController {
             return res.status(400).json({ menssagem: "Erro ao pegar" })
         }
     }
-
-    // // Obtém a lista de usuários relacionados ao chamado (observadores)
-    // const userList = await getAllUsersRelatedToCall(committeeId); // Implemente essa função para obter a lista correta
-
-    // // Verifica se a lista de usuários foi retornada corretamente
-    // if(Array.isArray(userList) && userList.length > 0) {
-    // userList.forEach((user) => {
-    //     const userObserver = new UserObserver(user.userEmail);
-    //     concreteSubject.addObserver(userObserver);
-    // });
 }
 
 export default new GroupToCallController();
