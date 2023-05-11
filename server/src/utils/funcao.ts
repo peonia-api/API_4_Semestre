@@ -1,7 +1,10 @@
 import AppDataSource from "../data-source";
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
+import { GroupToCall } from "../entities/GroupToCall";
 import { ConcreteSubject, UserObserver } from './observer';
+
+const concreteSubject = new ConcreteSubject();
 
 export const validateCommitteeFilter = async (idCommittee) => {
     const committeeRepository = AppDataSource.getRepository(Committee)
@@ -9,18 +12,7 @@ export const validateCommitteeFilter = async (idCommittee) => {
     const call = await callRep.findOneBy({ id: idCommittee })
     const allCommittee = await committeeRepository.findOneBy({ id: idCommittee })
 
-    const concreteSubject = new ConcreteSubject();
-
-    // Obtém a lista de usuários relacionados ao chamado (observadores)
-    const userList = await getAllUsersRelatedToCall(idCommittee); // Implemente essa função para obter a lista correta
-
-    // Verifica se a lista de usuários foi retornada corretamente
-    if (Array.isArray(userList) && userList.length > 0) {
-        userList.forEach((user) => {
-            const userObserver = new UserObserver(user.userEmail);
-            concreteSubject.addObserver(userObserver);
-        });
-    }
+    getGroupToCall(idCommittee);
 
     if (allCommittee.call.callStatus == "Em análise") {
         if (allCommittee.comiRiskCso == 3 || allCommittee.comiRiskRt == 3 || allCommittee.comiImpactCto == 0 || allCommittee.comiImpactHp == 0) {
@@ -53,7 +45,51 @@ export const validateCommitteeFilter = async (idCommittee) => {
     }
 }
 
-function getAllUsersRelatedToCall(idCommittee: any) {
-    throw new Error("Function not implemented.");
-}
+// export const getGroupToCall = async (idgroupToCall: number) => {
+//     try {
+//         const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
+//         const allgroupToCall = await groupToCallRepository.find({
+//             relations: { call: true },
+//             where: {
+//                 call: { id: idgroupToCall },
+//             },
+//         })
+//         let listaCliente = [];
+//         allgroupToCall.forEach((item) => (listaCliente.push(item.group.cliente, item.call.callTitle))) //item.call.callStatus para add futuramente, se necessario
+//         const observer = new UserObserver(emails, callTitle);
+//         concreteSubject.addObserver(observer);
+
+//         return (listaCliente);
+//     } catch (err) {
+//         return ("");
+//     }
+// }
+
+export const getGroupToCall = async (idgroupToCall: number) => {
+    try {
+        const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
+        const allgroupToCall = await groupToCallRepository.find({
+            relations: { call: true },
+            where: {
+                call: { id: idgroupToCall },
+            },
+        })
+        let listaCliente = [];
+        allgroupToCall.forEach((item) => (listaCliente.push({ email: item.group.cliente, titulo: item.call.callTitle, status: item.call.callStatus })))
+
+        listaCliente.forEach((item) => {
+            const emails = item.email;
+            console.log(emails);
+
+
+            const observer = new UserObserver(emails, item.status, item.titulo);
+            concreteSubject.addObserver(observer);
+        });
+
+        return listaCliente;
+    } catch (err) {
+        return "";
+    }
+};
+
 

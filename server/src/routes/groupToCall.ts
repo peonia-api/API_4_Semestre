@@ -6,6 +6,8 @@ routes.get('/historic', GroupToCallController.getHistoric);
 
 routes.get('/specific/:uuid', GroupToCallController.getGroupByOne);
 
+routes.get('/grouptocall/:uuid', GroupToCallController.getGroupToCall);
+
 routes.post('/create', GroupToCallController.postGroup);
 
 routes.put('/modify/:uuid', GroupToCallController.putGroup);

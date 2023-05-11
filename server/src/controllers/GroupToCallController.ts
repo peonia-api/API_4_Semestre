@@ -4,30 +4,30 @@ import { Request, Response } from 'express';
 
 class GroupToCallController {
 
-    public async getHistoric (req: Request, res: Response) : Promise<Response> {
-        try{
+    public async getHistoric(req: Request, res: Response): Promise<Response> {
+        try {
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
             const allgroupToCall = await groupToCallRepository.find()
             console.log(allgroupToCall)
             return res.json(allgroupToCall)
-        }catch(err){
-            return res.status(400).json({menssagem: "Erro ao pegar"})
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao pegar" })
         }
     }
 
-    public async getGroupByOne (req: Request, res: Response) : Promise<Response> {
-        try{
-            const idgroupToCall:any = req.params.uuid
+    public async getGroupByOne(req: Request, res: Response): Promise<Response> {
+        try {
+            const idgroupToCall: any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const allgroupToCall = await groupToCallRepository.findOneBy({id: idgroupToCall})
+            const allgroupToCall = await groupToCallRepository.findOneBy({ id: idgroupToCall })
             return res.json(allgroupToCall)
-        }catch(err){
-            return res.status(400).json({menssagem: "Erro ao pegar"})
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao pegar" })
         }
     }
 
-    public async postGroup (req: Request, res: Response) : Promise<Response> {
-        try{
+    public async postGroup(req: Request, res: Response): Promise<Response> {
+        try {
             const creategroupToCall = req.body
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
             const insertgroupToCall = new GroupToCall();
@@ -37,40 +37,70 @@ class GroupToCallController {
 
             const allgroupToCall = await groupToCallRepository.save(insertgroupToCall)
             return res.json(allgroupToCall)
-        }catch(err){
-            return res.status(400).json({menssagem: "Erro ao cadastrar"})
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao cadastrar" })
         }
     }
 
-    public async putGroup (req: Request, res: Response) : Promise<Response> {
-        try{
+    public async putGroup(req: Request, res: Response): Promise<Response> {
+        try {
             const creategroupToCall = req.body
-            const idgroupToCall:any = req.params.uuid
+            const idgroupToCall: any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const findgroupToCall = await groupToCallRepository.findOneBy({id: idgroupToCall})
+            const findgroupToCall = await groupToCallRepository.findOneBy({ id: idgroupToCall })
             findgroupToCall.group = creategroupToCall.group
             findgroupToCall.call = creategroupToCall.call
-        
-        
+
+
             const allgroupToCall = await groupToCallRepository.save(findgroupToCall)
             return res.json(allgroupToCall)
-        }catch(err){
-            return res.status(400).json({menssagem: "Erro ao editar"})
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao editar" })
         }
     }
 
-    public async deleteGroup (req: Request, res: Response) : Promise<Response> {
-        try{
-            const idgroupToCall:any = req.params.uuid
+    public async deleteGroup(req: Request, res: Response): Promise<Response> {
+        try {
+            const idgroupToCall: any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const findgroupToCall = await groupToCallRepository.findOneBy({id: idgroupToCall})
+            const findgroupToCall = await groupToCallRepository.findOneBy({ id: idgroupToCall })
             const allgroupToCall = await groupToCallRepository.remove(findgroupToCall)
             return res.json(allgroupToCall)
-        }catch(err){
-            return res.status(400).json({menssagem: "Erro ao deletar"})
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao deletar" })
         }
     }
 
+    public async getGroupToCall(req: Request, res: Response) {
+        try {
+            const idgroupToCall: any = req.params.uuid
+            const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
+            const allgroupToCall = await groupToCallRepository.find({
+                relations: { call: true },
+                where: {
+                    call: { id: idgroupToCall },
+                },
+            })
+            let listaCliente = [];
+            allgroupToCall.forEach((item) => (listaCliente.push(item.group.cliente, item.call.callTitle, item.call.callStatus)))
+            // console.log(listaCliente);
+
+            return (listaCliente);
+        } catch (err) {
+            return res.status(400).json({ menssagem: "Erro ao pegar" })
+        }
+    }
+
+    // // Obtém a lista de usuários relacionados ao chamado (observadores)
+    // const userList = await getAllUsersRelatedToCall(committeeId); // Implemente essa função para obter a lista correta
+
+    // // Verifica se a lista de usuários foi retornada corretamente
+    // if(Array.isArray(userList) && userList.length > 0) {
+    // userList.forEach((user) => {
+    //     const userObserver = new UserObserver(user.userEmail);
+    //     concreteSubject.addObserver(userObserver);
+    // });
 }
+
 export default new GroupToCallController();
 

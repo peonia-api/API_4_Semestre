@@ -30,9 +30,13 @@ class ConcreteSubject {
 // Classe UserObserver
 class UserObserver implements Observer {
     private email: string;
+    private status: string;
+    private titulo: string;
 
-    constructor(email: string) {
+    constructor(email: string, status: string, titulo: string) {
         this.email = email;
+        this.status = status;
+        this.titulo = titulo;
     }
 
     public update(): void {
@@ -40,6 +44,8 @@ class UserObserver implements Observer {
         const templateParams = {
             email: this.email,
             // Outros parâmetros do e-mail, se necessário
+            status: this.status,
+            titulo: this.titulo
         };
 
         emailjs.send(
