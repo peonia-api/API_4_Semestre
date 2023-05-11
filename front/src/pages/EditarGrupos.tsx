@@ -14,10 +14,12 @@ import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
+import CreatableSelect from "react-select/creatable";
 
 function EditarGrupo() {
 
     const id = window.location.href.split("/")[4];
+    const typeGroup = window.location.href.split("/")[5];
     const [groupName, setGroupName] = useState("");
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
@@ -43,6 +45,7 @@ function EditarGrupo() {
     }
 
     useEffect(() => {
+      
       async function fetchGroupToUser(id: any) {
         axios
           .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
@@ -76,8 +79,30 @@ function EditarGrupo() {
           });
       }
   
-      fetchGroupToUser(id);
-      fetchUsers();
+      async function fetchGroup(id: any) {
+        axios
+          .get(`${URIgroup.PEGAR_GROUP_ESPECIFICO}${id}`)
+          .then((response) => {
+            console.log(response.data);
+            setGroupName(response.data.groupName);
+            setGroupType(response.data.groupType);
+            setGroupDescription(response.data.groupDescription);
+            
+            // setIds(response.data.map((item:any) => item.id))
+            const opt = response.data.cliente.replace('{', "[").replace('}', "]")
+            setUserOptions(opt);
+            
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      if(typeGroup == "Funcionario"){
+        fetchGroupToUser(id);
+        fetchUsers();
+      }else{
+        fetchGroup(id)
+      }
     }, []);
   
 
@@ -85,6 +110,7 @@ function EditarGrupo() {
     //console.log(groupId);
     console.log(ids);
     console.log(data);
+
     
     
     function handleSubmit(event:any) {
@@ -217,7 +243,7 @@ function EditarGrupo() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {data.length > 0 && userOptions.length > 0 && (
+                    {data.length > 0 && groupType === "Funcionario" && userOptions.length > 0 && (
                         <Select
                         defaultValue={data.filter(({ value }: any) =>
                             userOptions.includes(value)
@@ -229,6 +255,18 @@ function EditarGrupo() {
                         onChange={(e) => handleChangeUser(e)}
                         className="basic-multi-select"
                         />
+                    )}
+                    {groupType == "Cliente" && (
+
+                      <CreatableSelect
+                      isMulti
+                      name="clients"
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={(e) => handleChangeUser(e)}
+                      id="slcMembros"
+                      placeholder="Digite os emails dos clientes"
+                      />
                     )}
                         {userOptions === null && (
                             <div className="fv-plugins-message-container">

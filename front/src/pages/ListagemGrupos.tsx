@@ -203,7 +203,7 @@ function ListagemGrupos() {
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>
                       <td className="text-center">
-                        <Link to={"/editarGrupo/" + grupo.id} style={{ padding: "3px" }}>
+                        <Link to={"/editarGrupo/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />
                         </Link>
                           <img

@@ -16,7 +16,7 @@ export enum URIgroup {
     ALTERA_GROUP = "http://localhost:3001/group/modify/",
     DELETE_GROUP = "http://localhost:3001/group/delete/",
     PEGAR_GROUP = "http://localhost:3001/group/historic",
-    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/especificoGroup/",
+    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/",
 }
 export enum URIgroupToUser {
     ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",

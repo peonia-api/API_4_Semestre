@@ -47,7 +47,7 @@ function App() {
             <Route path="/comites/:id" element={<VerifyRT> <Private> <Comites URL={URIcommit.ALTERA_COMITE_RT} type={"RT"}/> </Private></VerifyRT>} />
             <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
             <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
-            <Route path="/editarGrupo/:id" element={<Private><EditarGrupos /></Private>}></Route>
+            <Route path="/editarGrupo/:id/:type" element={<Private><EditarGrupos /></Private>}></Route>
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
