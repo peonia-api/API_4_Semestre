@@ -11,9 +11,15 @@ import Header from "../components/Header";
 import '../App.css';
 import { Users } from "../types/user";
 import Select from 'react-select';
+import CreatableSelect from "react-select/creatable";
 
 
 function CadastroGrupo() {
+
+  let userType = localStorage.getItem("userType");
+
+  console.log(userType);
+
   const [data, setData] = useState<Users[]>([]);
   const [selectedUsers, setSelectedUsers] = useState([] as any);
 
@@ -142,10 +148,11 @@ function CadastroGrupo() {
 
             <div className="row">
               <div className="fv-row mb-3">
+                {userType !== "Padrao" ?
                 <Select
                   defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
                   isMulti
-                  name="users"
+                  name="members"
                   options={options}
                   className="basic-multi-select"
                   classNamePrefix="select"
@@ -153,26 +160,17 @@ function CadastroGrupo() {
                   id="slcMembros"
                   placeholder="Selecione os membros do grupo"
                 />
-                <input
-                    placeholder="Nomes dos membros"
-                    type="text"
-                    autoComplete="off"
-                    {...formik.getFieldProps("groupType")}
-                    onChange={formik.handleChange}
-                    value={formik.values.groupType}
-                    className={clsx(
-                      "form-control bg-transparent d-none",
-                      {
-                        "is-invalid d-none":
-                          formik.touched.groupType && formik.errors.groupType,
-                      },
-                      {
-                        "is-valid d-none":
-                          formik.touched.groupType &&
-                          !formik.errors.groupType,
-                      }
-                    )}
-                  />
+                :
+                <CreatableSelect
+                  isMulti
+                  name="clients"
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  onChange={handleSelectChange}
+                  id="slcMembros"
+                  placeholder="Digite os emails dos clientes"
+                />
+                }
               </div>
 
             </div>
@@ -183,7 +181,7 @@ function CadastroGrupo() {
                 <div className="fv-row mb-3">
                   <label className="form-label fw-bolder text-dark fs-6"> Descrição </label>
                   <textarea
-                    placeholder="Descrição da solicitação"
+                    placeholder="Descrição do grupo"
                     rows={5}
                     autoComplete="off"
                     {...formik.getFieldProps("groupDescription")}
@@ -235,7 +233,7 @@ function CadastroGrupo() {
                 onClick={onClickEnviar}
                 disabled={formik.isSubmitting}
               >
-                Enviar
+                Cadastrar
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

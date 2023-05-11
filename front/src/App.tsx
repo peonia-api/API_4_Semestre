@@ -24,7 +24,6 @@ import CadastroGrupos from "./pages/CadastroGrupos";
 import ArchivedList from "./pages/Archived";
 import LogAvaliacoes from "./pages/LogAvaliacoes";
 import CadastroGrupo from "./pages/CadastroGrupos";
-import CadastroGruposCliente from "./pages/CadastroGruposCliente";
 
 function App() {
   return (
@@ -52,7 +51,7 @@ function App() {
                   <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
                   <Route path="/editarGrupo/:id" element={<Private><EditarGrupos /></Private>}></Route>
                   <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
-                  <Route path="/cadastroGrupoCliente" element={<Private><CadastroGruposCliente /></Private>} />
+                  <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
                   <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
                 </Routes>
               </AuthProvider>

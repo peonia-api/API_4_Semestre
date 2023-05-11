@@ -56,7 +56,7 @@ function Header() {
                       </NavDropdown.Item>
                   </NavDropdown>
                 </>
-                : ""
+                : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>
                }
               <NavDropdown 
                 className="me-2 perfil" 
