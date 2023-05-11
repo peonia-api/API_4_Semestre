@@ -89,8 +89,8 @@ function EditarGrupo() {
             setGroupDescription(response.data.groupDescription);
             
             // setIds(response.data.map((item:any) => item.id))
-            const opt = response.data.cliente.replace('{', "[").replace('}', "]")
-            setUserOptions(opt);
+            const opt = response.data.cliente.replace('{', "").replace('}', "")
+            setUserOptions(opt.split(","));
             
           })
           .catch((error) => {
@@ -186,7 +186,7 @@ function EditarGrupo() {
        
     }
 
-    console.log(userOptions);
+    //console.log(userOptions.map((item) => console.log(item)));
     
     
     return(
