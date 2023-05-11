@@ -45,26 +45,6 @@ export const validateCommitteeFilter = async (idCommittee) => {
     }
 }
 
-// export const getGroupToCall = async (idgroupToCall: number) => {
-//     try {
-//         const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-//         const allgroupToCall = await groupToCallRepository.find({
-//             relations: { call: true },
-//             where: {
-//                 call: { id: idgroupToCall },
-//             },
-//         })
-//         let listaCliente = [];
-//         allgroupToCall.forEach((item) => (listaCliente.push(item.group.cliente, item.call.callTitle))) //item.call.callStatus para add futuramente, se necessario
-//         const observer = new UserObserver(emails, callTitle);
-//         concreteSubject.addObserver(observer);
-
-//         return (listaCliente);
-//     } catch (err) {
-//         return ("");
-//     }
-// }
-
 export const getGroupToCall = async (idgroupToCall: number) => {
     try {
         const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
