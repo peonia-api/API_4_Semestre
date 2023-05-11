@@ -40,16 +40,22 @@ function CadastroGrupo() {
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchemaUser,
-    initialErrors: { groupType: "" },
+    initialErrors: { groupName: "" },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
+      if(formik.values.groupType == "Cliente"){
+        await axios.post(URIgroup.ENVIAR_GROUP, {groupName: formik.values.groupName, groupType: formik.values.groupType, groupDescription: formik.values.groupDescription, cliente:  selectedUsers})
+      }else{
+        await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
         .then(async (res) => {
           const groupId = res.data.id;
           for (let i = 0; i < selectedUsers.length; i++) {
+
             await axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: groupId, user: selectedUsers[i] })
           }
         });
+      }
+     
       onClickLimpar();
       setSelectedUsers([]);
     },
@@ -79,7 +85,8 @@ function CadastroGrupo() {
     label: data.userName
   }));
 
-  console.log(selectedUsers);
+  formik.values.groupType = "Cliente"
+
 
   return (
     <>
@@ -119,26 +126,26 @@ function CadastroGrupo() {
                     placeholder="Nome do grupo"
                     type="text"
                     autoComplete="off"
-                    {...formik.getFieldProps("groupType")}
+                    {...formik.getFieldProps("groupName")}
                     onChange={formik.handleChange}
-                    value={formik.values.groupType}
+                    value={formik.values.groupName}
                     className={clsx(
                       "form-control bg-transparent",
                       {
                         "is-invalid":
-                          formik.touched.groupType && formik.errors.groupType,
+                          formik.touched.groupName && formik.errors.groupName,
                       },
                       {
                         "is-valid":
-                          formik.touched.groupType &&
-                          !formik.errors.groupType,
+                          formik.touched.groupName &&
+                          !formik.errors.groupName,
                       }
                     )}
                   />
-                  {formik.touched.groupType && formik.errors.groupType && (
+                  {formik.touched.groupName && formik.errors.groupName && (
                     <div className="fv-plugins-message-container">
                       <div className="fv-help-block">
-                        <span role="alert">{formik.errors.groupType}</span>
+                        <span role="alert">{formik.errors.groupName}</span>
                       </div>
                     </div>
                   )}
