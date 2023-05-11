@@ -31,6 +31,7 @@ function EditarGrupo() {
     const [user, setUser] = useState<string[]>([]);
     const [ids, setIds] = useState([]);
     const [arleyid, setArleyid] = useState<any[]>([]);
+    const [clientes, setClientes] = useState<any[]>([]);
 
     const [selectedValues, setSelectedValues] = useState<any[]>([]);
 
@@ -119,30 +120,34 @@ function EditarGrupo() {
         schema.validate({ groupType, groupDescription, user }).then(() => {
           const updatedData = {
             groupType: groupType,
+            groupName: groupName,
+            cliente: clientes,
             groupDescription: groupDescription,
           };
       
           axios
             .put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData)
             .then((res) => {
-              let cont = 0;
-              arleyid.map((idA) => {
-                if (idA == undefined) {
-                  axios.delete(
-                    `${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`
-                  );
-                  arleyid.splice(cont, 1);
-                }
-                cont++;
-              });
-              for (let i = 0; i < user.length; i++) {
-                if (
-                  arleyid.find((tes) => tes.id == user[i]) == undefined
-                ) {
-                  axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
-                    group: id,
-                    user: user[i],
-                  });
+              if(typeGroup == "Funcionario"){
+                let cont = 0;
+                arleyid.map((idA) => {
+                  if (idA == undefined) {
+                    axios.delete(
+                      `${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`
+                    );
+                    arleyid.splice(cont, 1);
+                  }
+                  cont++;
+                });
+                for (let i = 0; i < user.length; i++) {
+                  if (
+                    arleyid.find((tes) => tes.id == user[i]) == undefined
+                  ) {
+                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
+                      group: id,
+                      user: user[i],
+                    });
+                  }
                 }
               }
             })
@@ -185,6 +190,15 @@ function EditarGrupo() {
         setUser(event.map((item:any) => item.id));
        
     }
+
+    function handleChangeCli(event:any) {
+        
+      console.log(userOptions);
+      setClientes(event.map((item:any) => item.value))
+     
+  }
+
+  console.log(clientes);
 
     //console.log(userOptions.map((item) => console.log(item)));
     
@@ -259,11 +273,12 @@ function EditarGrupo() {
                     {groupType == "Cliente" && (
 
                       <CreatableSelect
+                      defaultValue={userOptions.map((item) => item)}
                       isMulti
                       name="clients"
                       className="basic-multi-select"
                       classNamePrefix="select"
-                      onChange={(e) => handleChangeUser(e)}
+                      onChange={(e) => handleChangeCli(e)}
                       id="slcMembros"
                       placeholder="Digite os emails dos clientes"
                       />
