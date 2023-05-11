@@ -11,12 +11,13 @@ export function Comites({URL, type}: any) {
     const id = window.location.href.split("/")[4];
 
     const [comite, setComite] = useState("2")
+    const [ descricao, setDescricao ] = useState("")
     const [descType, setDescType] = useState("");
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         console.log("submint", { comite });
-        await axios.put(`${URL}${id}`, { impact: comite })
+        await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
         avisoConcuidoComite().then((res) => {
             window.location.assign("/ListagemTipoUsuario");
         })
@@ -71,6 +72,7 @@ export function Comites({URL, type}: any) {
                             rows={7}
                             autoComplete="off"
                             className="form-control bg-transparent"
+                            onChange={(e) => setDescricao(e.target.value)}
                             ></textarea>
                         </div>
                     </div>
@@ -79,7 +81,7 @@ export function Comites({URL, type}: any) {
 
                 <div className="drop-comite">
                     <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> {descType} - {type}: {comite}</label>
-                    <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="4" id="rangeAvaliacao"></input>
+                    <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="3" id="rangeAvaliacao"></input>
                 </div>
                 <div className="button-comite">
                     <button

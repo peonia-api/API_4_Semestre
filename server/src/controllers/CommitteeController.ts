@@ -66,6 +66,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiImpactCto = createCommittee.impact
+        findCommittee.comiImpactCtoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -77,6 +78,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiImpactHp = createCommittee.impact
+        findCommittee.comiImpactoHpAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -97,6 +99,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiRiskRt = createCommittee.impact
+        findCommittee.comiRiskRtAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -107,6 +110,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiRiskCso = createCommittee.impact
+        findCommittee.comiRiskCsoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
