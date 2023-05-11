@@ -35,21 +35,30 @@ function CadastroGrupo() {
         });
     }
     fetchUsers();
+    if(userType === "Padrao"){
+      formik.values.groupType = "Cliente"
+    }
   }, []);
 
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchemaUser,
-    initialErrors: { groupType: "" },
+    initialErrors: { groupName: "" },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
+      if(formik.values.groupType == "Cliente"){
+        await axios.post(URIgroup.ENVIAR_GROUP, {groupName: formik.values.groupName, groupType: formik.values.groupType, groupDescription: formik.values.groupDescription, cliente:  selectedUsers})
+      }else{
+        await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
         .then(async (res) => {
           const groupId = res.data.id;
           for (let i = 0; i < selectedUsers.length; i++) {
+
             await axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: groupId, user: selectedUsers[i] })
           }
         });
+      }
+     
       onClickLimpar();
       setSelectedUsers([]);
     },
@@ -79,7 +88,7 @@ function CadastroGrupo() {
     label: data.userName
   }));
 
-  console.log(selectedUsers);
+
 
   return (
     <>
@@ -119,6 +128,41 @@ function CadastroGrupo() {
                     placeholder="Nome do grupo"
                     type="text"
                     autoComplete="off"
+                    {...formik.getFieldProps("groupName")}
+                    onChange={formik.handleChange}
+                    value={formik.values.groupName}
+                    className={clsx(
+                      "form-control bg-transparent",
+                      {
+                        "is-invalid":
+                          formik.touched.groupName && formik.errors.groupName,
+                      },
+                      {
+                        "is-valid":
+                          formik.touched.groupName &&
+                          !formik.errors.groupName,
+                      }
+                    )}
+                  />
+                  {formik.touched.groupName && formik.errors.groupName && (
+                    <div className="fv-plugins-message-container">
+                      <div className="fv-help-block">
+                        <span role="alert">{formik.errors.groupName}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-6">
+          {/* begin::Form group Tipo grupo */}
+            {userType !== "Padrao" ?
+                <div className="fv-row mb-3">
+                  <label className="form-label fw-bolder text-dark fs-6">
+                    Grupo
+                  </label>
+                  <select
+                    placeholder="Tipo do grupo"
+                    autoComplete="off"
                     {...formik.getFieldProps("groupType")}
                     onChange={formik.handleChange}
                     value={formik.values.groupType}
@@ -130,11 +174,28 @@ function CadastroGrupo() {
                       },
                       {
                         "is-valid":
-                          formik.touched.groupType &&
-                          !formik.errors.groupType,
+                          formik.touched.groupType && !formik.errors.groupType,
                       }
                     )}
-                  />
+                  >
+                    <option value="" disabled label="Selecione o tipo do grupo">
+                      Tipo do grupo{" "}
+                    </option>
+                    <option
+                      value="Funcionario"
+                      onChange={formik.handleChange}
+                      label="Funcionario"
+                    >
+                      Funcionario
+                    </option>
+                    <option
+                      value="Cliente"
+                      onChange={formik.handleChange}
+                      label="Cliente"
+                    >
+                      Cliente
+                    </option>
+                  </select>
                   {formik.touched.groupType && formik.errors.groupType && (
                     <div className="fv-plugins-message-container">
                       <div className="fv-help-block">
@@ -143,22 +204,34 @@ function CadastroGrupo() {
                     </div>
                   )}
                 </div>
+               
+                  : ""}
               </div>
             </div>
 
             <div className="row">
               <div className="fv-row mb-3">
-                {userType !== "Padrao" ?
-                <Select
-                  defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
-                  isMulti
-                  name="members"
-                  options={options}
-                  classNamePrefix="select"
-                  onChange={handleSelectChange}
-                  id="slcMembros"
-                  placeholder="Selecione os membros do grupo"
-                />
+                {userType !== "Padrao" ? formik.values.groupType == "Funcionario" ?
+                    <Select
+                      defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
+                      isMulti
+                      name="members"
+                      options={options}
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Selecione os membros do grupo"
+                    />
+                    :
+                    <CreatableSelect
+                      isMulti
+                      name="clients"
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Digite os emails dos clientes"
+                    />
                 :
                 <CreatableSelect
                   isMulti
