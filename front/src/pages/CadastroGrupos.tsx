@@ -35,6 +35,9 @@ function CadastroGrupo() {
         });
     }
     fetchUsers();
+    if(userType === "Padrao"){
+      formik.values.groupType = "Cliente"
+    }
   }, []);
 
   const formik = useFormik({
@@ -85,7 +88,6 @@ function CadastroGrupo() {
     label: data.userName
   }));
 
-  formik.values.groupType = "Cliente"
 
 
   return (
@@ -151,21 +153,83 @@ function CadastroGrupo() {
                   )}
                 </div>
               </div>
+              <div className="col-lg-6">
+          {/* begin::Form group Tipo grupo */}
+                <div className="fv-row mb-3">
+                  <label className="form-label fw-bolder text-dark fs-6">
+                    Grupo
+                  </label>
+                  <select
+                    placeholder="Tipo do grupo"
+                    autoComplete="off"
+                    {...formik.getFieldProps("groupType")}
+                    onChange={formik.handleChange}
+                    value={formik.values.groupType}
+                    className={clsx(
+                      "form-control bg-transparent",
+                      {
+                        "is-invalid":
+                          formik.touched.groupType && formik.errors.groupType,
+                      },
+                      {
+                        "is-valid":
+                          formik.touched.groupType && !formik.errors.groupType,
+                      }
+                    )}
+                  >
+                    <option value="" disabled label="Selecione o tipo do grupo">
+                      Tipo do grupo{" "}
+                    </option>
+                    <option
+                      value="Funcionario"
+                      onChange={formik.handleChange}
+                      label="Funcionario"
+                    >
+                      Funcionario
+                    </option>
+                    <option
+                      value="Cliente"
+                      onChange={formik.handleChange}
+                      label="Cliente"
+                    >
+                      Cliente
+                    </option>
+                  </select>
+                  {formik.touched.groupType && formik.errors.groupType && (
+                    <div className="fv-plugins-message-container">
+                      <div className="fv-help-block">
+                        <span role="alert">{formik.errors.groupType}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/* end::Form group Tipo grupo*/}
+              </div>
             </div>
 
             <div className="row">
               <div className="fv-row mb-3">
-                {userType !== "Padrao" ?
-                <Select
-                  defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
-                  isMulti
-                  name="members"
-                  options={options}
-                  classNamePrefix="select"
-                  onChange={handleSelectChange}
-                  id="slcMembros"
-                  placeholder="Selecione os membros do grupo"
-                />
+                {userType !== "Padrao" ? formik.values.groupType == "Funcionario" ?
+                    <Select
+                      defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
+                      isMulti
+                      name="members"
+                      options={options}
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Selecione os membros do grupo"
+                    />
+                    :
+                    <CreatableSelect
+                      isMulti
+                      name="clients"
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Digite os emails dos clientes"
+                    />
                 :
                 <CreatableSelect
                   isMulti
