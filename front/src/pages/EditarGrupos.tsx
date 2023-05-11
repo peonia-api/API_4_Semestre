@@ -257,7 +257,7 @@ function EditarGrupo() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {data.length > 0 && groupType === "Funcionario" && userOptions.length > 0 && (
+                    {groupType === "Funcionario" && userOptions.length > 0 && (
                         <Select
                         defaultValue={data.filter(({ value }: any) =>
                             userOptions.includes(value)
@@ -270,7 +270,7 @@ function EditarGrupo() {
                         className="basic-multi-select"
                         />
                     )}
-                    {groupType == "Cliente" && (
+                    {groupType == "Cliente" && userOptions.length > 0 &&(
 
                       <CreatableSelect
                       defaultValue={userOptions.map((item) => item)}
