@@ -54,7 +54,7 @@ const handleSelectChange = (selectedOptions: any) => {
 
 const options = data.map((data) => ({
   value: data.id,
-  label: data.groupType
+  label: data.groupName
 }));
 
   //uploadFile(files)
