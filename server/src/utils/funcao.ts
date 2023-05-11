@@ -1,6 +1,7 @@
 import AppDataSource from "../data-source";
 import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
+import { ConcreteSubject, UserObserver } from './observer';
 
 export const validateCommitteeFilter = async (idCommittee) => {
     const committeeRepository = AppDataSource.getRepository(Committee)
@@ -8,11 +9,25 @@ export const validateCommitteeFilter = async (idCommittee) => {
     const call = await callRep.findOneBy({ id: idCommittee })
     const allCommittee = await committeeRepository.findOneBy({ id: idCommittee })
 
+    const concreteSubject = new ConcreteSubject();
+
+    // Obtém a lista de usuários relacionados ao chamado (observadores)
+    const userList = await getAllUsersRelatedToCall(idCommittee); // Implemente essa função para obter a lista correta
+
+    // Verifica se a lista de usuários foi retornada corretamente
+    if (Array.isArray(userList) && userList.length > 0) {
+        userList.forEach((user) => {
+            const userObserver = new UserObserver(user.userEmail);
+            concreteSubject.addObserver(userObserver);
+        });
+    }
+
     if (allCommittee.call.callStatus == "Em análise") {
         if (allCommittee.comiRiskCso == 3 || allCommittee.comiRiskRt == 3 || allCommittee.comiImpactCto == 0 || allCommittee.comiImpactHp == 0) {
             call.callStatus = "Arquivada"
             call.callDateFinalization = new Date();
-            await callRep.save(call)
+            await callRep.save(call);
+            concreteSubject.notifyObservers();
         }
         else if (allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null) {
             if (allCommittee.comiRiskCso < 3 && allCommittee.comiRiskRt == null && allCommittee.comiRiskCso != null) {
@@ -33,7 +48,12 @@ export const validateCommitteeFilter = async (idCommittee) => {
         else {
             call.callStatus = "Aprovada"
             await callRep.save(call)
+            concreteSubject.notifyObservers();
         }
     }
+}
+
+function getAllUsersRelatedToCall(idCommittee: any) {
+    throw new Error("Function not implemented.");
 }
 

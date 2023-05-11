@@ -19,7 +19,13 @@ class GroupToCallController {
         try{
             const idgroupToCall:any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const allgroupToCall = await groupToCallRepository.findOneBy({id: idgroupToCall})
+            const allgroupToCall = await groupToCallRepository.find(
+            {
+                relations: { call: true },
+                where: {
+                    call: { id: idgroupToCall},
+                },
+            })
             return res.json(allgroupToCall)
         }catch(err){
             return res.status(400).json({menssagem: "Erro ao pegar"})

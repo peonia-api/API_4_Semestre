@@ -158,6 +158,7 @@ function EditarGrupo() {
        
     }
 
+    console.log(userOptions);
     
     
     return(
