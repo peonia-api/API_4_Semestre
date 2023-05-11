@@ -133,6 +133,7 @@ export const VerifyCTO = ({ children }:any) => {
 }
 
 export const VerifyHP = ({ children }:any) => {
+    debugger
     const tipo = localStorage.getItem("userType")
 
     if(tipo !== "HP"){

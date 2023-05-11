@@ -1,6 +1,6 @@
 import { URIcommit } from "../../enumerations/uri";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './comite.css';
 import { avisoConcuidoComite } from "../../controllers/avisoConcluido";
 import Header from "../../components/Header";
@@ -11,6 +11,7 @@ export function Comites({URL, type}: any) {
     const id = window.location.href.split("/")[4];
 
     const [comite, setComite] = useState("2")
+    const [descType, setDescType] = useState("");
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -20,6 +21,25 @@ export function Comites({URL, type}: any) {
             window.location.assign("/ListagemTipoUsuario");
         })
     }
+
+    const typeCall = localStorage.getItem("typeCall");
+
+    function changeDes() {
+        if(type === "CSO" || type === "RT"){
+            setDescType("Análise de Risco")
+        } else {
+            if(typeCall === "hotfix"){
+                setDescType("Prioridade do Hotfix")
+            } else {
+                setDescType("Análise de Impacto")
+            }
+            
+        }
+    }
+
+    useEffect(() => {
+        changeDes();
+    }, [type])
 
     return (
         <>
@@ -58,7 +78,7 @@ export function Comites({URL, type}: any) {
 
 
                 <div className="drop-comite">
-                    <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> Análise de Risco - {type}: {comite}</label>
+                    <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> {descType} - {type}: {comite}</label>
                     <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="4" id="rangeAvaliacao"></input>
                 </div>
                 <div className="button-comite">

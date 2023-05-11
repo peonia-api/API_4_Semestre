@@ -4,6 +4,7 @@ import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
 import { logger } from "../config/logger";
 import { validateCommitteeFilter } from "../utils/funcao";
+import { ObjectLiteral } from "typeorm";
 
 
 class CommitteeController {
@@ -196,7 +197,9 @@ class CommitteeController {
         try {
             const callRepository = AppDataSource.getRepository(Call)
             const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
-            return res.json(feature)
+            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise" })
+            let calls = feature.concat(hotfix);
+            return res.json(calls)
         } catch (err) {
             return res.status(400).json({ menssagem: "Erro" })
         }

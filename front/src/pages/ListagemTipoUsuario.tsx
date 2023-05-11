@@ -12,12 +12,13 @@ import avaliacao from "../images/avaliar.png";
 import axios from "axios";
 import "../App.css";
 import { URI, URIattach, URIcommit } from "../enumerations/uri";
-import { Link } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Calls, Status } from "../types/call";
 import Header from "../components/Header";
 import '../App.css';
 import { VerifyType } from "../controllers";
 import { Attachment } from "../types/attachment";
+import { identity } from "lodash";
 
 function ListagemTipoUsuario() {
   const linkUrl: any = localStorage.getItem("userType")
@@ -30,6 +31,8 @@ function ListagemTipoUsuario() {
   const [commiteData, setCommiteData] = useState<Calls[]>([]);
 
   const [anexo, setAnexo] = useState<Attachment[]>([]);
+
+  const navigate = useNavigate();
 
   //axios get
   useEffect(() => {
@@ -68,6 +71,12 @@ function ListagemTipoUsuario() {
   }, []);
 
   console.log(commiteData);
+
+  function redirectToCommite({id, type}: any){
+    debugger
+    localStorage.setItem("typeCall", type);
+    return navigate(`/comites/${id}`)
+  }
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
@@ -167,7 +176,7 @@ function ListagemTipoUsuario() {
                         <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callTitle}</td>
                         <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("en-GB")}</td>
-                        <td className="text-center"> <Link to={linkCom + data.id}><img style={{ width: '25px' }} src={avaliacao} alt='Comitê' /> </Link>
+                        <td className="text-center"> <a href="" onClick={() => redirectToCommite({id: data.id, type: data.callType})}><img style={{ width: '25px' }} src={avaliacao} alt='Comitê' /> </a>
                         </td>
                       </tr>
                     );
