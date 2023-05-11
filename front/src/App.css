@@ -49,6 +49,14 @@ input {
   border-radius: 0 !important;
 }
 
+input.form-range {
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+}
+
 .fs-6, input, button, th, td {
   font-family: 'Source Sans Pro', sans-serif !important;
 }

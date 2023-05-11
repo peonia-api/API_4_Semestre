@@ -21,7 +21,7 @@ import { Attachment } from "../types/attachment";
 
 function ListagemTipoUsuario() {
   const linkUrl: any = localStorage.getItem("userType")
-  const linkCom: any = VerifyType(linkUrl);
+  const linkCom: any = "/comites/";
   //const getCom:any = VerifyTypeList(linkUrl)
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -33,28 +33,6 @@ function ListagemTipoUsuario() {
 
   //axios get
   useEffect(() => {
-
-    // async function fetchCalls() {
-    //   axios
-    //     .get(URI.PEGAR_CALL)
-    //     .then((response) => {
-    //       setData(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // }
-    // fetchCalls();
-    // async function fetchStatus() {
-    //   axios.get(URIcommit.PEGAR_COMITE_STATUS)
-    //   .then((res) => {
-    //     setCommiteData(res.data)
-    //   }).catch((err) => {
-    //     console.log("bom");
-
-    //   })
-    // }
-    // fetchStatus();
 
     async function VerifyTypeList(tipo: any) {
 

@@ -64,7 +64,7 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiImpactCto = createCommittee.comiImpactCto
+        findCommittee.comiImpactCto = createCommittee.impact
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -75,7 +75,7 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiImpactHp = createCommittee.comiImpactHp
+        findCommittee.comiImpactHp = createCommittee.impact
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -95,7 +95,7 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiRiskRt = createCommittee.comiRiskRt
+        findCommittee.comiRiskRt = createCommittee.impact
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -105,7 +105,7 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiRiskCso = createCommittee.comiRiskCso
+        findCommittee.comiRiskCso = createCommittee.impact
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 

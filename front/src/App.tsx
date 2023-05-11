@@ -24,6 +24,8 @@ import CadastroGrupos from "./pages/CadastroGrupos";
 import ArchivedList from "./pages/Archived";
 import LogAvaliacoes from "./pages/Comite/LogAvaliacoes";
 import ListagemCallUser from "./pages/ListagemCallDoUsuario";
+import { Comites } from "./pages/Comite/Comites";
+import { URIcommit } from "./enumerations/uri";
 
 function App() {
   return (
@@ -44,10 +46,10 @@ function App() {
                   <Route path="/listagemTipoUsuario" element={<VerifyPADRAO> <Private><ListagemTipoUsuario  /></Private></VerifyPADRAO>} />
                   {/* <Route path="/comite/:id" element={<Private><Comite /></Private>} /> */}
                   <Route path="/" element={<Private> <ListagemCall /> </Private>} />
-                  <Route path="/comiteCso/:id" element={<VerifyCso><Private> <ComiteCso/> </Private> </VerifyCso>} />
-                  <Route path="/comiteCto/:id" element={<VerifyCTO> <Private> <ComiteCto/> </Private> </VerifyCTO>} />
-                  <Route path="/comiteHp/:id" element={<VerifyHP> <Private> <ComiteHp/> </Private> </VerifyHP>} />
-                  <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
+                  <Route path="/comites/:id" element={<VerifyCso><Private> <Comites URL={URIcommit.ALTERA_COMITE_CSO} type={"CSO"}/> </Private> </VerifyCso>} />
+                  <Route path="/comites/:id" element={<VerifyCTO> <Private> <Comites URL={URIcommit.ALTERA_COMITE_CTO} type={"CTO"}/> </Private> </VerifyCTO>} />
+                  <Route path="/comites/:id" element={<VerifyHP> <Private> <Comites URL={URIcommit.ALTERA_COMITE_HP} type={"HP"}/> </Private> </VerifyHP>} />
+                  <Route path="/comites/:id" element={<VerifyRT> <Private> <Comites URL={URIcommit.ALTERA_COMITE_RT} type={"RT"}/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
                   <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
                   <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
