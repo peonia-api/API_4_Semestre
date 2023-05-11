@@ -22,9 +22,10 @@ class GroupController {
         const createGroup = req.body
         const groupRepository = AppDataSource.getRepository(Group)
         const insertGroup = new Group();
+        insertGroup.groupName = createGroup.groupName
         insertGroup.groupType = createGroup.groupType
         insertGroup.groupDescription = createGroup.groupDescription
-
+        insertGroup.cliente = createGroup.cliente
 
         const allGroup = await groupRepository.save(insertGroup)
         return res.json(allGroup)
