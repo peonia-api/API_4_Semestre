@@ -18,6 +18,7 @@ import * as Yup from 'yup';
 function EditarGrupo() {
 
     const id = window.location.href.split("/")[4];
+    const [groupName, setGroupName] = useState("");
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
     //const [userName, setUserName] = useState("");
@@ -47,10 +48,9 @@ function EditarGrupo() {
           .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
           .then((response) => {
             console.log(response.data);
+            setGroupName(response.data[0].group.groupName);
             setGroupType(response.data[0].group.groupType);
             setGroupDescription(response.data[0].group.groupDescription);
-            //setUserName(response.data[0].user.userName);
-            //setGroupId(response.data[0].group.id);
             
             setIds(response.data.map((item:any) => item.id))
             setUserOptions(response.data.map((item: any) => item.user.userName));
@@ -143,6 +143,10 @@ function EditarGrupo() {
         setGroupType(event.target.value);
     }
 
+    function handleGroupNameChange(event:any) {
+        setGroupName(event.target.value);
+    }
+
     function handleGroupDescriptionChange(event:any) {
         setGroupDescription(event.target.value);
     }
@@ -185,21 +189,21 @@ function EditarGrupo() {
                             placeholder="Nome do Grupo"
                             type="text"
                             autoComplete="off"
-                            value={groupType}
-                            onChange={handleGroupTypeChange}
+                            value={groupName}
+                            onChange={handleGroupNameChange}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        groupType === "",
+                                    groupName === "",
                                 },
                                 {
                                     "is-valid":
-                                        groupType !== "",
+                                    groupName !== "",
                                 }
                             )}
                         />
-                        {groupType === "" && (
+                        {groupName === "" && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
                                     <span role="alert">Grupo é obrigatório</span>
