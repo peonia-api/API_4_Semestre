@@ -155,6 +155,7 @@ function CadastroGrupo() {
               </div>
               <div className="col-lg-6">
           {/* begin::Form group Tipo grupo */}
+            {userType !== "Padrao" ?
                 <div className="fv-row mb-3">
                   <label className="form-label fw-bolder text-dark fs-6">
                     Grupo
@@ -203,7 +204,8 @@ function CadastroGrupo() {
                     </div>
                   )}
                 </div>
-                {/* end::Form group Tipo grupo*/}
+               
+                  : ""}
               </div>
             </div>
 
