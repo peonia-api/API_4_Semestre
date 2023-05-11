@@ -129,6 +129,10 @@ div.perfil a.nav-link {
   justify-content: right;
 }
 
+div.dropdown a.dropdown-toggle {
+  margin-left: 0;
+}
+
 .btn-form {
   display: flex;
   align-items: center;

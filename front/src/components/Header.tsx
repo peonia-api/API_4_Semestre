@@ -39,7 +39,7 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
-              <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
+              <CustomLink to="/listagemCall">MEUS CHAMADOS</CustomLink>
               {tipoUsuario !== "Padrao" ? 
                 <>
                   <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
