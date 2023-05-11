@@ -13,7 +13,7 @@ import salvar from "../images/salvar.png";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
 
-function EditarGrupos() {
+function EditarGrupo() {
 
     const id = window.location.href.split("/")[4];
     const [groupType, setGroupType] = useState("");
@@ -271,4 +271,4 @@ function EditarGrupos() {
     );
 }
 
-export default EditarGrupos;
+export default EditarGrupo;

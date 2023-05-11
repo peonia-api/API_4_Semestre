@@ -102,6 +102,16 @@ export const Private = ({ children }:any) => {
 
 }
 
+export const VerifyDiretor = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "Diretor"){
+        return <Navigate to={"/LogAvaliacoes"}/>
+    }
+
+    return children;
+}
+
 export const VerifyCso = ({ children }:any) => {
     const tipo = localStorage.getItem("userType")
 

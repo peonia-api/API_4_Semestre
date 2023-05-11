@@ -138,12 +138,11 @@ function ListagemGrupos() {
 
   //search
   const [searchQuery, setSearchQuery] = useState<string>("");
-  // const filteredData = data.filter(
-  //   (item) =>
-  //     item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     item.userGroup.toLowerCase().includes(searchQuery.toLowerCase())
-
-  // );
+  const filteredData = data.filter(
+    (item) =>
+    item.user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.group.groupDescription.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   
   return (
@@ -189,7 +188,7 @@ function ListagemGrupos() {
                       <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">{grupo.usuarios.join(", ")}</td>
                       <td className="text-center">
-                        <Link to={"/editarGrupos/" + grupo.id} style={{ padding: "3px" }}>
+                        <Link to={"/editarGrupo/" + grupo.id} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />
                         </Link>
                         {grupo.usuarios.length <= 5 ? (

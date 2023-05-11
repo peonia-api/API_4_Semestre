@@ -8,7 +8,7 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import ListagemUser from "./pages/ListagemUser";
 import EditarUser from "./pages/EditarUser";
 import Login from "./pages/Login";
-import { AuthProvider, Private, VerifyCTO, VerifyCso, VerifyHP, VerifyPADRAO, VerifyRT, VerifySQUAD } from "./contexts/auth";
+import { AuthProvider, Private, VerifyCTO, VerifyCso, VerifyDiretor, VerifyHP, VerifyPADRAO, VerifyRT, VerifySQUAD } from "./contexts/auth";
 import ListagemTipoUsuario from "./pages/ListagemTipoUsuario";
 //import { Comite } from "./pages/Comite";
 import { ComiteCso } from "./pages/Comite/ComiteCso";
@@ -23,6 +23,8 @@ import EditarGrupos from "./pages/EditarGrupos";
 import CadastroGrupos from "./pages/CadastroGrupos";
 import ArchivedList from "./pages/Archived";
 import LogAvaliacoes from "./pages/LogAvaliacoes";
+import CadastroGrupo from "./pages/CadastroGrupos";
+import CadastroGruposCliente from "./pages/CadastroGruposCliente";
 
 function App() {
   return (
@@ -47,11 +49,11 @@ function App() {
                   <Route path="/comiteHp/:id" element={<VerifyHP> <Private> <ComiteHp/> </Private> </VerifyHP>} />
                   <Route path="/comiteRt/:id" element={<VerifyRT> <Private> <ComiteRt/> </Private></VerifyRT>} />
                   <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
-                  <Route path="/listagemGrupos" element={<ListagemGrupos />}></Route>
-                  <Route path="/editarGrupos" element={<EditarGrupos />}></Route>
-                  <Route path="/arquivar" element={<ArchivedList />}></Route>
-                  <Route path="/editarGrupos/:id" element={<EditarGrupos />}></Route>
-                  <Route path="/logAvaliacoes" element={<LogAvaliacoes />}></Route>
+                  <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
+                  <Route path="/editarGrupo/:id" element={<Private><EditarGrupos /></Private>}></Route>
+                  <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
+                  <Route path="/cadastroGrupoCliente" element={<Private><CadastroGruposCliente /></Private>} />
+                  <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
                 </Routes>
               </AuthProvider>
               <Footer />

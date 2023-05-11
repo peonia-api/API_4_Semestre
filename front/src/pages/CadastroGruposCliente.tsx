@@ -13,7 +13,7 @@ import { Users } from "../types/user";
 import Select from 'react-select';
 
 
-function CadastroGrupo() {
+function CadastroGrupoCliente() {
   const [data, setData] = useState<Users[]>([]);
   const [selectedUsers, setSelectedUsers] = useState([] as any);
 
@@ -258,4 +258,4 @@ function CadastroGrupo() {
   );
 
 }
-export default CadastroGrupo;
+export default CadastroGrupoCliente;
