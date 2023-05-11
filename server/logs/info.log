@@ -1047,3 +1047,9 @@
 [info]: [ 11/05/2023:11:57:26 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
 [info]: [ 11/05/2023:11:57:26 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
 [info]: [ 11/05/2023:11:57:26 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 11/05/2023:12:9:12 ] - Rodando na porta 3001
+[info]: [ 11/05/2023:12:9:12 ] - {"allCall":{"id":12,"callEmail":"ana@gmail.com","callType":"feature","callTitle":"teste22","callDescription":"testeeeeeeeeeeeeeeeeeeeeeeeee222222","callPriority":"avaliar","callStatus":"Em análise","callDateCreate":"2023-05-11T17:19:42.237Z","callDateFinalization":"2023-05-11T17:19:42.237Z","avaliar":"CSO"},"message":"Sucesso ao pegar os chamados."}
+[info]: [ 11/05/2023:12:9:12 ] - {"findFile":[],"message":"Sucesso ao pegar o arquivo."}
+[info]: [ 11/05/2023:12:9:20 ] - Rodando na porta 3001
+[error]: [ 11/05/2023:12:9:20 ] - {"mensage":"Erro ao pegar os chamados"}
+[error]: [ 11/05/2023:12:9:20 ] - {"mensage":"Erro ao pegar os arquivos"}
