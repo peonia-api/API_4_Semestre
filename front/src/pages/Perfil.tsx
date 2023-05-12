@@ -18,7 +18,7 @@ import { uploadIcone } from "../services/supabase";
 
 function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)
-  const [avatarSRC, setAvatarSRC] = useState(avatar)
+  const [avatarSRC, setAvatarSRC]:any = useState(localStorage.getItem("icone"))
   const [icone, setIcone] = useState()
   const inputFile = useRef<HTMLInputElement>(null)
   
