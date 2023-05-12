@@ -15,7 +15,6 @@ import { Groups } from "../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
-import { getDifferentElements } from "../utils/log";
 
 function EditarGrupo() {
 
@@ -59,7 +58,6 @@ function EditarGrupo() {
             
             setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
             setUserOptions(response.data.map((item: any) => item.user.userName));
-            //setUserOptions(response.data.map((item: any) => ({id: item.user.id, value: item.user.userName})))
           })
           .catch((error) => {
             console.log(error);
@@ -91,7 +89,6 @@ function EditarGrupo() {
             setGroupType(response.data.groupType);
             setGroupDescription(response.data.groupDescription);
             
-            // setIds(response.data.map((item:any) => item.id))
             const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
             setUserOptions(opt.split(","));
             
@@ -104,7 +101,6 @@ function EditarGrupo() {
       if(typeGroup == "Funcionario"){
         fetchGroupToUser(id);
         fetchUsers();
-        //document.location.reload();
       }else{
         fetchGroup(id)
       }
@@ -135,31 +131,19 @@ function EditarGrupo() {
             .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType, groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
             .then((res) => {
               if(typeGroup == "Funcionario"){
-                //let cont = 0;
-                //ids.find((item:any) => item.name == arleyid.map((re) => re))
                 ids.map((idG:any) => {
                   if(arleyid.find((item:any) => idG.name === item)){
                     axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${idG.id}`);
                   }
                 })
-                // arleyid.map((idA) => {
-                //   // if (idA == undefined) {
-
-                //     axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids}`);
-                //     //arleyid.splice(cont, 1);
-                //  // }
-                //  // cont++;
-                // });
-                // for (let i = 0; i < user.length; i++) {
-                //   if (
-                //     arleyid.find((tes) => tes.id == user[i]) == undefined //mudar
-                //   ) {
-                //     axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
-                //       group: id,
-                //       user: user[i],
-                //     });
-                //   }
-                // }
+                user.map((u:any) => {
+                  if(arleyid.find((item:any) => u.name === item)){
+                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
+                      group: id,
+                      user: u.id,
+                    });
+                  }
+                })
               }
             })
             .then(() => {
@@ -196,11 +180,7 @@ function EditarGrupo() {
     function handleChangeUser(event:any) {
         console.log(event);
         const val = event.map((item:any) => item.value)
-        //setSelectedValues(event.map((item:any) => item.value))
-        
-        //const differentElements = arr1.filter(elem => !arr2.includes(elem)).concat(arr2.filter(elem => !arr1.includes(elem)));
-        //console.log(event.map((item:any) => item.id));
-        setUser(event.map((item:any) => item.id));
+        setUser(event.map((item:any) => ({id:item.id, name: item.value})));
         setArleyid(val.filter((elem:any) => !userOptions.includes(elem)).concat(userOptions.filter((elem:any) => !val.includes(elem))))
 
        
@@ -213,9 +193,9 @@ function EditarGrupo() {
   console.log(clientes);
   console.log(userOptions);
   console.log(arleyid);
-  //console.log(getDifferentElements(selectedValues, userOptions));
+  console.log(user);
   
-    //console.log(userOptions.map((item) => console.log(item)));
+
     
     
     return(
