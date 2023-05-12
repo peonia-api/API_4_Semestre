@@ -69,7 +69,12 @@ class GroupToCallController {
         try {
             const idgroupToCall: any = req.params.uuid
             const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
-            const findgroupToCall = await groupToCallRepository.findOneBy({ id: idgroupToCall })
+            const findgroupToCall = await groupToCallRepository.find({
+                relations: { call: true },
+                where: {
+                    call: { id: idgroupToCall },
+                },
+            })
             const allgroupToCall = await groupToCallRepository.remove(findgroupToCall)
             return res.json(allgroupToCall)
         } catch (err) {

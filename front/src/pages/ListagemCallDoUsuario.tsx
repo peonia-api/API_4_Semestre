@@ -1,7 +1,7 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
 import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
-import { URI, URIattach, URIcommit } from "../enumerations/uri";
+import { URI, URIattach, URIcommit, URIgroupToCall } from "../enumerations/uri";
 import { avisoDeletar } from "../controllers/avisoConcluido";
 import React, { useState, useEffect, useRef } from "react";
 import { Attachment } from "../types/attachment";
@@ -60,7 +60,7 @@ function ListagemCallUser() {
                 console.log("erro");
                 
               })
-                
+              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);

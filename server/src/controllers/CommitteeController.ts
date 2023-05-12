@@ -118,11 +118,15 @@ class CommitteeController {
     }
 
     public async deleteCommittee(req: Request, res: Response): Promise<Response> {
-        const deleteId: any = req.params.uuid
-        const committeeRep = AppDataSource.getRepository(Committee)
-        const find = await committeeRep.findOneBy({ id: deleteId })
-        const remove = await committeeRep.remove(find)
-        return res.json(remove)
+        try{
+            const deleteId: any = req.params.uuid
+            const committeeRep = AppDataSource.getRepository(Committee)
+            const find = await committeeRep.findOneBy({ id: deleteId })
+            const remove = await committeeRep.remove(find)
+            return res.json(remove)
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro o deletar"})
+        }
     }
 
 

@@ -15,6 +15,7 @@ import { Groups } from "../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
+import { setTimeout } from "timers/promises";
 
 function EditarGrupo() {
 
@@ -58,6 +59,8 @@ function EditarGrupo() {
             
             setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
             setUserOptions(response.data.map((item: any) => item.user.userName));
+
+            
           })
           .catch((error) => {
             console.log(error);
@@ -104,15 +107,22 @@ function EditarGrupo() {
       }else{
         fetchGroup(id)
       }
-      if((data.filter(({ value }: any) => userOptions.includes(value)) > []) === true ){document.location.reload()}
+      
     }, []);
   
-
+    
     console.log((data.filter(({ value }: any) => userOptions.includes(value)) > []) === false );
     console.log(ids);
     console.log(clientes);
     console.log(data);
-    
+
+   
+    // if (userOptions.length === 0) {
+    //   //window.setTimeout(function(){window.location.reload()}, 2000)
+      
+    //   //window.location.reload();
+      
+    // }
     
     
     function handleSubmit(event:any) {
@@ -252,7 +262,7 @@ function EditarGrupo() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {groupType === "Funcionario" && userOptions.length > 0 && (
+                    {groupType === "Funcionario" &&  (
                         <Select
                         defaultValue={data.filter(({ value }: any) =>
                             userOptions.includes(value)
@@ -264,6 +274,7 @@ function EditarGrupo() {
                         onChange={(e) => handleChangeUser(e)}
                         className="basic-multi-select"
                         />
+                        
                     )}
                     {groupType == "Cliente" && userOptions.length > 0 &&(
 
