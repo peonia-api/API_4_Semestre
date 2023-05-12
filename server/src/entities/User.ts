@@ -24,6 +24,10 @@ export class User {
     @Column({ nullable: false, length: 70 })
     userType: string;
 
+    @Column()
+    icone: string;
+
+
     @BeforeInsert() //a função hashPassword é disparada antes do insert e update
     @BeforeUpdate()
     hashPassword(): void {

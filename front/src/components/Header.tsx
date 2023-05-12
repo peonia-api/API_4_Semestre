@@ -18,6 +18,7 @@ function Header() {
   };
 
   const tipoUsuario = localStorage.getItem("userType")
+  const icone:any = localStorage.getItem("icone")
 
   return (
     <>
@@ -61,7 +62,7 @@ function Header() {
                 className="me-2 perfil" 
                 title={
                   <>
-                    <img src={perfil} alt="Meu Perfil" width="40%" />
+                    <img src={icone} alt="Meu Perfil" width="40%" />
                   </>
                 }>
                   <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>

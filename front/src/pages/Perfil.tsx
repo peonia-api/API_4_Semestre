@@ -14,10 +14,12 @@ import { avisoAlterarSenha, avisoPerfil } from "../controllers/avisoConcluido";
 import "../App.css";
 import { Modal } from "react-bootstrap";
 import { perfilValidationSchemaAlterarSenha } from "../controllers/validatePerfil";
+import { uploadIcone } from "../services/supabase";
 
 function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)
   const [avatarSRC, setAvatarSRC] = useState(avatar)
+  const [icone, setIcone] = useState()
   const inputFile = useRef<HTMLInputElement>(null)
   
 
@@ -29,13 +31,17 @@ function Perfil() {
 
   const onChangeInputFile = (e: any) =>{
     const files = e.target.files;
+    
     if (FileReader && files && files.length > 0) {
       const file = files[0] 
+    console.log(files);
+
       var fr = new FileReader();
       fr.onload = function () {
         if(fr.result){
           setAvatarSRC(fr.result.toString())
           formik.setFieldValue('userAvatar', file)
+          setIcone(files)
         }        
       }           
       fr.readAsDataURL(file);
@@ -54,14 +60,18 @@ function Perfil() {
   const formik = useFormik({
     initialValues: {
       userName: localStorage.getItem("userName")?? "",
-      userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
+      userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "",
+      icone: localStorage.getItem("icone")
     },
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      
-      await axios.put(`${URIuser.ALTERA_PERFIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`, values).then(async (res) => {
 
+      uploadIcone(icone).then((res) => {
+        formik.values.icone = res 
+        localStorage.setItem("icone", formik.values.icone)
+      })
+      await axios.put(`${URIuser.ALTERA_PERFIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`, values).then(async (res) => {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))

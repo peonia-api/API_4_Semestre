@@ -40,7 +40,7 @@ function App() {
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupos /></Private>} />
             <Route path="/editarUser/:id" element={<Private><EditarUser /></Private>} />
             <Route path="/listagemTipoUsuario" element={<VerifyPADRAO> <Private><ListagemTipoUsuario  /></Private></VerifyPADRAO>} />
-            <Route path="/" element={<Private> <ListagemCall /> </Private>} />
+            <Route path="/" element={<Private> <ListagemCallUser /> </Private>} />
             <Route path="/comites/:id" element={<VerifyCso><Private> <Comites URL={URIcommit.ALTERA_COMITE_CSO} type={"CSO"}/> </Private> </VerifyCso>} />
             <Route path="/comites/:id" element={<VerifyCTO> <Private> <Comites URL={URIcommit.ALTERA_COMITE_CTO} type={"CTO"}/> </Private> </VerifyCTO>} />
             <Route path="/comites/:id" element={<VerifyHP> <Private> <Comites URL={URIcommit.ALTERA_COMITE_HP} type={"HP"}/> </Private> </VerifyHP>} />
