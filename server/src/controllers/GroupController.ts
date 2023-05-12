@@ -46,11 +46,14 @@ class GroupController {
     }
 
     public async deleteGroup(req: Request, res: Response): Promise<Response> {
-        const idGroup: any = req.params.uuid
+        try{const idGroup: any = req.params.uuid
         const groupRepository = AppDataSource.getRepository(Group)
         const findGroup = await groupRepository.findOneBy({ id: idGroup })
         const allGroup = await groupRepository.remove(findGroup)
-        return res.json(allGroup)
+        return res.json(allGroup)}
+        catch(err){
+            return res.status(400).json(err)
+        }
     }
 
 }

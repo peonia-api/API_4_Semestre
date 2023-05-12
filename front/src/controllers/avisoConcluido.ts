@@ -49,6 +49,7 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
+
 function avisoConcuidoComite(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Sucesso",

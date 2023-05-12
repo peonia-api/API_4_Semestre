@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import autoAnimate from "@formkit/auto-animate";
@@ -8,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { avisoErroAoDeletar } from "../controllers";
 import { avisoDeletar } from "../controllers/avisoConcluido";
-import { avisoErroDeletar } from "../controllers/avisoErro";
+import { avisoErroDeletar, avisoChamado } from "../controllers/avisoErro";
 import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../enumerations/uri";
 import { removeFile } from "../services/supabase";
 import { Calls } from "../types/call";
@@ -74,9 +75,11 @@ function ListagemGrupos() {
             await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
           }));
         }
-        await axios.delete(`${URIgroup.DELETE_GROUP}${id}`);
-      
-        // Recarrega a página após a exclusão
+        
+          await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).catch((err) => {
+           avisoChamado();
+          })
+        
         setTimeout(() => {
           window.location.reload();
         }, 200);
