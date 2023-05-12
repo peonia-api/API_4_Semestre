@@ -90,7 +90,7 @@ function EditarGrupo() {
             setGroupDescription(response.data.groupDescription);
             
             // setIds(response.data.map((item:any) => item.id))
-            const opt = response.data.cliente.replace('{', "").replace('}', "")
+            const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
             setUserOptions(opt.split(","));
             
           })
@@ -109,7 +109,7 @@ function EditarGrupo() {
 
     console.log(userOptions);
     //console.log(groupId);
-    console.log(ids);
+    console.log(clientes);
     console.log(data);
 
     
@@ -127,7 +127,7 @@ function EditarGrupo() {
           };
       
           axios
-            .put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData)
+            .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType,groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
             .then((res) => {
               if(typeGroup == "Funcionario"){
                 let cont = 0;
