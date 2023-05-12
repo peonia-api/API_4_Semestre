@@ -195,7 +195,8 @@ function ListagemGrupos() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Nome da Equipe {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("id")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th className="text-center">Tipo do Grupo</th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
@@ -206,6 +207,7 @@ function ListagemGrupos() {
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>
+                      <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">
                         <Link to={"/editarGrupo/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
                           <img src={editar} style={{ width: '25px' }} alt='Editar' />
