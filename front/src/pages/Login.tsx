@@ -58,8 +58,9 @@ function Login() {
 
   function enviarLink(email: string) {
     Swal.fire({
+      icon: "success",
       title: 'Sucesso!!',
-      text: 'Em breve você receberá um e-mail contendo as instruções para redefiir a senha',
+      text: 'Em instantes você receberá um e-mail contendo as instruções para redefinir a sua senha',
     })
 
     var templateParams = {
