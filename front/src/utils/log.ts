@@ -7,3 +7,7 @@ export const log = (data: any) => {
       return list;
     }, []);
   }
+
+export const getDifferentElements = (arr1:any, arr2:any) => {
+  return arr1.filter((elem:any) => !arr2.includes(elem)).concat(arr2.filter((elem:any) => !arr1.includes(elem)));
+}

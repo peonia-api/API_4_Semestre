@@ -15,6 +15,7 @@ import { Groups } from "../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
+import { getDifferentElements } from "../utils/log";
 
 function EditarGrupo() {
 
@@ -34,7 +35,7 @@ function EditarGrupo() {
     const [clientes, setClientes] = useState<any[]>([]);
 
     const [selectedValues, setSelectedValues] = useState<any[]>([]);
-
+    
 
     const schema = Yup.object().shape({
         groupType: Yup.string().required(),
@@ -56,8 +57,9 @@ function EditarGrupo() {
             setGroupType(response.data[0].group.groupType);
             setGroupDescription(response.data[0].group.groupDescription);
             
-            setIds(response.data.map((item:any) => item.id))
+            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
             setUserOptions(response.data.map((item: any) => item.user.userName));
+            //setUserOptions(response.data.map((item: any) => ({id: item.user.id, value: item.user.userName})))
           })
           .catch((error) => {
             console.log(error);
@@ -98,20 +100,23 @@ function EditarGrupo() {
             console.log(error);
           });
       }
+     
       if(typeGroup == "Funcionario"){
         fetchGroupToUser(id);
         fetchUsers();
+        //document.location.reload();
       }else{
         fetchGroup(id)
       }
+      if((data.filter(({ value }: any) => userOptions.includes(value)) > []) === true ){document.location.reload()}
     }, []);
   
 
-    console.log(userOptions);
-    //console.log(groupId);
+    console.log((data.filter(({ value }: any) => userOptions.includes(value)) > []) === false );
+    console.log(ids);
     console.log(clientes);
     console.log(data);
-
+    
     
     
     function handleSubmit(event:any) {
@@ -130,26 +135,31 @@ function EditarGrupo() {
             .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType, groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
             .then((res) => {
               if(typeGroup == "Funcionario"){
-                let cont = 0;
-                arleyid.map((idA) => {
-                  if (idA == undefined) {
-                    axios.delete(
-                      `${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`
-                    );
-                    arleyid.splice(cont, 1);
+                //let cont = 0;
+                //ids.find((item:any) => item.name == arleyid.map((re) => re))
+                ids.map((idG:any) => {
+                  if(arleyid.find((item:any) => idG.name === item)){
+                    axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${idG.id}`);
                   }
-                  cont++;
-                });
-                for (let i = 0; i < user.length; i++) {
-                  if (
-                    arleyid.find((tes) => tes.id == user[i]) == undefined
-                  ) {
-                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
-                      group: id,
-                      user: user[i],
-                    });
-                  }
-                }
+                })
+                // arleyid.map((idA) => {
+                //   // if (idA == undefined) {
+
+                //     axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids}`);
+                //     //arleyid.splice(cont, 1);
+                //  // }
+                //  // cont++;
+                // });
+                // for (let i = 0; i < user.length; i++) {
+                //   if (
+                //     arleyid.find((tes) => tes.id == user[i]) == undefined //mudar
+                //   ) {
+                //     axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
+                //       group: id,
+                //       user: user[i],
+                //     });
+                //   }
+                // }
               }
             })
             .then(() => {
@@ -184,23 +194,27 @@ function EditarGrupo() {
     }
 
     function handleChangeUser(event:any) {
+        console.log(event);
+        const val = event.map((item:any) => item.value)
+        //setSelectedValues(event.map((item:any) => item.value))
         
-        console.log(userOptions.map((test) => event.find((item:any) => item.value == test)));
-        console.log(event.map((item:any) => item.id));
-        setArleyid(userOptions.map((test) => event.find((item:any) => item.value == test)))
+        //const differentElements = arr1.filter(elem => !arr2.includes(elem)).concat(arr2.filter(elem => !arr1.includes(elem)));
+        //console.log(event.map((item:any) => item.id));
         setUser(event.map((item:any) => item.id));
+        setArleyid(val.filter((elem:any) => !userOptions.includes(elem)).concat(userOptions.filter((elem:any) => !val.includes(elem))))
+
        
     }
 
     function handleChangeCli(event:any) {
-        
-      console.log(userOptions);
       setClientes(event.map((item:any) => item.value))
-     
   }
 
   console.log(clientes);
-
+  console.log(userOptions);
+  console.log(arleyid);
+  //console.log(getDifferentElements(selectedValues, userOptions));
+  
     //console.log(userOptions.map((item) => console.log(item)));
     
     
