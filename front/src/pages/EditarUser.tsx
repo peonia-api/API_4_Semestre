@@ -99,27 +99,25 @@ function EditarUser() {
 
         }
     }
-
-    const cso = type.find((item: UserType) => item.userType === "CSO");
-    const rt = type.find((item: UserType) => item.userType === "RT");
-    const cto = type.find((item: UserType) => item.userType === "CTO");
-    const hp = type.find((item: UserType) => item.userType === "HP");
+   
+     
+    const cso = type.find((item: UserType) => item.userType === "CSO")
+    const rt = type.find((item: UserType) => item.userType === "RT" )
+    const cto = type.find((item: UserType) => item.userType === "CTO")
+    const hp = type.find((item: UserType) => item.userType === "HP")
     
-    const options: Option[] = [
+    const options:Option[] = [
       { value: formik.values.userType, label: formik.values.userType },
       { value: "CSO", label: "CSO (Chief Security Officer)" },
       { value: "RT", label: "RT (Responsável Técnico)" },
       { value: "CTO", label: "CTO (Chief Technology Officer)" },
       { value: "HP", label: "Head de plataforma" },
+      { value: "Diretor", label: "Diretor" },
       { value: "Padrao", label: "Padrão" },
     ].filter((option) => {
-      if (option.value === "CSO" && cso) return false;
-      if (option.value === "RT" && rt) return false;
-      if (option.value === "CTO" && cto) return false;
-      if (option.value === "HP" && hp) return false;
-      if (option.value ===  formik.values.userType) return false;
-      return true;
-    });
+        return option.value !== formik.values.userType &&
+          !type.find((item: UserType) => item.userType === option.value && data?.userType !== option.value);
+      });
     
     useEffect(() => {
       if (!selectedOption && formik.values.userType) {
@@ -129,8 +127,9 @@ function EditarUser() {
     
     const handleChange = (option: Option | null) => {
       setSelectedOption(option);
-      formik.setFieldValue("userType", option?.value);
+        formik.setFieldValue("userType", option?.value)  
     };
+    console.log(formik.values.userType);
     
     console.log(selectedOption);
     
