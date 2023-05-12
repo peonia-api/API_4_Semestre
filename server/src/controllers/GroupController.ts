@@ -39,7 +39,7 @@ class GroupController {
         const findGroup = await groupRepository.findOneBy({ id: idGroup })
         findGroup.groupType = createGroup.groupType
         findGroup.groupDescription = createGroup.groupDescription
-
+        findGroup.cliente = createGroup.cliente
 
         const allGroup = await groupRepository.save(findGroup)
         return res.json(allGroup)

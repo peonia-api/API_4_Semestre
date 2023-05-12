@@ -127,7 +127,7 @@ function EditarGrupo() {
           };
       
           axios
-            .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType,groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
+            .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType, groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
             .then((res) => {
               if(typeGroup == "Funcionario"){
                 let cont = 0;
