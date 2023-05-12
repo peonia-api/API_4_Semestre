@@ -12,13 +12,12 @@ export const validateCommitteeFilter = async (idCommittee) => {
     const call = await callRep.findOneBy({ id: idCommittee })
     const allCommittee = await committeeRepository.findOneBy({ id: idCommittee })
 
-    getGroupToCall(idCommittee);
-
     if (allCommittee.call.callStatus == "Em análise") {
         if (allCommittee.comiRiskCso == 3 || allCommittee.comiRiskRt == 3 || allCommittee.comiImpactCto == 0 || allCommittee.comiImpactHp == 0) {
             call.callStatus = "Arquivada"
             call.callDateFinalization = new Date();
             await callRep.save(call);
+            await getGroupToCall(idCommittee);
             concreteSubject.notifyObservers();
         }
         else if (allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null) {
@@ -39,7 +38,8 @@ export const validateCommitteeFilter = async (idCommittee) => {
         }
         else {
             call.callStatus = "Aprovada"
-            await callRep.save(call)
+            await callRep.save(call);
+            await getGroupToCall(idCommittee);
             concreteSubject.notifyObservers();
         }
     }
@@ -59,11 +59,10 @@ export const getGroupToCall = async (idgroupToCall: number) => {
 
         listaCliente.forEach((item) => {
             const emails = item.email;
-            console.log(emails);
-
 
             const observer = new UserObserver(emails, item.status, item.titulo);
             concreteSubject.addObserver(observer);
+            console.log(observer);
         });
 
         return listaCliente;

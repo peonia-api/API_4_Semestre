@@ -1,4 +1,5 @@
-import emailjs from '@emailjs/browser';
+import * as nodemailer from 'nodemailer';
+
 
 // Interface Observer
 interface Observer {
@@ -21,9 +22,8 @@ class ConcreteSubject {
     }
 
     public notifyObservers(): void {
-        for (const observer of this.observers) {
-            observer.update();
-        }
+        console.log('Subject: Notifying observers...');
+        this.observers.forEach((observer) => observer.update());
     }
 }
 
@@ -41,22 +41,35 @@ class UserObserver implements Observer {
 
     public update(): void {
 
-        const templateParams = {
-            email: this.email,
-            // Outros parâmetros do e-mail, se necessário
-            status: this.status,
-            titulo: this.titulo
+        let nodemailer = require('nodemailer');
+
+        var transporter = nodemailer.createTransport({
+            host: "smtp-mail.outlook.com", // hostname
+            secureConnection: false, // TLS requires secureConnection to be false
+            port: 587, // port for secure SMTP
+            tls: {
+                ciphers: 'SSLv3'
+            },
+            auth: {
+                user: 'peonia-api@outlook.com',
+                pass: 'ADDJLmRY'
+            }
+        });
+
+        var mailOptions = {
+            from: '"Equipe Peônia - Ionichealth" <peonia-api@outlook.com>', // sender address (who sends)
+            to: this.email, // list of receivers (who receives)
+            subject: 'Ionichealth - Atualização de status de chamado ', // Subject line
+            text: 'Olá', // plaintext body
+            html: `<p>Olá, </p><p> Gentileza notar que o seu chamado <strong>${this.titulo}</strong> teve seu status alterado para: <strong>${this.status}</strong>.</p><p>Caso existam dúvidas, favor entrar em contato com o atendimento ao cliente <a href="https://pt-br.ionic.health/contato" target="_blank">clicando aqui</a>.</p><p>Atenciosamente,</p><p>Equipe Peonia - Ionichealth.</p>` // html body
         };
 
-        emailjs.send(
-            "gmailMessage",
-            "template_rngpv1h",
-            templateParams,
-            "w4LxBZJlq08EuppL3"
-        ).then((response) => {
-            console.log('E-mail enviado com sucesso!', response);
-        }).catch((error) => {
-            console.error('Erro ao enviar o e-mail:', error);
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                return console.log(error);
+            }
+
+            console.log('Message sent: ' + info.response);
         });
     }
 }
