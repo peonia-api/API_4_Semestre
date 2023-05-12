@@ -90,7 +90,7 @@ function EditarCall() {
       axios
         .get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_ESPECIFICO}${id}`)
         .then((response) => {
-          setSelectedGroup(response.data.map((item: any) => item.group.groupType));
+          setSelectedGroup(response.data.map((item: any) => item.group.groupName));
         })
         .catch((error) => {
           console.log(error);
@@ -103,7 +103,7 @@ function EditarCall() {
         const response = await axios.get(URIgroup.PEGAR_GROUP);
         const options = response.data.map((group:any) => ({
           value: group.id,
-          label: group.groupType
+          label: group.groupName
         }));
         setGroup(options);
       } catch (error) {
@@ -204,10 +204,9 @@ function EditarCall() {
   }
 
   const handleSelectChange = (selectedOptions: any) => {
-    const selectedValues = selectedOptions.map((option: any) => option.value);
+    const selectedValues = selectedOptions.map((option: any) => option.label); 
     setSelectedGroup(selectedValues);
   };
-
 
   console.log(group);
   console.log(selectedGroup);
@@ -357,12 +356,21 @@ function EditarCall() {
                 </label>
                 {group.length > 0 && selectedGroup.length > 0 && (
                 <Select
-                  defaultValue={group.filter(({ value }: any) => selectedGroup.includes(value))}
-                  isMulti
-                  name="group"
-                  options={group}
-                  classNamePrefix="select"
-                  onChange={(e) => handleSelectChange(e)}
+                defaultValue={selectedGroup.map((item) => ({ value: item, label: item }))}
+                isMulti
+                name="users"
+                options={[
+                  {
+                    label: "Users",
+                    options: selectedGroup.map((item) => ({
+                      value: item,
+                      label: item,
+                    })),
+                  },
+                ]}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                onChange={handleSelectChange}
                 />
                 )}
               </div>

@@ -123,6 +123,7 @@ function EditarGrupo() {
             groupName: groupName,
             cliente: clientes,
             groupDescription: groupDescription,
+            user: user,
           };
       
           axios
@@ -273,10 +274,19 @@ function EditarGrupo() {
                     {groupType == "Cliente" && userOptions.length > 0 &&(
 
                       <CreatableSelect
-                      defaultValue={userOptions.map((item) => item)}
+                      defaultValue={userOptions.map((item) => ({ value: item, label: item }))}
                       isMulti
                       name="clients"
                       className="basic-multi-select"
+                      options={[
+                        {
+                          label: "Users",
+                          options: userOptions.map((item) => ({
+                            value: item,
+                            label: item,
+                          })),
+                        },
+                      ]}
                       classNamePrefix="select"
                       onChange={(e) => handleChangeCli(e)}
                       id="slcMembros"
