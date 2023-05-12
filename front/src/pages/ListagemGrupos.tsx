@@ -76,18 +76,19 @@ function ListagemGrupos() {
           }));
         }
         
-          await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).catch((err) => {
+          await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).then(() => {  
+            setTimeout(() => {
+            window.location.reload();
+          }, 200);})
+          .catch((err) => {
            avisoChamado();
           })
-        
-        setTimeout(() => {
-          window.location.reload();
-        }, 200);
+
       }
 
     } catch (error) {
       console.error(error);
-      avisoErroDeletar();
+      avisoErroDeletar()
     }
   }
 
