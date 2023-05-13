@@ -218,6 +218,8 @@ function EditarCall() {
     formik.setFieldValue("group", selectedOptions?.value)
   };
 
+
+
   console.log(group);
   console.log(selectedGroup);
   console.log(idLiga);

@@ -174,12 +174,13 @@ function Perfil() {
                   <div className="d-flex border border-2 shadow-sm rounded-circle">
                     <input ref={inputFile} accept="image/png, image/jpeg" type="file" className="d-none" onChange={onChangeInputFile} />
                     <img className="rounded-circle" src={avatarSRC} alt="avatar" style={{
-                      width: 280,
-                      height: 280
+                      position:'relative',
+                      width: 190,
+                      height: 190
                     }} />
                     <span style={{
                       position: "relative",
-                      top: 0,
+                      top: -18,
                       right: 35,
                       width: 0,
                       height: 0
@@ -192,7 +193,7 @@ function Perfil() {
                     </span>
                     <span className={avatarSRC === avatar ? 'd-none' : ''} style={{
                       position: "relative",
-                      top: 249,
+                      top: 180,
                       right: 35,
                       width: 0,
                       height: 0
