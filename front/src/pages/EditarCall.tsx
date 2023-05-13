@@ -208,6 +208,8 @@ function EditarCall() {
     setSelectedGroup(selectedValues);
   };
 
+
+
   console.log(group);
   console.log(selectedGroup);
   
