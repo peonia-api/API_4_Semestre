@@ -68,7 +68,12 @@ function Header() {
                       }
                   </NavDropdown>
                 </>
-                : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>
+                : 
+                <>
+                  <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink> 
+                  <CustomLink to="/listagemGrupos">GRUPOS</CustomLink>
+                </>
+                
                }
               <NavDropdown 
                 className="me-2 perfil" 
