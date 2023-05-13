@@ -117,11 +117,15 @@ function EditarGrupo() {
 
   
     
-    console.log((data.filter(({ value }: any) => userOptions.includes(value)) > []) === false );
-    console.log(ids);
-    console.log(clientes);
-    console.log(data);
-    
+    function veri(e:any){
+      if(groupType === "Cliente"){
+        if(clientes.length > 0){
+          handleSubmit(e)
+        }
+      }else{
+        handleSubmit(e)
+      }
+    }
     
     function handleSubmit(event:any) {
         event.preventDefault();
@@ -194,12 +198,9 @@ function EditarGrupo() {
 
     function handleChangeCli(event:any) {
       setClientes(event.map((item:any) => item.value))
-  }
+    }
 
-  console.log(clientes);
-  console.log(userOptions);
-  console.log(arleyid);
-  console.log(user);
+  console.log(clientes.length > 0);
   
     
     
@@ -284,9 +285,10 @@ function EditarGrupo() {
                     </>
                   )}
                     {groupType == "Cliente" && userOptions.length > 0 &&(
-
+                    <>
                       <CreatableSelect
                       defaultValue={userOptions.map((item) => ({ value: item, label: item }))}
+                      required
                       isMulti
                       name="clients"
                       className="basic-multi-select"
@@ -304,14 +306,16 @@ function EditarGrupo() {
                       id="slcMembros"
                       placeholder="Digite os emails dos clientes"
                       />
-                    )}
-                        {userOptions === null && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">Selecione pelo menos um usuário</span>
-                                </div>
+                      {clientes.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                            <div className="fv-help-block">
+                                <span role="alert">Selecione pelo menos um usuário</span>
                             </div>
-                        )}
+                        </div>
+                      )}
+                    </>
+                    )}
+                        
                     </div>
                     </div>
             </div>
@@ -353,7 +357,7 @@ function EditarGrupo() {
                     <button
                         type="button"
                         className="btn btn-form"
-                        onClick={(e) => (handleSubmit (e))}
+                        onClick={(e) => (veri (e))}
                     >
                         Salvar
                         <img src={salvar} alt="icone salvar" style={{height:"20px", width:"20px", marginLeft:"5px"}}/>
