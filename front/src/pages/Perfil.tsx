@@ -14,14 +14,14 @@ import { avisoAlterarSenha, avisoPerfil } from "../controllers/avisoConcluido";
 import "../App.css";
 import { Modal } from "react-bootstrap";
 import { perfilValidationSchemaAlterarSenha } from "../controllers/validatePerfil";
-import { uploadIcone } from "../services/supabase";
+import { removeFileOneIcone, uploadIcone } from "../services/supabase";
 
 function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)
   const [avatarSRC, setAvatarSRC]:any = useState(localStorage.getItem("icone"))
   const [icone, setIcone] = useState()
   const inputFile = useRef<HTMLInputElement>(null)
-  
+  const imagemUti = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
 
   useEffect(() => {
     
@@ -53,8 +53,7 @@ function Perfil() {
   }
 
   const onClickRmvAvatar = () =>{   
-    formik.values.icone = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
-    localStorage.setItem("icone", "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png")
+    formik.values.icone = imagemUti
     setAvatarSRC(avatar)
     formik.setFieldValue('userAvatar', null)
     if(inputFile.current){
@@ -72,17 +71,13 @@ function Perfil() {
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-
-      // uploadIcone(icone).then((res) => {
-      //   //formik.values.icone = res 
-      //   //localStorage.setItem("icone", formik.values.icone)
-      // })
-      console.log(formik.values.icone);
       
       await axios.put(`${URIuser.ALTERA_PERFIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`, values).then(async (res) => {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
+          if(localStorage.getItem("icone") != imagemUti){removeFileOneIcone(localStorage.getItem("icone"))}
+          if(formik.values.icone === imagemUti){localStorage.setItem("icone", imagemUti)}
           avisoPerfil()
         }
       }).catch((err) => {
@@ -104,8 +99,9 @@ function Perfil() {
           localStorage.removeItem("token")
           localStorage.removeItem("userType")
           localStorage.removeItem("userName")
+          localStorage.removeItem("icone")
           avisoAlterarSenha().then((res) => {
-            setTimeout(function(){window.location.assign("/listagem");}, 500)
+            setTimeout(function(){window.location.assign("/");}, 500)
           })
         }
 
@@ -124,6 +120,7 @@ function Perfil() {
     } else {
       if(icone){uploadIcone(icone).then((res) => {
         formik.values.icone = res 
+        localStorage.setItem("icone", res)
         formik.submitForm();
       })}else{formik.submitForm();}
     }

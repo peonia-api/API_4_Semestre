@@ -85,12 +85,11 @@ export async function removeFileOneIcone(path: any) {
 export async function uploadIcone(e: any) {
   //const filesS = e.target.files
   const filesS = e
-
-  const nameFile:any = Date.now() + '-' + filesS[0].name.replace(/[^a-zA-Z0-9]/g, "").split(' ').join('')
+  let nameFile
   if(filesS[0] != undefined){
-    console.log(filesS[0]);
-   
-      removeFileOneIcone(localStorage.getItem("icone"))
+    nameFile = Date.now() + '-' + filesS[0].name.replace(/[^a-zA-Z0-9]/g, "").split(' ').join('')
+    console.log(nameFile);
+      
       const { data, error } = await supabase.storage.from('icones').upload(nameFile, filesS[0])
       
       if (error) {
@@ -99,7 +98,7 @@ export async function uploadIcone(e: any) {
 
       } else {
         // Handle success
-        localStorage.setItem("icone", "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/" + nameFile)
+        
       }
   }
   
