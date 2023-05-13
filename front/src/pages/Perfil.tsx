@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import axios from "axios";
@@ -22,6 +22,10 @@ function Perfil() {
   const [icone, setIcone] = useState()
   const inputFile = useRef<HTMLInputElement>(null)
   
+
+  useEffect(() => {
+    
+}, [])
 
   const handleCloseMdlAlterarSenha = () => setShowMdlAlterarSenha(false)
 
@@ -49,6 +53,8 @@ function Perfil() {
   }
 
   const onClickRmvAvatar = () =>{   
+    formik.values.icone = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
+    localStorage.setItem("icone", "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png")
     setAvatarSRC(avatar)
     formik.setFieldValue('userAvatar', null)
     if(inputFile.current){
@@ -61,29 +67,27 @@ function Perfil() {
     initialValues: {
       userName: localStorage.getItem("userName")?? "",
       userEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "",
-      icone: localStorage.getItem("icone")
+      icone: localStorage.getItem("icone") ?? ""
     },
     validationSchema: perfilValidationSchema,
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
 
-      uploadIcone(icone).then((res) => {
-        formik.values.icone = res 
-        localStorage.setItem("icone", formik.values.icone)
-      })
+      // uploadIcone(icone).then((res) => {
+      //   //formik.values.icone = res 
+      //   //localStorage.setItem("icone", formik.values.icone)
+      // })
+      console.log(formik.values.icone);
+      
       await axios.put(`${URIuser.ALTERA_PERFIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`, values).then(async (res) => {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
           avisoPerfil()
         }
-
       }).catch((err) => {
-
         avisoErroRequisicao()
-          
       })
-
     },
   });
 
@@ -118,7 +122,10 @@ function Perfil() {
     if (!formik.isValid) {
       avisoErro();
     } else {
-      formik.submitForm();
+      if(icone){uploadIcone(icone).then((res) => {
+        formik.values.icone = res 
+        formik.submitForm();
+      })}else{formik.submitForm();}
     }
   }
 

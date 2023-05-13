@@ -99,7 +99,7 @@ export async function uploadIcone(e: any) {
 
       } else {
         // Handle success
-
+        localStorage.setItem("icone", "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/" + nameFile)
       }
   }
   
