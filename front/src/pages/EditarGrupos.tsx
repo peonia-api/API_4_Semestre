@@ -39,7 +39,9 @@ function EditarGrupo() {
 
     const schema = Yup.object().shape({
         groupName: Yup.string().required(),
-        user:  Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro"),
+        ...(groupType === "Funcionario"
+        ? { user: Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro") }
+        : {}),
     });
 
     let location = useNavigate();
@@ -123,7 +125,7 @@ function EditarGrupo() {
     function handleSubmit(event:any) {
         event.preventDefault();
       
-        schema.validate({ groupName, user }).then(() => {
+        schema.validate({ groupName, user}).then(() => {
           const updatedData = {
             groupType: groupType,
             groupName: groupName,
@@ -254,36 +256,32 @@ function EditarGrupo() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {groupType === "Funcionario" &&  (
-                        <Select
+                    {groupType === "Funcionario" && (
+                    <>
+                      <Select
                         defaultValue={data.filter(({ value }: any) =>
-                            userOptions.includes(value)
+                          userOptions.includes(value)
                         )}
+                        required
                         isMulti
                         name="users"
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
-                        className={clsx(
-                          "basic-multi-select",
-                          {
-                              "is-invalid":
-                              user.length < 0,
-                          },
-                          {
-                              "is-valid":
-                              user.length > 0,
-                          }
-                      )}  
-                        />
-                    )}
-                    {groupType === "Funcionario" && user.length === 0 && (
-                          <div className="fv-plugins-message-container">
-                              <div className="fv-help-block">
-                                  <span role="alert">Selecione pelo menos um usuário</span>
-                              </div>
+                        className={clsx("basic-multi-select", {
+                          "is-invalid": user.length < 1,
+                          "is-valid": user.length > 0,
+                        })}
+                      />
+                      {user.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                          <div className="fv-help-block">
+                            <span role="alert">Selecione pelo menos um usuário</span>
                           </div>
+                        </div>
                       )}
+                    </>
+                  )}
                     {groupType == "Cliente" && userOptions.length > 0 &&(
 
                       <CreatableSelect
