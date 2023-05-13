@@ -24,7 +24,7 @@ export function Comites() {
         e.preventDefault()
         debugger
         console.log("submint", { comite });
-        await axios.post(`${URL}${id}`, { impact: comite , desc: descricao})
+        await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
         avisoConcuidoComite().then((res) => {
             window.location.assign("/ListagemTipoUsuario");
         })
