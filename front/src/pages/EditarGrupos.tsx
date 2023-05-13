@@ -98,6 +98,7 @@ function EditarGrupo() {
             
             const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
             setUserOptions(opt.split(","));
+            setClientes(opt.split(","))
             
           })
           .catch((error) => {
