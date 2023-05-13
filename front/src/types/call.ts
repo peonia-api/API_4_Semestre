@@ -4,6 +4,7 @@ export const solicitacaoInitialValues = {
     callType: '',
     callPriority: '',
     callDescription: '',
+    group: '',
     callFiles: [],
 }
 
@@ -25,9 +26,18 @@ export interface Calls {
     callDescription: string;
     callPriority: number;
     callDateCreate: Date;
+    callDateFinalization: Date;
     callRequesterId: number
     callFiles: []
     callStatus: string;
+}
+
+export interface LogCall{
+    id: number;
+    type: string;
+    nota: number;
+    descricao: string;
+    tipoChamado: string;
 }
 
 export interface Status {

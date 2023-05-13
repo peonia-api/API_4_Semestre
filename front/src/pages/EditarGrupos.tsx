@@ -13,10 +13,15 @@ import salvar from "../images/salvar.png";
 import { GroupsToUser } from "../types/groupToUser";
 import { Groups } from "../types/group";
 import { useNavigate } from "react-router-dom";
+import * as Yup from 'yup';
+import CreatableSelect from "react-select/creatable";
+import { setTimeout } from "timers/promises";
 
-function EditarGrupos() {
+function EditarGrupo() {
 
     const id = window.location.href.split("/")[4];
+    const typeGroup = window.location.href.split("/")[5];
+    const [groupName, setGroupName] = useState("");
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
     //const [userName, setUserName] = useState("");
@@ -27,8 +32,17 @@ function EditarGrupos() {
     const [user, setUser] = useState<string[]>([]);
     const [ids, setIds] = useState([]);
     const [arleyid, setArleyid] = useState<any[]>([]);
+    const [clientes, setClientes] = useState<any[]>([]);
 
     const [selectedValues, setSelectedValues] = useState<any[]>([]);
+    
+
+    const schema = Yup.object().shape({
+        groupName: Yup.string().required(),
+        ...(groupType === "Funcionario"
+        ? { user: Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro") }
+        : {}),
+    });
 
     let location = useNavigate();
     function voltar (){
@@ -36,18 +50,21 @@ function EditarGrupos() {
     }
 
     useEffect(() => {
+      
       async function fetchGroupToUser(id: any) {
         axios
           .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
           .then((response) => {
             console.log(response.data);
+            setGroupName(response.data[0].group.groupName);
             setGroupType(response.data[0].group.groupType);
             setGroupDescription(response.data[0].group.groupDescription);
-            //setUserName(response.data[0].user.userName);
-            //setGroupId(response.data[0].group.id);
             
-            setIds(response.data.map((item:any) => item.id))
+            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
+            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userName})));
             setUserOptions(response.data.map((item: any) => item.user.userName));
+
+            
           })
           .catch((error) => {
             console.log(error);
@@ -70,49 +87,90 @@ function EditarGrupos() {
           });
       }
   
-      fetchGroupToUser(id);
-      fetchUsers();
+      async function fetchGroup(id: any) {
+        axios
+          .get(`${URIgroup.PEGAR_GROUP_ESPECIFICO}${id}`)
+          .then((response) => {
+            console.log(response.data);
+            setGroupName(response.data.groupName);
+            setGroupType(response.data.groupType);
+            setGroupDescription(response.data.groupDescription);
+            
+            const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
+            setUserOptions(opt.split(","));
+            setClientes(opt.split(","))
+            
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+     
+      if(typeGroup == "Funcionario"){
+        fetchUsers();
+        fetchGroupToUser(id);
+      }else{
+        fetchGroup(id)
+      }
+      
     }, []);
-  
 
-    console.log(userOptions);
-    //console.log(groupId);
-    console.log(ids);
-    console.log(data);
+  
     
+    function veri(e:any){
+      if(groupType === "Cliente"){
+        if(clientes.length > 0){
+          handleSubmit(e)
+        }
+      }else{
+        handleSubmit(e)
+      }
+    }
     
     function handleSubmit(event:any) {
         event.preventDefault();
-
-        const updatedData = {
+      
+        schema.validate({ groupName, user}).then(() => {
+          const updatedData = {
             groupType: groupType,
-            groupDescription: groupDescription
-        };
-
-        axios.put(`${URIgroup.ALTERA_GROUP}${id}`, updatedData).then((res) => {
-            let cont = 0 
-            arleyid.map((idA) => {
-                if(idA == undefined){
-                    axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${ids[cont]}`)              
-                    arleyid.splice(cont, 1)
-                }
-                cont++
+            groupName: groupName,
+            cliente: clientes,
+            groupDescription: groupDescription,
+            user: user,
+          };
+      
+          axios
+            .put(`${URIgroup.ALTERA_GROUP}${id}`, {groupType: groupType, groupName: groupName, cliente: clientes, groupDescription: groupDescription} )
+            .then((res) => {
+              if(typeGroup == "Funcionario"){
+                ids.map((idG:any) => {
+                  if(arleyid.find((item:any) => idG.name === item)){
+                    axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${idG.id}`);
+                  }
+                })
+                user.map((u:any) => {
+                  if(arleyid.find((item:any) => u.name === item)){
+                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
+                      group: id,
+                      user: u.id,
+                    });
+                  }
+                })
+              }
             })
-            for (let i = 0; i < user.length; i++) {
-                if(arleyid.find(tes => tes.id == user[i]) == undefined){
-                    axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: id, user: user[i]})
-                }
-            }
-            
-        })
-        .then(() => {
-            avisoConcluido().then((result) => result.isConfirmed ? voltar() : '');
+            .then(() => {
+              avisoConcluido().then((result) =>
+                result.isConfirmed ? voltar() : ""
+              );
             })
             .catch((error) => {
-                console.log(error);
-                setStatus("Ocorreu um erro ao atualizar a equipe.");
+              console.log(error);
+              setStatus("Ocorreu um erro ao atualizar a equipe.");
             });
-    }
+        }).catch((err:any) => {
+          avisoErro();
+        });
+      }
     
      const handleClear = () => {
         setGroupType("");
@@ -123,18 +181,28 @@ function EditarGrupos() {
         setGroupType(event.target.value);
     }
 
+    function handleGroupNameChange(event:any) {
+        setGroupName(event.target.value);
+    }
+
     function handleGroupDescriptionChange(event:any) {
         setGroupDescription(event.target.value);
     }
 
     function handleChangeUser(event:any) {
-        
-        console.log(userOptions.map((test) => event.find((item:any) => item.value == test)));
-        console.log(event.map((item:any) => item.id));
-        setArleyid(userOptions.map((test) => event.find((item:any) => item.value == test)))
-        setUser(event.map((item:any) => item.id));
-       
+        console.log(event);
+        const val = event.map((item:any) => item.value)
+        setUser(event.map((item:any) => ({id:item.id, name: item.value})));
+        setArleyid(val.filter((elem:any) => !userOptions.includes(elem)).concat(userOptions.filter((elem:any) => !val.includes(elem))))
     }
+
+    function handleChangeCli(event:any) {
+      setClientes(event.map((item:any) => item.value))
+    }
+
+  console.log(clientes.length > 0);
+  
+    
     
     return(
         <>
@@ -143,7 +211,7 @@ function EditarGrupos() {
                 <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
                     <div className="text-center mb-4">
                         <h1 className="text-dark fw-semi-bold mb-3 font-padrao-titulo">
-                            Editar Equipe
+                            Editar Grupo
                         </h1>
                     </div>
 
@@ -157,29 +225,29 @@ function EditarGrupos() {
                 <div className="col-lg-12">
                     {/* begin::Form group Nome do time */}
                     <div className="fv-row mb-3 col-lg-6">
-                        <label className="form-label fw-bolder text-dark fs-6">Nome da equipe</label>
+                        <label className="form-label fw-bolder text-dark fs-6">Nome do Grupo</label>
                         <input
-                            placeholder="Nome da equipe"
+                            placeholder="Nome do Grupo"
                             type="text"
                             autoComplete="off"
-                            value={groupType}
-                            onChange={handleGroupTypeChange}
+                            value={groupName}
+                            onChange={handleGroupNameChange}
                             className={clsx(
                                 "form-control bg-transparent",
                                 {
                                     "is-invalid":
-                                        groupType === "",
+                                    groupName === "",
                                 },
                                 {
                                     "is-valid":
-                                        groupType !== "",
+                                    groupName !== "",
                                 }
                             )}
                         />
-                        {groupType === "" && (
+                        {groupName === "" && (
                             <div className="fv-plugins-message-container">
                                 <div className="fv-help-block">
-                                    <span role="alert">Campo obrigatório</span>
+                                    <span role="alert">Grupo é obrigatório</span>
                                 </div>
                             </div>
                         )}
@@ -190,21 +258,65 @@ function EditarGrupos() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {data.length > 0 && userOptions.length > 0 && (
-                        <Select
+                    {groupType === "Funcionario" && (
+                    <>
+                      <Select
                         defaultValue={data.filter(({ value }: any) =>
-                            userOptions.includes(value)
+                          userOptions.includes(value)
                         )}
+                        required
                         isMulti
                         name="users"
-                        className="basic-multi-select"
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
-                        />
+                        className={clsx("basic-multi-select", {
+                          "is-invalid": user.length < 1,
+                          "is-valid": user.length > 0,
+                        })}
+                      />
+                      {user.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                          <div className="fv-help-block">
+                            <span role="alert">Selecione pelo menos um usuário</span>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                    {groupType == "Cliente" && userOptions.length > 0 &&(
+                    <>
+                      <CreatableSelect
+                      defaultValue={userOptions.map((item) => ({ value: item, label: item }))}
+                      required
+                      isMulti
+                      name="clients"
+                      className="basic-multi-select"
+                      options={[
+                        {
+                          label: "Users",
+                          options: userOptions.map((item) => ({
+                            value: item,
+                            label: item,
+                          })),
+                        },
+                      ]}
+                      classNamePrefix="select"
+                      onChange={(e) => handleChangeCli(e)}
+                      id="slcMembros"
+                      placeholder="Digite os emails dos clientes"
+                      />
+                      {clientes.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                            <div className="fv-help-block">
+                                <span role="alert">Selecione pelo menos um usuário</span>
+                            </div>
+                        </div>
+                      )}
+                    </>
                     )}
+                        
                     </div>
-                        {/* end::Form group Membros*/}
                     </div>
             </div>
             <div className="row">
@@ -221,25 +333,9 @@ function EditarGrupos() {
                             autoComplete="off"
                             value={groupDescription}
                             onChange={handleGroupDescriptionChange}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                "is-invalid":
-                                    groupDescription === "",
-                                },
-                                {
-                                "is-valid":
-                                    groupDescription !== "",
-                                }
-                            )}
+                            className="form-control bg-transparent"
                         />
-                         {groupDescription === "" && (
-                                <div className="fv-plugins-message-container">
-                                    <div className="fv-help-block">
-                                        <span role="alert">Campo obrigatório</span>
-                                    </div>
-                                </div>
-                            )}
+
                     </div>
                     {/* end::Form group Descrição */}
             </div>
@@ -261,7 +357,7 @@ function EditarGrupos() {
                     <button
                         type="button"
                         className="btn btn-form"
-                        onClick={(e) => (handleSubmit (e))}
+                        onClick={(e) => (veri (e))}
                     >
                         Salvar
                         <img src={salvar} alt="icone salvar" style={{height:"20px", width:"20px", marginLeft:"5px"}}/>
@@ -274,4 +370,4 @@ function EditarGrupos() {
     );
 }
 
-export default EditarGrupos;
+export default EditarGrupo;

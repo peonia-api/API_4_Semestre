@@ -13,6 +13,9 @@ export class Group {
     @Column({ nullable: false, length: 80 })
     groupType: string;
 
+    @Column({ nullable: false, length: 80 })
+    groupName: string;
+
     @Column({ nullable: false, length: 100 })
     groupDescription: string;
 
@@ -23,6 +26,9 @@ export class Group {
     // @ManyToMany(() => Call)
     // @JoinTable()
     // call: Call[]
+
+    @Column({ nullable: true })
+    cliente: string;
 
     @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.group)
     groupToCall: GroupToCall[];

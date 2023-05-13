@@ -11,12 +11,27 @@ import { URIuser } from "../enumerations/uri";
 import { Users } from "../types/user";
 import Header from "../components/Header";
 import '../App.css';
+import Select from "react-select";
 
+
+interface UserType {
+    userType: string;
+  }
+  
+  interface SelectUserTypeProps {
+    type: UserType[];
+  }
+interface Option {
+    value: string;
+    label: string;
+  }
 
 function EditarUser() {
     const id = window.location.href.split("/")[4];
 
     const [data, setData] = useState<Users>();
+    const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+    const [type, setType] = useState([]);
 
     useEffect(() => {
         async function fetchUsers(id: string) {
@@ -32,7 +47,14 @@ function EditarUser() {
                 });
         }
         fetchUsers(id);
+        function typeUser(){
+            axios.get(URIuser.VERIFICA_TYPE).then((res) => {
+                setType(res.data)
+            })
+        }
+        typeUser()
     }, []);
+
 
     const formik = useFormik({
         initialValues: {
@@ -77,6 +99,40 @@ function EditarUser() {
 
         }
     }
+   
+     
+    const cso = type.find((item: UserType) => item.userType === "CSO")
+    const rt = type.find((item: UserType) => item.userType === "RT" )
+    const cto = type.find((item: UserType) => item.userType === "CTO")
+    const hp = type.find((item: UserType) => item.userType === "HP")
+    
+    const options:Option[] = [
+      { value: formik.values.userType, label: formik.values.userType },
+      { value: "CSO", label: "CSO (Chief Security Officer)" },
+      { value: "RT", label: "RT (Responsável Técnico)" },
+      { value: "CTO", label: "CTO (Chief Technology Officer)" },
+      { value: "HP", label: "Head de plataforma" },
+      { value: "Diretor", label: "Diretor" },
+      { value: "Padrao", label: "Padrão" },
+    ].filter((option) => {
+        return option.value !== formik.values.userType &&
+          !type.find((item: UserType) => item.userType === option.value && data?.userType !== option.value);
+      });
+    
+    useEffect(() => {
+      if (!selectedOption && formik.values.userType) {
+        setSelectedOption({ value: formik.values.userType, label: formik.values.userType });
+      }
+    }, [selectedOption, formik.values.userType]);
+    
+    const handleChange = (option: Option | null) => {
+      setSelectedOption(option);
+        formik.setFieldValue("userType", option?.value)  
+    };
+    console.log(formik.values.userType);
+    
+    console.log(selectedOption);
+    
 
     return (
         <>
@@ -92,13 +148,13 @@ function EditarUser() {
         >
             <div className="text-center mb-4">
                 <h1 className="text-dark mb-3 font-padrao-titulo">
-                    Cadastrar Usuário
+                    Editar Usuário
                 </h1>
                 <div
                     className="text-gray-500 fs-6 font-padrao-titulo mb-5"
                     style={{ letterSpacing: 0 }}
                 >
-                    Preencha os campos e defina a permissão para cadastrar um novo usuário
+                    Preencha os campos e defina a permissão para editar o usuário
                 </div>
             </div>
 
@@ -214,84 +270,23 @@ function EditarUser() {
                             </div>
                         )}
                     </div>
-                    {/* end::Form group Cargo*/}
                 </div>
                 <div className="col-lg-6">
-                    {/* begin::Form group Tipo usuario */}
-                    <div className="fv-row mb-3">
-                        <label className="form-label fw-bolder text-dark fs-6">
-                            Tipo de usuário
-                        </label>
-                        <select
-                            placeholder="Tipo do Chamado (Hotfix ou Feature)"
-                            autoComplete="off"
-                            {...formik.getFieldProps("userType")}
-                            onChange={formik.handleChange}
-                            value={formik.values.userType}
-                            className={clsx(
-                                "form-control bg-transparent",
-                                {
-                                    "is-invalid":
-                                        formik.touched.userType && formik.errors.userType,
-                                },
-                                {
-                                    "is-valid":
-                                        formik.touched.userType && !formik.errors.userType,
-                                }
-                            )}
-                        >
-                            <option value="" disabled label="Selecione o tipo de usuário">
-                                Tipo de usuário{" "}
-                            </option>
-                            <option
-                                value="CSO"
-                                onChange={formik.handleChange}
-                                label="CSO (Chief Security Officer)"
-                            >
-                                CSO (Chief Security Officer)
-                            </option>
-                            <option
-                                value="RT"
-                                onChange={formik.handleChange}
-                                label="RT (Responsável Técnico)"
-                            >
-                                RT (Responsável Técnico)
-                            </option>
-                            <option
-                                value="CTO"
-                                onChange={formik.handleChange}
-                                label="CTO (Chief Technology Officer)"
-                            >
-                                CTO (Chief Technology Officer)
-                            </option>
-                            <option
-                                value="HP"
-                                onChange={formik.handleChange}
-                                label="HP (Head de Plataformas)"
-                            >
-                                HP (Head de Plataformas)
-                            </option>
-                            <option
-                                value="SQUAD"
-                                onChange={formik.handleChange}
-                                label="SQUAD"
-                            >
-                                SQUAD
-                            </option>
-                        </select>
-                        {formik.touched.userType && formik.errors.userType && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">{formik.errors.userType}</span>
-                                </div>
-                            </div>
-                        )}
+                        <div className="fv-row mb-3">
+                            <label className="form-label fw-bolder text-dark fs-6">
+                                Tipo de usuário
+                            </label>
+                                <Select
+                                    placeholder="Selecione o tipo de usuário"
+                                    {...formik.getFieldProps("userType")}
+                                    value={selectedOption}
+                                    onChange={handleChange}
+                                    options={options}
+                                />
+                        </div>
                     </div>
-                    {/* end::Form group Tipo Usuario*/}
-                </div>
             </div>
 
-            {/* begin::Form group */}
             <div className="d-flex align-items-center justify-content-between mt-4">
                 <button type="button" className="btn btn-form" onClick={onClickLimpar}>
                     Limpar

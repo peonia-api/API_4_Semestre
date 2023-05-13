@@ -5,7 +5,7 @@ const perfilValidationSchema = Yup.object().shape({
     .required('O nome é obrigatório'),
   userEmail: Yup.string()
     .required('O e-mail é obrigatório')
-    .email('O e-mail deve ser em um formato válido'),
+    .email('O e-mail deve ter um formato válido'),
 })
 
 const perfilValidationSchemaAlterarSenha = Yup.object().shape({

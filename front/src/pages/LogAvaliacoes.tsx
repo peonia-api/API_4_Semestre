@@ -2,37 +2,39 @@ import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../components/Header";
 import { useEffect, useRef, useState } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import axios from "axios";
-import { URIcommit, URIattach, URI } from "../../enumerations/uri";
-import { Calls } from "../../types/call";
+import { URIcommit, URIattach, URI } from "../enumerations/uri";
+import { Calls, LogCall } from "../types/call";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { log } from "../utils/log";
 
 function LogAvaliacoes(){
 
     const url_atual = window.location.href;
     const id = window.location.href.split("/")[4]
   
-    const [data, setData] = useState<Calls[]>([]);
-  
+    const [data, setData] = useState<LogCall[]>([]);
+    const [comite, setComite] = useState<LogCall[]>([]);
     //axios get
     useEffect(() => {
       async function fetchCalls() {
         axios
-          .get(URIcommit.PEGAR_COMITE_STATUS)
+          .get(URIcommit.PEGAR_ARCHIVED_STATUS)
           .then((response) => {
-            setData(response.data);
+            setData(log(response.data))
           })
           .catch((error) => {
             console.log(error);
           });
       }
       fetchCalls();
-  
+      
     }, []);
+    
   
     //sort
     const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
@@ -97,8 +99,9 @@ function LogAvaliacoes(){
       const [description, setDescription] = useState("");
 
       const handleClose = () => setDisplay(false);
-      function handleDisplay(id:any){
-        setDescription(data.find(x => x.id === id)?.callDescription || "");
+      function handleDisplay(id:any, type:any){
+        const descr = data.find(x => x.id === id && x.type === type)?.descricao || ""
+        descr == "" ? setDescription("Não Possui Descrição!") : setDescription(descr);
         setDisplay(true);
       };
 
@@ -130,8 +133,9 @@ function LogAvaliacoes(){
                             {/*cabeçalho tabela*/}
                             <th className="text-center">Chamado</th>
                             <th className="text-center">Tipo de usuário</th>
-                            <th className="text-center">Data da avaliação</th>
-                            <th className="text-center">Avaliação</th>
+                            <th className="text-center">Tipo de chamado</th>
+                            {/* <th className="text-center">Data da avaliação</th> */}
+                            <th className="text-center">Avaliação/Prioridade</th>
                             <th className="text-center">Descrição</th>
                             {/*fim cabeçalho tabela*/}
                             </tr>
@@ -143,11 +147,12 @@ function LogAvaliacoes(){
                                 <tr>
                                 {/*corpo tabela*/}
                                 <td className="text-center">{data.id}</td>
-                                <td className="text-center">{data.callRequesterId}</td>
-                                <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("pt-BR")}</td>
-                                <td className="text-center">{}</td>
+                                <td className="text-center">{data.type}</td>
+                                <td className="text-center">{data.tipoChamado}</td>
+                                {/* <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("pt-BR")}</td> */}
+                                <td className="text-center">{data.nota}</td>
                                 <td className="text-center">
-                                    <Button onClick={() => handleDisplay(data.id)}>Visualizar</Button>
+                                    <Button onClick={() => handleDisplay(data.id, data.type)}>Visualizar</Button>
                                 </td>
                                 </tr>
                             );

@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Swal, { SweetAlertResult } from "sweetalert2";
 
 function avisoErro() {
   Swal.fire({
@@ -8,6 +8,13 @@ function avisoErro() {
     confirmButtonColor: "#54C5CE",
   });
 } 
+function avisoChamado(){
+  Swal.fire({
+    title: "Ocorreu um erro!",
+    text: "Não é possível deletar, pois este grupo está vinculado ao chamado ",
+    icon: "error",
+  });
+}
 
 function avisoErroDeletar() {
   Swal.fire({
@@ -41,4 +48,4 @@ function avisoErroRequisicao(){
   })
 }
 
-export { avisoErro, avisoErroDeletar, avisoErroAoDeletar, avisoErroLogin, avisoErroRequisicao };
+export { avisoErro, avisoErroDeletar, avisoErroAoDeletar, avisoErroLogin, avisoErroRequisicao, avisoChamado };

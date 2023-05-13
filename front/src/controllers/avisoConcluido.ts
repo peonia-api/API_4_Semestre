@@ -49,6 +49,7 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
+
 function avisoConcuidoComite(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Sucesso",
@@ -63,7 +64,7 @@ function avisoEspera(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: 'Enviando chamado!',
     html: 'O chamado será enviado em <b></b> milissegundos.',
-    timer: 10000,
+    timer: 5000,
     timerProgressBar: true,
     didOpen: () => {
       Swal.showLoading()
@@ -141,4 +142,4 @@ function avisoEsperaAnexo(): Promise<SweetAlertResult> {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar, avisoAlterarSenha };
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar, avisoAlterarSenha  };

@@ -4,6 +4,7 @@ import { Call } from "../entities/Call";
 import { Committee } from "../entities/Committee";
 import { logger } from "../config/logger";
 import { validateCommitteeFilter } from "../utils/funcao";
+import { ObjectLiteral } from "typeorm";
 
 
 class CommitteeController {
@@ -64,7 +65,8 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiImpactCto = createCommittee.comiImpactCto
+        findCommittee.comiImpactCto = createCommittee.impact
+        findCommittee.comiImpactCtoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -75,7 +77,8 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiImpactHp = createCommittee.comiImpactHp
+        findCommittee.comiImpactHp = createCommittee.impact
+        findCommittee.comiImpactoHpAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -95,7 +98,8 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiRiskRt = createCommittee.comiRiskRt
+        findCommittee.comiRiskRt = createCommittee.impact
+        findCommittee.comiRiskRtAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -105,7 +109,8 @@ class CommitteeController {
         const idCommittee: any = req.params.uuid
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
-        findCommittee.comiRiskCso = createCommittee.comiRiskCso
+        findCommittee.comiRiskCso = createCommittee.impact
+        findCommittee.comiRiskCsoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -113,11 +118,15 @@ class CommitteeController {
     }
 
     public async deleteCommittee(req: Request, res: Response): Promise<Response> {
-        const deleteId: any = req.params.uuid
-        const committeeRep = AppDataSource.getRepository(Committee)
-        const find = await committeeRep.findOneBy({ id: deleteId })
-        const remove = await committeeRep.remove(find)
-        return res.json(remove)
+        try{
+            const deleteId: any = req.params.uuid
+            const committeeRep = AppDataSource.getRepository(Committee)
+            const find = await committeeRep.findOneBy({ id: deleteId })
+            const remove = await committeeRep.remove(find)
+            return res.json(remove)
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro o deletar"})
+        }
     }
 
 
@@ -196,7 +205,9 @@ class CommitteeController {
         try {
             const callRepository = AppDataSource.getRepository(Call)
             const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
-            return res.json(feature)
+            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise", avaliar: "hotfix" })
+            let calls = feature.concat(hotfix);
+            return res.json(calls)
         } catch (err) {
             return res.status(400).json({ menssagem: "Erro" })
         }
@@ -249,12 +260,13 @@ class CommitteeController {
             const callRepository = AppDataSource.getRepository(Call)
             const committeeRepository = AppDataSource.getRepository(Committee)
             const findCall = await callRepository.findBy({ callType: "feature" })
-            const findCommittee = await committeeRepository.find({
-                relations: { call: true },
-                where: {
-                    call: { callStatus: "Arquivada" },
-                },
-            })
+            const findCommittee = await committeeRepository.find()
+            //{
+            //     relations: { call: true },
+            //     where: {
+            //         call: { callStatus: "Arquivada" },
+            //     },
+            // }
 
             logger.info(JSON.stringify({ findCommittee, message: "Sucesso ao buscar os chamados arquivados." }))
             return res.json(findCommittee)

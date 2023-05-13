@@ -3,11 +3,14 @@ import axios from "axios";
 export enum URI {
     ENVIAR_CALL = "http://localhost:3001/call/createCall",
     ALTERA_CALL = "http://localhost:3001/call/modifyCall/",
+    ATUALIZA_HOTFIX = "http://localhost:3001/call/updateHotfix/",
     DELETE_CALL = "http://localhost:3001/call/delete/",
     PEGAR_CALL = "http://localhost:3001/call/historic",
     PEGAR_CAll_ESPECIFICO = "http://localhost:3001/call/especificoCall/",
     PEGAR_CALL_HOTFIX = "http://localhost:3001/call/hotfix",
-    PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature"
+    PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature", 
+    PEGAR_CAll_User = "http://localhost:3001/call/callUser/",
+    PEGAR_CAll_ARQUIVADO = "http://localhost:3001/call/arquivados/",
 }
 
 export enum URIgroup {
@@ -15,7 +18,8 @@ export enum URIgroup {
     ALTERA_GROUP = "http://localhost:3001/group/modify/",
     DELETE_GROUP = "http://localhost:3001/group/delete/",
     PEGAR_GROUP = "http://localhost:3001/group/historic",
-    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/especificoGroup/",
+    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/", 
+    PEGAR_GROUP_Cliente = "http://localhost:3001/group/cliente/", //cliente
 }
 export enum URIgroupToUser {
     ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",
@@ -23,6 +27,14 @@ export enum URIgroupToUser {
     DELETE_GROUP_TO_USER = "http://localhost:3001/groupToUser/delete/",
     PEGAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/historic",
     PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
+}
+
+export enum URIgroupToCall {
+    ENVIAR_GROUP_TO_CALL = "http://localhost:3001/groupToCall/create",
+    ALTERA_GROUP_TO_CALL = "http://localhost:3001/groupToCall/modify/",
+    DELETE_GROUP_TO_CALL = "http://localhost:3001/groupToCall/delete/",
+    PEGAR_GROUP_TO_CALL = "http://localhost:3001/groupToCall/historic",
+    PEGAR_GROUP_TO_CALL_ESPECIFICO = "http://localhost:3001/groupToCall/specific/",
 }
 
 export enum URIuser {
@@ -40,10 +52,6 @@ export enum URIuser {
     ALTERA_PERFIL = "http://localhost:3001/user/perfil/",
 }
 
-export enum URIperfil {
-    ALTERA_PERFIL = "http://localhost:3001/user/modifyUserPerfil/",
-    ALTERA_SENHA = "http://localhost:3001/user/modifyUserPassword/",
-}
 
 export enum URIcommit {
     ENVIAR_COMITE = "http://localhost:3001/committee/createCommittee",

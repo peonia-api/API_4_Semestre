@@ -92,6 +92,7 @@ function CadastroUsuario() {
        { value: "RT", label: "RT (Responsável Técnico)" },
        { value: "CTO", label: "CTO (Chief Technology Officer)" },
        { value: "HP", label: "Head de plataforma" },
+       { value: "Diretor", label: "Diretor" },
        { value: "Padrao", label: "Padrão" },
      ].filter((option) => {
        if (option.value === "CSO" && cso) return false;
@@ -294,7 +295,6 @@ function CadastroUsuario() {
                                 onChange={handleChange}
                                 options={options}
                                 className={clsx(
-                                    "form-control bg-transparent",
                                     {
                                         "is-invalid":
                                             formik.touched.userType && formik.errors.userType,
