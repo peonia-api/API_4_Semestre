@@ -74,7 +74,19 @@ function Header() {
                 className="me-2 perfil" 
                 title={
                   <>
-                    <img src={icone} alt="Meu Perfil" width="40%" />
+                    <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
+                      width: 70,
+                      height: 70
+                    }} />
+                    <span style={{
+                      position: "relative",
+                      top: 0,
+                      right: 35,
+                      width: 0,
+                      height: 0
+                    }}></span>
+                    
+                    
                   </>
                 }>
                   <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
