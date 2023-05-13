@@ -4,6 +4,7 @@ export const solicitacaoInitialValues = {
     callType: '',
     callPriority: '',
     callDescription: '',
+    group: '',
     callFiles: [],
 }
 

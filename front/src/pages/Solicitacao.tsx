@@ -48,9 +48,12 @@ function Solicitacao() {
 console.log(files);
 
 const handleSelectChange = (selectedOptions: any) => {
-  const selectedValues = selectedOptions.map((option: any) => option.value);
-  setSelectedGroup(selectedValues);
+  // const selectedValues = selectedOptions.map((option: any) => option.value);
+  setSelectedGroup(selectedOptions);
+  formik.setFieldValue("group", selectedOptions?.value);
+   
 };
+
 
 const options = data.map((data) => ({
   value: data.id,
@@ -66,9 +69,9 @@ const options = data.map((data) => ({
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
-        for (let i = 0; i < selectedGroup.length; i++) {
-          await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
-        }
+        // for (let i = 0; i < selectedGroup.length; i++) {
+           await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: formik.values.group, call: res.data.id })
+        // }
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
@@ -116,6 +119,7 @@ const options = data.map((data) => ({
       
     }
   }
+  console.log(formik.values.group);
 
   return (
     <>
@@ -278,9 +282,8 @@ const options = data.map((data) => ({
                 Grupos
               </label>
                 <Select
-                  defaultValue={options.filter(({ value }) => selectedGroup.includes(value))}
-                  isMulti
-                  name="users"
+                  {...formik.getFieldProps("group")}
+                  value={selectedGroup}
                   options={options}
                   classNamePrefix="select"
                   onChange={handleSelectChange}
