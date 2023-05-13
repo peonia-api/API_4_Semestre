@@ -74,7 +74,7 @@ function Perfil() {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
-          if(localStorage.getItem("icone") != imagemUti || formik.values.icone != icoAnte){
+          if(formik.values.icone != icoAnte){
             removeFileOneIcone(icoAnte)
           }
           if(formik.values.icone === imagemUti){localStorage.setItem("icone", imagemUti)}
@@ -120,7 +120,12 @@ function Perfil() {
     } else {
       if(icone){uploadIcone(icone).then((res) => {
         formik.values.icone = res 
-        localStorage.setItem("icone", res)
+        if(res.split('icones')[1].split("/")[1] !== 'undefined'){
+          localStorage.setItem("icone", res)
+        }else{
+          localStorage.setItem("icone", imagemUti)
+          removeFileOneIcone(icoAnte)
+        }
         formik.submitForm();
       })}else{formik.submitForm();}
     }
