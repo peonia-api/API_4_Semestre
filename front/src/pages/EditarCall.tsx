@@ -33,9 +33,11 @@ function EditarCall() {
 
   const [comite, setComite] = useState<Committee[]>([]);
 
-  const [group, setGroup] = useState<Groups[]>([]);
+  const [group, setGroup] = useState([]);
 
-  const [selectedGroup, setSelectedGroup] = useState<string[]>([]);
+  const [idLiga, setidLiga] = useState();
+
+  const [selectedGroup, setSelectedGroup] = useState([] as any);
 
   const updateFiles = (incommingFiles: any) => {
     //do something with the files
@@ -90,7 +92,8 @@ function EditarCall() {
       axios
         .get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_ESPECIFICO}${id}`)
         .then((response) => {
-          setSelectedGroup(response.data.map((item: any) => item.group.groupName));
+          setidLiga(response.data.map((item: any) => item.id))
+          setSelectedGroup(response.data.map((item: any) => ({id: item.id ,value: item.group.id , label:item.group.groupName })));
         })
         .catch((error) => {
           console.log(error);
@@ -113,6 +116,9 @@ function EditarCall() {
     fetchGroup();
   }, []);
 
+  console.log(group);
+  
+
   const formik = useFormik({
     initialValues: {
       callType: data?.callType ?? "",
@@ -121,6 +127,7 @@ function EditarCall() {
       callDescription: data?.callDescription ?? "",
       callPriority: data?.callPriority ?? "",
       //callState: "Inicializado",
+      group: selectedGroup,
     },
     validationSchema: solicitacaoValidationSchema,
     initialErrors: { callEmail: "" },
@@ -134,12 +141,14 @@ function EditarCall() {
           callPriority: values.callPriority,
           //callState: values.callState,
           callDateCreate: data?.callDateCreate ?? new Date(),
+          group: values.group,
         };
 
         await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
-          for (let i = 0; i < selectedGroup.length; i++) {
-            await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
-          }
+          // for (let i = 0; i < selectedGroup.length; i++) {
+          //   await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
+          // }
+          await axios.put(`${URIgroupToCall.ALTERA_GROUP_TO_CALL}${idLiga}`, { group: selectedGroup.value, call: id }).then((res) => console.log("linux")).catch((rtt) => console.log("deu ruim!"))
           if (formik.values.callType == "feature") {
             await axios.post(URIcommit.ENVIAR_COMITE, { id: id })
           } else {
@@ -204,12 +213,14 @@ function EditarCall() {
   }
 
   const handleSelectChange = (selectedOptions: any) => {
-    const selectedValues = selectedOptions.map((option: any) => option.label); 
-    setSelectedGroup(selectedValues);
+    //const selectedValues = selectedOptions.map((option: any) => option.label); 
+    setSelectedGroup(selectedOptions);
+    formik.setFieldValue("group", selectedOptions?.value)
   };
 
   console.log(group);
   console.log(selectedGroup);
+  console.log(idLiga);
   
 
   function onClickEnviar() {
@@ -232,6 +243,7 @@ function EditarCall() {
 
   console.log(files);
 
+console.log(formik.values.group);
 
   return (
     <>
@@ -354,25 +366,15 @@ function EditarCall() {
                 <label className="form-label fw-bolder text-dark fs-6">
                   Grupos
                 </label>
-                {group.length > 0 && selectedGroup.length > 0 && (
+                
                 <Select
-                defaultValue={selectedGroup.map((item) => ({ value: item, label: item }))}
-                isMulti
-                name="users"
-                options={[
-                  {
-                    label: "Users",
-                    options: selectedGroup.map((item) => ({
-                      value: item,
-                      label: item,
-                    })),
-                  },
-                ]}
-                className="basic-multi-select"
-                classNamePrefix="select"
+                placeholder="Selecione o Grupo"
+                {...formik.getFieldProps("group")}
+                value={selectedGroup}
                 onChange={handleSelectChange}
+                options={group}
                 />
-                )}
+                
               </div>
             </div>
             <div className="row">
