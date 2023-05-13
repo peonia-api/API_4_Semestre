@@ -22,10 +22,8 @@ function Perfil() {
   const [icone, setIcone] = useState()
   const inputFile = useRef<HTMLInputElement>(null)
   const imagemUti = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
-
-  useEffect(() => {
-    
-}, [])
+  const icoAnte = localStorage.getItem("icone") ?? ""
+  
 
   const handleCloseMdlAlterarSenha = () => setShowMdlAlterarSenha(false)
 
@@ -76,7 +74,9 @@ function Perfil() {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
-          if(localStorage.getItem("icone") != imagemUti){removeFileOneIcone(localStorage.getItem("icone"))}
+          if(localStorage.getItem("icone") != imagemUti || formik.values.icone != icoAnte){
+            removeFileOneIcone(icoAnte)
+          }
           if(formik.values.icone === imagemUti){localStorage.setItem("icone", imagemUti)}
           avisoPerfil()
         }

@@ -98,6 +98,8 @@ export async function uploadIcone(e: any) {
 
       } else {
         // Handle success
+        console.log(data);
+        
         
       }
   }

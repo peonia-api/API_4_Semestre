@@ -172,7 +172,7 @@ class UserController {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-
+    insertUser.icone = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
   }
