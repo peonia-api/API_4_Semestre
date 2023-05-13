@@ -38,7 +38,8 @@ function EditarGrupo() {
     
 
     const schema = Yup.object().shape({
-        groupType: Yup.string().required(),
+        groupName: Yup.string().required(),
+        user:  Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro"),
     });
 
     let location = useNavigate();
@@ -58,6 +59,7 @@ function EditarGrupo() {
             setGroupDescription(response.data[0].group.groupDescription);
             
             setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
+            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userName})));
             setUserOptions(response.data.map((item: any) => item.user.userName));
 
             
@@ -102,33 +104,26 @@ function EditarGrupo() {
       }
      
       if(typeGroup == "Funcionario"){
-        fetchGroupToUser(id);
         fetchUsers();
+        fetchGroupToUser(id);
       }else{
         fetchGroup(id)
       }
       
     }, []);
+
   
     
     console.log((data.filter(({ value }: any) => userOptions.includes(value)) > []) === false );
     console.log(ids);
     console.log(clientes);
     console.log(data);
-
-   
-    // if (userOptions.length === 0) {
-    //   //window.setTimeout(function(){window.location.reload()}, 2000)
-      
-    //   //window.location.reload();
-      
-    // }
     
     
     function handleSubmit(event:any) {
         event.preventDefault();
       
-        schema.validate({ groupType, groupDescription, user }).then(() => {
+        schema.validate({ groupName, user }).then(() => {
           const updatedData = {
             groupType: groupType,
             groupName: groupName,
@@ -192,8 +187,6 @@ function EditarGrupo() {
         const val = event.map((item:any) => item.value)
         setUser(event.map((item:any) => ({id:item.id, name: item.value})));
         setArleyid(val.filter((elem:any) => !userOptions.includes(elem)).concat(userOptions.filter((elem:any) => !val.includes(elem))))
-
-       
     }
 
     function handleChangeCli(event:any) {
@@ -205,7 +198,6 @@ function EditarGrupo() {
   console.log(arleyid);
   console.log(user);
   
-
     
     
     return(
@@ -272,10 +264,26 @@ function EditarGrupo() {
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
-                        className="basic-multi-select"
+                        className={clsx(
+                          "basic-multi-select",
+                          {
+                              "is-invalid":
+                              user.length < 0,
+                          },
+                          {
+                              "is-valid":
+                              user.length > 0,
+                          }
+                      )}  
                         />
-                        
                     )}
+                    {groupType === "Funcionario" && user.length === 0 && (
+                          <div className="fv-plugins-message-container">
+                              <div className="fv-help-block">
+                                  <span role="alert">Selecione pelo menos um usuário</span>
+                              </div>
+                          </div>
+                      )}
                     {groupType == "Cliente" && userOptions.length > 0 &&(
 
                       <CreatableSelect
@@ -306,7 +314,6 @@ function EditarGrupo() {
                             </div>
                         )}
                     </div>
-                        {/* end::Form group Membros*/}
                     </div>
             </div>
             <div className="row">

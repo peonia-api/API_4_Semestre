@@ -37,6 +37,7 @@ class GroupController {
         const groupRepository = AppDataSource.getRepository(Group)
         const findGroup = await groupRepository.findOneBy({ id: idGroup })
         findGroup.groupType = createGroup.groupType
+        findGroup.groupName = createGroup.groupName
         findGroup.groupDescription = createGroup.groupDescription
         findGroup.cliente = createGroup.cliente
 
