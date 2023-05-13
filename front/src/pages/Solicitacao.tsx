@@ -93,9 +93,9 @@ const options = data.map((data) => ({
       })
       avisoEspera().then((res) => {
         setTimeout(function(){avisoConcluido().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagem");}, 2000)
+          setTimeout(function(){window.location.assign("/listagem");}, 1000)
           
-        })}, 3000)
+        })}, 2000)
       })
     },
   });

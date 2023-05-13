@@ -11,7 +11,6 @@ class GroupController {
         console.log(allGroup)
         return res.json(allGroup)
     }
-
     public async getGroupByOne(req: Request, res: Response): Promise<Response> {
         const idGroup: any = req.params.uuid
         const groupRepository = AppDataSource.getRepository(Group)

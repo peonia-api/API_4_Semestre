@@ -43,17 +43,29 @@ function Header() {
               <CustomLink to="/listagemCall">MEUS CHAMADOS</CustomLink>
               {tipoUsuario !== "Padrao" ? 
                 <>
-                  <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
-                  <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
+                  {
+                    tipoUsuario === 'Diretor' && (
+                      <>
+                        <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
+                        <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
+                      </>
+                    )
+                  }
                   <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                      <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
                       <NavDropdown.Item href="/listagemGrupos">
-                      Grupos
+                        Grupos
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/listagemTipoUsuario">
-                      Comitê
+                        Comitê
                       </NavDropdown.Item>
-                      <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
+                      {
+                        tipoUsuario === 'Diretor' && (
+                          <>
+                            <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
+                            <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
+                          </>
+                        )
+                      }
                   </NavDropdown>
                 </>
                 : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>
