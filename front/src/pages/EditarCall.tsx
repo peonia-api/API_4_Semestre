@@ -103,7 +103,7 @@ function EditarCall() {
 
     async function fetchGroup() {
       try {
-        const response = await axios.get(URIgroup.PEGAR_GROUP);
+        const response = await axios.get(URIgroup.PEGAR_GROUP_Cliente);
         const options = response.data.map((group:any) => ({
           value: group.id,
           label: group.groupName
@@ -233,7 +233,7 @@ function EditarCall() {
       avisoEsperaAnexo().then((res) => {
         setTimeout(function () {
           avisoEdicao().then((res: any) => {
-            setTimeout(function () { window.location.assign("/listagem"); }, 2000)
+            setTimeout(function () { window.location.assign("/listagemCall"); }, 2000)
 
           })
         }, 3000)

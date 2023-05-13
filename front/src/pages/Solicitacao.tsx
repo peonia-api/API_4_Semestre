@@ -21,7 +21,7 @@ function Solicitacao() {
   useEffect(() => {
     async function fetchUsers() {
       axios
-        .get(URIgroup.PEGAR_GROUP)
+        .get(URIgroup.PEGAR_GROUP_Cliente)
         .then((response) => {
           setData(response.data);
         })
@@ -96,7 +96,7 @@ const options = data.map((data) => ({
       })
       avisoEspera().then((res) => {
         setTimeout(function(){avisoConcluido().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagem");}, 1000)
+          setTimeout(function(){window.location.assign("/listagemCall");}, 1000)
           
         })}, 2000)
       })
