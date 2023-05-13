@@ -11,6 +11,7 @@ routes.get('/callUser/:email', CallController.getHistoricCallUser);
 routes.post('/createCall', CallController.postCall);
 
 routes.put('/modifyCall/:uuid', CallController.putCall);
+routes.put('/updateHotfix/:uuid', CallController.updateHotfix);
 
 routes.delete('/delete/:uuid', CallController.deleteCall);
 export default routes;

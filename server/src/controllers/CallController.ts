@@ -145,6 +145,26 @@ class CallController {
         }
     }
 
+    public async updateHotfix(req: Request, res: Response): Promise<Response> {
+        try {
+            const createCall = req.body
+            const idCall: any = req.params.uuid
+            const callRepository = AppDataSource.getRepository(Call)
+            const findCall = await callRepository.findOneBy({ id: idCall })
+            findCall.callDescription = createCall.desc;
+            findCall.callPriority = createCall.impact;
+            findCall.callStatus = "Em desenvolvimento";
+
+            const allCall = await callRepository.save(findCall)
+            logger.info(JSON.stringify({ allCall, message: "Sucesso ao priorizar o chamado." }))
+            return res.json(allCall)
+        } catch (err) {
+            logger.error(JSON.stringify({ mensage: "Erro ao priorizar o chamado" }))
+            return res.status(400).json({ mensage: "Erro ao priorizar o chamado" })
+        }
+    }
+
+
 }
 export default new CallController();
 

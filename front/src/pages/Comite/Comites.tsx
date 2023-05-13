@@ -1,4 +1,4 @@
-import { URIcommit, URIgroup } from "../../enumerations/uri";
+import { URI, URIcommit, URIgroup } from "../../enumerations/uri";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import './comite.css';
@@ -35,10 +35,11 @@ export function Comites() {
             setDescType("Análise de Risco")
             setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
         } else {
-            setUrl(type === "HP" ? URIcommit.ALTERA_COMITE_HP : (type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD))
             if(typeCall === "hotfix"){
+                setUrl(URI.ATUALIZA_HOTFIX)
                 setDescType("Prioridade do Hotfix")
             } else {
+                setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
                 setDescType("Análise de Impacto")
             }
             

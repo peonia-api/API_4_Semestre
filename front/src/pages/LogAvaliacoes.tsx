@@ -133,8 +133,9 @@ function LogAvaliacoes(){
                             {/*cabeçalho tabela*/}
                             <th className="text-center">Chamado</th>
                             <th className="text-center">Tipo de usuário</th>
+                            <th className="text-center">Tipo de chamado</th>
                             {/* <th className="text-center">Data da avaliação</th> */}
-                            <th className="text-center">Avaliação</th>
+                            <th className="text-center">Avaliação/Prioridade</th>
                             <th className="text-center">Descrição</th>
                             {/*fim cabeçalho tabela*/}
                             </tr>
@@ -147,6 +148,7 @@ function LogAvaliacoes(){
                                 {/*corpo tabela*/}
                                 <td className="text-center">{data.id}</td>
                                 <td className="text-center">{data.type}</td>
+                                <td className="text-center">{data.tipoChamado}</td>
                                 {/* <td className="text-center">{new Date(data.callDateCreate).toLocaleDateString("pt-BR")}</td> */}
                                 <td className="text-center">{data.nota}</td>
                                 <td className="text-center">

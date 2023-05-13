@@ -205,7 +205,7 @@ class CommitteeController {
         try {
             const callRepository = AppDataSource.getRepository(Call)
             const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
-            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise" })
+            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise", avaliar: "hotfix" })
             let calls = feature.concat(hotfix);
             return res.json(calls)
         } catch (err) {
