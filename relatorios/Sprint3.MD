@@ -33,6 +33,11 @@
 </p>
 <br>
 
+ <h3 align="center"> USER STORIES </h3>
+<p align="center">
+  <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/UserStorys_Sprint3.png" align="center"/>
+</p>
+
   <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
     <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/DERsprint3.jpg" align="center"/> &nbsp;
