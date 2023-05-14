@@ -35,7 +35,8 @@
 
   <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
-  
+    <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/DERsprint3.png" align="center"/> &nbsp;
+    <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/LOGICO_DERsprint3.png" align="center"/>
 </h1>
 <br>
   
