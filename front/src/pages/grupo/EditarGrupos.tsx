@@ -52,7 +52,7 @@ function EditarGrupo() {
     useEffect(() => {
       const typeGroup = window.location.href.split("/")[5];
 
-      if(typeGroup == "Funcionario"){
+      if(window.location.href.split("/")[5] === "Funcionario"){
         axios
           .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
           .then((response) => {
@@ -61,9 +61,9 @@ function EditarGrupo() {
             setGroupType(response.data[0].group.groupType);
             setGroupDescription(response.data[0].group.groupDescription);
             
-            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
-            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userName})));
-            setUserOptions(response.data.map((item: any) => item.user.userName));
+            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})))
+            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})));
+            setUserOptions(response.data.map((item: any) => item.user.userEmail));
 
             
           })
@@ -75,8 +75,8 @@ function EditarGrupo() {
           .then((response) => {
             const users = response.data.map((item: any) => ({
                 id: item.id,
-              value: item.userName,
-              label: item.userName,
+              value: item.userEmail,
+              label: item.userEmail,
             }));
             setData(users);
           })
