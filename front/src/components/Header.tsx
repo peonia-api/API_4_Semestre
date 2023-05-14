@@ -68,15 +68,20 @@ function Header() {
                       }
                   </NavDropdown>
                 </>
-                : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>
+                : 
+                <>
+                  <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink> 
+                  <CustomLink to="/listagemGrupos">GRUPOS</CustomLink>
+                </>
+                
                }
               <NavDropdown 
                 className="me-2 perfil" 
                 title={
                   <>
                     <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
-                      width: 70,
-                      height: 70
+                      width: 60,
+                      height: 60
                     }} />
                     <span style={{
                       position: "relative",

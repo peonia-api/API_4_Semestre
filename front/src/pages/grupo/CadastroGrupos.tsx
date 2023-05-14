@@ -1,15 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro } from "../controllers";
-import registrationSchemaUser from "../controllers/validateGroup";
-import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
-import { initialValues } from "../types/group";
-import Header from "../components/Header";
-import '../App.css';
-import { Users } from "../types/user";
+import { avisoConcluido, avisoErro } from "../../controllers";
+import registrationSchemaUser from "../../controllers/validateGroup";
+import { URIgroup, URIgroupToUser, URIuser } from "../../enumerations/uri";
+import { initialValues } from "../../types/group";
+import Header from "../../components/Header";
+import { Users } from "../../types/user";
 import Select from 'react-select';
 import CreatableSelect from "react-select/creatable";
 import { useNavigate } from "react-router-dom";
@@ -91,7 +90,7 @@ function CadastroGrupo() {
 
   const options = data.map((data) => ({
     value: data.id,
-    label: data.userName
+    label: data.userEmail
   }));
 
 

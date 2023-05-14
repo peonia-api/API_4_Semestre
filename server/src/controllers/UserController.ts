@@ -241,7 +241,7 @@ class UserController {
       const userRepository = await AppDataSource.getRepository(User)
         .createQueryBuilder('user')
         .select('DISTINCT user.userType')
-        .where("user.userType  != 'Padrao'")
+        .where("user.userType  != 'Padrao' AND user.userType  != 'Diretor'")
         .getRawMany()
       return res.json(userRepository)
     }catch(err){

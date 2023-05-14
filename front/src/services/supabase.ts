@@ -71,15 +71,18 @@ export async function removeFileOneIcone(path: any) {
   let fileSrc = path
  
   //console.log(fileSrc.split('icones')[1].split("/")[1]);
-  const { data, error } = await supabase
-    .storage
-    .from('icones')
-    .remove(fileSrc.split('icones')[1].split("/")[1])
-  if(error){
-    console.log(error);
+  if(fileSrc !== "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"){
+    console.log("oi");
     
+    const { data, error } = await supabase
+      .storage
+      .from('icones')
+      .remove(fileSrc.split('icones')[1].split("/")[1])
+    if(error){
+      console.log(error);
+      
+    }
   }
-
 }
 
 export async function uploadIcone(e: any) {

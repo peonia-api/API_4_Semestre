@@ -1,23 +1,24 @@
-import Header from "../components/Header";
-import '../App.css';
+import Header from "../../components/Header";
+import '../../App.css';
 import React, { useEffect, useState } from "react";
-import { Users } from "../types/user";
+import { Users } from "../../types/user";
 import axios from "axios";
-import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
-import registrationSchemaUserEditar from "../controllers/validateUserEditar";
-import { avisoErro } from "../controllers/avisoErro";
-import { avisoConcluido, avisoEdicao } from "../controllers";
+import { URIgroup, URIgroupToUser, URIuser } from "../../enumerations/uri";
+import registrationSchemaUserEditar from "../../controllers/validateUserEditar";
+import { avisoErro } from "../../controllers/avisoErro";
+import { avisoConcluido, avisoEdicao } from "../../controllers";
 import clsx from "clsx";
 import Select from 'react-select';
-import salvar from "../images/salvar.png";
-import { GroupsToUser } from "../types/groupToUser";
-import { Groups } from "../types/group";
+import salvar from "../../images/salvar.png";
+import { GroupsToUser } from "../../types/groupToUser";
+import { Groups } from "../../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
-import { setTimeout } from "timers/promises";
 
-function EditarGrupo() {
+
+function EditarGrupo(type:any) {
+console.log(type);
 
     const id = window.location.href.split("/")[4];
     const typeGroup = window.location.href.split("/")[5];
@@ -39,7 +40,9 @@ function EditarGrupo() {
 
     const schema = Yup.object().shape({
         groupName: Yup.string().required(),
-        user:  Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro"),
+        ...(groupType === "Funcionario"
+        ? { user: Yup.array().required("Selecione pelo menos um membro").min(1, "Selecione pelo menos um membro") }
+        : {}),
     });
 
     let location = useNavigate();
@@ -48,82 +51,73 @@ function EditarGrupo() {
     }
 
     useEffect(() => {
-      
-      async function fetchGroupToUser(id: any) {
-        axios
-          .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
-          .then((response) => {
-            console.log(response.data);
-            setGroupName(response.data[0].group.groupName);
-            setGroupType(response.data[0].group.groupType);
-            setGroupDescription(response.data[0].group.groupDescription);
-            
-            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userName})))
-            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userName})));
-            setUserOptions(response.data.map((item: any) => item.user.userName));
 
-            
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-  
-      async function fetchUsers() {
+      axios
+        .get(`${type.urlCli}${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setGroupName(response.data.groupName);
+          setGroupType(response.data.groupType);
+          setGroupDescription(response.data.groupDescription);
+          
+          const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
+          setUserOptions(opt.split(","));
+          setClientes(opt.split(","))
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .get(`${type.urlFun}${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setGroupName(response.data[0].group.groupName);
+          setGroupType(response.data[0].group.groupType);
+          setGroupDescription(response.data[0].group.groupDescription);
+          
+          setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})))
+          setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})));
+          setUserOptions(response.data.map((item: any) => item.user.userEmail));
+
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
         axios
-          .get(URIuser.PEGAR_USER)
+          .get(type.urlUser)
           .then((response) => {
             const users = response.data.map((item: any) => ({
                 id: item.id,
-              value: item.userName,
-              label: item.userName,
+              value: item.userEmail,
+              label: item.userEmail,
             }));
             setData(users);
           })
           .catch((error) => {
             console.log(error);
           });
-      }
-  
-      async function fetchGroup(id: any) {
-        axios
-          .get(`${URIgroup.PEGAR_GROUP_ESPECIFICO}${id}`)
-          .then((response) => {
-            console.log(response.data);
-            setGroupName(response.data.groupName);
-            setGroupType(response.data.groupType);
-            setGroupDescription(response.data.groupDescription);
-            
-            const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
-            setUserOptions(opt.split(","));
-            
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-     
-      if(typeGroup == "Funcionario"){
-        fetchUsers();
-        fetchGroupToUser(id);
-      }else{
-        fetchGroup(id)
-      }
-      
+
     }, []);
 
   
     
-    console.log((data.filter(({ value }: any) => userOptions.includes(value)) > []) === false );
-    console.log(ids);
-    console.log(clientes);
-    console.log(data);
-    
+    function veri(e:any){
+      if(groupType === "Cliente"){
+        if(clientes.length > 0){
+          handleSubmit(e)
+        }
+      }else{
+        handleSubmit(e)
+      }
+    }
     
     function handleSubmit(event:any) {
         event.preventDefault();
       
-        schema.validate({ groupName, user }).then(() => {
+        schema.validate({ groupName, user}).then(() => {
           const updatedData = {
             groupType: groupType,
             groupName: groupName,
@@ -191,12 +185,9 @@ function EditarGrupo() {
 
     function handleChangeCli(event:any) {
       setClientes(event.map((item:any) => item.value))
-  }
+    }
 
-  console.log(clientes);
-  console.log(userOptions);
-  console.log(arleyid);
-  console.log(user);
+  console.log(clientes.length > 0);
   
     
     
@@ -254,40 +245,37 @@ function EditarGrupo() {
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {groupType === "Funcionario" &&  (
-                        <Select
+                    {groupType === "Funcionario" && (
+                    <>
+                      <Select
                         defaultValue={data.filter(({ value }: any) =>
-                            userOptions.includes(value)
+                          userOptions.includes(value)
                         )}
+                        required
                         isMulti
                         name="users"
                         classNamePrefix="select"
                         options={data}
                         onChange={(e) => handleChangeUser(e)}
-                        className={clsx(
-                          "basic-multi-select",
-                          {
-                              "is-invalid":
-                              user.length < 0,
-                          },
-                          {
-                              "is-valid":
-                              user.length > 0,
-                          }
-                      )}  
-                        />
-                    )}
-                    {groupType === "Funcionario" && user.length === 0 && (
-                          <div className="fv-plugins-message-container">
-                              <div className="fv-help-block">
-                                  <span role="alert">Selecione pelo menos um usuário</span>
-                              </div>
+                        className={clsx("basic-multi-select", {
+                          "is-invalid": user.length < 1,
+                          "is-valid": user.length > 0,
+                        })}
+                      />
+                      {user.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                          <div className="fv-help-block">
+                            <span role="alert">Selecione pelo menos um usuário</span>
                           </div>
+                        </div>
                       )}
+                    </>
+                  )}
                     {groupType == "Cliente" && userOptions.length > 0 &&(
-
+                    <>
                       <CreatableSelect
                       defaultValue={userOptions.map((item) => ({ value: item, label: item }))}
+                      required
                       isMulti
                       name="clients"
                       className="basic-multi-select"
@@ -305,14 +293,16 @@ function EditarGrupo() {
                       id="slcMembros"
                       placeholder="Digite os emails dos clientes"
                       />
-                    )}
-                        {userOptions === null && (
-                            <div className="fv-plugins-message-container">
-                                <div className="fv-help-block">
-                                    <span role="alert">Selecione pelo menos um usuário</span>
-                                </div>
+                      {clientes.length === 0 && (
+                        <div className="fv-plugins-message-container">
+                            <div className="fv-help-block">
+                                <span role="alert">Selecione pelo menos um usuário</span>
                             </div>
-                        )}
+                        </div>
+                      )}
+                    </>
+                    )}
+                        
                     </div>
                     </div>
             </div>
@@ -354,7 +344,7 @@ function EditarGrupo() {
                     <button
                         type="button"
                         className="btn btn-form"
-                        onClick={(e) => (handleSubmit (e))}
+                        onClick={(e) => (veri (e))}
                     >
                         Salvar
                         <img src={salvar} alt="icone salvar" style={{height:"20px", width:"20px", marginLeft:"5px"}}/>

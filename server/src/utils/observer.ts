@@ -1,4 +1,5 @@
 import * as nodemailer from 'nodemailer';
+require('dotenv').config();
 
 
 // Interface Observer
@@ -51,8 +52,8 @@ class UserObserver implements Observer {
                 ciphers: 'SSLv3'
             },
             auth: {
-                user: 'peonia-api@outlook.com',
-                pass: 'ADDJLmRY'
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
             }
         });
 

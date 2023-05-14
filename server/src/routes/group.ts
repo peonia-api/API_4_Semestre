@@ -4,6 +4,8 @@ const routes = Router();
 
 routes.get('/historic', GroupController.getHistoricGroups);
 
+routes.get('/cliente', GroupController.getGroupByCliente);
+
 routes.get('/specific/:uuid', GroupController.getGroupByOne);
 
 routes.post('/create', GroupController.postGroup);

@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import axios from "axios";
-import { avisoErro, perfilValidationSchema } from "../controllers";
-import { URIuser } from "../enumerations/uri";
-import { initialValues, initialValuesAlterarSenha } from "../types/perfil";
-import Header from "../components/Header";
-import avatar from "../images/avatar.png";
-import { avisoErroRequisicao } from "../controllers/avisoErro";
-import { avisoAlterarSenha, avisoPerfil } from "../controllers/avisoConcluido";
-import "../App.css";
+import { avisoErro, perfilValidationSchema } from "../../controllers";
+import { URIuser } from "../../enumerations/uri";
+import { initialValues, initialValuesAlterarSenha } from "../../types/perfil";
+import Header from "../../components/Header";
+import avatar from "../../images/avatar.png";
+import { avisoErroRequisicao } from "../../controllers/avisoErro";
+import { avisoAlterarSenha, avisoPerfil } from "../../controllers/avisoConcluido";
+import "../../App.css";
 import { Modal } from "react-bootstrap";
-import { perfilValidationSchemaAlterarSenha } from "../controllers/validatePerfil";
-import { removeFileOneIcone, uploadIcone } from "../services/supabase";
+import { perfilValidationSchemaAlterarSenha } from "../../controllers/validatePerfil";
+import { removeFileOneIcone, uploadIcone } from "../../services/supabase";
 
 function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)
@@ -74,7 +74,7 @@ function Perfil() {
         if(res.status === 200){
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
-          if(localStorage.getItem("icone") != imagemUti || formik.values.icone != icoAnte){
+          if(formik.values.icone != icoAnte){
             removeFileOneIcone(icoAnte)
           }
           if(formik.values.icone === imagemUti){localStorage.setItem("icone", imagemUti)}
@@ -120,7 +120,12 @@ function Perfil() {
     } else {
       if(icone){uploadIcone(icone).then((res) => {
         formik.values.icone = res 
-        localStorage.setItem("icone", res)
+        if(res.split('icones')[1].split("/")[1] !== 'undefined'){
+          localStorage.setItem("icone", res)
+        }else{
+          localStorage.setItem("icone", imagemUti)
+          removeFileOneIcone(icoAnte)
+        }
         formik.submitForm();
       })}else{formik.submitForm();}
     }
@@ -174,12 +179,13 @@ function Perfil() {
                   <div className="d-flex border border-2 shadow-sm rounded-circle">
                     <input ref={inputFile} accept="image/png, image/jpeg" type="file" className="d-none" onChange={onChangeInputFile} />
                     <img className="rounded-circle" src={avatarSRC} alt="avatar" style={{
-                      width: 280,
-                      height: 280
+                      position:'relative',
+                      width: 190,
+                      height: 190
                     }} />
                     <span style={{
                       position: "relative",
-                      top: 0,
+                      top: -18,
                       right: 35,
                       width: 0,
                       height: 0
@@ -192,7 +198,7 @@ function Perfil() {
                     </span>
                     <span className={avatarSRC === avatar ? 'd-none' : ''} style={{
                       position: "relative",
-                      top: 249,
+                      top: 180,
                       right: 35,
                       width: 0,
                       height: 0

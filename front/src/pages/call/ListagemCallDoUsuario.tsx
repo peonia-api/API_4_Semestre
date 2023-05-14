@@ -1,22 +1,21 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
-import { URI, URIattach, URIcommit, URIgroupToCall } from "../enumerations/uri";
-import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
+import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
 import React, { useState, useEffect, useRef } from "react";
-import { Attachment } from "../types/attachment";
+import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import avaliacao from "../images/avaliar.png";
-import excluir from "../images/excluir.png";
-import arquivos from "../images/paperclip.svg";
+import excluir from "../../images/excluir.png";
+import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
-import Header from "../components/Header";
-import editar from "../images/editar.png";
+import Header from "../../components/Header";
+import editar from "../../images/editar.png";
 import { Link } from "react-router-dom";
-import { Calls } from "../types/call";
+import { Calls } from "../../types/call";
 import axios from "axios";
-import '../App.css';
-import { removeFile } from "../services/supabase";
+import '../../App.css';
+import { removeFile } from "../../services/supabase";
 
 
 function ListagemCallUser() {

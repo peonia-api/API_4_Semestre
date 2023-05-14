@@ -1,27 +1,24 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall, URIgroupToUser, URIuser } from "../enumerations/uri";
-import { solicitacaoInitialValues } from "../types/call";
-//import Dropzone from "../components/Dropzone";
-import Header from "../components/Header";
-import '../App.css';
+import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../../controllers";
+import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
+import { solicitacaoInitialValues } from "../../types/call";
+import Header from "../../components/Header";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { supabase, uploadFile } from "../services/supabase";
-import { Attachment } from "../types/attachment";
-import { Groups } from "../types/group";
+import { uploadFile } from "../../services/supabase";
+import { Groups } from "../../types/group";
 import Select from "react-select";
 function Solicitacao() {
 
   useEffect(() => {
     async function fetchUsers() {
       axios
-        .get(URIgroup.PEGAR_GROUP)
+        .get(URIgroup.PEGAR_GROUP_Cliente)
         .then((response) => {
           setData(response.data);
         })
@@ -96,7 +93,7 @@ const options = data.map((data) => ({
       })
       avisoEspera().then((res) => {
         setTimeout(function(){avisoConcluido().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagem");}, 1000)
+          setTimeout(function(){window.location.assign("/listagemCall");}, 1000)
           
         })}, 2000)
       })

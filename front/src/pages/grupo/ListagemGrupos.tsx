@@ -6,20 +6,18 @@ import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import { avisoErroAoDeletar } from "../controllers";
-import { avisoDeletar } from "../controllers/avisoConcluido";
-import { avisoErroDeletar, avisoChamado } from "../controllers/avisoErro";
-import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../enumerations/uri";
-import { removeFile } from "../services/supabase";
-import { Calls } from "../types/call";
-import editar from "../images/editar.png";
-import excluir from "../images/excluir.png";
-import grupoImag from "../images/grupo.png";
-import "../App.css";
-import { GroupsToUser } from "../types/groupToUser";
-import { Groups } from "../types/group";
-import { group, log } from "console";
+import Header from "../../components/Header";
+import { avisoErroAoDeletar } from "../../controllers";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
+import { avisoErroDeletar, avisoChamado } from "../../controllers/avisoErro";
+import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../../enumerations/uri";
+import editar from "../../images/editar.png";
+import excluir from "../../images/excluir.png";
+import grupoImag from "../../images/grupo.png";
+import "../../App.css";
+import { GroupsToUser } from "../../types/groupToUser";
+import { Groups } from "../../types/group";
+
 
 function ListagemGrupos() {
 
@@ -209,9 +207,15 @@ function ListagemGrupos() {
                       <td className="text-center">{grupo.groupName}</td>
                       <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">
-                        <Link to={"/editarGrupo/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
-                          <img src={editar} style={{ width: '25px' }} alt='Editar' />
-                        </Link>
+                        {grupo.groupType === "Funcionario"? 
+                          <Link to={"/editarGrupoFun/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
+                            <img src={editar} style={{ width: '25px' }} alt='Editar' />
+                          </Link>
+                          :
+                          <Link to={"/editarGrupoCli/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
+                            <img src={editar} style={{ width: '25px' }} alt='Editar' />
+                          </Link>
+                        }
                           <img
                             className="actions"
                             style={{ width: "35px", padding: "3px" }}
