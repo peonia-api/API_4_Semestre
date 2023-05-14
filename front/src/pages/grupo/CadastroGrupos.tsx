@@ -90,7 +90,7 @@ function CadastroGrupo() {
 
   const options = data.map((data) => ({
     value: data.id,
-    label: data.userName
+    label: data.userEmail
   }));
 
 

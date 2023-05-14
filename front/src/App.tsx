@@ -20,7 +20,7 @@ import ArchivedList from "./pages/call/Archived";
 import LogAvaliacoes from "./pages/call/LogAvaliacoes";
 import CadastroGrupo from "./pages/grupo/CadastroGrupos";
 import { Comites } from "./pages/Comite/Comites";
-import { URIcommit } from "./enumerations/uri";
+import { URIcommit, URIgroup, URIgroupToUser, URIuser } from "./enumerations/uri";
 import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
 
 function App() {
@@ -44,7 +44,8 @@ function App() {
             <Route path="/comites/:id" element={<Private> <Comites /> </Private> } />
             <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
             <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
-            <Route path="/editarGrupo/:id/:type" element={<Private><EditarGrupos /></Private>}></Route>
+            <Route path="/editarGrupoFun/:id/:type" element={<Private><EditarGrupos type={"Funcionario"} urlUser={URIuser.PEGAR_USER} urlFun={URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}/></Private>}></Route>
+            <Route path="/editarGrupoCli/:id/:type" element={<Private><EditarGrupos type={"Cliente"} urlCli={URIgroup.PEGAR_GROUP_ESPECIFICO} /></Private>}></Route>
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
