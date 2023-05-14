@@ -55,9 +55,11 @@ function Header() {
                       <NavDropdown.Item href="/listagemGrupos">
                         Grupos
                       </NavDropdown.Item>
+                      {tipoUsuario !== 'Diretor' &&(
                       <NavDropdown.Item href="/listagemTipoUsuario">
                         Comitê
                       </NavDropdown.Item>
+                      )}
                       {
                         tipoUsuario === 'Diretor' && (
                           <>
