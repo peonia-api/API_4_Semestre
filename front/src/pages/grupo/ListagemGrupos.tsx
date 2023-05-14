@@ -207,9 +207,15 @@ function ListagemGrupos() {
                       <td className="text-center">{grupo.groupName}</td>
                       <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">
-                        <Link to={"/editarGrupo/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
-                          <img src={editar} style={{ width: '25px' }} alt='Editar' />
-                        </Link>
+                        {grupo.groupType === "Funcionario"? 
+                          <Link to={"/editarGrupoFun/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
+                            <img src={editar} style={{ width: '25px' }} alt='Editar' />
+                          </Link>
+                          :
+                          <Link to={"/editarGrupoCli/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
+                            <img src={editar} style={{ width: '25px' }} alt='Editar' />
+                          </Link>
+                        }
                           <img
                             className="actions"
                             style={{ width: "35px", padding: "3px" }}
