@@ -1,25 +1,24 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
-import { URI, URIattach, URIcommit, URIgroupToCall } from "../enumerations/uri";
-import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
+import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
 import React, { useState, useEffect, useRef } from "react";
-import { Attachment } from "../types/attachment";
+import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import avaliacao from "../images/avaliar.png";
-import excluir from "../images/excluir.png";
-import arquivos from "../images/paperclip.svg";
+import excluir from "../../images/excluir.png";
+import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
-import Header from "../components/Header";
-import editar from "../images/editar.png";
+import Header from "../../components/Header";
+import editar from "../../images/editar.png";
 import { Link } from "react-router-dom";
-import { Calls } from "../types/call";
+import { Calls } from "../../types/call";
 import axios from "axios";
-import '../App.css';
-import { removeFile } from "../services/supabase";
+import '../../App.css';
+import { removeFile } from "../../services/supabase";
 
 
-function ListagemCall() {
+function ListagemCallUser() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -33,7 +32,7 @@ function ListagemCall() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(URIcommit.PEGAR_COMITE_STATUS)
+        .get(`${URI.PEGAR_CAll_User}${localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""}`)
         .then((response) => {
           setData(response.data);
         })
@@ -174,11 +173,11 @@ function ListagemCall() {
                   <tr>
                     {/*cabeçalho tabela*/}
                     <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
                 </thead>
@@ -192,11 +191,15 @@ function ListagemCall() {
                           {/*animate*/}
                           <strong className="dropdown-label anexo" onClick={() => reveal(data.id)}>{data.id}</strong>
                         </td>
-                        <td className="text-center">{data.callEmail}</td>
-                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callTitle}</td>
+                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
+                        </td>
+                        <td className="text-center">
+                          <Link to={"/editarCall/" + data.id} style={{padding: "3px"}}> <img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
+                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteCall(data.id)} />
+                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(data.id)} />
                         </td>
                       </tr>
                     );
@@ -234,4 +237,4 @@ function ListagemCall() {
   );
 }
 
-export default ListagemCall;
+export default ListagemCallUser;

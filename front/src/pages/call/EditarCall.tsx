@@ -3,23 +3,20 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoEdicao, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../enumerations/uri";
-import { Calls } from "../types/call";
-import Header from "../components/Header";
-import '../App.css';
+import { avisoEdicao, avisoErro, solicitacaoValidationSchema } from "../../controllers";
+import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
+import { Calls } from "../../types/call";
+import Header from "../../components/Header";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { removeFile, removeFileOne, supabase, uploadFile } from "../services/supabase";
-import { Attachment } from "../types/attachment";
-import { FloatingLabel, Form } from "react-bootstrap";
-import { Committee } from "../types/committee";
-import { avisoDeletar, avisoDeletarAnexo, avisoEsperaAnexo } from "../controllers/avisoConcluido";
-import { avisoErroDeletar } from "../controllers/avisoErro";
-import excluir from "../images/excluir.png";
+import { removeFile, removeFileOne, uploadFile } from "../../services/supabase";
+import { Attachment } from "../../types/attachment";
+import { Committee } from "../../types/committee";
+import { avisoDeletarAnexo, avisoEsperaAnexo } from "../../controllers/avisoConcluido";
+import { avisoErroDeletar } from "../../controllers/avisoErro";
+import excluir from "../../images/excluir.png";
 import Select from "react-select";
-import { Groups } from "../types/group";
 
 
 function EditarCall() {
