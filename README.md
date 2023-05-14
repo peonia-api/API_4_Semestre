@@ -18,13 +18,13 @@
 <span id="requisitos">
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
-- [ ] Cadastro de grupo de usuários;
+- [x] Cadastro de grupo de usuários;
 - [x] Permissão por grupo e por usuário;
-- [ ] Distinção de usuários por times;
+- [x] Distinção de usuários por times;
 - [x] Fila de chamados para cada time;
 - [x] Configuração e personalização de formulário de chamados;
 - [x] Árvore de Decisão para escalonamento de chamados;
-- [ ] Cadastro de soluções para problemas conhecidos;
+- [x] Cadastro de soluções para problemas conhecidos;
 - [x] Formulário de abertura de chamado com indicação de interessados;
 
 <h3> Requisitos Não Funcionais </h3>
@@ -79,7 +79,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 |:-----:|:----------:|:---------:|:---------:|
 | 01 | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
 | 02 | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
-| 03 |  | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint3.MD) |
+| 03 | 14/05/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint3.MD) |
 <!--| 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
 
 <span id="Documentação">
@@ -99,7 +99,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 <h1 align="center"> 
     
-![Product Backlog](https://user-images.githubusercontent.com/86448876/235326440-7e85279f-43b7-4555-862a-8d9d39b96985.png)
+![Product Backlog](https://github.com/peonia-api/API_4_Semestre/assets/86448876/213af40e-72e7-49c2-8102-f270e8aad344)
     
 </h1>
  
