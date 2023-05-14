@@ -49,6 +49,14 @@ input {
   border-radius: 0 !important;
 }
 
+input.form-range {
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+}
+
 .fs-6, input, button, th, td {
   font-family: 'Source Sans Pro', sans-serif !important;
 }
@@ -110,8 +118,19 @@ a.nav-link {
   }
 }
 
-.nav-link + .nav-link {
-  margin-left: 3rem;
+.navbar-nav a.nav-link {
+  margin-left: 2rem;
+  margin-right: 1rem;
+}
+
+div.perfil a.nav-link {
+  margin-left: 0;
+  margin-right: 0;
+  justify-content: right;
+}
+
+div.dropdown a.dropdown-toggle {
+  margin-left: 0;
 }
 
 .btn-form {
@@ -199,24 +218,6 @@ input::-webkit-inner-spin-button {
   border-bottom: 2px solid #212529
 }
 
-/* CSS ChechBox Inicio */
-.form-check-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 3px;
-  background-color: #424242;
+.perfil .dropdown-toggle::after {
+  display: none !important; 
 }
-
-.form-check-input[type="checkbox"]:checked {
-  background-color: #007bff;
-  border-color: #007bff;
-}
-
-.container-checkbox{
-  margin-top: 50px;
-}
-
-.form-check-label {
-  font-weight: normal;
-}
-/* CSS ChechBox  Fim */

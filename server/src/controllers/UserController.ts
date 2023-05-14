@@ -30,8 +30,10 @@ class UserController {
         // retorna o token para o cliente
         return res.json({
           id: usuario.id,
+          userName: usuario.userName,
           userType: usuario.userType,
           userEmail: usuario.userEmail,
+          icone: usuario.icone,
           token
         });
       }
@@ -127,6 +129,13 @@ class UserController {
     return res.json(allUser)
   }
 
+  public async getAllUser(req: Request, res: Response): Promise<Response> {
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.query("SELECT id, userName FROM User")
+    console.log(allUser)
+    return res.json(allUser)
+  }
+
   public async getId(req: Request, res: Response): Promise<Response> {
     const { userEmail } = req.body
     const usuario: any = await AppDataSource
@@ -142,6 +151,18 @@ class UserController {
     return res.json(usuario)
   }
 
+  public async getEmail(req: Request, res: Response): Promise<Response> {
+    const userEmail: any = req.params.email
+    const userRepository = AppDataSource.getRepository(User)
+    const allUser = await userRepository.findOneBy({ userEmail: userEmail })
+    if (allUser == undefined) {
+      return res.json({ Existe: false })
+    }
+    else {
+      return res.json({ Existe: true })
+    }
+  }
+
   public async postUser(req: Request, res: Response): Promise<Response> {
     const createUser = req.body
     const userRepository = AppDataSource.getRepository(User)
@@ -151,7 +172,7 @@ class UserController {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-
+    insertUser.icone = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
   }
@@ -168,6 +189,23 @@ class UserController {
 
     const allUser = await userRepository.save(findUser)
     return res.json(allUser)
+  }
+
+  public async putUserPerfil(req: Request, res: Response): Promise<Response> {
+    try{
+      const createUser = req.body
+      const idUser: any = req.params.uuid
+      const userRepository = AppDataSource.getRepository(User)
+      const findUser = await userRepository.findOneBy({ userEmail: idUser })
+      findUser.userName = createUser.userName
+      findUser.userEmail = createUser.userEmail
+      findUser.icone = createUser.icone
+      const allUser = await userRepository.save(findUser)
+      return res.json(allUser)
+    }catch(err){
+      res.status(400).json({menssagem: "Erro ao mudar"})
+    }
+    
   }
 
   public async deleteUser(req: Request, res: Response): Promise<Response> {
@@ -200,21 +238,16 @@ class UserController {
 
   public async getVeficaType(req: Request, res: Response): Promise<Response> {
     try{
-      const userRepository = AppDataSource.getRepository(User).createQueryBuilder('user').select('DISTINCT user.userType').getRawMany()
-      let type = [{type: "CSO", possui: false}, {type: "RT", possui: false},{type: "CTO", possui: false},{type: "HP", possui: false},{type: "Padrao", possui: false}]
-      const user = (await userRepository).forEach((resp)=> {
-        if(resp.userType != "Padrao"){
-          const list = type.find((types) => types.type == resp.userType)
-          list.possui = true
-        }
-        
-      })
-      return res.json(type)
+      const userRepository = await AppDataSource.getRepository(User)
+        .createQueryBuilder('user')
+        .select('DISTINCT user.userType')
+        .where("user.userType  != 'Padrao' AND user.userType  != 'Diretor'")
+        .getRawMany()
+      return res.json(userRepository)
     }catch(err){
       return res.status(400).json({menssagem: "Erro ao verificar"})
     }
   }
-
 }
 
 export default new UserController();

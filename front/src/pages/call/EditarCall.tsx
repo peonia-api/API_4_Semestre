@@ -3,21 +3,20 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoEdicao, avisoErro, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIcommit } from "../enumerations/uri";
-import { Calls } from "../types/call";
-import Header from "../components/Header";
-import '../App.css';
+import { avisoEdicao, avisoErro, solicitacaoValidationSchema } from "../../controllers";
+import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
+import { Calls } from "../../types/call";
+import Header from "../../components/Header";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { removeFile, removeFileOne, supabase, uploadFile } from "../services/supabase";
-import { Attachment } from "../types/attachment";
-import { FloatingLabel, Form } from "react-bootstrap";
-import { Committee } from "../types/committee";
-import { avisoDeletar, avisoDeletarAnexo, avisoEsperaAnexo } from "../controllers/avisoConcluido";
-import { avisoErroDeletar } from "../controllers/avisoErro";
-import excluir from "../images/excluir.png";
+import { removeFile, removeFileOne, uploadFile } from "../../services/supabase";
+import { Attachment } from "../../types/attachment";
+import { Committee } from "../../types/committee";
+import { avisoDeletarAnexo, avisoEsperaAnexo } from "../../controllers/avisoConcluido";
+import { avisoErroDeletar } from "../../controllers/avisoErro";
+import excluir from "../../images/excluir.png";
+import Select from "react-select";
 
 
 function EditarCall() {
@@ -31,6 +30,12 @@ function EditarCall() {
 
   const [comite, setComite] = useState<Committee[]>([]);
 
+  const [group, setGroup] = useState([]);
+
+  const [idLiga, setidLiga] = useState();
+
+  const [selectedGroup, setSelectedGroup] = useState([] as any);
+
   const updateFiles = (incommingFiles: any) => {
     //do something with the files
     setFiles(incommingFiles);
@@ -41,7 +46,7 @@ function EditarCall() {
   };
 
   console.log(anexo);
-  
+
 
   useEffect(() => {
     async function fetchCalls(id: string) {
@@ -79,7 +84,37 @@ function EditarCall() {
       }
     }
     fetchAnexo(id)
+
+    async function fetchGroupSelected(id: string) {
+      axios
+        .get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_ESPECIFICO}${id}`)
+        .then((response) => {
+          setidLiga(response.data.map((item: any) => item.id))
+          setSelectedGroup(response.data.map((item: any) => ({id: item.id ,value: item.group.id , label:item.group.groupName })));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchGroupSelected(id)
+
+    async function fetchGroup() {
+      try {
+        const response = await axios.get(URIgroup.PEGAR_GROUP_Cliente);
+        const options = response.data.map((group:any) => ({
+          value: group.id,
+          label: group.groupName
+        }));
+        setGroup(options);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchGroup();
   }, []);
+
+  console.log(group);
+  
 
   const formik = useFormik({
     initialValues: {
@@ -89,6 +124,7 @@ function EditarCall() {
       callDescription: data?.callDescription ?? "",
       callPriority: data?.callPriority ?? "",
       //callState: "Inicializado",
+      group: selectedGroup,
     },
     validationSchema: solicitacaoValidationSchema,
     initialErrors: { callEmail: "" },
@@ -102,17 +138,22 @@ function EditarCall() {
           callPriority: values.callPriority,
           //callState: values.callState,
           callDateCreate: data?.callDateCreate ?? new Date(),
+          group: values.group,
         };
 
         await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
+          // for (let i = 0; i < selectedGroup.length; i++) {
+          //   await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
+          // }
+          await axios.put(`${URIgroupToCall.ALTERA_GROUP_TO_CALL}${idLiga}`, { group: selectedGroup.value, call: id }).then((res) => console.log("linux")).catch((rtt) => console.log("deu ruim!"))
           if (formik.values.callType == "feature") {
             await axios.post(URIcommit.ENVIAR_COMITE, { id: id })
           } else {
             if (data?.callType == "feature") {
-              if(formik.values.callType == "hotfix"){
+              if (formik.values.callType == "hotfix") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`)
               }
-              
+
             }
           }
         })
@@ -134,7 +175,7 @@ function EditarCall() {
 
       anexo.map(async (fileData) => {
         console.log(fileData.name);
-        
+
         await axios.put(`${URIattach.ALTERA_ANEXO_ESPECIFICO_SUPABASE}${id}`, anexo).then(async (res) => {
 
         })
@@ -168,16 +209,31 @@ function EditarCall() {
     }
   }
 
+  const handleSelectChange = (selectedOptions: any) => {
+    //const selectedValues = selectedOptions.map((option: any) => option.label); 
+    setSelectedGroup(selectedOptions);
+    formik.setFieldValue("group", selectedOptions?.value)
+  };
+
+
+
+  console.log(group);
+  console.log(selectedGroup);
+  console.log(idLiga);
+  
+
   function onClickEnviar() {
     if (!formik.isValid) {
       avisoErro();
     } else {
       formik.submitForm();
       avisoEsperaAnexo().then((res) => {
-        setTimeout(function(){avisoEdicao().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagem");}, 2000)
-          
-        })}, 3000)
+        setTimeout(function () {
+          avisoEdicao().then((res: any) => {
+            setTimeout(function () { window.location.assign("/listagemCall"); }, 2000)
+
+          })
+        }, 3000)
       })
 
     }
@@ -185,7 +241,8 @@ function EditarCall() {
   }
 
   console.log(files);
-  
+
+console.log(formik.values.group);
 
   return (
     <>
@@ -219,40 +276,7 @@ function EditarCall() {
             )}
 
             <div className="row">
-              <div className="col-lg-6">
-                {/* begin::Form group E-mail */}
-                <div className="fv-row mb-3">
-                  <label className="form-label fw-bolder text-dark fs-6">
-                    E-mail
-                  </label>
-                  <input
-                    placeholder="E-mail"
-
-                    type="email"
-                    autoComplete="off"
-                    {...formik.getFieldProps("callEmail")}
-
-
-                    className={clsx(
-                      "form-control bg-transparent",
-                      {
-                        "is-invalid": formik.touched.callEmail && formik.errors.callEmail,
-                      },
-                      {
-                        "is-valid": formik.touched.callEmail && !formik.errors.callEmail,
-                      }
-                    )} />
-                  {formik.touched.callEmail && formik.errors.callEmail && (
-                    <div className="fv-plugins-message-container">
-                      <div className="fv-help-block">
-                        <span role="alert">{formik.errors.callEmail}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {/* end::Form group E-mail */}
-              </div>
-              <div className="col-lg-6">
+              <div className="col-lg-12">
                 {/* begin::Form group Título */}
                 <div className="fv-row mb-3">
                   <label className="form-label fw-bolder text-dark fs-6">
@@ -338,61 +362,18 @@ function EditarCall() {
                 {/* end::Form group Tipo Chamado*/}
               </div>
               <div className="col-lg-6">
-                {/* begin::Form group Prioridade */}
-                <div className="fv-row mb-3">
-                  <label className="form-label fw-bolder text-dark fs-6">
-                    Prioridade
-                  </label>
-                  <select
-                    placeholder="Prioridade do chamado"
-                    autoComplete="off"
-                    {...formik.getFieldProps("callPriority")}
-                    onChange={formik.handleChange}
-                    value={formik.values.callPriority}
-                    className={clsx(
-                      "form-control bg-transparent",
-                      {
-                        "is-invalid": formik.touched.callPriority && formik.errors.callPriority,
-                      },
-                      {
-                        "is-valid": formik.touched.callPriority && !formik.errors.callPriority,
-                      }
-                    )}
-                  >
-                    <option
-                      value=""
-                      disabled
-                      label="Selecione a prioridade do chamado"
-                    >
-                      Prioridade do chamado{" "}
-                    </option>
-                    <option value="alta" onChange={formik.handleChange} label="Alta">
-                      Alta
-                    </option>
-                    <option
-                      value="media"
-                      onChange={formik.handleChange}
-                      label="Média"
-                    >
-                      Media
-                    </option>
-                    <option
-                      value="baixa"
-                      onChange={formik.handleChange}
-                      label="Baixa"
-                    >
-                      Baixa
-                    </option>
-                  </select>
-                  {formik.touched.callPriority && formik.errors.callPriority && (
-                    <div className="fv-plugins-message-container">
-                      <div className="fv-help-block">
-                        <span role="alert">{formik.errors.callPriority}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {/* end::Form group Tipo Prioridade*/}
+                <label className="form-label fw-bolder text-dark fs-6">
+                  Grupos
+                </label>
+                
+                <Select
+                placeholder="Selecione o Grupo"
+                {...formik.getFieldProps("group")}
+                value={selectedGroup}
+                onChange={handleSelectChange}
+                options={group}
+                />
+                
               </div>
             </div>
             <div className="row">
@@ -444,7 +425,7 @@ function EditarCall() {
                       {anexo.map((anexo) => (
                         <>
                           <a href={anexo.src} target="_blank" rel="noopener noreferrer">Visualizar anexo</a>
-                          <img className="actions" style={{ width: "35px", marginLeft:'-25px'}} src={excluir} alt="Excluir" onClick={() => handleDeleteFile(anexo.id)} />
+                          <img className="actions" style={{ width: "35px", marginLeft: '-25px' }} src={excluir} alt="Excluir" onClick={() => handleDeleteFile(anexo.id)} />
                         </>
                       ))}
                     </div>

@@ -38,11 +38,14 @@ export const AuthProvider = ({children}:any) => {
                 const loggedUser = res.data.userEmail
                 const token = res.data.token
                 const userType = res.data.userType
+                const userName = res.data.userName
+                const icone = res.data.icone
 
                 localStorage.setItem('userEmail', JSON.stringify(loggedUser))
                 localStorage.setItem('token', token)
                 localStorage.setItem("userType",userType)
-
+                localStorage.setItem("userName", userName)
+                localStorage.setItem("icone", icone)
                 console.log(res);
                 
 
@@ -57,7 +60,8 @@ export const AuthProvider = ({children}:any) => {
                 localStorage.removeItem("userEmail");
                 localStorage.removeItem("token")    
                 localStorage.removeItem("userType")
-
+                localStorage.removeItem("userName")
+                localStorage.removeItem("icone")
                 avisoErroLogin()
             })
         }catch(err){
@@ -71,6 +75,8 @@ export const AuthProvider = ({children}:any) => {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("token")
         localStorage.removeItem("userType")
+        localStorage.removeItem("userName")
+        localStorage.removeItem("icone")
         api.defaults.headers.Authorization = null
         api.defaults.headers.common = { Authorization: `` }
         api.defaults.withCredentials = false
@@ -98,6 +104,16 @@ export const Private = ({ children }:any) => {
 
     return children;
 
+}
+
+export const VerifyDiretor = ({ children }:any) => {
+    const tipo = localStorage.getItem("userType")
+
+    if(tipo !== "Diretor"){
+        return <Navigate to={"/LogAvaliacoes"}/>
+    }
+
+    return children;
 }
 
 export const VerifyCso = ({ children }:any) => {
@@ -131,6 +147,7 @@ export const VerifyCTO = ({ children }:any) => {
 }
 
 export const VerifyHP = ({ children }:any) => {
+    debugger
     const tipo = localStorage.getItem("userType")
 
     if(tipo !== "HP"){
@@ -149,6 +166,7 @@ export const VerifySQUAD = ({ children }:any) => {
 
     return children;
 }
+
 export const VerifyPADRAO = ({ children }:any) => {
     const tipo = localStorage.getItem("userType")
 

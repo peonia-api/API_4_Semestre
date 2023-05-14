@@ -13,11 +13,11 @@ const registrationSchemaUser = Yup.object().shape({
       .required('O cargo é obrigatório'),
 
     userPassword: Yup.string()
-      .required('A senha é obrigatório')
+      .required('A senha é obrigatória')
       .min(8, "A senha deve ter no mínimo 8 caracteres"),
 
     userEmail: Yup.string()     
-      .required('O email é obrigatório')
-      .min(8, "A email deve ter no mínimo 8 caracteres"),
+      .required('O e-mail é obrigatório')
+      .min(8, "O e-mail deve ter no mínimo 8 caracteres"),
   })
   export default registrationSchemaUser;

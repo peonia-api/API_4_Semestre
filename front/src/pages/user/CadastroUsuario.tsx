@@ -3,18 +3,32 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro } from "../controllers";
-import registrationSchemaUser from "../controllers/validateUser";
-import { URIuser } from "../enumerations/uri";
-import { initialValues } from "../types/user";
-import Header from "../components/Header";
-import '../App.css';
+import { avisoConcluido, avisoErro } from "../../controllers";
+import registrationSchemaUser from "../../controllers/validateUser";
+import { URIuser } from "../../enumerations/uri";
+import { initialValues } from "../../types/user";
+import Header from "../../components/Header";
+import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
+interface UserType {
+    userType: string;
+  }
+  
+  interface SelectUserTypeProps {
+    type: UserType[];
+  }
+interface Option {
+    value: string;
+    label: string;
+  }
 function CadastroUsuario() {
-    const [type, setType] = useState({} as any);
-    let options = null;
+    const [type, setType] = useState([]);
+    const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  
+
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchemaUser,
@@ -26,6 +40,25 @@ function CadastroUsuario() {
         },
     });
 
+    let location = useNavigate();
+    function voltar (){
+      location('/listagemUser')
+    }
+    
+    useEffect(() => {
+        async function fetchUsers() {
+          axios
+            .get(URIuser.VERIFICA_TYPE)
+            .then((response) => {
+                setType(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+        fetchUsers();
+      }, []);
+
     function onClickLimpar() {
         formik.resetForm();
     }
@@ -35,12 +68,9 @@ function CadastroUsuario() {
             avisoErro();
         } else {
             formik.submitForm();
-            avisoConcluido();
+            avisoConcluido().then((result) => result.isConfirmed ? voltar() : '');
         }
     }
-
-
-
     useEffect(() => {
         function typeUser(){
             axios.get(URIuser.VERIFICA_TYPE).then((res) => {
@@ -50,21 +80,31 @@ function CadastroUsuario() {
         typeUser()
         
      }, []);
-     if(type){
-        for (let i = 0; i < type.length; i++) {
-            console.log(type[i].type);
-            options = <option key={type[i]}>{type[i].type}</option>
-            console.log(options);
-            
-            
-        }
-        // type.map((res:any) => {
-        //     console.log(res);
-            
-        // })
-        //options = type.map((el:any) => <option key={el}>{el}</option>);
-     }
-     
+
+     const cso = type.find((item: UserType) => item.userType === "CSO");
+     const rt = type.find((item: UserType) => item.userType === "RT");
+     const cto = type.find((item: UserType) => item.userType === "CTO");
+     const hp = type.find((item: UserType) => item.userType === "HP");
+   
+     const options: Option[] = [
+       { value: "CSO", label: "CSO (Chief Security Officer)" },
+       { value: "RT", label: "RT (Responsável Técnico)" },
+       { value: "CTO", label: "CTO (Chief Technology Officer)" },
+       { value: "HP", label: "Head de plataforma" },
+       { value: "Diretor", label: "Diretor" },
+       { value: "Padrao", label: "Padrão" },
+     ].filter((option) => {
+       if (option.value === "CSO" && cso) return false;
+       if (option.value === "RT" && rt) return false;
+       if (option.value === "CTO" && cto) return false;
+       if (option.value === "HP" && hp) return false;
+       return true;
+     });
+   
+     const handleChange = (option: Option | null) => {
+       setSelectedOption(option);
+       formik.setFieldValue("userType", option?.value);
+     };
 
     return (
         <>
@@ -86,7 +126,7 @@ function CadastroUsuario() {
                     className="text-gray-500 fs-6 font-padrao-titulo mb-5"
                     style={{ letterSpacing: 0 }}
                 >
-                    Preencha os campos e defina a permissão para cadastrar um novo usuário
+                        Preencha os campos e defina a permissão para cadastrar um novo usuário
                 </div>
             </div>
 
@@ -247,14 +287,13 @@ function CadastroUsuario() {
                             <label className="form-label fw-bolder text-dark fs-6">
                                 Tipo de usuário
                             </label>
-                            <select
-                                placeholder="Tipo do Chamado (Hotfix ou Feature)"
-                                autoComplete="off"
+                                <Select
+                                placeholder="Selecione o tipo de usuário"
                                 {...formik.getFieldProps("userType")}
-                                onChange={formik.handleChange}
-                                value={formik.values.userType}
+                                value={selectedOption}
+                                onChange={handleChange}
+                                options={options}
                                 className={clsx(
-                                    "form-control bg-transparent",
                                     {
                                         "is-invalid":
                                             formik.touched.userType && formik.errors.userType,
@@ -263,18 +302,11 @@ function CadastroUsuario() {
                                         "is-valid":
                                             formik.touched.userType && !formik.errors.userType,
                                     }
-                                )}
-                            >
-                                <option value="" disabled label="Selecione o tipo de usuário">
-                                    Tipo de usuário{" "}
-                                </option>
-                                <option value="CSO" onChange={formik.handleChange} label="CSO (Chief Security Officer)"> CSO (Chief Security Officer) </option>
-                                <option value="RT" onChange={formik.handleChange} label="RT (Responsável Técnico)" > RT (Responsável Técnico) </option>
-                                <option value="CTO" onChange={formik.handleChange} label="CTO (Chief Technology Officer)"> CTO (Chief Technology Officer) </option>
-                                <option value="HP" onChange={formik.handleChange} label="Head de plataforma"> Head de plataforma </option>
-                                {/* <option value="SQUAD" onChange={formik.handleChange} label="Squad"> Squad </option> */}
-                                <option value="Padrao" onChange={formik.handleChange} label="Padrão"> Padrão </option>
-                            </select>
+                                    )}
+                                />
+                                {formik.touched.userType && formik.errors.userType ? (
+                                    <div className="invalid-feedback">{formik.errors.userType}</div>
+                                ) : null}
                             {formik.touched.userType && formik.errors.userType && (
                                 <div className="fv-plugins-message-container">
                                     <div className="fv-help-block">

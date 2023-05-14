@@ -1,19 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro } from "../controllers";
-import registrationSchemaUser from "../controllers/validateGroup";
-import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
-import { initialValues } from "../types/group";
-import Header from "../components/Header";
-import '../App.css';
-import { Users } from "../types/user";
+import { avisoConcluido, avisoErro } from "../../controllers";
+import registrationSchemaUser from "../../controllers/validateGroup";
+import { URIgroup, URIgroupToUser, URIuser } from "../../enumerations/uri";
+import { initialValues } from "../../types/group";
+import Header from "../../components/Header";
+import { Users } from "../../types/user";
 import Select from 'react-select';
+import CreatableSelect from "react-select/creatable";
+import { useNavigate } from "react-router-dom";
 
 
-function CadastroGrupos() {
+function CadastroGrupo() {
+
+  let userType = localStorage.getItem("userType");
+
+  console.log(userType);
+
   const [data, setData] = useState<Users[]>([]);
   const [selectedUsers, setSelectedUsers] = useState([] as any);
 
@@ -29,25 +35,39 @@ function CadastroGrupos() {
         });
     }
     fetchUsers();
+    if(userType === "Padrao"){
+      formik.values.groupType = "Cliente"
+    }
   }, []);
 
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchemaUser,
-    initialErrors: { groupType: "" },
+    initialErrors: { groupName: "" },
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
-      await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
+      if(formik.values.groupType == "Cliente"){
+        await axios.post(URIgroup.ENVIAR_GROUP, {groupName: formik.values.groupName, groupType: formik.values.groupType, groupDescription: formik.values.groupDescription, cliente:  selectedUsers})
+      }else{
+        await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
         .then(async (res) => {
           const groupId = res.data.id;
           for (let i = 0; i < selectedUsers.length; i++) {
+
             await axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, { group: groupId, user: selectedUsers[i] })
           }
         });
+      }
+     
       onClickLimpar();
       setSelectedUsers([]);
     },
   });
+
+  let location = useNavigate();
+  function voltar (){
+    location('/listagemGrupos')
+  }
 
   function onClickLimpar() {
     formik.resetForm();
@@ -55,12 +75,12 @@ function CadastroGrupos() {
   }
 
   function onClickEnviar() {
-    if (!formik.isValid) {
-      avisoErro();
-    } else {
+    if(formik.isValid && selectedUsers.length > 0 ) {
       formik.submitForm();
-      avisoConcluido();
-    }
+      avisoConcluido().then((result) => result.isConfirmed ? voltar() : '');
+    }else{
+      avisoErro();
+    } 
   }
 
   const handleSelectChange = (selectedOptions: any) => {
@@ -73,7 +93,7 @@ function CadastroGrupos() {
     label: data.userName
   }));
 
-  console.log(selectedUsers);
+
 
   return (
     <>
@@ -110,8 +130,43 @@ function CadastroGrupos() {
                 <div className="fv-row mb-4">
                   <label className="form-label fw-bolder text-dark fs-6">Nome</label>
                   <input
-                    placeholder="Nome do usuário"
+                    placeholder="Nome do grupo"
                     type="text"
+                    autoComplete="off"
+                    {...formik.getFieldProps("groupName")}
+                    onChange={formik.handleChange}
+                    value={formik.values.groupName}
+                    className={clsx(
+                      "form-control bg-transparent",
+                      {
+                        "is-invalid":
+                          formik.touched.groupName && formik.errors.groupName,
+                      },
+                      {
+                        "is-valid":
+                          formik.touched.groupName &&
+                          !formik.errors.groupName,
+                      }
+                    )}
+                  />
+                  {formik.touched.groupName && formik.errors.groupName && (
+                    <div className="fv-plugins-message-container">
+                      <div className="fv-help-block">
+                        <span role="alert">{formik.errors.groupName}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col-lg-6">
+          {/* begin::Form group Tipo grupo */}
+            {userType !== "Padrao" ?
+                <div className="fv-row mb-3">
+                  <label className="form-label fw-bolder text-dark fs-6">
+                    Grupo
+                  </label>
+                  <select
+                    placeholder="Tipo do grupo"
                     autoComplete="off"
                     {...formik.getFieldProps("groupType")}
                     onChange={formik.handleChange}
@@ -124,11 +179,28 @@ function CadastroGrupos() {
                       },
                       {
                         "is-valid":
-                          formik.touched.groupType &&
-                          !formik.errors.groupType,
+                          formik.touched.groupType && !formik.errors.groupType,
                       }
                     )}
-                  />
+                  >
+                    <option value="" disabled label="Selecione o tipo do grupo">
+                      Tipo do grupo{" "}
+                    </option>
+                    <option
+                      value="Funcionario"
+                      onChange={formik.handleChange}
+                      label="Funcionario"
+                    >
+                      Funcionario
+                    </option>
+                    <option
+                      value="Cliente"
+                      onChange={formik.handleChange}
+                      label="Cliente"
+                    >
+                      Cliente
+                    </option>
+                  </select>
                   {formik.touched.groupType && formik.errors.groupType && (
                     <div className="fv-plugins-message-container">
                       <div className="fv-help-block">
@@ -137,20 +209,45 @@ function CadastroGrupos() {
                     </div>
                   )}
                 </div>
+               
+                  : ""}
               </div>
             </div>
 
             <div className="row">
               <div className="fv-row mb-3">
-                <Select
-                  defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
+                {userType !== "Padrao" ? formik.values.groupType == "Funcionario" ?
+                    <Select
+                      defaultValue={options.filter(({ value }) => selectedUsers.includes(value))}
+                      isMulti
+                      name="members"
+                      options={options}
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Selecione os membros do grupo"
+                    />
+                    :
+                    <CreatableSelect
+                      isMulti
+                      name="clients"
+                      className="basic-multi-select"
+                      classNamePrefix="select"
+                      onChange={handleSelectChange}
+                      id="slcMembros"
+                      placeholder="Digite os emails dos clientes"
+                    />
+                :
+                <CreatableSelect
                   isMulti
-                  name="users"
-                  options={options}
+                  name="clients"
                   className="basic-multi-select"
                   classNamePrefix="select"
                   onChange={handleSelectChange}
+                  id="slcMembros"
+                  placeholder="Digite os emails dos clientes"
                 />
+                }
               </div>
 
             </div>
@@ -161,7 +258,7 @@ function CadastroGrupos() {
                 <div className="fv-row mb-3">
                   <label className="form-label fw-bolder text-dark fs-6"> Descrição </label>
                   <textarea
-                    placeholder="Descrição da solicitação"
+                    placeholder="Descrição do grupo"
                     rows={5}
                     autoComplete="off"
                     {...formik.getFieldProps("groupDescription")}
@@ -213,7 +310,7 @@ function CadastroGrupos() {
                 onClick={onClickEnviar}
                 disabled={formik.isSubmitting}
               >
-                Enviar
+                Cadastrar
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -236,4 +333,4 @@ function CadastroGrupos() {
   );
 
 }
-export default CadastroGrupos;
+export default CadastroGrupo;

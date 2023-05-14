@@ -30,9 +30,9 @@ function senhaAlterada(): Promise<SweetAlertResult> {
 function solicitaEmail(): Promise<SweetAlertResult> {
   return Swal.fire({
     title:
-      "Para recuperar a senha, favor inserir abaixo o seu E-mail cadastrado:",
+      "Para redefinir a senha, favor inserir abaixo o seu E-mail:",
     input: "email",
-    inputPlaceholder: "Insira o E-mail cadastrado aqui",
+    inputPlaceholder: "E-mail",
     allowOutsideClick: false,
   });
 }
@@ -49,6 +49,7 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
+
 function avisoConcuidoComite(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Sucesso",
@@ -63,7 +64,7 @@ function avisoEspera(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: 'Enviando chamado!',
     html: 'O chamado será enviado em <b></b> milissegundos.',
-    timer: 10000,
+    timer: 5000,
     timerProgressBar: true,
     didOpen: () => {
       Swal.showLoading()
@@ -87,6 +88,15 @@ function avisoPerfil(): Promise<SweetAlertResult> {
   });
 }
 
+function avisoAlterarSenha(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Sucesso",
+    text: "Senha alterada com sucesso!",
+    icon: "success",
+    confirmButtonColor: "#54C5CE",
+  });
+}
+
 async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar anexo",
@@ -96,6 +106,18 @@ async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Sim, deletar",
+  });
+}
+
+async function avisoDesarquivar(): Promise<SweetAlertResult>{
+  return Swal.fire({
+    title: "Tem certeza?",
+    text: "Você gostaria de reativar o chamado?",
+    icon: "warning",
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Confirmar",
+    cancelButtonText: "Cancelar"
   });
 }
 
@@ -120,4 +142,4 @@ function avisoEsperaAnexo(): Promise<SweetAlertResult> {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo };
+export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar, avisoAlterarSenha  };

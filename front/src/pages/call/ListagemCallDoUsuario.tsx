@@ -1,25 +1,24 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { avisoErroAoDeletar, avisoErroDeletar } from "../controllers/avisoErro";
-import { URI, URIattach, URIcommit } from "../enumerations/uri";
-import { avisoDeletar } from "../controllers/avisoConcluido";
+import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
+import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
 import React, { useState, useEffect, useRef } from "react";
-import { Attachment } from "../types/attachment";
+import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import avaliacao from "../images/avaliar.png";
-import excluir from "../images/excluir.png";
-import arquivos from "../images/paperclip.svg";
+import excluir from "../../images/excluir.png";
+import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
-import Header from "../components/Header";
-import editar from "../images/editar.png";
+import Header from "../../components/Header";
+import editar from "../../images/editar.png";
 import { Link } from "react-router-dom";
-import { Calls } from "../types/call";
+import { Calls } from "../../types/call";
 import axios from "axios";
-import '../App.css';
-import { removeFile } from "../services/supabase";
+import '../../App.css';
+import { removeFile } from "../../services/supabase";
 
 
-function ListagemCall() {
+function ListagemCallUser() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -33,7 +32,7 @@ function ListagemCall() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(URIcommit.PEGAR_COMITE_STATUS)
+        .get(`${URI.PEGAR_CAll_User}${localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""}`)
         .then((response) => {
           setData(response.data);
         })
@@ -60,7 +59,7 @@ function ListagemCall() {
                 console.log("erro");
                 
               })
-                
+              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);
@@ -156,23 +155,16 @@ function ListagemCall() {
         <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
             <h1 className="text-dark mb-0 font-padrao-titulo">
-              Listagem dos chamados
+              Listagem dos Chamados
             </h1>
           </div>
           <Container className="px-2 mb-5">
             <Container>
               <div className="d-flex align-items-center justify-content-between mt-4 Margin">
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/solicitacao'}><span className="labelButton">Adicionar Chamado</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill button" viewBox="0 0 16 16">
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/solicitacao'}>Adicionar Chamado
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
-                  </svg>
-                </button>
-
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/listagemTipoUsuario'}><span className="labelButton">Avaliação Comitê</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill button" viewBox="0 0 16 16">
-                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                    <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
                   </svg>
                 </button>
               </div>
@@ -181,9 +173,8 @@ function ListagemCall() {
                   <tr>
                     {/*cabeçalho tabela*/}
                     <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th className="text-center">Ações</th>
@@ -200,9 +191,8 @@ function ListagemCall() {
                           {/*animate*/}
                           <strong className="dropdown-label anexo" onClick={() => reveal(data.id)}>{data.id}</strong>
                         </td>
-                        <td className="text-center">{data.callEmail}</td>
-                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callTitle}</td>
+                        <td className="text-center">{data.callType}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
                         </td>
@@ -247,4 +237,4 @@ function ListagemCall() {
   );
 }
 
-export default ListagemCall;
+export default ListagemCallUser;
