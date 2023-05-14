@@ -18,6 +18,7 @@ function Header() {
   };
 
   const tipoUsuario = localStorage.getItem("userType")
+  const icone:any = localStorage.getItem("icone")
 
   return (
     <>
@@ -39,29 +40,58 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
-              <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
+              <CustomLink to="/listagemCall">MEUS CHAMADOS</CustomLink>
               {tipoUsuario !== "Padrao" ? 
                 <>
-                  <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
-                  <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
+                  {
+                    tipoUsuario === 'Diretor' && (
+                      <>
+                        <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
+                        <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
+                      </>
+                    )
+                  }
                   <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                      <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
                       <NavDropdown.Item href="/listagemGrupos">
-                      Grupos
+                        Grupos
                       </NavDropdown.Item>
                       <NavDropdown.Item href="/listagemTipoUsuario">
-                      Comitê
+                        Comitê
                       </NavDropdown.Item>
-                      <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
+                      {
+                        tipoUsuario === 'Diretor' && (
+                          <>
+                            <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
+                            <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
+                          </>
+                        )
+                      }
                   </NavDropdown>
                 </>
-                : <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>
+                : 
+                <>
+                  <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink> 
+                  <CustomLink to="/listagemGrupos">GRUPOS</CustomLink>
+                </>
+                
                }
               <NavDropdown 
                 className="me-2 perfil" 
                 title={
                   <>
-                    <img src={perfil} alt="Meu Perfil" width="40%" />
+                    <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
+                      width: 60,
+                      height: 60
+                    }} />
+                    <span style={{
+                      position: "relative",
+                      top: 0,
+                      right: 35,
+                      width: 0,
+                      height: 0
+                    }}></span>
+                    
+                    
                   </>
                 }>
                   <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>

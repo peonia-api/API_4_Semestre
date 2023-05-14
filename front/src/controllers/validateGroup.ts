@@ -1,11 +1,14 @@
 import * as Yup from 'yup'
 
 const registrationSchemaUser = Yup.object().shape({
+    groupName: Yup.string()
+    .required('O nome do grupo é obrigatório'),
+
     groupType: Yup.string()
-      .required('O nome é obrigatório'),
+      .required('O tipo do grupo é obrigatório'),
    
     groupDescription: Yup.string()
-      .required('O tipo de usuário é obrigatório'),
+      .required('A descrição do grupo é obrigatória'),
 
   })
   export default registrationSchemaUser;

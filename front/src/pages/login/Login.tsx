@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import "../App.css";
-import "../styles/Login.css";
-import { AuthContext } from "../contexts/auth";
+import "../../App.css";
+import "../../styles/Login.css";
+import { AuthContext } from "../../contexts/auth";
 //import emailjs from "emailjs-com";
 import  emailjs  from  '@emailjs/browser'
-import { solicitaEmail } from "../controllers";
-import { URIuser } from "../enumerations/uri";
-import { Users } from "../types/user";
+import { solicitaEmail } from "../../controllers";
+import { URIuser } from "../../enumerations/uri";
+import { Users } from "../../types/user";
 import axios from "axios";
 const Swal = require("sweetalert2");
 
@@ -58,8 +58,9 @@ function Login() {
 
   function enviarLink(email: string) {
     Swal.fire({
+      icon: "success",
       title: 'Sucesso!!',
-      text: 'Em breve você receberá um e-mail contendo as instruções para redefiir a senha',
+      text: 'Em instantes você receberá um e-mail contendo as instruções para redefinir a sua senha',
     })
 
     var templateParams = {

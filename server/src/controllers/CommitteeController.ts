@@ -66,6 +66,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiImpactCto = createCommittee.impact
+        findCommittee.comiImpactCtoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -77,6 +78,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiImpactHp = createCommittee.impact
+        findCommittee.comiImpactoHpAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -97,6 +99,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiRiskRt = createCommittee.impact
+        findCommittee.comiRiskRtAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
         return res.json(allCommittee)
@@ -107,6 +110,7 @@ class CommitteeController {
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiRiskCso = createCommittee.impact
+        findCommittee.comiRiskCsoAvaliation = createCommittee.desc
         const allCommittee = await committeeRepository.save(findCommittee)
         validateCommitteeFilter(idCommittee)
 
@@ -114,11 +118,15 @@ class CommitteeController {
     }
 
     public async deleteCommittee(req: Request, res: Response): Promise<Response> {
-        const deleteId: any = req.params.uuid
-        const committeeRep = AppDataSource.getRepository(Committee)
-        const find = await committeeRep.findOneBy({ id: deleteId })
-        const remove = await committeeRep.remove(find)
-        return res.json(remove)
+        try{
+            const deleteId: any = req.params.uuid
+            const committeeRep = AppDataSource.getRepository(Committee)
+            const find = await committeeRep.findOneBy({ id: deleteId })
+            const remove = await committeeRep.remove(find)
+            return res.json(remove)
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro o deletar"})
+        }
     }
 
 
@@ -197,7 +205,7 @@ class CommitteeController {
         try {
             const callRepository = AppDataSource.getRepository(Call)
             const feature = await callRepository.findBy({ callType: "feature", callStatus: "Em análise", avaliar: "HP" })
-            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise" })
+            const hotfix = await callRepository.findBy({ callType: "hotfix", callStatus: "Em análise", avaliar: "hotfix" })
             let calls = feature.concat(hotfix);
             return res.json(calls)
         } catch (err) {

@@ -1,45 +1,53 @@
-import { URIcommit } from "../../enumerations/uri";
+import { URI, URIcommit, URIgroup } from "../../enumerations/uri";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import './comite.css';
 import { avisoConcuidoComite } from "../../controllers/avisoConcluido";
 import Header from "../../components/Header";
 import '../../App.css';
+import Select from "react-select";
+import { Groups } from "../../types/group";
 
-export function Comites({URL, type}: any) {
+export function Comites() {
 
     const id = window.location.href.split("/")[4];
 
     const [comite, setComite] = useState("2")
+    const [descricao, setDescricao ] = useState("")
     const [descType, setDescType] = useState("");
+    const [URL, setUrl] = useState("");
+
+    const type = localStorage.getItem('userType');
+    const typeCall = localStorage.getItem("typeCall"); 
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
+        debugger
         console.log("submint", { comite });
-        await axios.put(`${URL}${id}`, { impact: comite })
+        await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
         avisoConcuidoComite().then((res) => {
             window.location.assign("/ListagemTipoUsuario");
         })
     }
 
-    const typeCall = localStorage.getItem("typeCall");
-
     function changeDes() {
         if(type === "CSO" || type === "RT"){
             setDescType("Análise de Risco")
+            setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
         } else {
             if(typeCall === "hotfix"){
+                setUrl(URI.ATUALIZA_HOTFIX)
                 setDescType("Prioridade do Hotfix")
             } else {
+                setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
                 setDescType("Análise de Impacto")
             }
             
         }
     }
-
     useEffect(() => {
         changeDes();
-    }, [type])
+    }, [type, typeCall])
 
     return (
         <>
@@ -71,16 +79,18 @@ export function Comites({URL, type}: any) {
                             rows={7}
                             autoComplete="off"
                             className="form-control bg-transparent"
+                            onChange={(e) => setDescricao(e.target.value)}
                             ></textarea>
                         </div>
                     </div>
                 </div>
-
-
-                <div className="drop-comite">
-                    <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> {descType} - {type}: {comite}</label>
-                    <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="4" id="rangeAvaliacao"></input>
+                <div className="row d-flex justify-content-center">
+                    <div className="drop-comite col-md-4">
+                        <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> {descType} - {type}: {comite}</label>
+                        <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="3" id="rangeAvaliacao"></input>
+                    </div>
                 </div>
+
                 <div className="button-comite">
                     <button
                         type="button"

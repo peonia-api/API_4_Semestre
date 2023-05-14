@@ -1,21 +1,18 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { URIattach, URIcommit } from "../enumerations/uri";
+import { URIattach, URIcommit } from "../../enumerations/uri";
 import React, { useState, useEffect, useRef } from "react";
-import { Attachment } from "../types/attachment";
+import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import arquivos from "../images/paperclip.svg";
+import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
-import Header from "../components/Header";
-import swal from 'sweetalert2';
-
+import Header from "../../components/Header";
 import axios from "axios";
-import '../App.css';
+import '../../App.css';
 
-import { Archived } from "../types/archived";
+import { Archived } from "../../types/archived";
 import Swal from "sweetalert2";
-import { icons } from "react-icons/lib";
-import { avisoDesarquivar } from "../controllers";
+import { avisoDesarquivar } from "../../controllers";
 
 
 function ArchivedList() {

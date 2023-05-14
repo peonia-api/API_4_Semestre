@@ -63,3 +63,49 @@ export async function removeFileOne(path: any) {
     .remove(file.split('/')[1])
 
 }
+
+
+export async function removeFileOneIcone(path: any) {
+
+  //console.log(path);
+  let fileSrc = path
+ 
+  //console.log(fileSrc.split('icones')[1].split("/")[1]);
+  if(fileSrc !== "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"){
+    console.log("oi");
+    
+    const { data, error } = await supabase
+      .storage
+      .from('icones')
+      .remove(fileSrc.split('icones')[1].split("/")[1])
+    if(error){
+      console.log(error);
+      
+    }
+  }
+}
+
+export async function uploadIcone(e: any) {
+  //const filesS = e.target.files
+  const filesS = e
+  let nameFile
+  if(filesS[0] != undefined){
+    nameFile = Date.now() + '-' + filesS[0].name.replace(/[^a-zA-Z0-9]/g, "").split(' ').join('')
+    console.log(nameFile);
+      
+      const { data, error } = await supabase.storage.from('icones').upload(nameFile, filesS[0])
+      
+      if (error) {
+        // Handle error
+        console.log(error);
+
+      } else {
+        // Handle success
+        console.log(data);
+        
+        
+      }
+  }
+  
+  return "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/" + nameFile
+}

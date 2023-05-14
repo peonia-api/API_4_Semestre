@@ -33,6 +33,7 @@ class UserController {
           userName: usuario.userName,
           userType: usuario.userType,
           userEmail: usuario.userEmail,
+          icone: usuario.icone,
           token
         });
       }
@@ -171,7 +172,7 @@ class UserController {
     insertUser.userEmail = createUser.userEmail
     insertUser.userPassword = createUser.userPassword
     insertUser.userType = createUser.userType
-
+    insertUser.icone = "https://undvejpptbowpgysnwiw.supabase.co/storage/v1/object/public/icones/do-utilizador.png"
     const allUser = await userRepository.save(insertUser)
     return res.json(allUser)
   }
@@ -191,14 +192,20 @@ class UserController {
   }
 
   public async putUserPerfil(req: Request, res: Response): Promise<Response> {
-    const createUser = req.body
-    const idUser: any = req.params.uuid
-    const userRepository = AppDataSource.getRepository(User)
-    const findUser = await userRepository.findOneBy({ userEmail: idUser })
-    findUser.userName = createUser.userName
-    findUser.userEmail = createUser.userEmail
-    const allUser = await userRepository.save(findUser)
-    return res.json(allUser)
+    try{
+      const createUser = req.body
+      const idUser: any = req.params.uuid
+      const userRepository = AppDataSource.getRepository(User)
+      const findUser = await userRepository.findOneBy({ userEmail: idUser })
+      findUser.userName = createUser.userName
+      findUser.userEmail = createUser.userEmail
+      findUser.icone = createUser.icone
+      const allUser = await userRepository.save(findUser)
+      return res.json(allUser)
+    }catch(err){
+      res.status(400).json({menssagem: "Erro ao mudar"})
+    }
+    
   }
 
   public async deleteUser(req: Request, res: Response): Promise<Response> {
@@ -234,7 +241,7 @@ class UserController {
       const userRepository = await AppDataSource.getRepository(User)
         .createQueryBuilder('user')
         .select('DISTINCT user.userType')
-        .where("user.userType  != 'Padrao'")
+        .where("user.userType  != 'Padrao' AND user.userType  != 'Diretor'")
         .getRawMany()
       return res.json(userRepository)
     }catch(err){

@@ -1,27 +1,24 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../controllers";
-import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall, URIgroupToUser, URIuser } from "../enumerations/uri";
-import { solicitacaoInitialValues } from "../types/call";
-//import Dropzone from "../components/Dropzone";
-import Header from "../components/Header";
-import '../App.css';
+import { avisoConcluido, avisoErro, avisoEspera, solicitacaoValidationSchema } from "../../controllers";
+import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
+import { solicitacaoInitialValues } from "../../types/call";
+import Header from "../../components/Header";
 import { Dropzone, FileItem } from "@dropzone-ui/react";
-import { supabase, uploadFile } from "../services/supabase";
-import { Attachment } from "../types/attachment";
-import { Groups } from "../types/group";
+import { uploadFile } from "../../services/supabase";
+import { Groups } from "../../types/group";
 import Select from "react-select";
 function Solicitacao() {
 
   useEffect(() => {
     async function fetchUsers() {
       axios
-        .get(URIgroup.PEGAR_GROUP)
+        .get(URIgroup.PEGAR_GROUP_Cliente)
         .then((response) => {
           setData(response.data);
         })
@@ -48,13 +45,16 @@ function Solicitacao() {
 console.log(files);
 
 const handleSelectChange = (selectedOptions: any) => {
-  const selectedValues = selectedOptions.map((option: any) => option.value);
-  setSelectedGroup(selectedValues);
+  // const selectedValues = selectedOptions.map((option: any) => option.value);
+  setSelectedGroup(selectedOptions);
+  formik.setFieldValue("group", selectedOptions?.value);
+   
 };
+
 
 const options = data.map((data) => ({
   value: data.id,
-  label: data.groupType
+  label: data.groupName
 }));
 
   //uploadFile(files)
@@ -66,9 +66,9 @@ const options = data.map((data) => ({
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
-        for (let i = 0; i < selectedGroup.length; i++) {
-          await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
-        }
+        // for (let i = 0; i < selectedGroup.length; i++) {
+           await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: formik.values.group, call: res.data.id })
+        // }
         if(formik.values.callType == "feature"){
           await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
@@ -93,9 +93,9 @@ const options = data.map((data) => ({
       })
       avisoEspera().then((res) => {
         setTimeout(function(){avisoConcluido().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagem");}, 2000)
+          setTimeout(function(){window.location.assign("/listagemCall");}, 1000)
           
-        })}, 3000)
+        })}, 2000)
       })
     },
   });
@@ -116,6 +116,7 @@ const options = data.map((data) => ({
       
     }
   }
+  console.log(formik.values.group);
 
   return (
     <>
@@ -278,9 +279,8 @@ const options = data.map((data) => ({
                 Grupos
               </label>
                 <Select
-                  defaultValue={options.filter(({ value }) => selectedGroup.includes(value))}
-                  isMulti
-                  name="users"
+                  {...formik.getFieldProps("group")}
+                  value={selectedGroup}
                   options={options}
                   classNamePrefix="select"
                   onChange={handleSelectChange}

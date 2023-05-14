@@ -39,11 +39,13 @@ export const AuthProvider = ({children}:any) => {
                 const token = res.data.token
                 const userType = res.data.userType
                 const userName = res.data.userName
+                const icone = res.data.icone
 
                 localStorage.setItem('userEmail', JSON.stringify(loggedUser))
                 localStorage.setItem('token', token)
                 localStorage.setItem("userType",userType)
                 localStorage.setItem("userName", userName)
+                localStorage.setItem("icone", icone)
                 console.log(res);
                 
 
@@ -59,6 +61,7 @@ export const AuthProvider = ({children}:any) => {
                 localStorage.removeItem("token")    
                 localStorage.removeItem("userType")
                 localStorage.removeItem("userName")
+                localStorage.removeItem("icone")
                 avisoErroLogin()
             })
         }catch(err){
@@ -73,6 +76,7 @@ export const AuthProvider = ({children}:any) => {
         localStorage.removeItem("token")
         localStorage.removeItem("userType")
         localStorage.removeItem("userName")
+        localStorage.removeItem("icone")
         api.defaults.headers.Authorization = null
         api.defaults.headers.common = { Authorization: `` }
         api.defaults.withCredentials = false

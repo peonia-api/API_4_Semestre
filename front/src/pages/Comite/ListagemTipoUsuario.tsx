@@ -8,16 +8,15 @@ import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
 import React, { useState, useEffect, useRef } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import ReactPaginate from "react-paginate";
-import avaliacao from "../images/avaliar.png";
+import avaliacao from "../../images/avaliar.png";
 import axios from "axios";
-import "../App.css";
-import { URI, URIattach, URIcommit } from "../enumerations/uri";
+import "../../App.css";
+import { URI, URIattach, URIcommit } from "../../enumerations/uri";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Calls, Status } from "../types/call";
-import Header from "../components/Header";
-import '../App.css';
-import { VerifyType } from "../controllers";
-import { Attachment } from "../types/attachment";
+import { Calls, Status } from "../../types/call";
+import Header from "../../components/Header";
+import { VerifyType } from "../../controllers";
+import { Attachment } from "../../types/attachment";
 import { identity } from "lodash";
 
 function ListagemTipoUsuario() {
@@ -140,6 +139,7 @@ function ListagemTipoUsuario() {
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
             <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos chamados</h1>
+            <h6>Chamados disponíveis para a avaliação/priorização</h6>
           </div>
           <Container className="px-2 mb-5">
             <Container>
