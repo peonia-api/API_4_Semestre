@@ -50,8 +50,9 @@ function EditarGrupo() {
     }
 
     useEffect(() => {
-      
-      async function fetchGroupToUser(id: any) {
+      const typeGroup = window.location.href.split("/")[5];
+
+      if(typeGroup == "Funcionario"){
         axios
           .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
           .then((response) => {
@@ -69,10 +70,7 @@ function EditarGrupo() {
           .catch((error) => {
             console.log(error);
           });
-      }
-  
-      async function fetchUsers() {
-        axios
+          axios
           .get(URIuser.PEGAR_USER)
           .then((response) => {
             const users = response.data.map((item: any) => ({
@@ -85,9 +83,7 @@ function EditarGrupo() {
           .catch((error) => {
             console.log(error);
           });
-      }
-  
-      async function fetchGroup(id: any) {
+      }else{
         axios
           .get(`${URIgroup.PEGAR_GROUP_ESPECIFICO}${id}`)
           .then((response) => {
@@ -105,14 +101,6 @@ function EditarGrupo() {
             console.log(error);
           });
       }
-     
-      if(typeGroup == "Funcionario"){
-        fetchUsers();
-        fetchGroupToUser(id);
-      }else{
-        fetchGroup(id)
-      }
-      
     }, []);
 
   
