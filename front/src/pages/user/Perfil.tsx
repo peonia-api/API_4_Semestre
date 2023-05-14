@@ -4,17 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import axios from "axios";
-import { avisoErro, perfilValidationSchema } from "../controllers";
-import { URIuser } from "../enumerations/uri";
-import { initialValues, initialValuesAlterarSenha } from "../types/perfil";
-import Header from "../components/Header";
-import avatar from "../images/avatar.png";
-import { avisoErroRequisicao } from "../controllers/avisoErro";
-import { avisoAlterarSenha, avisoPerfil } from "../controllers/avisoConcluido";
-import "../App.css";
+import { avisoErro, perfilValidationSchema } from "../../controllers";
+import { URIuser } from "../../enumerations/uri";
+import { initialValues, initialValuesAlterarSenha } from "../../types/perfil";
+import Header from "../../components/Header";
+import avatar from "../../images/avatar.png";
+import { avisoErroRequisicao } from "../../controllers/avisoErro";
+import { avisoAlterarSenha, avisoPerfil } from "../../controllers/avisoConcluido";
+import "../../App.css";
 import { Modal } from "react-bootstrap";
-import { perfilValidationSchemaAlterarSenha } from "../controllers/validatePerfil";
-import { removeFileOneIcone, uploadIcone } from "../services/supabase";
+import { perfilValidationSchemaAlterarSenha } from "../../controllers/validatePerfil";
+import { removeFileOneIcone, uploadIcone } from "../../services/supabase";
 
 function Perfil() {
   const [showMdlAlterarSenha, setShowMdlAlterarSenha] = useState(false)

@@ -1,21 +1,21 @@
-import Header from "../components/Header";
-import '../App.css';
+import Header from "../../components/Header";
+import '../../App.css';
 import React, { useEffect, useState } from "react";
-import { Users } from "../types/user";
+import { Users } from "../../types/user";
 import axios from "axios";
-import { URIgroup, URIgroupToUser, URIuser } from "../enumerations/uri";
-import registrationSchemaUserEditar from "../controllers/validateUserEditar";
-import { avisoErro } from "../controllers/avisoErro";
-import { avisoConcluido, avisoEdicao } from "../controllers";
+import { URIgroup, URIgroupToUser, URIuser } from "../../enumerations/uri";
+import registrationSchemaUserEditar from "../../controllers/validateUserEditar";
+import { avisoErro } from "../../controllers/avisoErro";
+import { avisoConcluido, avisoEdicao } from "../../controllers";
 import clsx from "clsx";
 import Select from 'react-select';
-import salvar from "../images/salvar.png";
-import { GroupsToUser } from "../types/groupToUser";
-import { Groups } from "../types/group";
+import salvar from "../../images/salvar.png";
+import { GroupsToUser } from "../../types/groupToUser";
+import { Groups } from "../../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
-import { setTimeout } from "timers/promises";
+
 
 function EditarGrupo() {
 

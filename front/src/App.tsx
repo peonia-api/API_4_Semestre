@@ -1,27 +1,27 @@
 import Footer from "./components/Footer";
 import './App.css';
-import Solicitacao from "./pages/Solicitacao";
+import Solicitacao from "./pages/call/Solicitacao";
 import { Route, Routes } from "react-router-dom";
-import ListagemCall from "./pages/ListagemCall";
-import EditarCall from "./pages/EditarCall";
-import CadastroUsuario from "./pages/CadastroUsuario";
-import ListagemUser from "./pages/ListagemUser";
-import EditarUser from "./pages/EditarUser";
-import Login from "./pages/Login";
+import ListagemCall from "./pages/call/ListagemCall";
+import EditarCall from "./pages/call/EditarCall";
+import CadastroUsuario from "./pages/user/CadastroUsuario";
+import ListagemUser from "./pages/user/ListagemUser";
+import EditarUser from "./pages/user/EditarUser";
+import Login from "./pages/login/Login";
 import { AuthProvider, Private, VerifyCTO, VerifyCso, VerifyHP, VerifyPADRAO, VerifyRT, VerifySQUAD } from "./contexts/auth";
-import ListagemTipoUsuario from "./pages/ListagemTipoUsuario";
+import ListagemTipoUsuario from "./pages/Comite/ListagemTipoUsuario";
 import { ComiteSquad } from "./pages/Comite/ComiteSquad";
-import RedefinirSenha from "./pages/RedefinirSenha";
-import Perfil from "./pages/Perfil";
-import ListagemGrupos from "./pages/ListagemGrupos";
-import EditarGrupos from "./pages/EditarGrupos";
-import CadastroGrupos from "./pages/CadastroGrupos";
-import ArchivedList from "./pages/Archived";
-import LogAvaliacoes from "./pages/LogAvaliacoes";
-import CadastroGrupo from "./pages/CadastroGrupos";
+import RedefinirSenha from "./pages/login/RedefinirSenha";
+import Perfil from "./pages/user/Perfil";
+import ListagemGrupos from "./pages/grupo/ListagemGrupos";
+import EditarGrupos from "./pages/grupo/EditarGrupos";
+import CadastroGrupos from "./pages/grupo/CadastroGrupos";
+import ArchivedList from "./pages/call/Archived";
+import LogAvaliacoes from "./pages/call/LogAvaliacoes";
+import CadastroGrupo from "./pages/grupo/CadastroGrupos";
 import { Comites } from "./pages/Comite/Comites";
 import { URIcommit } from "./enumerations/uri";
-import ListagemCallUser from "./pages/ListagemCallDoUsuario";
+import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
 
 function App() {
   return (

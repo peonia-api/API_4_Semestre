@@ -1,18 +1,17 @@
 import {FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft} from "react-icons/fa";
-import { avisoDeletar } from "../controllers/avisoConcluido";
-import { avisoErroDeletar } from "../controllers/avisoErro";
-import React, { useState, useEffect, useRef } from "react";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
+import { avisoErroDeletar } from "../../controllers/avisoErro";
+import React, { useState, useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
-import autoAnimate from "@formkit/auto-animate";
-import { URIuser } from "../enumerations/uri";
-import excluir from "../images/excluir.png";
+import { URIuser } from "../../enumerations/uri";
+import excluir from "../../images/excluir.png";
 import ReactPaginate from "react-paginate";
-import Header from "../components/Header";
-import editar from "../images/editar.png";
+import Header from "../../components/Header";
+import editar from "../../images/editar.png";
 import { Link } from "react-router-dom";
-import { Users } from "../types/user";
+import { Users } from "../../types/user";
 import axios from "axios";
-import "../App.css";
+import "../../App.css";
 
 function ListagemUser() {
 
