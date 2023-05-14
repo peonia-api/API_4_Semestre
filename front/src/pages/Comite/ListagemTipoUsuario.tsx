@@ -72,7 +72,6 @@ function ListagemTipoUsuario() {
   console.log(commiteData);
 
   function redirectToCommite({id, type}: any){
-    debugger
     localStorage.setItem("typeCall", type);
     return navigate(`/comites/${id}`)
   }
