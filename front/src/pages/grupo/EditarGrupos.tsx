@@ -17,7 +17,8 @@ import * as Yup from 'yup';
 import CreatableSelect from "react-select/creatable";
 
 
-function EditarGrupo() {
+function EditarGrupo(type:any) {
+console.log(type);
 
     const id = window.location.href.split("/")[4];
     const typeGroup = window.location.href.split("/")[5];
@@ -50,28 +51,43 @@ function EditarGrupo() {
     }
 
     useEffect(() => {
-      const typeGroup = window.location.href.split("/")[5];
 
-      if(window.location.href.split("/")[5] === "Funcionario"){
+      axios
+        .get(`${type.urlCli}${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setGroupName(response.data.groupName);
+          setGroupType(response.data.groupType);
+          setGroupDescription(response.data.groupDescription);
+          
+          const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
+          setUserOptions(opt.split(","));
+          setClientes(opt.split(","))
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .get(`${type.urlFun}${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setGroupName(response.data[0].group.groupName);
+          setGroupType(response.data[0].group.groupType);
+          setGroupDescription(response.data[0].group.groupDescription);
+          
+          setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})))
+          setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})));
+          setUserOptions(response.data.map((item: any) => item.user.userEmail));
+
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
         axios
-          .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}${id}`)
-          .then((response) => {
-            console.log(response.data);
-            setGroupName(response.data[0].group.groupName);
-            setGroupType(response.data[0].group.groupType);
-            setGroupDescription(response.data[0].group.groupDescription);
-            
-            setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})))
-            setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})));
-            setUserOptions(response.data.map((item: any) => item.user.userEmail));
-
-            
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          axios
-          .get(URIuser.PEGAR_USER)
+          .get(type.urlUser)
           .then((response) => {
             const users = response.data.map((item: any) => ({
                 id: item.id,
@@ -83,24 +99,7 @@ function EditarGrupo() {
           .catch((error) => {
             console.log(error);
           });
-      }else{
-        axios
-          .get(`${URIgroup.PEGAR_GROUP_ESPECIFICO}${id}`)
-          .then((response) => {
-            console.log(response.data);
-            setGroupName(response.data.groupName);
-            setGroupType(response.data.groupType);
-            setGroupDescription(response.data.groupDescription);
-            
-            const opt = response.data.cliente.replace('{', "").replace('}', "").replace(/["]/g, '')
-            setUserOptions(opt.split(","));
-            setClientes(opt.split(","))
-            
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+
     }, []);
 
   
