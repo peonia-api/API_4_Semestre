@@ -56,9 +56,8 @@
  
 ## 👩‍💻 Entrega
   
-<video width="320" height="240" autoplay muted>
-   <source src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/sprint3_compressed.mp4" type="video/mp4">
-</video>
+
+![ezgif com-video-to-gif (3)](https://github.com/peonia-api/API_4_Semestre/assets/86448876/d97034a5-8f0f-4810-85f0-7eb1f8160183)
 
 
   
