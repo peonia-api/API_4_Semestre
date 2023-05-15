@@ -55,12 +55,8 @@
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-  
 
-![ezgif com-video-to-gif (3)](https://github.com/peonia-api/API_4_Semestre/assets/86448876/d97034a5-8f0f-4810-85f0-7eb1f8160183)
-
-
-  
+https://github.com/peonia-api/API_4_Semestre/assets/86448876/58c57fd3-f7c8-488c-92d2-2f7e9c88633b
 
 <br>
    
