@@ -151,7 +151,7 @@ class CallController {
             const idCall: any = req.params.uuid
             const callRepository = AppDataSource.getRepository(Call)
             const findCall = await callRepository.findOneBy({ id: idCall })
-            findCall.callDescription = createCall.desc;
+            findCall.HpDescription = createCall.desc;
             findCall.callPriority = createCall.impact;
             findCall.callStatus = "Em desenvolvimento";
 
