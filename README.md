@@ -59,15 +59,18 @@ https://user-images.githubusercontent.com/86115352/233876936-91b7e7fe-1404-4cfc-
 https://user-images.githubusercontent.com/86115352/233877053-97b2f78b-c03e-4a55-a84d-9995c23f0cf9.mp4
 
 </p>
-<!--<h4> Entrega da Sprint 3 </h4>
-<p align="center"> <img width="100%" src = "imagens/features3sprint.gif"></p>
-<h4> Entrega da Sprint 4 </h4>
+<h4> Entrega da Sprint 3 </h4>
+<p align="center"> 
+
+https://github.com/peonia-api/API_4_Semestre/assets/86448876/52bd5e2f-9586-40a0-b2df-8b6c3db24b9a
+ 
+</p>
+<!--<h4> Entrega da Sprint 4 </h4>
 <p align="center"> <img width="100%" src = "imagens/sprint_4.gif"></p>
 <h4> Endereço do site para acesso na nuvem:  </h4>
 <p align="center">
   <img width="300" src="https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/qrcode.jpeg">
-</p>
-<h5 align="center"> Link de acesso: http://20.110.14.195/ </h5>-->
+</p>-->
 <br>
     
 <span id="relatório">
