@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDat
 import { Committee } from "./Committee";
 import { Attachment } from "./Attachment";
 import { GroupToCall } from "./GroupToCall";
+import { Kanban } from "./Kanban";
 
 @Entity({ name: "call" })
 export class Call {
@@ -44,6 +45,10 @@ export class Call {
 
     @OneToMany(() => Committee, (committee) => committee.call)
     committee: Committee[];
+
+    @OneToMany(() => Kanban, (kanban) => kanban.call)
+    kanban: Kanban[];
+
 
     @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.call)
     groupToCall: GroupToCall[];

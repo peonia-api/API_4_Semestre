@@ -3,6 +3,7 @@ import { User } from "./User";
 import { Call } from "./Call";
 import { GroupToCall } from "./GroupToCall";
 import { GroupToUser } from "./GroupToUser";
+import { Kanban } from "./Kanban";
 
 @Entity({ name: "group" })
 
@@ -35,4 +36,7 @@ export class Group {
 
     @OneToMany(() => GroupToUser, (groupToUser) => groupToUser.group)
     groupToUser: GroupToUser[];
+
+    @OneToMany(() => Kanban, (kanban) => kanban.group)
+    kanban: Kanban[];
 }
