@@ -258,9 +258,13 @@ class CommitteeController {
     public async getArchived(req: Request, res: Response): Promise<Response> {
         try {
             const callRepository = AppDataSource.getRepository(Call)
+                .createQueryBuilder("call")
+                .where("call.callType = :callType", {callType :"hotfix"})
+                .andWhere("call.callPriority != 'avaliar'")
+                .getMany()
             const committeeRepository = AppDataSource.getRepository(Committee)
-            const findCall = await callRepository.findBy({ callType: "feature" })
-            const findCommittee = await committeeRepository.find()
+            const hotfix = await callRepository
+            const feature = await committeeRepository.find()
             //{
             //     relations: { call: true },
             //     where: {
@@ -268,8 +272,8 @@ class CommitteeController {
             //     },
             // }
 
-            logger.info(JSON.stringify({ findCommittee, message: "Sucesso ao buscar os chamados arquivados." }))
-            return res.json(findCommittee)
+            logger.info(JSON.stringify({ feature, message: "Sucesso ao buscar os chamados arquivados." }))
+            return res.json({feature, hotfix})
         } catch (err) {
             logger.error(JSON.stringify({ mensage: "Erro ao buscar os chamados arquivados" }))
             return res.status(400).json({ mensage: "Erro ao buscar os chamados arquivados" })
