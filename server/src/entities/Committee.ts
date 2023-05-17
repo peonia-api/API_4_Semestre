@@ -41,4 +41,6 @@ export class Committee {
 
     @ManyToOne(() => Call, (call) => call.committee, { eager: true })
     call: Call;
+
+
 }
