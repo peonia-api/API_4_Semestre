@@ -80,7 +80,7 @@ function ListagemUser() {
 
   //pagination
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 6;
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
