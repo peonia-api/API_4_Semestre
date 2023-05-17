@@ -22,7 +22,6 @@ export function Comites() {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        debugger
         console.log("submint", { comite });
         await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
         avisoConcuidoComite().then((res) => {

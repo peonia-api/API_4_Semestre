@@ -49,8 +49,8 @@ function EditarCall() {
 
 
   useEffect(() => {
-    async function fetchCalls(id: string) {
-      axios
+    const id = window.location.href.split("/")[4];
+    axios
         .get(`${URI.PEGAR_CAll_ESPECIFICO}${id}`)
         .then((response) => {
           const fetchedData = response.data;
@@ -60,21 +60,17 @@ function EditarCall() {
         .catch((error) => {
           console.log(error);
         });
-    }
-    fetchCalls(id);
-    async function fetchComites() {
-      axios
-        .get(URIcommit.PEGAR_COMITE_ALL)
-        .then((response) => {
-          const fetchedData = response.data;
-          setComite(fetchedData);
-          formik.setValues(fetchedData);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchComites();
+    
+    axios
+    .get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_ESPECIFICO}${id}`)
+    .then((response) => {
+      setidLiga(response.data.map((item: any) => item.id))
+      setSelectedGroup(response.data.map((item: any) => ({id: item.id ,value: item.group.id , label:item.group.groupName })));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
     async function fetchAnexo(id: string) {
       try {
         const response = await axios.get(`${URIattach.PEGAR_ANEXO_ESPECIFICO}${id}`);
@@ -85,18 +81,6 @@ function EditarCall() {
     }
     fetchAnexo(id)
 
-    async function fetchGroupSelected(id: string) {
-      axios
-        .get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_ESPECIFICO}${id}`)
-        .then((response) => {
-          setidLiga(response.data.map((item: any) => item.id))
-          setSelectedGroup(response.data.map((item: any) => ({id: item.id ,value: item.group.id , label:item.group.groupName })));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchGroupSelected(id)
 
     async function fetchGroup() {
       try {

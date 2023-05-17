@@ -33,6 +33,9 @@ export class Call {
     @CreateDateColumn({ name: 'callDateFinalization' })
     callDateFinalization: Date;
 
+    @Column()
+    HpDescription: string
+
     @Column({ nullable: true })
     avaliar: string;
 

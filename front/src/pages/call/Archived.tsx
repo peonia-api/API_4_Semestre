@@ -1,6 +1,6 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { URIattach, URIcommit } from "../../enumerations/uri";
+import { URI, URIattach, URIcommit } from "../../enumerations/uri";
 import React, { useState, useEffect, useRef } from "react";
 import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
@@ -13,6 +13,7 @@ import '../../App.css';
 import { Archived } from "../../types/archived";
 import Swal from "sweetalert2";
 import { avisoDesarquivar } from "../../controllers";
+import { Calls } from "../../types/call";
 
 
 function ArchivedList() {
@@ -20,7 +21,7 @@ function ArchivedList() {
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
 
-  const [data, setData] = useState<Archived[]>([]);
+  const [data, setData] = useState<Calls[]>([]);
   const [files, setFiles] = useState([]);
   const [callId, setCallId] = useState(0);
   const [anexo, setAnexo] = useState<Attachment[]>([]);
@@ -29,7 +30,7 @@ function ArchivedList() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(URIcommit.PEGAR_ARCHIVED_STATUS)
+        .get(URI.PEGAR_CAll_ARQUIVADO)
         .then((response) => {
           setData(response.data);
         })
@@ -39,9 +40,12 @@ function ArchivedList() {
     }
     fetchCalls();
   }, []);
+
   function Unarchived(callId: any) {
     avisoDesarquivar()
       .then((result) => {
+        console.log("oi");
+        
         if (result.isConfirmed) {
           axios.put(`${URIcommit.ALTERA_ARCHIVED_STATUS}${callId}`, {
             status: "Aprovada"
@@ -63,10 +67,10 @@ function ArchivedList() {
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-  const sorting = (col: keyof typeof data[0]['call']) => {
+  const sorting = (col: keyof typeof data[0]) => {
     if (order === "ASC") {
       const sorted = [...data].sort((a, b) =>
-        a.call[col].toString().toLowerCase() > b.call[col].toString().toLowerCase()
+        a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
           ? 1
           : -1
       );
@@ -75,7 +79,7 @@ function ArchivedList() {
     }
     if (order === "DSC") {
       const sorted = [...data].sort((a, b) =>
-        a.call[col].toString().toLowerCase() < b.call[col].toString().toLowerCase()
+        a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
           ? 1
           : -1
       );
@@ -86,7 +90,7 @@ function ArchivedList() {
 
   //pagination
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 6;
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
@@ -150,24 +154,24 @@ function ArchivedList() {
 
 
                     return (
-                      <tr key={d.call.id}>
+                      <tr key={d.id}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}
-                          <strong className="dropdown-label anexo" onClick={() => reveal(d.call.id)}>{d.call.id}</strong>
+                          <strong className="dropdown-label anexo" onClick={() => reveal(d.id)}>{d.id}</strong>
                         </td>
-                        <td className="text-center">{d.call.callType}</td>
-                        <td className="text-center">{d.call.callTitle}</td>
-                        <td className="text-center"> {new Date(d.call.callDateCreate).toLocaleDateString("en-GB")}</td>
-                        <td className="text-center"> {new Date(d.call.callDateFinalization).toLocaleDateString("en-GB")}
+                        <td className="text-center">{d.callType}</td>
+                        <td className="text-center">{d.callTitle}</td>
+                        <td className="text-center"> {new Date(d.callDateCreate).toLocaleDateString("en-GB")}</td>
+                        <td className="text-center"> {new Date(d.callDateFinalization).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
-                          <a href="" onClick={() => Unarchived(d.call.id)} title="Desarquivar">
+                          <a onClick={(e) => Unarchived(d.id)} title="Desarquivar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-up-square" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
                             </svg>
                           </a>
-                          <img title="Ver Anexo" className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.call.id)} />
+                          <img title="Ver Anexo" className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(d.id)} />
                         </td>
                       </tr>
                     );
@@ -185,11 +189,11 @@ function ArchivedList() {
               {/*animate*/}
               {data.map((item) => {
                 return (
-                  <div key={item.call.id} ref={parent} >
-                    {show === item.call.id && (
+                  <div key={item.id} ref={parent} >
+                    {show === item.id && (
                       <FloatingLabel controlId="floatingLabel" label="Descrição">
-                        <Form.Control type="text" defaultValue={item.call.callDescription} disabled />
-                        {anexo.filter((anexo) => anexo.call.id === item.call.id).map((anexo) => (
+                        <Form.Control type="text" defaultValue={item.callDescription} disabled />
+                        {anexo.filter((anexo) => anexo.call.id === item.id).map((anexo) => (
                           <a href={anexo.src} target="_blank" rel="noopener noreferrer">Visualizar anexo</a>
                         ))}
                       </FloatingLabel>
