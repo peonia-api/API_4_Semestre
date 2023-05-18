@@ -33,7 +33,7 @@ export class Call {
     @CreateDateColumn({ name: 'callDateFinalization' })
     callDateFinalization: Date;
 
-    @Column()
+    @Column({nullable: true})
     HpDescription: string
 
     @Column({ nullable: true })

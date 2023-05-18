@@ -13,9 +13,9 @@ export class GroupToCall {
     // @Column()
     // callId: number
 
-    @ManyToOne(() => Group, (group) => group.groupToCall, {eager:true})
+    @ManyToOne(() => Group, (group) => group.groupToCall, {onDelete: 'CASCADE', eager:true})
     group: Group
 
-    @ManyToOne(() => Call, (call) => call.groupToCall, {eager:true})
+    @ManyToOne(() => Call, (call) => call.groupToCall, {onDelete: 'CASCADE', eager:true})
     call: Call
 }
