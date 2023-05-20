@@ -6,7 +6,7 @@ interface props{
     data:Users[],
     userOptions:string[],
     handleChangeUser: Function,
-    user:string[]
+    user:{ id: any; name: any; }[]
 }
 
 export function SelectFuncionario({data, userOptions, handleChangeUser, user}:props ){
