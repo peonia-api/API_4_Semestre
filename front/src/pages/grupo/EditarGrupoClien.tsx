@@ -4,21 +4,15 @@ import React, { useEffect, useState } from "react";
 import { Users } from "../../types/user";
 import axios from "axios";
 import { URIgroup, URIgroupToUser, URIuser } from "../../enumerations/uri";
-import registrationSchemaUserEditar from "../../controllers/validateUserEditar";
 import { avisoErro } from "../../controllers/avisoErro";
 import { avisoConcluido, avisoEdicao } from "../../controllers";
-import clsx from "clsx";
-import Select from 'react-select';
-import salvar from "../../images/salvar.png";
-import { GroupsToUser } from "../../types/groupToUser";
-import { Groups } from "../../types/group";
 import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
-import CreatableSelect from "react-select/creatable";
 import { Titulo } from "../../components/Grupos/TituloGrupo";
 import { Nome } from "../../components/Grupos/NomeGrupo";
 import { Descricao } from "../../components/Grupos/DescricaoGrupo";
 import { Botao } from "../../components/Grupos/Botao";
+import { SelectCliente } from "../../components/Grupos/SelectCliente";
 
 
 function EditarGrupoCliente(type:any) {
@@ -29,8 +23,6 @@ console.log(type);
     const [groupName, setGroupName] = useState("");
     const [groupType, setGroupType] = useState("");
     const [groupDescription, setGroupDescription] = useState("");
-    //const [userName, setUserName] = useState("");
-    //const [groupId, setGroupId] = useState("");
     const [status, setStatus] = useState("");
     const [data, setData] = useState<Users[]>([]);
     const [userOptions, setUserOptions] = useState<string[]>([]);
@@ -38,8 +30,6 @@ console.log(type);
     const [ids, setIds] = useState([]);
     const [arleyid, setArleyid] = useState<any[]>([]);
     const [clientes, setClientes] = useState<any[]>([]);
-
-    const [selectedValues, setSelectedValues] = useState<any[]>([]);
     
 
     const schema = Yup.object().shape({
@@ -214,36 +204,8 @@ console.log(type);
                         {/* begin::Form group Membros */}
                         <div className="fv-row mb-3">
                     <label className="form-label fw-bolder text-dark fs-6">Membros</label>
-                    {groupType == "Cliente" && userOptions.length > 0 &&(
-                    <>
-                      <CreatableSelect
-                      defaultValue={userOptions.map((item) => ({ value: item, label: item }))}
-                      required
-                      isMulti
-                      name="clients"
-                      className="basic-multi-select"
-                      options={[
-                        {
-                          label: "Users",
-                          options: userOptions.map((item) => ({
-                            value: item,
-                            label: item,
-                          })),
-                        },
-                      ]}
-                      classNamePrefix="select"
-                      onChange={(e) => handleChangeCli(e)}
-                      id="slcMembros"
-                      placeholder="Digite os emails dos clientes"
-                      />
-                      {clientes.length === 0 && (
-                        <div className="fv-plugins-message-container">
-                            <div className="fv-help-block">
-                                <span role="alert">Selecione pelo menos um usuário</span>
-                            </div>
-                        </div>
-                      )}
-                    </>
+                    {userOptions.length > 0 &&(
+                      <SelectCliente userOptions={userOptions} handleChangeCli={handleChangeCli} clientes={clientes}/>
                     )}
                         
                     </div>
