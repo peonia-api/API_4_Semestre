@@ -63,37 +63,6 @@ console.log(type);
           console.log(error);
         });
 
-      axios
-        .get(`${type.urlFun}${id}`)
-        .then((response) => {
-          console.log(response.data);
-          setGroupName(response.data[0].group.groupName);
-          setGroupType(response.data[0].group.groupType);
-          setGroupDescription(response.data[0].group.groupDescription);
-          
-          setIds(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})))
-          setUser(response.data.map((item:any) => ({id:item.id, name: item.user.userEmail})));
-          setUserOptions(response.data.map((item: any) => item.user.userEmail));
-
-          
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-        axios
-          .get(type.urlUser)
-          .then((response) => {
-            const users = response.data.map((item: any) => ({
-                id: item.id,
-              value: item.userEmail,
-              label: item.userEmail,
-            }));
-            setData(users);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
     }, []);
 
   
