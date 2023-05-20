@@ -14,7 +14,7 @@ import { ComiteSquad } from "./pages/Comite/ComiteSquad";
 import RedefinirSenha from "./pages/login/RedefinirSenha";
 import Perfil from "./pages/user/Perfil";
 import ListagemGrupos from "./pages/grupo/ListagemGrupos";
-import EditarGrupos from "./pages/grupo/EditarGrupos";
+import EditarGrupos from "./pages/grupo/EditarGrupoClien";
 import CadastroGrupos from "./pages/grupo/CadastroGrupos";
 import ArchivedList from "./pages/call/Archived";
 import LogAvaliacoes from "./pages/call/LogAvaliacoes";
@@ -22,6 +22,8 @@ import CadastroGrupo from "./pages/grupo/CadastroGrupos";
 import { Comites } from "./pages/Comite/Comites";
 import { URIcommit, URIgroup, URIgroupToUser, URIuser } from "./enumerations/uri";
 import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
+import EditarGrupoFuncionario from "./pages/grupo/EditarGrupoFunc";
+import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien";
 
 function App() {
   return (
@@ -44,8 +46,8 @@ function App() {
             <Route path="/comites/:id" element={<Private> <Comites /> </Private> } />
             <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
             <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
-            <Route path="/editarGrupoFun/:id/:type" element={<Private><EditarGrupos type={"Funcionario"} urlUser={URIuser.PEGAR_USER} urlFun={URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}/></Private>}></Route>
-            <Route path="/editarGrupoCli/:id/:type" element={<Private><EditarGrupos type={"Cliente"} urlCli={URIgroup.PEGAR_GROUP_ESPECIFICO} /></Private>}></Route>
+            <Route path="/editarGrupoFun/:id/:type" element={<Private><EditarGrupoFuncionario type={"Funcionario"} urlUser={URIuser.PEGAR_USER} urlFun={URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}/></Private>}></Route>
+            <Route path="/editarGrupoCli/:id/:type" element={<Private><EditarGrupoCliente type={"Cliente"} urlCli={URIgroup.PEGAR_GROUP_ESPECIFICO} /></Private>}></Route>
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
