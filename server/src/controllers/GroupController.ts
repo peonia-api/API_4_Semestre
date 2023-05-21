@@ -51,6 +51,7 @@ class GroupController {
         insertGroup.groupType = createGroup.groupType
         insertGroup.groupDescription = createGroup.groupDescription
         insertGroup.cliente = createGroup.cliente
+        insertGroup.groupEmail = createGroup.groupEmail
 
         const allGroup = await groupRepository.save(insertGroup)
         return res.json(allGroup)
