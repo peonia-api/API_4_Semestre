@@ -70,6 +70,22 @@ class CallController {
 
     }
 
+
+    public async patchCall(req: Request, res: Response): Promise<Response>{
+        try{
+            const {email, antes} = req.body
+            const rep = await AppDataSource
+            .createQueryBuilder()
+            .update(Call)
+            .set({callEmail: email})
+            .where("callEmail = :callEmail", {callEmail: antes })
+            .execute()
+            return res.json(rep)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao mudar!"})
+        }
+    }
+
     public async postCall(req: Request, res: Response): Promise<Response> {
         try {
             const createCall = req.body

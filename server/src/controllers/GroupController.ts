@@ -5,6 +5,21 @@ import { getGroupToCall } from "../utils/funcao";
 
 class GroupController {
 
+    public async patchGroup(req: Request, res: Response): Promise<Response>{
+        try{
+            const {email, antes} = req.body
+            const rep = await AppDataSource
+            .createQueryBuilder()
+            .update(Group)
+            .set({groupEmail: email})
+            .where("groupEmail = :groupEmail", {groupEmail: antes })
+            .execute()
+            return res.json(rep)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao mudar!"})
+        }
+    }
+
     public async getHistoricGroups(req: Request, res: Response): Promise<Response> {
         const groupRepository = AppDataSource.getRepository(Group)
         const allGroup = await groupRepository.find()

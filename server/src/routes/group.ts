@@ -13,5 +13,7 @@ routes.post('/create', GroupController.postGroup);
 routes.put('/modify/:uuid', GroupController.putGroup);
 
 routes.delete('/delete/:uuid', GroupController.deleteGroup);
+
+routes.patch("/email", GroupController.patchGroup)
 export default routes;
 

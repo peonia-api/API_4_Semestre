@@ -11,6 +11,7 @@ export enum URI {
     PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature", 
     PEGAR_CAll_User = "http://localhost:3001/call/callUser/",
     PEGAR_CAll_ARQUIVADO = "http://localhost:3001/call/arquivados/",
+    ALTERA_EMAIL = "http://localhost:3001/call/email/",
 }
 
 export enum URIgroup {
@@ -20,6 +21,7 @@ export enum URIgroup {
     PEGAR_GROUP = "http://localhost:3001/group/historic",
     PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/", 
     PEGAR_GROUP_Cliente = "http://localhost:3001/group/cliente/", //cliente
+    ALTERA_EMAIL = "http://localhost:3001/group/email/",
 }
 export enum URIgroupToUser {
     ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",
