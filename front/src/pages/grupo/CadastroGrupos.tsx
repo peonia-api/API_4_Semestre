@@ -47,8 +47,9 @@ function CadastroGrupo() {
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       if(formik.values.groupType == "Cliente"){
-        await axios.post(URIgroup.ENVIAR_GROUP, {groupName: formik.values.groupName, groupType: formik.values.groupType, groupDescription: formik.values.groupDescription, cliente:  selectedUsers})
+        await axios.post(URIgroup.ENVIAR_GROUP, {groupName: formik.values.groupName, groupType: formik.values.groupType, groupDescription: formik.values.groupDescription, cliente:  selectedUsers, groupEmail: localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""})
       }else{
+        formik.values.groupEmail = localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""
         await axios.post(URIgroup.ENVIAR_GROUP, formik.values)
         .then(async (res) => {
           const groupId = res.data.id;

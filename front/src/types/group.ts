@@ -5,6 +5,7 @@ export const initialValues = {
     groupDescription: '',
     clientes: '',
     groupName: "",
+    groupEmail: "",
 }
 
 export interface Groups {
