@@ -14,5 +14,7 @@ routes.put('/modifyCall/:uuid', CallController.putCall);
 routes.put('/updateHotfix/:uuid', CallController.updateHotfix);
 
 routes.delete('/delete/:uuid', CallController.deleteCall);
+
+routes.patch("/email", CallController.patchCall)
 export default routes;
 

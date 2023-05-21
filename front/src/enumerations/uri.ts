@@ -11,6 +11,7 @@ export enum URI {
     PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature", 
     PEGAR_CAll_User = "http://localhost:3001/call/callUser/",
     PEGAR_CAll_ARQUIVADO = "http://localhost:3001/call/arquivados/",
+    ALTERA_EMAIL = "http://localhost:3001/call/email/"
 }
 
 export enum URIgroup {
