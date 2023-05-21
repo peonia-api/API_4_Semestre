@@ -7,8 +7,7 @@ import group from "./group";
 import groupToUser from "./groupToUser";
 import committee from "./committee";
 import groupToCall from "./groupToCall"
-import { Kanban } from "../entities/Kanban";
-import kanban from "./kanban";
+import task from "./task";
 
 const routes = Router()
 
@@ -22,7 +21,7 @@ routes.use("/committee", committee);
 
 routes.use("/group", group);
 
-routes.use("/kanban", kanban);
+routes.use("/task", task);
 
 routes.use("/groupToUser", groupToUser);
 

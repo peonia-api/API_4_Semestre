@@ -5,21 +5,19 @@ import { Call } from "./Call";
 
 @Entity({ name: "kanban" })
 
-export class Kanban {
+export class Task {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: false, length: 80 })
-    kanToDo: string;
+    @Column({ nullable: false, length: 30 })
+    taskStatus: string;
+
+    @Column({ nullable: false, length: 100 })
+    taskDescription: string;
 
     @Column({ nullable: false, length: 80 })
-    kanInProgress: string;
+    taskUserResponsible: string;
 
-    @Column({ nullable: false, length: 80 })
-    kanDone: string;
-
-    @Column({ nullable: false, length: 80 })
-    kanEmail: string;
 
     @ManyToOne(() => Call, (call) => call.committee, { eager: true })
     call: Call; 
