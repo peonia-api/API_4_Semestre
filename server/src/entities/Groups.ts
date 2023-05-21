@@ -19,6 +19,9 @@ export class Group {
     @Column({ nullable: false, length: 100 })
     groupDescription: string;
 
+    @Column({ nullable: false, length: 80 })
+    groupEmail: string;
+
     // @ManyToMany(() => User)
     // @JoinTable()
     // user: User[]

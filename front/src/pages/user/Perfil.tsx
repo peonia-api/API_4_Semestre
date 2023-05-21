@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import axios from "axios";
 import { avisoErro, perfilValidationSchema } from "../../controllers";
-import { URI, URIuser } from "../../enumerations/uri";
+import { URI, URIgroup, URIuser } from "../../enumerations/uri";
 import { initialValues, initialValuesAlterarSenha } from "../../types/perfil";
 import Header from "../../components/Header";
 import avatar from "../../images/avatar.png";
@@ -74,6 +74,7 @@ function Perfil() {
       await axios.put(`${URIuser.ALTERA_PERFIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`, values).then(async (res) => {
         if(res.status === 200){
           emailPatch(URI.ALTERA_EMAIL, values.userEmail, localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "")
+          emailPatch(URIgroup.ALTERA_EMAIL, values.userEmail, localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? "")
           localStorage.setItem("userName", values.userName)
           localStorage.setItem('userEmail', JSON.stringify(values.userEmail))
           if(formik.values.icone != icoAnte){
