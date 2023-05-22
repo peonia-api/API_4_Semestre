@@ -7,6 +7,14 @@ import { logger } from "../config/logger";
 
 class CallController {
 
+    public async hello(req: Request, res: Response): Promise<Response>{
+        try{
+            return res.json({menssagem: "Hello word!"})
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao rodar"})
+        }
+    }
+
     public async getHistoricCall(req: Request, res: Response): Promise<Response> {
         try {
             const callRepository = AppDataSource.getRepository(Call)

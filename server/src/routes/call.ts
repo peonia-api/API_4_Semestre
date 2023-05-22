@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CallController } from "../controllers";
+import { authorization } from '../middlewares'
 const routes = Router();
 
 routes.get('/historic', CallController.getHistoricCall);
@@ -16,5 +17,7 @@ routes.put('/updateHotfix/:uuid', CallController.updateHotfix);
 routes.delete('/delete/:uuid', CallController.deleteCall);
 
 routes.patch("/email", CallController.patchCall)
+
+routes.get("/hello", CallController.hello)
 export default routes;
 
