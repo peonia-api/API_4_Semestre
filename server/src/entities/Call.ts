@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDat
 import { Committee } from "./Committee";
 import { Attachment } from "./Attachment";
 import { GroupToCall } from "./GroupToCall";
-import { Kanban } from "./Kanban";
+import { Task } from "./Task";
 
 @Entity({ name: "call" })
 export class Call {
@@ -34,7 +34,7 @@ export class Call {
     @CreateDateColumn({ name: 'callDateFinalization' })
     callDateFinalization: Date;
 
-    @Column()
+    @Column({nullable: true})
     HpDescription: string
 
     @Column({ nullable: true })
@@ -46,8 +46,8 @@ export class Call {
     @OneToMany(() => Committee, (committee) => committee.call)
     committee: Committee[];
 
-    @OneToMany(() => Kanban, (kanban) => kanban.call)
-    kanban: Kanban[];
+    @OneToMany(() => Task, (task) => task.call)
+    task: Task[];
 
 
     @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.call)

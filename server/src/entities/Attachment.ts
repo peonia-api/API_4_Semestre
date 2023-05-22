@@ -13,7 +13,7 @@ export class Attachment {
     @Column() 
     src: string;
 
-    @ManyToOne(() => Call, (call) => call.attachment, {eager:true})
+    @ManyToOne(() => Call, (call) => call.attachment, {onDelete: 'CASCADE', eager:true})
     call: Call;
 
 

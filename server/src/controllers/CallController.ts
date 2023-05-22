@@ -7,6 +7,14 @@ import { logger } from "../config/logger";
 
 class CallController {
 
+    public async hello(req: Request, res: Response): Promise<Response>{
+        try{
+            return res.json({menssagem: "Hello word!"})
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao rodar"})
+        }
+    }
+
     public async getHistoricCall(req: Request, res: Response): Promise<Response> {
         try {
             const callRepository = AppDataSource.getRepository(Call)
@@ -68,6 +76,22 @@ class CallController {
             return res.status(400).json({ mensage: "Erro ao pegar os chamados" })
         }
 
+    }
+
+
+    public async patchCall(req: Request, res: Response): Promise<Response>{
+        try{
+            const {email, antes} = req.body
+            const rep = await AppDataSource
+            .createQueryBuilder()
+            .update(Call)
+            .set({callEmail: email})
+            .where("callEmail = :callEmail", {callEmail: antes })
+            .execute()
+            return res.json(rep)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao mudar!"})
+        }
     }
 
     public async postCall(req: Request, res: Response): Promise<Response> {

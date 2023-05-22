@@ -10,9 +10,9 @@ export class GroupToUser {
     // @Column()
     // public userId: number
 
-    @ManyToOne(() => Group, (group) => group.groupToUser, {eager:true})
+    @ManyToOne(() => Group, (group) => group.groupToUser, {onDelete: 'CASCADE', eager:true})
     group: Group
 
-    @ManyToOne(() => User, (user) => user.groupToUser, {eager:true})
+    @ManyToOne(() => User, (user) => user.groupToUser, {onDelete: 'CASCADE', eager:true})
     user: User
 }

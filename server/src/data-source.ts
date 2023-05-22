@@ -1,4 +1,6 @@
 import { DataSource } from "typeorm";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 //https://orkhan.gitbook.io/typeorm/docs/data-source-options
 
@@ -21,10 +23,10 @@ import { DataSource } from "typeorm";
 const AppDataSource = new DataSource({
     database: 'postgres', // se for SQLite, então use bdaula.sqlite
     type: "postgres", // se for SQLite, então use sqlite
-    host: 'db.undvejpptbowpgysnwiw.supabase.co', // não use esta propriedade se for sqlite
+    host: process.env.URLBANCO, // não use esta propriedade se for sqlite
     port: 5432, // não use esta propriedade se for sqlite
     username: 'postgres', // não use esta propriedade se for sqlite
-    password: 'djmr1234@fatec', // não use esta propriedade se for sqlite
+    password: process.env.SENHA, // não use esta propriedade se for sqlite
     // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
     // deixe false ao usar migrations
     synchronize: false,
@@ -37,10 +39,10 @@ const AppDataSource = new DataSource({
 
     // database: 'callbd', // se for SQLite, então use bdaula.sqlite
     // type: "mysql", // se for SQLite, então use sqlite
-    // host: 'localhost', // não use esta propriedade se for sqlite
+    // host: '172.17.0.1', // não use esta propriedade se for sqlite
     // port: 3306, // não use esta propriedade se for sqlite
     // username: 'root', // não use esta propriedade se for sqlite
-    // password: 'password', // não use esta propriedade se for sqlite
+    // password: 'fatec', // não use esta propriedade se for sqlite
     // // true indica que o schema do BD será criado a cada vez que a aplicação inicializar
     // // deixe false ao usar migrations
     // synchronize: false,

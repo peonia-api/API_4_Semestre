@@ -39,7 +39,7 @@ export class Committee {
     // group: Group[];
    
 
-    @ManyToOne(() => Call, (call) => call.committee, { eager: true })
+    @ManyToOne(() => Call, (call) => call.committee, { onDelete: 'CASCADE', eager: true })
     call: Call;
 
 
