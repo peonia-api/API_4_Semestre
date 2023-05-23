@@ -22,7 +22,8 @@ import { Comites } from "./pages/Comite/Comites";
 import { URIgroup, URIgroupToUser, URIuser } from "./enumerations/uri";
 import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
 import EditarGrupoFuncionario from "./pages/grupo/EditarGrupoFunc";
-import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien";
+import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien"; 
+import KanbanBoard from "./pages/kanban/kanban";
 
 
 function Rotas(){
@@ -50,6 +51,7 @@ function Rotas(){
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
+            <Route path="/kanban" element={<KanbanBoard/>}></Route>
         </Routes>
         <Footer />
         </>
