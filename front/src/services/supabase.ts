@@ -41,7 +41,8 @@ export async function uploadFile(e: any) {
 }
 
 export async function removeFile(path: any) {
-
+  console.log(path);
+  
   for (let i = 0; i < path.length; i++) {
     console.log(path[i].src);
     let fileSrc = path[i].src

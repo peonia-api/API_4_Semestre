@@ -53,7 +53,9 @@ function ListagemCallUser() {
             if (dados.id == id) {              
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
                 console.log(res.data.list);
-                removeFile(res.data.list)
+                
+                console.log(res.data);
+                if(res.data.possui === true){removeFile(res.data.list)}
                 
               }).catch((err) => {
                 console.log("erro");
