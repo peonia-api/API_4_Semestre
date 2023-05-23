@@ -52,14 +52,14 @@ function ListagemCallUser() {
           data.map(async (dados) => {
             if (dados.id == id) {              
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-                console.log("foi");
+                console.log(res.data.list);
                 removeFile(res.data.list)
                 
               }).catch((err) => {
                 console.log("erro");
                 
               })
-              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
+             // await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
               if (dados.callType === "feature") {
                 await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
                   console.log(res);

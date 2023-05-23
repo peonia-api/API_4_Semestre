@@ -59,22 +59,23 @@ function avisoConcuidoComite(): Promise<SweetAlertResult> {
   });
 }
 
-function avisoEspera(): Promise<SweetAlertResult> {
+function avisoEspera(quantidade: number): Promise<SweetAlertResult> {
+  let quant = quantidade * 2000
   let timerInterval: any
   return Swal.fire({
     title: 'Enviando chamado!',
-    html: 'O chamado será enviado em <b></b> milissegundos.',
-    timer: 5000,
+    //html: 'O chamado será enviado em <b></b> milissegundos.',
+    timer: quant,
     timerProgressBar: true,
     didOpen: () => {
       Swal.showLoading()
-      const b: any = Swal.getHtmlContainer()?.querySelector('b')
-      timerInterval = setInterval(() => {
-        b.textContent = Swal.getTimerLeft()
-      }, 100)
+      // const b: any = Swal.getHtmlContainer()?.querySelector('b')
+      // timerInterval = setInterval(() => {
+      //   //b.textContent = Swal.getTimerLeft()
+      // }, 1000)
     },
     willClose: () => {
-      clearInterval(timerInterval)
+      clearInterval(quantidade * 2000)
     }
   })
 }
