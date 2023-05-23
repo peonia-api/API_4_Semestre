@@ -126,9 +126,16 @@ function EditarCall() {
         };
 
         await axios.put(`${URI.ALTERA_CALL}${id}`, updatedData).then(async (res) => {
-          // for (let i = 0; i < selectedGroup.length; i++) {
-          //   await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: selectedGroup[i], call: res.data.id })
-          // }
+          if (files.length != 0) {
+            uploadFile(files).then(async (rest) => {
+              console.log(rest);
+              await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${id}`, rest).then((s) => {
+    
+              }).catch((err) => {
+                console.log(err);
+              })
+            })
+          }
           await axios.put(`${URIgroupToCall.ALTERA_GROUP_TO_CALL}${idLiga}`, { group: selectedGroup.value, call: id }).then((res) => console.log("linux")).catch((rtt) => console.log("deu ruim!"))
           if (formik.values.callType == "feature") {
             await axios.post(URIcommit.ENVIAR_COMITE, { id: id })
@@ -145,17 +152,7 @@ function EditarCall() {
         console.log(error);
         formik.setStatus("Ocorreu um erro ao atualizar a solicitação.");
       }
-
-      if (files) {
-        uploadFile(files).then(async (rest) => {
-          console.log(rest);
-          await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${id}`, rest).then((s) => {
-
-          }).catch((err) => {
-            console.log(err);
-          })
-        })
-      }
+      
 
       anexo.map(async (fileData) => {
         console.log(fileData.name);
@@ -210,8 +207,7 @@ function EditarCall() {
     if (!formik.isValid) {
       avisoErro();
     } else {
-      formik.submitForm();
-      avisoEsperaAnexo().then((res) => {
+      formik.submitForm().then((res) => {
         setTimeout(function () {
           avisoEdicao().then((res: any) => {
             setTimeout(function () { window.location.assign("/listagemCall"); }, 2000)
@@ -219,9 +215,7 @@ function EditarCall() {
           })
         }, 3000)
       })
-
     }
-    // <Link to={"/listagem"}/>
   }
 
   console.log(files);
