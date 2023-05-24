@@ -120,14 +120,17 @@ function ListagemUser() {
                   {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
                       <tr key={data.id}>
-                        {/*corpo tabela*/}
-                        <td className="text-center">{data.userName}</td>
+                        {/*corpo tabela*/}         
+                        { data.userEmail !== localStorage.getItem("userEmail")?.replace(/["]/g, "") ? (
+                        <><td className="text-center">{data.userName}</td>
                         <td className="text-center">{data.userEmail}</td>
                         <td className="text-center">{data.userType}</td>
                         <td className="text-center">{data.userPosition}</td>
-                        <td className="text-center"> <Link to={"/editarUser/" + data.id}><img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
-                          <img style={{ width: "35px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteUser(data.id)}/>
-                        </td>
+                        <td className="text-center">
+                         <Link to={"/editarUser/" + data.id}><img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
+                              <img style={{ width: "35px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteUser(data.id)} />
+                        </td></>
+                        ): ""}
                       </tr>
                     );
                   })}
