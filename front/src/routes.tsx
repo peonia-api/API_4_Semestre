@@ -53,7 +53,7 @@ function Rotas(){
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
             <Route path="/kanban" element={<KanbanBoard/>}></Route>
-            <Route path="/listagemGruposUser" element={<ListagemGruposUser/>}></Route>
+            <Route path="/listagemGruposUser" element={<Private><ListagemGruposUser/></Private>}></Route>
         </Routes>
         <Footer />
         </>

@@ -52,8 +52,8 @@ function Header() {
                     )
                   }
                   <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                      <NavDropdown.Item href="/listagemGrupos">
-                        Grupos
+                      <NavDropdown.Item href="/listagemGruposUser">
+                        Meus Grupos
                       </NavDropdown.Item>
                       {tipoUsuario !== 'Diretor' &&(
                       <NavDropdown.Item href="/listagemTipoUsuario">
@@ -63,6 +63,7 @@ function Header() {
                       {
                         tipoUsuario === 'Diretor' && (
                           <>
+                            <NavDropdown.Item href="/listagemGrupos"> Grupos </NavDropdown.Item>
                             <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
                             <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
                           </>
@@ -72,8 +73,8 @@ function Header() {
                 </>
                 : 
                 <>
-                  <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink> 
-                  <CustomLink to="/listagemGrupos">GRUPOS</CustomLink>
+                  {/* <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>  */}
+                  <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
                 </>
                 
                }
