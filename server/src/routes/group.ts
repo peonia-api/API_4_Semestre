@@ -8,6 +8,8 @@ routes.get('/cliente', GroupController.getGroupByCliente);
 
 routes.get('/specific/:uuid', GroupController.getGroupByOne);
 
+routes.get('/email/:email', GroupController.getByEmail);
+
 routes.post('/create', GroupController.postGroup);
 
 routes.put('/modify/:uuid', GroupController.putGroup);

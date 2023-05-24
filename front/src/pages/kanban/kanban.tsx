@@ -29,7 +29,7 @@ function KanbanBoard() {
             {
                 "Id": "Task 2",
                 "Title": "Task - 29002",
-                "Status": "In Progress",
+                "Status": "InProgress",
                 "Summary": "Improve application performance",
                 "Type": "Improvement",
                 "Priority": "Normal",
@@ -49,7 +49,7 @@ function KanbanBoard() {
             {
                 "Id": "Task 4",
                 "Title": "Task - 29004",
-                "Status": "In Progress",
+                "Status": "InProgress",
                 "Summary": "Fix the issues reported in the IE browser.",
                 "Type": "Bug",
                 "Priority": "Critical",
@@ -59,7 +59,7 @@ function KanbanBoard() {
             {
                 "Id": "Task 5",
                 "Title": "Task - 29005",
-                "Status": "Review",
+                "Status": "Close",
                 "Summary": "Fix the issues reported by the customer.",
                 "Type": "Bug",
                 "Priority": "Low",

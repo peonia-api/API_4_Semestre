@@ -19,7 +19,7 @@ import { GroupsToUser } from "../../types/groupToUser";
 import { Groups } from "../../types/group";
 
 
-function ListagemGrupos() {
+function ListagemGruposUser() {
 
   const [dataGroup, setGroup] = useState<Groups[]>([]);
   const [data, setData] = useState<GroupsToUser[]>([]);
@@ -28,7 +28,7 @@ function ListagemGrupos() {
   useEffect(() => {
     async function fetchGroup() {
       axios
-        .get(URIgroup.PEGAR_GROUP)
+        .get(`${URIgroup.PEGAR_GROUP_USER}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`)
         .then((response) => {
           setGroup(response.data);
         })
@@ -38,17 +38,6 @@ function ListagemGrupos() {
     }
 
     fetchGroup();
-    async function fetchGroupToUser() {
-      axios
-        .get(URIgroupToUser.PEGAR_GROUP_TO_USER)
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchGroupToUser();
 
   }, []);
 
@@ -64,12 +53,12 @@ function ListagemGrupos() {
       
       const shouldDelete = await avisoDeletar();
       if (shouldDelete.isConfirmed) {
-        if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
-          await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {
-            const { id: groupToUserId} = groupToUserEntry;
-            await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
-          }));
-        }
+        // if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
+        //   await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {
+        //     const { id: groupToUserId} = groupToUserEntry;
+        //     await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
+        //   }));
+        // }
         
           await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).then(() => {  
             setTimeout(() => {
@@ -111,39 +100,6 @@ function ListagemGrupos() {
   };
 
 
-  let grupo: any = null;
-  data.forEach((user) => {
-    if (grupo === null) {
-      grupo = {
-        id: user.group.id,
-        usuarios: [],
-        usuarioIDs: []
-      };
-      grupo.usuarios.push(user.user.userName);
-      grupo.usuarioIDs.push(user.user.id);
-    } else if (user.group.id === grupo.id) {
-      grupo.usuarios.push(user.user.userName);
-      grupo.usuarioIDs.push(user.user.id);
-      console.log(grupo.usuarioIDs);
-    }
-
-  });
-
-  const groupedData = data.reduce((result: any, item: any) => {
-    if (!result[item.group.id]) {
-      result[item.group.id] = {
-        id: item.group.id,
-        groupType: item.group.groupType,
-        usuarios: []
-      };
-    }
-    result[item.group.id].usuarios.push(item.user.userName);
-    return result;
-  }, {});
-  const groupList = Object.values(groupedData);
-  console.log(groupedData);
-  
-
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 6;
 
@@ -153,10 +109,9 @@ function ListagemGrupos() {
 
   //search
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
+  const filteredData = dataGroup.filter(
     (item) =>
-    item.user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.group.groupDescription.toLowerCase().includes(searchQuery.toLowerCase())
+    item.groupName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   
@@ -242,4 +197,4 @@ function ListagemGrupos() {
   
 }
 
-export default ListagemGrupos;
+export default ListagemGruposUser;

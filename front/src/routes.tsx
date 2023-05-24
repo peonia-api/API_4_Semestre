@@ -24,6 +24,7 @@ import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
 import EditarGrupoFuncionario from "./pages/grupo/EditarGrupoFunc";
 import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien"; 
 import KanbanBoard from "./pages/kanban/kanban";
+import ListagemGruposUser from "./pages/grupo/ListagemGrupoUser";
 
 
 function Rotas(){
@@ -52,6 +53,7 @@ function Rotas(){
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
             <Route path="/kanban" element={<KanbanBoard/>}></Route>
+            <Route path="/listagemGruposUser" element={<ListagemGruposUser/>}></Route>
         </Routes>
         <Footer />
         </>
