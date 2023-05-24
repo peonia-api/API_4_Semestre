@@ -23,6 +23,7 @@ export enum URIgroup {
     PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/", 
     PEGAR_GROUP_Cliente = "http://localhost:3001/group/cliente/", //cliente
     ALTERA_EMAIL = "http://localhost:3001/group/email/",
+    PEGAR_GRUPO_FUNCIONARIO = "http://localhost:3001/group/funcionario/"
 }
 export enum URIgroupToUser {
     ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",

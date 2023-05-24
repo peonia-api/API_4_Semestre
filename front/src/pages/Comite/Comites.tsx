@@ -16,6 +16,8 @@ export function Comites() {
     const [descricao, setDescricao ] = useState("")
     const [descType, setDescType] = useState("");
     const [URL, setUrl] = useState("");
+    const [selectedGroup, setSelectedGroup] = useState([] as any);
+    const [data, setData] = useState<Groups[]>([]);
 
     const type = localStorage.getItem('userType');
     const typeCall = localStorage.getItem("typeCall"); 
@@ -45,8 +47,24 @@ export function Comites() {
         }
     }
     useEffect(() => {
+        async function fetchGroups() {
+            axios
+              .get(URIgroup.PEGAR_GRUPO_FUNCIONARIO)
+              .then((response) => {
+                setData(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+          fetchGroups();
         changeDes();
-    }, [type, typeCall])
+    }, [type, typeCall])      
+      
+      const options = data.map((data) => ({
+        value: data.id,
+        label: data.groupName
+      }));
 
     return (
         <>
@@ -62,14 +80,14 @@ export function Comites() {
             >
 
                 <div className="align-items mb-4">
-                    <h1 className="text-dark fw-bolder mb-3 font-padrao-titulo">
+                    <h1 className="text-dark mb-3 font-padrao-titulo">
                         Comitê de aprovação
                     </h1>
                 </div>
 
-                <div className="row mb-3">
+                <div className="row mb-4">
                     <div className="col-lg-12">
-                        <div className="fv-row mb-5">
+                        <div className="fv-row">
                             <label className="form-label fw-bolder text-dark fs-6">
                             Descrição
                             </label>
@@ -83,10 +101,17 @@ export function Comites() {
                         </div>
                     </div>
                 </div>
-                <div className="row d-flex justify-content-center">
+                <div className="row d-flex justify-content-between mb-4">
                     <div className="drop-comite col-md-4">
-                        <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6"> {descType} - {type}: {comite}</label>
+                        <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6 mb-3"> {descType} - {type}: {comite}</label>
                         <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="3" id="rangeAvaliacao"></input>
+                    </div>
+                    <div className="col-md-4">
+                        <label className="form-label text-dark fs-6">Grupo responsável:</label>
+                        <Select
+                            options={options}
+                            classNamePrefix="select"
+                        />
                     </div>
                 </div>
 
