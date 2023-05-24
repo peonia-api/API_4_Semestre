@@ -20,6 +20,21 @@ class GroupController {
         }
     }
 
+    public async getByEmail(req: Request, res: Response) : Promise<Response>{
+        try{
+            const email = req.params.email
+            console.log(email);
+            
+            const rep = await AppDataSource.getRepository(Group).find({where:{groupEmail: email}})
+            //const grupos = rep.findBy({groupEmail: email}) 
+            console.log(rep);
+            
+            return res.json(rep)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao pegar os grupos!"})
+        }
+    }
+
     public async getHistoricGroups(req: Request, res: Response): Promise<Response> {
         const groupRepository = AppDataSource.getRepository(Group)
         const allGroup = await groupRepository.find()

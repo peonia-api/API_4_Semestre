@@ -66,37 +66,32 @@ const options = data.map((data) => ({
     onSubmit: async (values) => {
       JSON.stringify(values, null, 2);
       await axios.post(URI.ENVIAR_CALL, formik.values).then(async (res) => {
-        // for (let i = 0; i < selectedGroup.length; i++) {
-           await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: formik.values.group, call: res.data.id })
-        // }
-        if(formik.values.callType == "feature"){
-          await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
-        }
-        if(files){
-          uploadFile(files).then(async (rest) => {
-            console.log(rest);
-            await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${res.data.id}`, rest ).then((s) => {
-            
-            }).catch((err) =>{
-              console.log(err);
+
+          if(files){
+            uploadFile(files).then(async (rest) => {
+              console.log(rest);
+              await axios.post(`${URIattach.ENVIAR_ANEXO_SUPABASE}${res.data.id}`, rest ).then((s) => {
+              }).catch((err) =>{
+                console.log(err);
+                
+              })
               
             })
             
-          })
-          
+          }
+           await axios.post(URIgroupToCall.ENVIAR_GROUP_TO_CALL, { group: formik.values.group, call: res.data.id })
+
+        if(formik.values.callType == "feature"){
+          await axios.post(URIcommit.ENVIAR_COMITE, {id: res.data.id})
         }
+        
 
 
       }).catch((err) => {
           console.log("oi");
           
       })
-      avisoEspera().then((res) => {
-        setTimeout(function(){avisoConcluido().then((res:any) => {
-          setTimeout(function(){window.location.assign("/listagemCall");}, 1000)
-          
-        })}, 2000)
-      })
+      
     },
   });
 
@@ -110,9 +105,12 @@ const options = data.map((data) => ({
     if (!formik.isValid) {
       avisoErro();
     } else {
-      formik.submitForm();
-      
-      
+      formik.submitForm().then((res) => {
+        setTimeout(function(){avisoConcluido().then((res:any) => {
+          setTimeout(function(){window.location.assign("/listagemCall");}, 1000)
+          
+        })}, 2000)
+      })
       
     }
   }

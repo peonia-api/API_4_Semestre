@@ -67,7 +67,7 @@ function CadastroGrupo() {
 
   let location = useNavigate();
   function voltar (){
-    location('/listagemGrupos')
+    location('/listagemGruposUser')
   }
 
   function onClickLimpar() {

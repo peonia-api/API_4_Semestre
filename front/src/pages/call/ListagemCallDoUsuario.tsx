@@ -52,30 +52,16 @@ function ListagemCallUser() {
           data.map(async (dados) => {
             if (dados.id == id) {              
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-                console.log("foi");
-                removeFile(res.data.list)
+                console.log(res.data.list);
+                
+                console.log(res.data);
+                if(res.data.possui === true){removeFile(res.data.list)}
                 
               }).catch((err) => {
                 console.log("erro");
                 
               })
-              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
-              if (dados.callType === "feature") {
-                await axios.delete(`${URIcommit.DELETE_COMITE}${id}`).then(async (res) => {
-                  console.log(res);
-
-                  setTimeout(async function(){ await axios.delete(`${URI.DELETE_CALL}${id}`)}, 3000)
-
-                }).catch((err) => {
-                  avisoErroAoDeletar()
-
-                })
-              } else {
-                setTimeout(async function(){await axios.delete(`${URI.DELETE_CALL}${id}`).catch((err) => {
-                  avisoErroAoDeletar()
-                })}, 5000)
-                
-              }
+              await axios.delete(`${URI.DELETE_CALL}${id}`)
             }
           })
 

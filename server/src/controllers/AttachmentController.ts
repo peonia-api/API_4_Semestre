@@ -181,13 +181,13 @@ class AttachmentController {
                     })
                     const allCall = await attachmentRepository.remove(file)
                 }
-            })
-            if(list.id == null){
+            })           
+            if(list.length == 0){
                 logger.error(JSON.stringify({mensage: "Não possui arquivos!"}))
-                return res.json({mensage: "Não possui arquivos!"})
+                return res.json({mensage: "Não possui arquivos!", possui: false})
             }
             logger.info(JSON.stringify({list, message: "Sucesso ao deletar o arquivo."}))
-            return res.json({mensage: "foi", list})
+            return res.json({mensage: "foi", list, possui: true})
         }catch(err){
             logger.error(JSON.stringify({mensage: "Erro ao deletar os arquivos"}))
             return res.status(400).json({mensage: "Erro"})

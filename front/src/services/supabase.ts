@@ -1,5 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js'
+import { avisoEspera } from '../controllers'
 
 const supabaseUrl = 'https://undvejpptbowpgysnwiw.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVuZHZlanBwdGJvd3BneXNud2l3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzkxNDQ1OTEsImV4cCI6MTk5NDcyMDU5MX0.LQYO99TBVgPT6gFmI1GyPcxD3tp62fwqiA2JfvRBkPA'
@@ -13,6 +14,7 @@ export async function uploadFile(e: any) {
   console.log(filesS.length);
 
   const list: any = []
+  avisoEspera(filesS.length)
 
   for (let index = 0; index < filesS.length; index++) {
     //const file = e.target.files[index]
@@ -21,6 +23,7 @@ export async function uploadFile(e: any) {
     console.log(filesS[index].file.name);
 
     const { data, error } = await supabase.storage.from('uploads').upload(nameFile, file)
+
     list.push({
       id: filesS[index].id,
       name: nameFile
@@ -38,7 +41,8 @@ export async function uploadFile(e: any) {
 }
 
 export async function removeFile(path: any) {
-
+  console.log(path);
+  
   for (let i = 0; i < path.length; i++) {
     console.log(path[i].src);
     let fileSrc = path[i].src

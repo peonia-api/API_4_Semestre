@@ -22,7 +22,9 @@ import { Comites } from "./pages/Comite/Comites";
 import { URIgroup, URIgroupToUser, URIuser } from "./enumerations/uri";
 import ListagemCallUser from "./pages/call/ListagemCallDoUsuario";
 import EditarGrupoFuncionario from "./pages/grupo/EditarGrupoFunc";
-import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien";
+import EditarGrupoCliente from "./pages/grupo/EditarGrupoClien"; 
+import KanbanBoard from "./pages/kanban/kanban";
+import ListagemGruposUser from "./pages/grupo/ListagemGrupoUser";
 
 
 function Rotas(){
@@ -44,12 +46,14 @@ function Rotas(){
             <Route path="/" element={<Private> <ListagemCallUser /> </Private>} />
             <Route path="/comites/:id" element={<Private> <Comites /> </Private> } />
             <Route path="/comiteSquad/:id" element={<VerifySQUAD> <Private> <ComiteSquad/> </Private> </VerifySQUAD>} />
-            <Route path="/listagemGrupos" element={<Private><ListagemGrupos /></Private>}></Route>
+            <Route path="/listagemGrupos" element={<VerifyPADRAO><Private><ListagemGrupos /></Private></VerifyPADRAO>}></Route>
             <Route path="/editarGrupoFun/:id/:type" element={<Private><EditarGrupoFuncionario type={"Funcionario"} urlUser={URIuser.PEGAR_USER} urlFun={URIgroupToUser.PEGAR_GROUP_TO_USER_ESPECIFICO}/></Private>}></Route>
             <Route path="/editarGrupoCli/:id/:type" element={<Private><EditarGrupoCliente type={"Cliente"} urlCli={URIgroup.PEGAR_GROUP_ESPECIFICO} /></Private>}></Route>
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
+            <Route path="/kanban" element={<KanbanBoard/>}></Route>
+            <Route path="/listagemGruposUser" element={<Private><ListagemGruposUser/></Private>}></Route>
         </Routes>
         <Footer />
         </>

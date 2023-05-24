@@ -91,23 +91,6 @@ function EditarGrupoCliente(type: any) {
 
       axios
         .put(`${URIgroup.ALTERA_GROUP}${id}`, { groupType: groupType, groupName: groupName, cliente: clientes, groupDescription: groupDescription })
-        .then((res) => {
-          if (typeGroup == "Funcionario") {
-            ids.map((idG: any) => {
-              if (arleyid.find((item: any) => idG.name === item)) {
-                axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${idG.id}`);
-              }
-            })
-            user.map((u: any) => {
-              if (arleyid.find((item: any) => u.name === item)) {
-                axios.post(URIgroupToUser.ENVIAR_GROUP_TO_USER, {
-                  group: id,
-                  user: u.id,
-                });
-              }
-            })
-          }
-        })
         .then(() => {
           avisoConcluido().then((result) =>
             result.isConfirmed ? voltar() : ""
@@ -127,9 +110,6 @@ function EditarGrupoCliente(type: any) {
     setGroupDescription("");
   }
 
-  function handleGroupTypeChange(event: any) {
-    setGroupType(event.target.value);
-  }
 
   function handleGroupNameChange(event: any) {
     setGroupName(event.target.value);
@@ -137,13 +117,6 @@ function EditarGrupoCliente(type: any) {
 
   function handleGroupDescriptionChange(event: any) {
     setGroupDescription(event.target.value);
-  }
-
-  function handleChangeUser(event: any) {
-    console.log(event);
-    const val = event.map((item: any) => item.value)
-    setUser(event.map((item: any) => ({ id: item.id, name: item.value })));
-    setArleyid(val.filter((elem: any) => !userOptions.includes(elem)).concat(userOptions.filter((elem: any) => !val.includes(elem))))
   }
 
   function handleChangeCli(event: any) {
