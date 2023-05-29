@@ -37,7 +37,8 @@ function KanbanBoard() {
                 "Status": "Aprovada",
                 "Summary": "Analyze the new requirements gathered from the customer.",
                 "Priority": "Low",
-                "Assignee": "Nancy Davloio"
+                "Assignee": "Nancy Davloio",
+                "color": "#9e1208"
             },
             {
                 "Id": "Task 2",
@@ -45,7 +46,8 @@ function KanbanBoard() {
                 "Status": "Fazendo",
                 "Summary": "Improve application performance",
                 "Priority": "Normal",
-                "Assignee": "Andrew Fuller"
+                "Assignee": "Andrew Fuller",
+                "color": "#9e1208"
             },
             {
                 "Id": "Task 3",
@@ -53,7 +55,8 @@ function KanbanBoard() {
                 "Status": "Feito",
                 "Summary": "Fix the issues reported by the customer.",
                 "Priority": "Low",
-                "Assignee": "Steven walker"
+                "Assignee": "Steven walker",
+                "color": "#9e1208"
             }
         ];
     }
@@ -68,7 +71,7 @@ function KanbanBoard() {
                             Kanban
                         </h1>
                         <KanbanComponent id="kanban" keyField="Status" dataSource={kanbanData()} 
-                            cardSettings={{ contentField: 'Summary', headerField: 'Id' }} swimlaneSettings={{keyField: 'Assignee'}}>
+                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Id', headerField: 'Title' }} swimlaneSettings={{keyField: 'Assignee'}}>
                             <ColumnsDirective>
                                 <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
                                 <ColumnDirective headerText="Fazendo" keyField="Fazendo" />
