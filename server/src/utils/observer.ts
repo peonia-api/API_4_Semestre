@@ -58,11 +58,11 @@ class UserObserver implements Observer {
         });
 
         var mailOptions = {
-            from: '"Equipe Peônia - Ionichealth" <peonia-api@outlook.com>', // sender address (who sends)
+            from: '"Equipe Peônia - Ionic health" <peonia-api@outlook.com>', // sender address (who sends)
             to: this.email, // list of receivers (who receives)
-            subject: 'Ionichealth - Atualização de status de chamado ', // Subject line
+            subject: 'Ionic health - Atualização de status de chamado ', // Subject line
             text: 'Olá', // plaintext body
-            html: `<p>Olá, </p><p> Gentileza notar que o seu chamado <strong>${this.titulo}</strong> teve seu status alterado para: <strong>${this.status}</strong>.</p><p>Caso existam dúvidas, favor entrar em contato com o atendimento ao cliente <a href="https://pt-br.ionic.health/contato" target="_blank">clicando aqui</a>.</p><p>Atenciosamente,</p><p>Equipe Peonia - Ionichealth.</p>` // html body
+            html: `<p>Olá, </p><p> Gentileza notar que o seu chamado <strong>${this.titulo}</strong> teve seu status alterado para: <strong>${this.status}</strong>.</p><p>Caso existam dúvidas, favor entrar em contato com o atendimento ao cliente <a href="https://pt-br.ionic.health/contato" target="_blank">clicando aqui</a>.</p><p>Atenciosamente,</p><p>Equipe Peonia - Ionic health.</p>` // html body
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
