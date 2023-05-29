@@ -5,13 +5,12 @@ export const emailPatch = async (url:any, email:string, antes:string) => {
 }
 
 export const taskBody = async (data: any) => {
-   console.log(data);
    const list:any = []
-
    data.map((res:any) => {
       if(res.call.callType === "hotfix"){
          list.push({
-            Id: res.id,status: res.call.callStatus, 
+            Id: res.id,
+            Status: res.call.callStatus,
             Title: res.call.callTitle, 
             Priority: res.call.callPriority, 
             Summary: res.call.callDescription, 
