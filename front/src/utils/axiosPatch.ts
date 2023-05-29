@@ -6,7 +6,7 @@ export const emailPatch = async (url:any, email:string, antes:string) => {
 }
 
 export const taskBody = async (data: any) => {
-   console.log(data.call);
+   console.log(data);
    // const result = data[0].call.reduce((list: any, res: any) => {
    //    list.push({status: res.callStatus, title: res.callTitle});
    //    return list;
@@ -14,7 +14,24 @@ export const taskBody = async (data: any) => {
 
    const result = data.map((res:any) => {
       const list:any = []
-      list.push({status: res.call.callStatus, title: res.call.callTitle});
+      if(res.call.callType === "hotfix"){
+         list.push({
+            id: res.id,status: res.call.callStatus, 
+            title: res.call.callTitle, 
+            Priority: res.call.callPriority, 
+            Summary: res.call.callDescription, 
+            color: "#9e1208" 
+         })
+      }else{
+         list.push({
+            id: res.id, 
+            status: res.call.callStatus, 
+            title: res.call.callTitle, 
+            Priority: res.call.callPriority, 
+            Summary: res.call.callDescription, 
+            color: "#148eba" 
+         });
+      }
       return list;
    })
    return result;
