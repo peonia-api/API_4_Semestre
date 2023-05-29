@@ -60,6 +60,7 @@ export enum URItask {
     ALTERA_TAKS = "http://localhost:3001/task/modify/",
     DELETE_TAKS = "http://localhost:3001/task/delete/",
     PEGAR_TAKS = "http://localhost:3001/task/historic",
+    PATCH_TAKS = "http://localhost:3001/task/patch/",
 }
 
 

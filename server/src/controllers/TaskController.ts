@@ -59,6 +59,19 @@ class TaskController {
         }
     }
 
+    public async patch(req:Request, res: Response): Promise<Response>{
+        try{
+            const {id, status} = req.body
+            const taskRepository = AppDataSource.getRepository(Call)
+            const find = await taskRepository.findOneBy({id: id})
+            find.callStatus = status
+            const save = taskRepository.save(find)
+            return res.json(save)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao alterar o status"})
+        }
+    }
+    
     public async delete(req: Request, res: Response): Promise<Response> {
         try {
             const idTask: any = req.params.uuid

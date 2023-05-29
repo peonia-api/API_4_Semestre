@@ -9,6 +9,8 @@ routes.post('/create', TaskController.post);
 
 routes.put('/modify/:uuid', TaskController.put);
 
+routes.patch("/patch/", TaskController.patch)
+
 routes.delete('/delete/:uuid', TaskController.delete);
 
 export default routes;
