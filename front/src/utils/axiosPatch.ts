@@ -6,12 +6,17 @@ export const emailPatch = async (url:any, email:string, antes:string) => {
 }
 
 export const taskBody = async (data: any) => {
-   console.log(data);
-   const result = data.call.reduce((list: any, res: any) => {
-      list.push({status: res.callStatus, title: res.callTitle});
-      return list;
-   }, []);
+   console.log(data.call);
+   // const result = data[0].call.reduce((list: any, res: any) => {
+   //    list.push({status: res.callStatus, title: res.callTitle});
+   //    return list;
+   // }, []);
 
+   const result = data.map((res:any) => {
+      const list:any = []
+      list.push({status: res.call.callStatus, title: res.call.callTitle});
+      return list;
+   })
    return result;
 }
 
