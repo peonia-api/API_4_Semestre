@@ -58,6 +58,16 @@ class GroupController {
         }
     }
 
+    public async getGroupByFuncionario(req: Request, res: Response): Promise<Response> {
+        try{
+            const groupRepository = AppDataSource.getRepository(Group)
+            const allGroup = await groupRepository.findBy({groupType : "Funcionario" })
+            return res.json(allGroup)
+        }catch(err){
+            return res.status(400).json({menssagem: "Erro ao pegar!"})
+        }
+    }
+
     public async postGroup(req: Request, res: Response): Promise<Response> {
         const createGroup = req.body
         const groupRepository = AppDataSource.getRepository(Group)

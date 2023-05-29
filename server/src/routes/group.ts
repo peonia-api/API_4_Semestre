@@ -6,6 +6,8 @@ routes.get('/historic', GroupController.getHistoricGroups);
 
 routes.get('/cliente', GroupController.getGroupByCliente);
 
+routes.get('/funcionario', GroupController.getGroupByFuncionario);
+
 routes.get('/specific/:uuid', GroupController.getGroupByOne);
 
 routes.get('/email/:email', GroupController.getByEmail);
