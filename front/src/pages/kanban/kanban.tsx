@@ -8,7 +8,7 @@ import { taskBody } from "../../utils/axiosPatch";
 
 
 function KanbanBoard() {
-    const [data, setData] = useState([] as any);
+    const [data, setData] = useState(Object);
 
     function createKanbanRemoteDatasource() {
         return new DataManager({
@@ -25,7 +25,9 @@ function KanbanBoard() {
               const result = await taskBody(res.data);
               setData(result);
            });
+
      }, []);
+
     console.log(data);
     
 
@@ -37,7 +39,7 @@ function KanbanBoard() {
                 "Status": "Aprovada",
                 "Summary": "Analyze the new requirements gathered from the customer.",
                 "Priority": "Low",
-                "Assignee": "Nancy Davloio",
+                "type": "feature",
                 "color": "#148eba"
             },
             {
@@ -46,16 +48,34 @@ function KanbanBoard() {
                 "Status": "Fazendo",
                 "Summary": "Improve application performance",
                 "Priority": "Normal",
-                "Assignee": "Andrew Fuller",
+                "type": "hotfix",
                 "color": "#9e1208"
             },
             {
                 "Id": "Task 3",
-                "Title": "Task - 29005",
+                "Title": "Task - 3",
                 "Status": "Feito",
                 "Summary": "Fix the issues reported by the customer.",
                 "Priority": "Low",
-                "Assignee": "Steven walker",
+                "type": "hotfix",
+                "color": "#9e1208"
+            },
+            {
+                "Id": "Task 4",
+                "Title": "Task - 4",
+                "Status": "Fazendo",
+                "Summary": "Improve application performance",
+                "Priority": "Normal",
+                "type": "hotfix",
+                "color": "#9e1208"
+            },
+            {
+                "Id": "Task 5",
+                "Title": "Task - 5",
+                "Status": "Feito",
+                "Summary": "Fix the issues reported by the customer.",
+                "Priority": "Low",
+                "type": "hotfix",
                 "color": "#9e1208"
             }
         ];
@@ -71,7 +91,7 @@ function KanbanBoard() {
                             Kanban
                         </h1>
                         <KanbanComponent id="kanban" keyField="Status" dataSource={kanbanData()} 
-                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Id', headerField: 'Title' }} swimlaneSettings={{keyField: 'Assignee'}}>
+                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Id', headerField: 'Title' }} swimlaneSettings={{keyField: 'type'}}>
                             <ColumnsDirective>
                                 <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
                                 <ColumnDirective headerText="Fazendo" keyField="Fazendo" />
