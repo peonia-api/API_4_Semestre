@@ -2552,3 +2552,13 @@
 [info]: [ 22/05/2023:14:1:16 ] - Rodando na porta 3001
 [info]: [ 22/05/2023:14:1:30 ] - Rodando na porta 3001
 [info]: [ 22/05/2023:14:4:8 ] - Rodando na porta 3001
+[info]: [ 29/05/2023:14:42:42 ] - Rodando na porta 3001
+[info]: [ 29/05/2023:14:46:23 ] - Rodando na porta 3001
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados arquivados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"feature":[],"message":"Sucesso ao buscar os chamados arquivados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allCall":[],"message":"Sucesso ao pegar os chamados."}
+[info]: [ 29/05/2023:14:46:23 ] - {"allTask":[],"message":"Sucesso ao pegar os chamados no kanban."}
