@@ -90,7 +90,7 @@ function KanbanBoard() {
                         <h1 className="text-dark mb-2 font-padrao-titulo">
                             Kanban
                         </h1>
-                        <KanbanComponent id="kanban" keyField="Status" dataSource={kanbanData()} 
+                        <KanbanComponent id="kanban" keyField="Status" dataSource={data} 
                             cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Id', headerField: 'Title' }} swimlaneSettings={{keyField: 'type'}}>
                             <ColumnsDirective>
                                 <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
