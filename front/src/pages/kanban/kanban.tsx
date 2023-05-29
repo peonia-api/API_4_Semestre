@@ -38,7 +38,7 @@ function KanbanBoard() {
                 "Summary": "Analyze the new requirements gathered from the customer.",
                 "Priority": "Low",
                 "Assignee": "Nancy Davloio",
-                "color": "#9e1208"
+                "color": "#148eba"
             },
             {
                 "Id": "Task 2",
