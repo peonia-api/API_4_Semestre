@@ -91,7 +91,7 @@ function KanbanBoard() {
                             Kanban
                         </h1>
                         <KanbanComponent id="kanban" keyField="Status" dataSource={data} 
-                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Id', headerField: 'Title' }} swimlaneSettings={{keyField: 'type'}}>
+                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Title', headerField: 'Id' }} swimlaneSettings={{keyField: 'type'}}>
                             <ColumnsDirective>
                                 <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
                                 <ColumnDirective headerText="Fazendo" keyField="Fazendo" />
