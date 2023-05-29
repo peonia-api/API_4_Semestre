@@ -2,6 +2,7 @@ import { logger } from "../config/logger"
 import AppDataSource from "../data-source"
 import { Request, Response } from 'express';
 import { Task } from "../entities/Task"
+import { Call } from "../entities/Call";
 
 
 class TaskController {
