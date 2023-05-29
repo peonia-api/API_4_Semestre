@@ -3,7 +3,7 @@ import { GroupToCall } from "./GroupToCall";
 import { Group } from "./Groups";
 import { Call } from "./Call";
 
-@Entity({ name: "kanban" })
+@Entity({ name: "task" })
 
 export class Task {
     @PrimaryGeneratedColumn()
