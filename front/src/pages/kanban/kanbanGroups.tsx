@@ -1,6 +1,5 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-grid-system';
 import Header from '../../components/Header';
-import GridLayout from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
@@ -15,9 +14,10 @@ function kanbanGroups() {
   const colStyle: React.CSSProperties = {
     backgroundColor: 'green',
     color: 'white',
-    padding: '60px',
-    margin: '30px',
+    padding: '90px',
+    margin: '20px',
     borderRadius: '30px',
+    width: '400%', // Defina a largura desejada aqui, por exemplo, '300px'
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -39,21 +39,21 @@ function kanbanGroups() {
           </h1>
         </div>
         <div style={containerStyle}>
-        <Container>
-          <Row>
-            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-              <div style={contentStyle}>Equipe 1</div>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-              <div style={contentStyle}>Equipe 2</div>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-              <div style={contentStyle}>Equipe 3</div>
-            </Col>
-            {/* Adicione mais Col para mais equipes */}
-          </Row>
-        </Container>
-        </div>
+      <Container>
+        <Row>
+          <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+            <div style={contentStyle}>Equipe 1</div>
+          </Col>
+          <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+            <div style={contentStyle}>Equipe 2</div>
+          </Col>
+          <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+            <div style={contentStyle}>Equipe 3</div>
+          </Col>
+          {/* Adicione mais Col para mais equipes */}
+        </Row>
+      </Container>
+    </div>
 
       </div>
     </div>
