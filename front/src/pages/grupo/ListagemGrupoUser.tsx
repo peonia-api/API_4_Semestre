@@ -108,12 +108,12 @@ function ListagemGruposUser() {
   };
 
   //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState("");
   const filteredData = dataGroup.filter(
     (item) =>
-    item.groupName.toLowerCase().includes(searchQuery.toLowerCase())
+    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   
   return (
     <>
@@ -153,7 +153,7 @@ function ListagemGruposUser() {
                 </thead>
 
                 <tbody>
-                  {dataGroup.map((grupo: any) => (
+                  {filteredData.map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>
