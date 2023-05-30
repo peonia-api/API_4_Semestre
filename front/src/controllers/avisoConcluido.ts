@@ -40,12 +40,26 @@ function solicitaEmail(): Promise<SweetAlertResult> {
 async function avisoDeletar(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar chamado",
-    text: "Essa ação não pode ser revertida",
+    text: "Esta ação não pode ser revertida",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Sim, deletar",
+    cancelButtonText: "Cancelar",
+  });
+}
+
+async function avisoDeletarUser(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Deletar usuário",
+    text: "Esta ação não pode ser revertida",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, deletar",
+    cancelButtonText: "Cancelar",
   });
 }
 
@@ -107,6 +121,7 @@ async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Sim, deletar",
+    cancelButtonText: "Cancelar",
   });
 }
 
