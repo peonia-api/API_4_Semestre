@@ -18,6 +18,7 @@ import Header from "../../components/Header";
 import { VerifyType } from "../../controllers";
 import { Attachment } from "../../types/attachment";
 import { identity } from "lodash";
+import moment from 'moment';
 
 function ListagemTipoUsuario() {
   const linkUrl: any = localStorage.getItem("userType")
@@ -133,15 +134,19 @@ function ListagemTipoUsuario() {
 
     //search
     const [searchQuery, setSearchQuery] = useState("");
-    const filteredData = commiteData.filter(
-      (item) =>
-
-      item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.id.toString().toLowerCase().includes(searchQuery.toLowerCase())
-
-    );
+    const filteredData = commiteData.filter((item) => {
+      const lowerCaseSearchQuery = searchQuery.toLowerCase();
+      
+      const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+    
+      return (
+        item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+        formattedDate.includes(lowerCaseSearchQuery) 
+      );
+    });
 
   return (
     <>
