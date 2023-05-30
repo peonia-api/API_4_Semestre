@@ -5,20 +5,27 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
 function kanbanGroups() {
-  const colStyle = {
+  
+  const containerStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  };
+  
+  const colStyle: React.CSSProperties = {
     backgroundColor: 'green',
     color: 'white',
-    padding: '40px',
+    padding: '60px',
     margin: '30px',
-    borderRadius: '20px',
+    borderRadius: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   };
-  // Defina as posições e os tamanhos dos quadradinhos
-  // const layout = [
-  //   { i: 'equipe1', x: 0, y: 0, w: 2, h: 2 },
-  //   { i: 'equipe2', x: 2, y: 0, w: 1, h: 4 },
-  //   { i: 'equipe3', x: 3, y: 0, w: 1, h: 2 },
-  //   // ... adicione mais equipes aqui
-  // ];
+  
+  const contentStyle: React.CSSProperties = {
+    textAlign: 'center',
+  };
 
   return (
     <>
@@ -31,22 +38,22 @@ function kanbanGroups() {
             Equipes
           </h1>
         </div>
-
+        <div style={containerStyle}>
         <Container>
-        <Row>
-        <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-          Equipe 1
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-          Equipe 2
-        </Col>
-        <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
-          Equipe 3
-        </Col>
-        {/* Adicione mais Col para mais equipes */}
-      </Row>
-          
+          <Row>
+            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+              <div style={contentStyle}>Equipe 1</div>
+            </Col>
+            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+              <div style={contentStyle}>Equipe 2</div>
+            </Col>
+            <Col xs={12} sm={6} md={4} lg={3} style={colStyle}>
+              <div style={contentStyle}>Equipe 3</div>
+            </Col>
+            {/* Adicione mais Col para mais equipes */}
+          </Row>
         </Container>
+        </div>
 
       </div>
     </div>
@@ -54,8 +61,6 @@ function kanbanGroups() {
     </>
   ); 
 
-     
-  
 }
 
 export default kanbanGroups;
