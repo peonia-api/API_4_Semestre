@@ -152,13 +152,12 @@ function ListagemGrupos() {
   };
 
   //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = dataGroup.filter(
     (item) =>
-    item.user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.group.groupDescription.toLowerCase().includes(searchQuery.toLowerCase())
+    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   
   return (
     <>
@@ -177,7 +176,7 @@ function ListagemGrupos() {
                 <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
                   <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
                 </button>
-                
+
                 <input
                   className="input-search"
                   type="text"
@@ -198,7 +197,7 @@ function ListagemGrupos() {
                 </thead>
 
                 <tbody>
-                  {dataGroup.map((grupo: any) => (
+                  {filteredData.map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>
