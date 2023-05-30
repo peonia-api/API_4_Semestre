@@ -138,8 +138,8 @@ function ListagemTipoUsuario() {
 
       item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) 
-     
+      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.id.toString().toLowerCase().includes(searchQuery.toLowerCase())
 
     );
 
