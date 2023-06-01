@@ -50,9 +50,22 @@ async function avisoDeletar(): Promise<SweetAlertResult> {
   });
 }
 
-async function avisoDeletarUser(): Promise<SweetAlertResult> {
+async function avisoDeletarUsuario(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar usuário",
+    text: "Esta ação não pode ser revertida",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, deletar",
+    cancelButtonText: "Cancelar",
+  });
+}
+
+async function avisoDeletarGrupo(): Promise<SweetAlertResult> {
+  return Swal.fire({
+    title: "Deletar grupo",
     text: "Esta ação não pode ser revertida",
     icon: "warning",
     showCancelButton: true,
@@ -77,7 +90,7 @@ function avisoEspera(quantidade: number): Promise<SweetAlertResult> {
   let quant = quantidade * 2000
   let timerInterval: any
   return Swal.fire({
-    title: 'Enviando chamado!',
+    title: 'Enviando chamado ...',
     //html: 'O chamado será enviado em <b></b> milissegundos.',
     timer: quant,
     timerProgressBar: true,
@@ -115,7 +128,7 @@ function avisoAlterarSenha(): Promise<SweetAlertResult> {
 async function avisoDeletarAnexo(): Promise<SweetAlertResult> {
   return Swal.fire({
     title: "Deletar anexo",
-    text: "Essa ação não pode ser revertida",
+    text: "Esta ação não pode ser revertida.",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -140,7 +153,7 @@ async function avisoDesarquivar(): Promise<SweetAlertResult>{
 function avisoEsperaAnexo(): Promise<SweetAlertResult> {
   let timerInterval: any
   return Swal.fire({
-    title: 'Atualizando chamado!',
+    title: 'Atualizando chamado ...',
     html: 'O chamado será atualizado em <b></b> milissegundos.',
     timer: 10000,
     timerProgressBar: true,
@@ -158,4 +171,4 @@ function avisoEsperaAnexo(): Promise<SweetAlertResult> {
 }
 
 
-export { avisoConcluido, avisoDeletar, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar, avisoAlterarSenha  };
+export { avisoConcluido, avisoDeletar, avisoDeletarUsuario, avisoDeletarGrupo, avisoConcuidoComite, senhaAlterada, solicitaEmail, avisoEspera, avisoEdicao, avisoPerfil, avisoDeletarAnexo, avisoEsperaAnexo, avisoDesarquivar, avisoAlterarSenha  };

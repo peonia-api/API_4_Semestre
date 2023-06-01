@@ -8,7 +8,7 @@ import ReactPaginate from "react-paginate";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { avisoErroAoDeletar } from "../../controllers";
-import { avisoDeletar } from "../../controllers/avisoConcluido";
+import { avisoDeletar, avisoDeletarGrupo } from "../../controllers/avisoConcluido";
 import { avisoErroDeletar, avisoChamado } from "../../controllers/avisoErro";
 import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../../enumerations/uri";
 import editar from "../../images/editar.png";
@@ -62,7 +62,7 @@ function ListagemGrupos() {
       const groupToUserEntries = data.filter(dataGroup => dataGroup.group.id === id);
       console.log(groupToUserEntries);
       
-      const shouldDelete = await avisoDeletar();
+      const shouldDelete = await avisoDeletarGrupo();
       if (shouldDelete.isConfirmed) {
         if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
           await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {

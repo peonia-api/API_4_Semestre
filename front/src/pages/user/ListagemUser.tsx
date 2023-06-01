@@ -1,5 +1,5 @@
 import {FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft} from "react-icons/fa";
-import { avisoDeletar } from "../../controllers/avisoConcluido";
+import { avisoDeletar, avisoDeletarUsuario } from "../../controllers/avisoConcluido";
 import { avisoErroDeletar } from "../../controllers/avisoErro";
 import React, { useState, useEffect } from "react";
 import { Container, Table } from "react-bootstrap";
@@ -39,7 +39,7 @@ function ListagemUser() {
   //delete
   async function handleDeleteUser(id: number) {
     try {
-      avisoDeletar().then(async (result) => {
+      avisoDeletarUsuario().then(async (result) => {
         if (result.isConfirmed) {
           await axios.delete(`${URIuser.DELETE_USER}${id}`);
           const updatedUsers = data.filter((user) => user.id !== id);
