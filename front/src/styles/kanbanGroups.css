@@ -3,21 +3,12 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-
   }
-
-.containerStyle .cabecalho {
-    background-color: palevioletred;
-    border-radius: 10px 10px 0px 0px;
-    
-}
 
 .rodape {
   display: flex;
   justify-content: center;
   align-items: center;
-
-
 } 
 
 .containerStyle .rodape a {
@@ -45,5 +36,6 @@
     align-items: center;
     justify-content: center;
     width: 280px;
+  
   }
   

@@ -38,14 +38,16 @@ function KanbanGroups() {
       <Header />
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
 
-        <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
+        <div className='container containerback bg-light-opacity rounded mx-auto' style={{ padding: "2rem" } }>
+
           <div className="text-center">
             <h1 className="text-dark mb-0 font-padrao-titulo">
               Equipes
             </h1>
           </div>
+          
           <div className='containerStyle'>
-            <div className='rodape'>
+            <div className='rodape' >
               {dataGroup.map((grupo: any) => (
                 <div className='colStyle'>
                   <a href='/kanban'>{grupo.groupName} </a>
