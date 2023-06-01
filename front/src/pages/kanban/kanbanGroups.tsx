@@ -45,16 +45,20 @@ function KanbanGroups() {
             </h1>
           </div>
           <div className='containerStyle'>
-            {dataGroup.map((grupo: any) => (
-              <div className='colStyle'>
-                <a href='/kanban'>{grupo.groupName} </a> 
-              </div>
-            ))}
+            <div className='rodape'>
+              {dataGroup.map((grupo: any) => (
+                <div className='colStyle'>
+                  <a href='/kanban'>{grupo.groupName} </a>
+                </div>
+              ))}
 
+            </div>
           </div>
 
         </div>
+
       </div>
+
 
     </>
   );

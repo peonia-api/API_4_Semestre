@@ -1,12 +1,42 @@
 .containerStyle {
     display: flex;
     justify-content: center;
-    width: 100%;
-    background-color: black;
+    align-items: center;
+    margin-bottom: 20px;
+
   }
+
+.containerStyle .cabecalho {
+    background-color: palevioletred;
+    border-radius: 10px 10px 0px 0px;
+    
+}
+
+.rodape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+} 
+
+.containerStyle .rodape a {
+  color: #101213;
+  font-size: 24px;
+  line-height: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  transition: .5s;
+
+}
+.containerStyle .rodape a:hover{
+  color: #0C5660;
+  transition: .3s;
+  
+}
   
 .colStyle {
-    background-color: #0C5660;
+    background-color: #c6c2c2;
     color: white;
     padding: 90px;
     margin: 20px;
@@ -14,13 +44,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 280px;
   }
   
-.contentStyle {
-    background-color: aliceblue;
-    width: 400px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
