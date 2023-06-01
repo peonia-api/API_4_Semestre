@@ -51,16 +51,16 @@ function ListagemCall() {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
           data.map(async (dados) => {
-            if (dados.id == id) {              
+            if (dados.id == id) {
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
                 console.log("foi");
                 removeFile(res.data.list)
-                
+
               }).catch((err) => {
                 console.log("erro");
-                
+
               })
-              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
+              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => { console.log("linuxxx") }).catch((err) => console.log(err))
             }
           })
 
@@ -132,6 +132,15 @@ function ListagemCall() {
     }
   }
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = data.filter(
+    (item) =>
+      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.callStatus.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) 
+  );
+
   return (
     <>
       <Header />
@@ -152,6 +161,13 @@ function ListagemCall() {
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
                   </svg>
                 </button>
+                <input
+                  className="input-search"
+                  type="text"
+                  placeholder="Pesquisar"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
               </div>
               <Table bordered hover responsive>
                 <thead>
@@ -168,7 +184,7 @@ function ListagemCall() {
                 </thead>
 
                 <tbody>
-                  {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
                       <tr key={data.id}>
                         {/*corpo tabela*/}

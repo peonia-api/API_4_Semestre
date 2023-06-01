@@ -120,6 +120,14 @@ function ArchivedList() {
       console.log(error);
     }
   }
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = data.filter(
+    (item) =>
+      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.callType.toLowerCase().includes(searchQuery.toLowerCase()) 
+  );
+
   //tabela
   return (
     <>
@@ -134,7 +142,15 @@ function ArchivedList() {
           </div>
           <Container className="px-2 mb-5">
             <Container>
-
+            <div className="d-flex align-items-center justify-content-between mt-4 Margin">
+                <input
+                  className="input-search"
+                  type="text"
+                  placeholder="Pesquisar"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </div>
               <Table bordered hover responsive>
                 <thead>
                   <tr>
@@ -150,9 +166,7 @@ function ArchivedList() {
                 </thead>
 
                 <tbody>
-                  {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((d) => {
-
-
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((d) => {
                     return (
                       <tr key={d.id}>
                         {/*corpo tabela*/}

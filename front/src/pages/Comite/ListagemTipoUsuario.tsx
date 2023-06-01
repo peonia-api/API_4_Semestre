@@ -154,7 +154,7 @@ function ListagemTipoUsuario() {
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
-            <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos chamados</h1>
+            <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos Chamados</h1>
             <h6>Chamados disponíveis para a avaliação/priorização</h6>
           </div>
           <Container className="px-2 mb-5">

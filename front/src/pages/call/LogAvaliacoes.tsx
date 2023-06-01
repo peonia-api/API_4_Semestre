@@ -76,11 +76,11 @@ function LogAvaliacoes(){
 
     //search
     const [searchQuery, setSearchQuery] = useState<string>("");
-    // const filteredData = data.filter(
-    //     (item) =>
-    //     item.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //     item.userGroup.toLowerCase().includes(searchQuery.toLowerCase())
-    // );
+    const filteredData = data.filter(
+        (item) =>
+        item.tipoChamado.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.type.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const style = {
         position: 'absolute' as 'absolute',
@@ -141,7 +141,7 @@ function LogAvaliacoes(){
                         </thead>
         
                         <tbody>
-                            {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
+                            {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                             return (
                                 <tr>
                                 {/*corpo tabela*/}
