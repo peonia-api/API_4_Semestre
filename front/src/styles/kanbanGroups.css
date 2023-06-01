@@ -1,9 +1,10 @@
+
 .containerStyle {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-  }
+}
 
 .rodape {
   display: flex;
@@ -21,13 +22,13 @@
 
 }
 .containerStyle .rodape a:hover{
-  color: #0C5660;
+  color: #e2e9ea;
   transition: .3s;
   
 }
   
 .colStyle {
-    background-color: #c6c2c2;
+    background-color: #149797;
     color: white;
     padding: 90px;
     margin: 20px;
