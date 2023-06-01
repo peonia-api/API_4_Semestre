@@ -1,42 +1,41 @@
 
-.containerStyle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
 .rodape {
+  
   display: flex;
   justify-content: center;
   align-items: center;
+
 } 
 
-.containerStyle .rodape a {
-  color: #101213;
-  font-size: 24px;
-  line-height: 22px;
-  font-weight: bold;
-  margin-bottom: 8px;
+.rodape a {
+  font-size: 20px;
+  color: #1e161a;
+  /* line-height: 22px;
+  font-weight: bold; */
+  /* margin-bottom: 8px; */
   transition: .5s;
 
 }
-.containerStyle .rodape a:hover{
-  color: #e2e9ea;
+.rodape a:hover{
+  color: #d6dbdc;
   transition: .3s;
   
 }
   
 .colStyle {
-    background-color: #149797;
-    color: white;
-    padding: 90px;
-    margin: 20px;
-    border-radius: 30px;
+  
+    margin: 50px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 280px;
+    background-color: #b6f1f1;
+    width: 200px;
+    height: 150px;
+    border: 10px solid rgb(69, 149, 174);
+    margin: 50px;
+    padding: 30px;
+     
   
   }
   
