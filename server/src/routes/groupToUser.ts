@@ -6,6 +6,8 @@ routes.get('/historic', GroupToUserController.getHistoric);
 
 routes.get('/specific/:uuid', GroupToUserController.getGroupByOne);
 
+routes.get('/groupUser/:uuid', GroupToUserController.getGroupUser);
+
 routes.post('/create', GroupToUserController.postGroup);
 
 routes.put('/modify/:uuid', GroupToUserController.putGroup);

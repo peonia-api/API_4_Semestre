@@ -1,4 +1,4 @@
-import { URI, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
+import { URI, URIcommit, URIgroup, URItask } from "../../enumerations/uri";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import './comite.css';
@@ -22,53 +22,43 @@ export function Comites() {
     const type = localStorage.getItem('userType');
     const typeCall = localStorage.getItem("typeCall"); 
 
+    const [ group, setGroup ] = useState()
+
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         console.log("submint", { comite });
         await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
+        if(type === 'HP'){
+            await axios.post(URItask.ENVIAR_TAKS, {call: id, group: group})
+        }
         avisoConcuidoComite().then((res) => {
             window.location.assign("/ListagemTipoUsuario");
         })
     }
 
-    async function changeDes() {
-        if(type === "CSO" || type === "RT"){
-            setDescType("Análise de Risco")
-            setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
-        } else {
-            if(typeCall === "hotfix"){
-                setUrl(URI.ATUALIZA_HOTFIX)
-                setDescType("Prioridade do Hotfix");
-            } else {
-                setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
-                setDescType("Análise de Impacto")
-            }
-            
-        }
+
+    function handGrupo(event:any){
+        setGroup(event);
     }
 
-    // const getGroupToCall = async (id: any) => {
-    //     try {
-    //         const response = await axios.get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_CLIENT}/${id}`);
-    //         const listaCliente = response.data;
-    //         console.log(listaCliente);
-    
-    //         listaCliente.forEach((item: any) => {
-    //             const emails = item.email;
-    
-    //             const observer = new UserObserver(emails, item.status, item.titulo);
-    //             concreteSubject.addObserver(observer);
-    //             console.log(observer);
-    //             console.log("Passei por aqui 2");
-    //         });
-    
-    //         setData(listaCliente);
-    //     } catch (error) {
-    //         console.log('Erro ao obter os dados do grupo de clientes', error);
-    //     }
-    // };
-
     useEffect(() => {
+        const type = localStorage.getItem('userType');
+        const typeCall = localStorage.getItem("typeCall"); 
+      
+            if(type === "CSO" || type === "RT"){
+                setDescType("Análise de Risco")
+                setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
+            } else {
+                if(typeCall === "hotfix"){
+                    setUrl(URI.ATUALIZA_HOTFIX)
+                    setDescType("Prioridade do Hotfix");
+                } else {
+                    setUrl(type === "CTO" ? URIcommit.ALTERA_COMITE_CTO : URIcommit.ALTERA_COMITE_HP)
+                    setDescType("Análise de Impacto")
+                }
+                
+            }
+     
         async function fetchGroups() {
             axios
               .get(URIgroup.PEGAR_GRUPO_FUNCIONARIO)
@@ -80,7 +70,7 @@ export function Comites() {
               });
           }
           fetchGroups();
-        changeDes();
+        
     }, [type, typeCall])      
       
       const options = data.map((data) => ({
@@ -128,13 +118,16 @@ export function Comites() {
                         <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6 mb-3"> {descType} - {type}: {comite}</label>
                         <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="3" id="rangeAvaliacao"></input>
                     </div>
+                    { type === 'HP'? (
                     <div className="col-md-4">
                         <label className="form-label text-dark fs-6">Grupo responsável:</label>
                         <Select
                             options={options}
                             classNamePrefix="select"
+                            onChange={(e) => handGrupo(e?.value)}
                         />
                     </div>
+                    ): ""}
                 </div>
 
                 <div className="button-comite">

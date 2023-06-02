@@ -5,12 +5,12 @@ import autoAnimate from "@formkit/auto-animate";
 import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Header from "../../components/Header";
 import { avisoErroAoDeletar } from "../../controllers";
 import { avisoDeletar } from "../../controllers/avisoConcluido";
 import { avisoErroDeletar, avisoChamado } from "../../controllers/avisoErro";
-import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../../enumerations/uri";
+import { URIgroup } from "../../enumerations/uri";
 import editar from "../../images/editar.png";
 import excluir from "../../images/excluir.png";
 import grupoImag from "../../images/grupo.png";
@@ -78,23 +78,23 @@ function ListagemGruposUser() {
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-  const sorting = (col: keyof typeof data[0]) => {
+  const sorting = (col: keyof typeof dataGroup[0]) => {
     if (order === "ASC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("DSC");
     }
     if (order === "DSC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("ASC");
     }
   };
@@ -108,12 +108,12 @@ function ListagemGruposUser() {
   };
 
   //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState("");
   const filteredData = dataGroup.filter(
     (item) =>
-    item.groupName.toLowerCase().includes(searchQuery.toLowerCase())
+    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   
   return (
     <>
@@ -145,15 +145,15 @@ function ListagemGruposUser() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th className="text-center">Tipo do Grupo</th>
+                    <th onClick={() => sorting("groupName")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("groupType")} className="text-center">Tipo do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
                 </thead>
 
                 <tbody>
-                  {dataGroup.map((grupo: any) => (
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>

@@ -1,73 +1,37 @@
 import Header from "../../components/Header";
-import { ColumnDirective, ColumnsDirective, KanbanComponent } from '@syncfusion/ej2-react-kanban'
+import { ColumnDirective, ColumnsDirective, DialogEventArgs, KanbanComponent, cardClick } from '@syncfusion/ej2-react-kanban'
 import { DataManager, ODataAdaptor } from '@syncfusion/ej2-data';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { URItask } from "../../enumerations/uri";
+import { taskBody } from "../../utils/axiosPatch";
 
-function KanbanBoard() {
-    
-    function createKanbanRemoteDatasource() {
-        return new DataManager({
-          url: 'https://ej2services.syncfusion.com/production/web-services/api/Kanban',
-          adaptor: new ODataAdaptor(),
-          crossDomain: true
-        });
+
+function KanbanBoard(this: any) {
+    const [data, setData] = useState(Object);
+
+      useEffect(() => {
+        const id = window.location.href.split("/")[4];
+        axios.get(`${URItask.PEGAR_TAKS}${id}`)
+           .then(async (res) => {
+              const result = await taskBody(res.data);
+              setData(result);
+           });
+
+     }, []);
+
+     const changeStatus = (id:any, newStatus:any) => {
+        if(newStatus === 'Feito'){newStatus = 'Finalizado'}
+        axios.patch(URItask.PATCH_TAKS, {
+            id: id,
+            status: newStatus
+        })
       }
-      
-      const kanbanRemoteDatasource = createKanbanRemoteDatasource();
 
-    function kanbanData(): Object[] {
-        return [
-            {
-                "Id": "Task 1",
-                "Title": "Task - 29001",
-                "Status": "Open",
-                "Summary": "Analyze the new requirements gathered from the customer.",
-                "Type": "Story",
-                "Priority": "Low",
-                "Estimate": 3.5,
-                "Assignee": "Nancy Davloio"
-            },
-            {
-                "Id": "Task 2",
-                "Title": "Task - 29002",
-                "Status": "InProgress",
-                "Summary": "Improve application performance",
-                "Type": "Improvement",
-                "Priority": "Normal",
-                "Estimate": 6,
-                "Assignee": "Andrew Fuller"
-            },
-            {
-                "Id": "Task 3",
-                "Title": "Task - 29003",
-                "Status": "Open",
-                "Summary": "Arrange a web meeting with the customer to get new requirements.",
-                "Type": "Others",
-                "Priority": "Critical",
-                "Estimate": 5.5,
-                "Assignee": "Janet Leverling"
-            },
-            {
-                "Id": "Task 4",
-                "Title": "Task - 29004",
-                "Status": "InProgress",
-                "Summary": "Fix the issues reported in the IE browser.",
-                "Type": "Bug",
-                "Priority": "Critical",
-                "Estimate": 2.5,
-                "Assignee": "Janet Leverling"
-            },
-            {
-                "Id": "Task 5",
-                "Title": "Task - 29005",
-                "Status": "Close",
-                "Summary": "Fix the issues reported by the customer.",
-                "Type": "Bug",
-                "Priority": "Low",
-                "Estimate": "3.5",
-                "Assignee": "Steven walker"
-            }
-        ];
+      function DialogOpen(args: DialogEventArgs): void {
+        args.cancel = true;
     }
+
 
     return (
         <>
@@ -78,12 +42,12 @@ function KanbanBoard() {
                         <h1 className="text-dark mb-2 font-padrao-titulo">
                             Kanban
                         </h1>
-                        <KanbanComponent id="kanban" keyField="Status" dataSource={kanbanData()} 
-                            cardSettings={{ contentField: 'Summary', headerField: 'Id' }} swimlaneSettings={{keyField: 'Assignee'}}>
+                        <KanbanComponent id="kanban" keyField="Status" dataSource={data} dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
+                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Title', headerField: 'Id'}}  swimlaneSettings={{keyField: 'type'}}  dialogOpen={DialogOpen.bind(this)}>
                             <ColumnsDirective>
-                                <ColumnDirective headerText="Para fazer" keyField="Open" />
-                                <ColumnDirective headerText="Fazendo" keyField="InProgress" />
-                                <ColumnDirective headerText="Feito" keyField="Close" />
+                                <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
+                                <ColumnDirective headerText="Fazendo" keyField="Fazendo" />
+                                <ColumnDirective headerText="Feito" keyField="Feito" />
                             </ColumnsDirective>
                         </KanbanComponent>
                     </div>

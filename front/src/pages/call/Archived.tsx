@@ -14,6 +14,7 @@ import { Archived } from "../../types/archived";
 import Swal from "sweetalert2";
 import { avisoDesarquivar } from "../../controllers";
 import { Calls } from "../../types/call";
+import moment from "moment";
 
 
 function ArchivedList() {
@@ -111,6 +112,7 @@ function ArchivedList() {
     }
   };
 
+
   //pegar anexo
   async function fetchAnexo(id: number) {
     try {
@@ -120,6 +122,22 @@ function ArchivedList() {
       console.log(error);
     }
   }
+
+      //search
+      const [searchQuery, setSearchQuery] = useState("");
+      const filteredData = data.filter((item) => {
+        const lowerCaseSearchQuery = searchQuery.toLowerCase();
+        
+        const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+      
+        return (
+          item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+          item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+          item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+          formattedDate.includes(lowerCaseSearchQuery) 
+        );
+      });
+
   //tabela
   return (
     <>
@@ -134,7 +152,15 @@ function ArchivedList() {
           </div>
           <Container className="px-2 mb-5">
             <Container>
-
+            <div className="d-flex align-items-center justify-content-between mt-4 Margin">
+                <input
+                  className="input-search"
+                  type="text"
+                  placeholder="Pesquisar"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </div>
               <Table bordered hover responsive>
                 <thead>
                   <tr>
@@ -150,11 +176,9 @@ function ArchivedList() {
                 </thead>
 
                 <tbody>
-                  {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((d) => {
-
-
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((d) => {
                     return (
-                      <tr key={d.id}>
+                      <tr  className="dropdown-label anexo" onClick={() => reveal(d.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}

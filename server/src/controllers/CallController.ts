@@ -181,7 +181,7 @@ class CallController {
             const findCall = await callRepository.findOneBy({ id: idCall })
             findCall.HpDescription = createCall.desc;
             findCall.callPriority = createCall.impact;
-            findCall.callStatus = "Em desenvolvimento";
+            findCall.callStatus = "Aprovada";
 
             await getGroupToCall(idCall);
             console.log("Passei");
