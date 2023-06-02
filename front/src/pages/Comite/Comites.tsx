@@ -1,4 +1,4 @@
-import { URI, URIcommit, URIgroup } from "../../enumerations/uri";
+import { URI, URIcommit, URIgroup, URItask } from "../../enumerations/uri";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import './comite.css';
@@ -25,10 +25,15 @@ export function Comites() {
     const type = localStorage.getItem('userType');
     const typeCall = localStorage.getItem("typeCall"); 
 
+    const [ group, setGroup ] = useState()
+
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         console.log("submint", { comite });
         await axios.put(`${URL}${id}`, { impact: comite , desc: descricao})
+        if(type === 'HP'){
+            await axios.post(URItask.ENVIAR_TAKS, {call: id, group: group})
+        }
         avisoConcuidoComite().then((res) => {
             window.location.assign("/ListagemTipoUsuario");
         })
@@ -49,6 +54,10 @@ export function Comites() {
             }
             
         }
+    }
+
+    function handGrupo(event:any){
+        setGroup(event);
     }
     useEffect(() => {
         async function fetchGroups() {
@@ -115,6 +124,7 @@ export function Comites() {
                         <Select
                             options={options}
                             classNamePrefix="select"
+                            onChange={(e) => handGrupo(e?.value)}
                         />
                     </div>
                 </div>

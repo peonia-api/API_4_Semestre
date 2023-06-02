@@ -5,6 +5,8 @@ export const emailPatch = async (url:any, email:string, antes:string) => {
 }
 
 export const taskBody = async (data: any) => {
+   console.log(data);
+   
    const list:any = []
    data.map((res:any) => {
       if(res.call.callType === "hotfix"){

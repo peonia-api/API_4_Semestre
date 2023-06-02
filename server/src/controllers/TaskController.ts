@@ -29,10 +29,11 @@ class TaskController {
             const createTask = req.body
             const taskRepository = AppDataSource.getRepository(Task)
             const insertTask = new Task();
-            insertTask.taskStatus = createTask.taskStatus
-            insertTask.taskDescription = createTask.taskDescription
-            insertTask.taskUserResponsible = createTask.taskUserDescription
-          
+            insertTask.taskStatus = 'Aprovada'
+            insertTask.taskDescription = ' Aprovada'
+            insertTask.taskUserResponsible = 'Aprovada '
+            insertTask.call = createTask.call
+            insertTask.group = createTask.group
          
             const allTask = await taskRepository.save(insertTask)
             logger.info(JSON.stringify({ allTask, message: "Sucesso ao cadastrar a task no kanban." }))

@@ -96,7 +96,7 @@ function Header() {
                 <Nav className="d-flex" style={{alignItems:"center"}}>
                 {tipoUsuario === 'Padrao' &&(
                   <>
-                    <CustomLink to="/kanban">KANBAN</CustomLink>
+                    <CustomLink to="/kanbanGroups">KANBAN</CustomLink>
                     <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
                     <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
                     <NavDropdown 
@@ -133,7 +133,7 @@ function Header() {
                       {
                         tipoUsuario !== 'Diretor' && (
                           <>
-                            <CustomLink to="/kanban">KANBAN</CustomLink>
+                            <CustomLink to="/kanbanGroups">KANBAN</CustomLink>
                             <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
                             <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
                             <CustomLink to="/listagemTipoUsuario">COMITÊ</CustomLink>

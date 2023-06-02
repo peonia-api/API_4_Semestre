@@ -9,13 +9,13 @@ export class Task {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: false, length: 30 })
+    @Column({ nullable: true, length: 30 })
     taskStatus: string;
 
-    @Column({ nullable: false, length: 100 })
+    @Column({ nullable: true, length: 100 })
     taskDescription: string;
 
-    @Column({ nullable: false, length: 80 })
+    @Column({ nullable: true, length: 80 })
     taskUserResponsible: string;
 
 

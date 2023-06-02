@@ -74,7 +74,7 @@ class CommitteeController {
     }
     public async putCommitteeImpactHp(req: Request, res: Response): Promise<Response> {
         const createCommittee = req.body
-        const idCommittee: any = req.params.uuid
+        const idCommittee: any = req.params.uuid 
         const committeeRepository = AppDataSource.getRepository(Committee)
         const findCommittee = await committeeRepository.findOneBy({ id: idCommittee })
         findCommittee.comiImpactHp = createCommittee.impact
