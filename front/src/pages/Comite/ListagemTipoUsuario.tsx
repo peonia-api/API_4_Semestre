@@ -190,7 +190,7 @@ function ListagemTipoUsuario() {
                 <tbody>
                   {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data: any) => {
                     return (
-                      <tr key={data.id}>
+                      <tr key={data.id} className="dropdown-label anexo" onClick={() => reveal(data.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}

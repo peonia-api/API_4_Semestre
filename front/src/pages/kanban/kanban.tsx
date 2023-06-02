@@ -32,6 +32,7 @@ function KanbanBoard(this: any) {
         args.cancel = true;
     }
 
+
     return (
         <>
             <Header />
