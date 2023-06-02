@@ -1,41 +1,29 @@
-
 .rodape {
-  
   display: flex;
   justify-content: center;
   align-items: center;
-
-} 
+}
 
 .rodape a {
   font-size: 20px;
   color: #1e161a;
-  /* line-height: 22px;
-  font-weight: bold; */
-  /* margin-bottom: 8px; */
-  transition: .5s;
+}
 
+.rodape a:hover {
+  color: #2a6266;
+  transition: .2s;
 }
-.rodape a:hover{
-  color: #d6dbdc;
-  transition: .3s;
-  
-}
-  
+
 .colStyle {
-  
-    margin: 50px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #b6f1f1;
-    width: 200px;
-    height: 150px;
-    border: 10px solid rgb(69, 149, 174);
-    margin: 50px;
-    padding: 30px;
-     
-  
-  }
-  
+  margin: 50px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bbbbbb;
+  width: 200px;
+  height: 150px;
+  border: 10px solid rgb(179, 181, 181);
+  margin: 50px;
+  padding: 30px;
+}

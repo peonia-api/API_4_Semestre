@@ -45,7 +45,7 @@ function KanbanGroups() {
           </div>
           <div className='rodape row mt-5' >
             {dataGroup.map((g: any) => (
-              <div className='colStyle col-3'>
+              <div className='colStyle col-2'>
                 <a href={'/kanban/' + g.group.id} >{g.group.groupName} </a>
               </div>
             ))}
