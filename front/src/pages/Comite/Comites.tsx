@@ -39,27 +39,30 @@ export function Comites() {
         })
     }
 
-    function changeDes() {
-        if(type === "CSO" || type === "RT"){
-            setDescType("Análise de Risco")
-            setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
-        } else {
-            if(typeCall === "hotfix"){
-                setUrl(URI.ATUALIZA_HOTFIX)
-                setDescType("Prioridade do Hotfix");
-                concreteSubject.notifyObservers();
-            } else {
-                setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
-                setDescType("Análise de Impacto")
-            }
-            
-        }
-    }
 
     function handGrupo(event:any){
         setGroup(event);
     }
+
     useEffect(() => {
+        const type = localStorage.getItem('userType');
+        const typeCall = localStorage.getItem("typeCall"); 
+      
+            if(type === "CSO" || type === "RT"){
+                setDescType("Análise de Risco")
+                setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
+            } else {
+                if(typeCall === "hotfix"){
+                    setUrl(URI.ATUALIZA_HOTFIX)
+                    setDescType("Prioridade do Hotfix");
+                    concreteSubject.notifyObservers();
+                } else {
+                    setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
+                    setDescType("Análise de Impacto")
+                }
+                
+            }
+     
         async function fetchGroups() {
             axios
               .get(URIgroup.PEGAR_GRUPO_FUNCIONARIO)
@@ -71,7 +74,7 @@ export function Comites() {
               });
           }
           fetchGroups();
-        changeDes();
+        
     }, [type, typeCall])      
       
       const options = data.map((data) => ({
