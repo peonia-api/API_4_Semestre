@@ -102,11 +102,10 @@ function LogAvaliacoes() {
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
 
     return (
-      item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.type.toLowerCase().includes(lowerCaseSearchQuery) ||
       item.tipoChamado.toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.nota.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.descricao.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      item.nota.toString().toLowerCase().includes(lowerCaseSearchQuery)
     )
   })
 
