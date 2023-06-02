@@ -136,17 +136,20 @@ function ListagemCall() {
   //search
   const [searchQuery, setSearchQuery] = useState("");
   const filteredData = data.filter((item) => {
+    console.log(item.callDateFinalization);
+    
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
 
-    const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
-
+    const formattedDateCreate = moment(item.callDateCreate).format('DD/MM/YYYY');
+    const formattedDateFinalization = moment(item.callDateFinalization).format('DD/MM/YYYY');
     return (
       item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
       item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
       item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      formattedDate.includes(lowerCaseSearchQuery)
+      formattedDateCreate.includes(lowerCaseSearchQuery) ||
+      formattedDateFinalization.includes(lowerCaseSearchQuery)
     );
   });
 
