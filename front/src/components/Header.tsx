@@ -40,7 +40,7 @@ function Header() {
             <Nav className="d-flex" style={{alignItems:"center"}}>
             {tipoUsuario === 'Diretor' &&(
                         <>
-                        <CustomLink to="/kanban">KANBAN</CustomLink>
+                        <CustomLink to="/kanbanGroups">KANBAN</CustomLink>
                         <NavDropdown className="me-2" title="CHAMADOS" id="navbarScrollingDropdown">
                               <NavDropdown.Item href="/listagemCall">
                                 Meus chamados
