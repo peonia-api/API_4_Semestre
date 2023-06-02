@@ -9,8 +9,12 @@ class TaskController {
 
     public async getHistoric(req: Request, res: Response): Promise<Response> {
         try {
+            const groupId:any = req.params.uuid
             const taskRepository = AppDataSource.getRepository(Task)
-            const allTask = await taskRepository.find()
+            const allTask = await taskRepository.find({relations: { group: true },
+                where: {
+                    group: {id: groupId}
+                },}) 
             logger.info(JSON.stringify({ allTask, message: "Sucesso ao pegar os chamados no kanban." }))
             return res.json(allTask)
         } catch (err) {

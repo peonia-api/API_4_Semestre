@@ -3,7 +3,7 @@ import { Router } from "express";
 import{ TaskController }from "../controllers/";
 const routes = Router();
 
-routes.get('/historic', TaskController.getHistoric);
+routes.get('/historic/:uuid', TaskController.getHistoric);
 
 routes.post('/create', TaskController.post);
 

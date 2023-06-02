@@ -11,7 +11,8 @@ function KanbanBoard() {
     const [data, setData] = useState(Object);
 
       useEffect(() => {
-        axios.get(URItask.PEGAR_TAKS)
+        const id = window.location.href.split("/")[4];
+        axios.get(`${URItask.PEGAR_TAKS}${id}`)
            .then(async (res) => {
               const result = await taskBody(res.data);
               setData(result);
