@@ -112,6 +112,7 @@ function ArchivedList() {
     }
   };
 
+
   //pegar anexo
   async function fetchAnexo(id: number) {
     try {
@@ -177,7 +178,7 @@ function ArchivedList() {
                 <tbody>
                   {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((d) => {
                     return (
-                      <tr key={d.id}>
+                      <tr  className="dropdown-label anexo" onClick={() => reveal(d.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}
