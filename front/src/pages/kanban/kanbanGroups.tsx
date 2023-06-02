@@ -5,18 +5,18 @@ import { GroupsToUser } from '../../types/groupToUser';
 import '../../styles/kanbanGroups.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { URIgroup } from '../../enumerations/uri';
+import { URIgroup, URIgroupToUser } from '../../enumerations/uri';
 import { Groups } from '../../types/group';
 
 function KanbanGroups() {
   const [dataGroup, setGroup] = useState<Groups[]>([]);
-  const [data, setData] = useState<GroupsToUser[]>([]);
+
 
   //axios get
   useEffect(() => {
     async function fetchGroup() {
       axios
-        .get(`${URIgroup.PEGAR_GROUP_USER}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`)
+        .get(`${URIgroupToUser.PEGAR_GROUP_TO_USER_EMAIL}${localStorage.getItem("userEmail")?.replace(/["]/g, "")}`)
         .then((response) => {
           setGroup(response.data);
         })
@@ -29,7 +29,6 @@ function KanbanGroups() {
 
   }, []);
 
-  console.log(data);
   console.log(dataGroup);
 
   return (
@@ -45,13 +44,12 @@ function KanbanGroups() {
             </h1>
           </div>
             <div className='rodape row mt-5' >
-              {dataGroup.map((grupo: any) => (
+              {dataGroup.map((g: any) => (
                 <div className='colStyle col-3'>
-                  <a href='/kanban'>{grupo.groupName} </a>
+                  <a href={'/kanban/' + g.group.id} >{g.group.groupName} </a>
                 </div>
               ))}
-
-            </div>
+            </div>  
           
 
         </div>
