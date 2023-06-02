@@ -1,25 +1,19 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
-import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
-import { avisoDeletar } from "../../controllers/avisoConcluido";
+import {  URIattach, URIcommit } from "../../enumerations/uri";
 import React, { useState, useEffect, useRef } from "react";
 import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import excluir from "../../images/excluir.png";
 import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/Header";
-import editar from "../../images/editar.png";
-import { Link } from "react-router-dom";
 import { Calls } from "../../types/call";
 import axios from "axios";
 import '../../App.css';
-import { removeFile } from "../../services/supabase";
 import moment from "moment";
-import "../../styles/Responsivo.css";
 
-function ListagemCallUser() {
+
+function ListagemCall() {
 
   const url_atual = window.location.href;
   const id = window.location.href.split("/")[4]
@@ -33,7 +27,7 @@ function ListagemCallUser() {
   useEffect(() => {
     async function fetchCalls() {
       axios
-        .get(`${URI.PEGAR_CAll_User}${localStorage.getItem("userEmail")?.replace(/["]/g, "") ?? ""}`)
+        .get(URIcommit.PEGAR_COMITE_STATUS)
         .then((response) => {
           setData(response.data);
         })
@@ -44,39 +38,6 @@ function ListagemCallUser() {
     fetchCalls();
 
   }, []);
-
-  //delete
-  async function handleDeleteCall(id: number) {
-    try {
-      avisoDeletar().then(async (result) => {
-        if (result.isConfirmed) {
-          data.map(async (dados) => {
-            if (dados.id == id) {              
-              await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-                console.log(res.data.list);
-                
-                console.log(res.data);
-                if(res.data.possui === true){removeFile(res.data.list)}
-                
-              }).catch((err) => {
-                console.log("erro");
-                
-              })
-              await axios.delete(`${URI.DELETE_CALL}${id}`)
-            }
-          })
-
-          const updatedCalls = data.filter((call) => call.id !== id);
-          setData(updatedCalls);
-        }
-
-      })
-
-    } catch (error) {
-      console.error(error);
-      avisoErroDeletar();
-    }
-  }
 
 
   //sort
@@ -134,21 +95,25 @@ function ListagemCallUser() {
     }
   }
 
-    //search
-    const [searchQuery, setSearchQuery] = useState("");
-    const filteredData = data.filter((item) => {
-      const lowerCaseSearchQuery = searchQuery.toLowerCase();
-  
-      const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
-  
-      return (
-        item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
-        item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
-        item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
-        formattedDate.includes(lowerCaseSearchQuery)
-      );
-    });
+  //search
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = data.filter((item) => {
+    console.log(item.callDateFinalization);
+    
+    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+
+    const formattedDateCreate = moment(item.callDateCreate).format('DD/MM/YYYY');
+    const formattedDateFinalization = moment(item.callDateFinalization).format('DD/MM/YYYY');
+    return (
+      item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
+      formattedDateCreate.includes(lowerCaseSearchQuery) ||
+      formattedDateFinalization.includes(lowerCaseSearchQuery)
+    );
+  });
 
   return (
     <>
@@ -164,7 +129,7 @@ function ListagemCallUser() {
           <Container className="px-2 mb-5">
             <Container>
               <div className="d-flex align-items-center justify-content-between mt-4 Margin">
-                <button type="button" className="btn btn-form resp" onClick={() => window.location.href = '/solicitacao'}>Adicionar Chamado
+                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/solicitacao'}>Adicionar Chamado
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-check-fill" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
@@ -183,8 +148,9 @@ function ListagemCallUser() {
                   <tr>
                     {/*cabeçalho tabela*/}
                     <th onClick={() => sorting("id")} className="text-center">Número da solicitação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callEmail")} className="text-center">Email do solicitante {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callType")} className="text-center">Tipo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th className="text-center">Ações</th>
@@ -198,17 +164,16 @@ function ListagemCallUser() {
                       <tr key={data.id} className="dropdown-label anexo" onClick={() => reveal(data.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
-                          {/*animate*/}
+                          {/* animate */}
                           <strong className="dropdown-label anexo" onClick={() => reveal(data.id)}>{data.id}</strong>
                         </td>
-                        <td className="text-center">{data.callTitle}</td>
+                        <td className="text-center">{data.callEmail}</td>
                         <td className="text-center">{data.callType}</td>
+                        <td className="text-center">{data.callTitle}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
                         </td>
                         <td className="text-center">
-                          <Link to={"/editarCall/" + data.id} style={{padding: "3px"}}> <img style={{ width: '25px' }} src={editar} alt='Editar' /> </Link>
-                          <img className="actions" style={{ width: "35px", padding: "3px" }} src={excluir} alt="Excluir" onClick={() => handleDeleteCall(data.id)} />
                           <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(data.id)} />
                         </td>
                       </tr>
@@ -217,7 +182,7 @@ function ListagemCallUser() {
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(filteredData.length / itemsPerPage)}
+                pageCount={Math.ceil(data.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}
@@ -247,4 +212,4 @@ function ListagemCallUser() {
   );
 }
 
-export default ListagemCallUser;
+export default ListagemCall;
