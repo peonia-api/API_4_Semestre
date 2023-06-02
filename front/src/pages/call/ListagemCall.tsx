@@ -1,22 +1,15 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
-import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
-import { avisoDeletar } from "../../controllers/avisoConcluido";
+import {  URIattach, URIcommit } from "../../enumerations/uri";
 import React, { useState, useEffect, useRef } from "react";
 import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import avaliacao from "../images/avaliar.png";
-import excluir from "../images/excluir.png";
-import arquivos from "../images/paperclip.svg";
+import arquivos from "../../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/Header";
-import editar from "../images/editar.png";
-import { Link } from "react-router-dom";
 import { Calls } from "../../types/call";
 import axios from "axios";
 import '../../App.css';
-import { removeFile } from "../../services/supabase";
 
 
 function ListagemCall() {
@@ -46,35 +39,35 @@ function ListagemCall() {
   }, []);
 
   //delete
-  async function handleDeleteCall(id: number) {
-    try {
-      avisoDeletar().then(async (result) => {
-        if (result.isConfirmed) {
-          data.map(async (dados) => {
-            if (dados.id == id) {              
-              await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-                console.log("foi");
-                removeFile(res.data.list)
+  // async function handleDeleteCall(id: number) {
+  //   try {
+  //     avisoDeletar().then(async (result) => {
+  //       if (result.isConfirmed) {
+  //         data.map(async (dados) => {
+  //           if (dados.id == id) {              
+  //             await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
+  //               console.log("foi");
+  //               removeFile(res.data.list)
                 
-              }).catch((err) => {
-                console.log("erro");
+  //             }).catch((err) => {
+  //               console.log("erro");
                 
-              })
-              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
-            }
-          })
+  //             })
+  //             await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
+  //           }
+  //         })
 
-          const updatedCalls = data.filter((call) => call.id !== id);
-          setData(updatedCalls);
-        }
+  //         const updatedCalls = data.filter((call) => call.id !== id);
+  //         setData(updatedCalls);
+  //       }
 
-      })
+  //     })
 
-    } catch (error) {
-      console.error(error);
-      avisoErroDeletar();
-    }
-  }
+  //   } catch (error) {
+  //     console.error(error);
+  //     avisoErroDeletar();
+  //   }
+  // }
 
 
   //sort
@@ -163,6 +156,7 @@ function ListagemCall() {
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
                 </thead>
@@ -181,6 +175,9 @@ function ListagemCall() {
                         <td className="text-center">{data.callTitle}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
+                        </td>
+                        <td className="text-center">
+                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(data.id)} />
                         </td>
                       </tr>
                     );
