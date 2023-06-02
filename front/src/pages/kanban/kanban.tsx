@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { ColumnDirective, ColumnsDirective, KanbanComponent } from '@syncfusion/ej2-react-kanban'
+import { ColumnDirective, ColumnsDirective, DialogEventArgs, KanbanComponent, cardClick } from '@syncfusion/ej2-react-kanban'
 import { DataManager, ODataAdaptor } from '@syncfusion/ej2-data';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,11 +7,12 @@ import { URItask } from "../../enumerations/uri";
 import { taskBody } from "../../utils/axiosPatch";
 
 
-function KanbanBoard() {
+function KanbanBoard(this: any) {
     const [data, setData] = useState(Object);
 
       useEffect(() => {
-        axios.get(URItask.PEGAR_TAKS)
+        const id = window.location.href.split("/")[4];
+        axios.get(`${URItask.PEGAR_TAKS}${id}`)
            .then(async (res) => {
               const result = await taskBody(res.data);
               setData(result);
@@ -20,13 +21,17 @@ function KanbanBoard() {
      }, []);
 
      const changeStatus = (id:any, newStatus:any) => {
+        if(newStatus === 'Feito'){newStatus = 'Finalizado'}
         axios.patch(URItask.PATCH_TAKS, {
             id: id,
             status: newStatus
         })
-    
-    
       }
+
+      function DialogOpen(args: DialogEventArgs): void {
+        args.cancel = true;
+    }
+
 
     return (
         <>
@@ -38,7 +43,7 @@ function KanbanBoard() {
                             Kanban
                         </h1>
                         <KanbanComponent id="kanban" keyField="Status" dataSource={data} dragStop={(e) => { changeStatus(e.data[0].Id, e.data[0].Status); }}
-                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Title', headerField: 'Id' }} swimlaneSettings={{keyField: 'type'}}>
+                            cardSettings={{ contentField: 'Summary', grabberField: "color", tagsField:'Title', headerField: 'Id'}}  swimlaneSettings={{keyField: 'type'}}  dialogOpen={DialogOpen.bind(this)}>
                             <ColumnsDirective>
                                 <ColumnDirective headerText="Para fazer" keyField="Aprovada" />
                                 <ColumnDirective headerText="Fazendo" keyField="Fazendo" />

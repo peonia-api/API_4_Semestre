@@ -25,12 +25,14 @@ export enum URIgroup {
     ALTERA_EMAIL = "http://localhost:3001/group/email/",
     PEGAR_GRUPO_FUNCIONARIO = "http://localhost:3001/group/funcionario/"
 }
+
 export enum URIgroupToUser {
     ENVIAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/create",
     ALTERA_GROUP_TO_USER = "http://localhost:3001/groupToUser/modify/",
     DELETE_GROUP_TO_USER = "http://localhost:3001/groupToUser/delete/",
     PEGAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/historic",
     PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
+    PEGAR_GROUP_TO_USER_EMAIL = "http://localhost:3001/groupToUser/groupUser/",
 }
 
 export enum URIgroupToCall {
@@ -55,11 +57,12 @@ export enum URIuser {
     VERIFICA_TYPE = "http://localhost:3001/user/veficaType/",
     ALTERA_PERFIL = "http://localhost:3001/user/perfil/",
 }
+
 export enum URItask {
     ENVIAR_TAKS = "http://localhost:3001/task/create",
     ALTERA_TAKS = "http://localhost:3001/task/modify/",
     DELETE_TAKS = "http://localhost:3001/task/delete/",
-    PEGAR_TAKS = "http://localhost:3001/task/historic",
+    PEGAR_TAKS = "http://localhost:3001/task/historic/",
     PATCH_TAKS = "http://localhost:3001/task/patch/",
 }
 

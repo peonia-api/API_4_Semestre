@@ -53,7 +53,7 @@ function Rotas(){
             <Route path="/arquivar" element={<Private><ArchivedList /></Private>}></Route>
             <Route path="/cadastroGrupo" element={<Private><CadastroGrupo/></Private>}></Route>
             <Route path="/logAvaliacoes" element={<Private><LogAvaliacoes /></Private>}></Route>
-            <Route path="/kanban" element={<KanbanBoard/>}></Route>
+            <Route path="/kanban/:id" element={<KanbanBoard/>}></Route>
             <Route path="/kanbanGroups" element={<KanbanGroups/>}></Route>
             <Route path="/listagemGruposUser" element={<Private><ListagemGruposUser/></Private>}></Route>
         </Routes>

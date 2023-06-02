@@ -1,28 +1,21 @@
-
 .rodape {
-  
   display: flex;
   justify-content: center;
   align-items: center;
-
-} 
+}
 
 .rodape a {
   font-size: 20px;
   color: #1e161a;
-  /* line-height: 22px;
-  font-weight: bold; */
-  /* margin-bottom: 8px; */
-  transition: .5s;
+}
 
+.rodape a:hover {
+  color: #2a6266;
+  transition: .2s;
 }
-.rodape a:hover{
-  color: #d6dbdc;
-  transition: .3s;
-  
-}
-  
+
 .colStyle {
+<<<<<<< HEAD
   
     margin: 50px;
     border-radius: 20px;
@@ -38,3 +31,16 @@
   
   }
   
+=======
+  margin: 50px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ECECEC;
+  width: 200px;
+  height: 150px;
+  margin: 50px;
+  padding: 30px;
+}
+>>>>>>> f35484dfde8e71aa9fac9d645b6b6456db3ad560
