@@ -57,7 +57,7 @@ export function Comites() {
                     setDescType("Prioridade do Hotfix");
                     concreteSubject.notifyObservers();
                 } else {
-                    setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
+                    setUrl(type === "CTO" ? URIcommit.ALTERA_COMITE_CTO : URIcommit.ALTERA_COMITE_HP)
                     setDescType("Análise de Impacto")
                 }
                 
@@ -122,6 +122,7 @@ export function Comites() {
                         <label htmlFor="rangeAvaliacao" className="form-label text-dark fs-6 mb-3"> {descType} - {type}: {comite}</label>
                         <input onChange={(e) => setComite(e.target.value)} value={comite} type="range" className="form-range" min="0" max="3" id="rangeAvaliacao"></input>
                     </div>
+                    { type === 'HP'? (
                     <div className="col-md-4">
                         <label className="form-label text-dark fs-6">Grupo responsável:</label>
                         <Select
@@ -130,6 +131,7 @@ export function Comites() {
                             onChange={(e) => handGrupo(e?.value)}
                         />
                     </div>
+                    ): ""}
                 </div>
 
                 <div className="button-comite">
