@@ -130,7 +130,7 @@ function ListagemGruposUser() {
           <Container className="px-2 mb-5">
             <Container>
               <div className="box-search d-flex align-items-center justify-content-between mt-4 Margin">
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
+                <button type="button" className="btn btn-form resp" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
                   <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
                 </button>
 
