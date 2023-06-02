@@ -142,10 +142,10 @@ function ListagemCallUser() {
       const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
   
       return (
+        item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
         item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
         item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
-        item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
         formattedDate.includes(lowerCaseSearchQuery)
       );
     });

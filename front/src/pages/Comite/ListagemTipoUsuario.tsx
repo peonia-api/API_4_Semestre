@@ -146,6 +146,7 @@ function ListagemTipoUsuario() {
         item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
         formattedDate.includes(lowerCaseSearchQuery) 
       );
+
     });
 
   return (

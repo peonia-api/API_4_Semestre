@@ -10,6 +10,7 @@ import { Calls, LogCall } from "../../types/call";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { log } from "../../utils/log";
+import moment from "moment";
 
 function LogAvaliacoes() {
 
@@ -73,15 +74,6 @@ function LogAvaliacoes() {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
 
-
-  //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
-    (item) =>
-      item.tipoChamado.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.type.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -103,6 +95,22 @@ function LogAvaliacoes() {
     descr == "" ? setDescription("Não Possui Descrição!") : setDescription(descr);
     setDisplay(true);
   };
+
+  //search
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = data.filter((item) => {
+    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+
+    return (
+      item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.tipoChamado.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.nota.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.descricao.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  })
+
+  
 
   return (
     <>
@@ -141,7 +149,7 @@ function LogAvaliacoes() {
                 </thead>
 
                 <tbody>
-                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
+                  {filteredData.map((data) => {
                     return (
                       <tr>
                         {/*corpo tabela*/}
