@@ -197,7 +197,7 @@ function ListagemGrupos() {
                 </thead>
 
                 <tbody>
-                  {filteredData.map((grupo: any) => (
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>
