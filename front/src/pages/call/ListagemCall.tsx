@@ -1,20 +1,22 @@
 import { FaSortUp, FaSortDown, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import { Container, Table, Form, FloatingLabel } from "react-bootstrap";
-import {  URIattach, URIcommit } from "../../enumerations/uri";
+import { avisoErroAoDeletar, avisoErroDeletar } from "../../controllers/avisoErro";
+import { URI, URIattach, URIcommit, URIgroupToCall } from "../../enumerations/uri";
+import { avisoDeletar } from "../../controllers/avisoConcluido";
 import React, { useState, useEffect, useRef } from "react";
 import { Attachment } from "../../types/attachment";
 import autoAnimate from "@formkit/auto-animate";
-import arquivos from "../../images/paperclip.svg";
+import avaliacao from "../images/avaliar.png";
+import excluir from "../images/excluir.png";
+import arquivos from "../images/paperclip.svg";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/Header";
+import editar from "../images/editar.png";
+import { Link } from "react-router-dom";
 import { Calls } from "../../types/call";
 import axios from "axios";
 import '../../App.css';
-<<<<<<< HEAD
-=======
 import { removeFile } from "../../services/supabase";
-import moment from 'moment';
->>>>>>> f35484dfde8e71aa9fac9d645b6b6456db3ad560
 
 
 function ListagemCall() {
@@ -44,55 +46,35 @@ function ListagemCall() {
   }, []);
 
   //delete
-<<<<<<< HEAD
-  // async function handleDeleteCall(id: number) {
-  //   try {
-  //     avisoDeletar().then(async (result) => {
-  //       if (result.isConfirmed) {
-  //         data.map(async (dados) => {
-  //           if (dados.id == id) {              
-  //             await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
-  //               console.log("foi");
-  //               removeFile(res.data.list)
-                
-  //             }).catch((err) => {
-  //               console.log("erro");
-                
-  //             })
-  //             await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
-  //           }
-  //         })
-=======
   async function handleDeleteCall(id: number) {
     try {
       avisoDeletar().then(async (result) => {
         if (result.isConfirmed) {
           data.map(async (dados) => {
-            if (dados.id == id) {
+            if (dados.id == id) {              
               await axios.delete(`${URIattach.DELETE_ANEXO_SUPABASE}${id}`).then((res) => {
                 console.log("foi");
                 removeFile(res.data.list)
-
+                
               }).catch((err) => {
                 console.log("erro");
-
+                
               })
-              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => { console.log("linuxxx") }).catch((err) => console.log(err))
+              await axios.delete(`${URIgroupToCall.DELETE_GROUP_TO_CALL}${id}`).then((res) => {console.log("linuxxx")}).catch((err) => console.log(err))
             }
           })
->>>>>>> f35484dfde8e71aa9fac9d645b6b6456db3ad560
 
-  //         const updatedCalls = data.filter((call) => call.id !== id);
-  //         setData(updatedCalls);
-  //       }
+          const updatedCalls = data.filter((call) => call.id !== id);
+          setData(updatedCalls);
+        }
 
-  //     })
+      })
 
-  //   } catch (error) {
-  //     console.error(error);
-  //     avisoErroDeletar();
-  //   }
-  // }
+    } catch (error) {
+      console.error(error);
+      avisoErroDeletar();
+    }
+  }
 
 
   //sort
@@ -150,26 +132,6 @@ function ListagemCall() {
     }
   }
 
-  //search
-  const [searchQuery, setSearchQuery] = useState("");
-  const filteredData = data.filter((item) => {
-    console.log(item.callDateFinalization);
-    
-    const lowerCaseSearchQuery = searchQuery.toLowerCase();
-
-    const formattedDateCreate = moment(item.callDateCreate).format('DD/MM/YYYY');
-    const formattedDateFinalization = moment(item.callDateFinalization).format('DD/MM/YYYY');
-    return (
-      item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
-      item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
-      formattedDateCreate.includes(lowerCaseSearchQuery) ||
-      formattedDateFinalization.includes(lowerCaseSearchQuery)
-    );
-  });
-
   return (
     <>
       <Header />
@@ -190,13 +152,6 @@ function ListagemCall() {
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
                   </svg>
                 </button>
-                <input
-                  className="input-search"
-                  type="text"
-                  placeholder="Pesquisar"
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                />
               </div>
               <Table bordered hover responsive>
                 <thead>
@@ -208,15 +163,14 @@ function ListagemCall() {
                     <th onClick={() => sorting("callTitle")} className="text-center">Título {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callStatus")} className="text-center">Status {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
                     <th onClick={() => sorting("callDateCreate")} className="text-center">Data de criação {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
                 </thead>
 
                 <tbody>
-                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
+                  {data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
-                      <tr key={data.id} className="dropdown-label anexo" onClick={() => reveal(data.id)}>
+                      <tr key={data.id}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}
@@ -227,9 +181,6 @@ function ListagemCall() {
                         <td className="text-center">{data.callTitle}</td>
                         <td className="text-center">{data.callStatus}</td>
                         <td className="text-center"> {new Date(data.callDateCreate).toLocaleDateString("en-GB")}
-                        </td>
-                        <td className="text-center">
-                          <img className="actions" style={{ width: "30px", padding: "3px" }} src={arquivos} alt="Arquivos" onClick={() => reveal(data.id)} />
                         </td>
                       </tr>
                     );
