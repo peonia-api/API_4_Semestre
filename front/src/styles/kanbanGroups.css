@@ -15,6 +15,23 @@
 }
 
 .colStyle {
+<<<<<<< HEAD
+  
+    margin: 50px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b6f1f1;
+    height: 150px;
+    border: 10px solid rgb(69, 149, 174);
+    margin: 50px;
+    padding: 30px;
+     
+  
+  }
+  
+=======
   margin: 50px;
   border-radius: 20px;
   display: flex;
@@ -26,3 +43,4 @@
   margin: 50px;
   padding: 30px;
 }
+>>>>>>> f35484dfde8e71aa9fac9d645b6b6456db3ad560
