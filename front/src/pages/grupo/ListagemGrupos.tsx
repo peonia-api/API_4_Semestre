@@ -89,23 +89,23 @@ function ListagemGrupos() {
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-  const sorting = (col: keyof typeof data[0]) => {
+  const sorting = (col: keyof typeof dataGroup[0]) => {
     if (order === "ASC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("DSC");
     }
     if (order === "DSC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("ASC");
     }
   };
@@ -189,8 +189,8 @@ function ListagemGrupos() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th className="text-center">Tipo do Grupo</th>
+                    <th onClick={() => sorting("groupName")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("groupType")} className="text-center">Tipo do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>

@@ -130,11 +130,11 @@ function LogAvaliacoes(){
                         <thead>
                             <tr>
                             {/*cabeçalho tabela*/}
-                            <th className="text-center">Chamado</th>
-                            <th className="text-center">Tipo de usuário</th>
-                            <th className="text-center">Tipo de chamado</th>
+                            <th onClick={() => sorting("id")} className="text-center">Chamado {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
+                            <th onClick={() => sorting("type")} className="text-center">Tipo de usuário {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
+                            <th onClick={() => sorting("tipoChamado")} className="text-center">Tipo de chamado {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                             {/* <th className="text-center">Data da avaliação</th> */}
-                            <th className="text-center">Avaliação/Prioridade</th>
+                            <th onClick={() => sorting("nota")} className="text-center">Avaliação/Prioridade {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                             <th className="text-center">Descrição</th>
                             {/*fim cabeçalho tabela*/}
                             </tr>
