@@ -21,6 +21,7 @@ function KanbanBoard(this: any) {
      }, []);
 
      const changeStatus = (id:any, newStatus:any) => {
+        if(newStatus === 'Feito'){newStatus = 'Finalizado'}
         axios.patch(URItask.PATCH_TAKS, {
             id: id,
             status: newStatus

@@ -14,6 +14,7 @@ import { Archived } from "../../types/archived";
 import Swal from "sweetalert2";
 import { avisoDesarquivar } from "../../controllers";
 import { Calls } from "../../types/call";
+import moment from "moment";
 
 
 function ArchivedList() {
@@ -121,12 +122,20 @@ function ArchivedList() {
     }
   }
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const filteredData = data.filter(
-    (item) =>
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callType.toLowerCase().includes(searchQuery.toLowerCase()) 
-  );
+      //search
+      const [searchQuery, setSearchQuery] = useState("");
+      const filteredData = data.filter((item) => {
+        const lowerCaseSearchQuery = searchQuery.toLowerCase();
+        
+        const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+      
+        return (
+          item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+          item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+          item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+          formattedDate.includes(lowerCaseSearchQuery) 
+        );
+      });
 
   //tabela
   return (

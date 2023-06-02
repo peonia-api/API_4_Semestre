@@ -17,6 +17,7 @@ import { Calls } from "../../types/call";
 import axios from "axios";
 import '../../App.css';
 import { removeFile } from "../../services/supabase";
+import moment from 'moment';
 
 
 function ListagemCall() {
@@ -132,14 +133,22 @@ function ListagemCall() {
     }
   }
 
+  //search
   const [searchQuery, setSearchQuery] = useState("");
-  const filteredData = data.filter(
-    (item) =>
-      item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callStatus.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) 
-  );
+  const filteredData = data.filter((item) => {
+    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+
+    const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+
+    return (
+      item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
+      item.callEmail.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+      formattedDate.includes(lowerCaseSearchQuery)
+    );
+  });
 
   return (
     <>
@@ -186,7 +195,7 @@ function ListagemCall() {
                 <tbody>
                   {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
-                      <tr key={data.id}>
+                      <tr key={data.id} className="dropdown-label anexo" onClick={() => reveal(data.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}
