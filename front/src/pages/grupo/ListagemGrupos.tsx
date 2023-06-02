@@ -8,7 +8,7 @@ import ReactPaginate from "react-paginate";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { avisoErroAoDeletar } from "../../controllers";
-import { avisoDeletar } from "../../controllers/avisoConcluido";
+import { avisoDeletar, avisoDeletarGrupo } from "../../controllers/avisoConcluido";
 import { avisoErroDeletar, avisoChamado } from "../../controllers/avisoErro";
 import { URIcommit, URIattach, URI, URIgroupToUser, URIgroup } from "../../enumerations/uri";
 import editar from "../../images/editar.png";
@@ -62,7 +62,7 @@ function ListagemGrupos() {
       const groupToUserEntries = data.filter(dataGroup => dataGroup.group.id === id);
       console.log(groupToUserEntries);
       
-      const shouldDelete = await avisoDeletar();
+      const shouldDelete = await avisoDeletarGrupo();
       if (shouldDelete.isConfirmed) {
         if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
           await Promise.all(groupToUserEntries.map(async (groupToUserEntry) => {
@@ -89,23 +89,23 @@ function ListagemGrupos() {
 
   //sort
   const [order, setOrder] = useState<"ASC" | "DSC">("ASC");
-  const sorting = (col: keyof typeof data[0]) => {
+  const sorting = (col: keyof typeof dataGroup[0]) => {
     if (order === "ASC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() > b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("DSC");
     }
     if (order === "DSC") {
-      const sorted = [...data].sort((a, b) =>
+      const sorted = [...dataGroup].sort((a, b) =>
         a[col].toString().toLowerCase() < b[col].toString().toLowerCase()
           ? 1
           : -1
       );
-      setData(sorted);
+      setGroup(sorted);
       setOrder("ASC");
     }
   };
@@ -152,13 +152,12 @@ function ListagemGrupos() {
   };
 
   //search
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const filteredData = data.filter(
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = dataGroup.filter(
     (item) =>
-    item.user.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.group.groupDescription.toLowerCase().includes(searchQuery.toLowerCase())
+    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   
   return (
     <>
@@ -177,7 +176,7 @@ function ListagemGrupos() {
                 <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
                   <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
                 </button>
-                
+
                 <input
                   className="input-search"
                   type="text"
@@ -190,15 +189,15 @@ function ListagemGrupos() {
                 <thead>
                   <tr>
                     {/*cabeçalho tabela*/}
-                    <th onClick={() => sorting("id")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
-                    <th className="text-center">Tipo do Grupo</th>
+                    <th onClick={() => sorting("groupName")} className="text-center">Nome do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />} </th>
+                    <th onClick={() => sorting("groupType")} className="text-center">Tipo do Grupo {order === "ASC" ? <FaSortUp /> : <FaSortDown />}</th>
                     <th className="text-center">Ações</th>
                     {/*fim cabeçalho tabela*/}
                   </tr>
                 </thead>
 
                 <tbody>
-                  {dataGroup.map((grupo: any) => (
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((grupo: any) => (
                     <tr key={grupo.id}>
                       {/*corpo tabela*/}
                       <td className="text-center">{grupo.groupName}</td>

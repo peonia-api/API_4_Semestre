@@ -18,6 +18,7 @@ import Header from "../../components/Header";
 import { VerifyType } from "../../controllers";
 import { Attachment } from "../../types/attachment";
 import { identity } from "lodash";
+import moment from 'moment';
 
 function ListagemTipoUsuario() {
   const linkUrl: any = localStorage.getItem("userType")
@@ -131,13 +132,30 @@ function ListagemTipoUsuario() {
     }
   }
 
+    //search
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredData = commiteData.filter((item) => {
+      const lowerCaseSearchQuery = searchQuery.toLowerCase();
+      
+      const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+    
+      return (
+        item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+        formattedDate.includes(lowerCaseSearchQuery) 
+      );
+
+    });
+
   return (
     <>
       <Header />
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
-            <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos chamados</h1>
+            <h1 className="text-dark mb-0 font-padrao-titulo">Listagem dos Chamados</h1>
             <h6>Chamados disponíveis para a avaliação/priorização</h6>
           </div>
           <Container className="px-2 mb-5">
@@ -149,6 +167,14 @@ function ListagemTipoUsuario() {
                     <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z" />
                   </svg>
                 </button>
+
+                <input
+                  className="input-search"
+                  type="text"
+                  placeholder="Pesquisar"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
               </div>
               <Table bordered hover responsive>
                 <thead>
@@ -163,9 +189,9 @@ function ListagemTipoUsuario() {
                   </tr>
                 </thead>
                 <tbody>
-                  {commiteData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data: any) => {
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data: any) => {
                     return (
-                      <tr key={data.id}>
+                      <tr key={data.id} className="dropdown-label anexo" onClick={() => reveal(data.id)}>
                         {/*corpo tabela*/}
                         <td className="text-center">
                           {/*animate*/}

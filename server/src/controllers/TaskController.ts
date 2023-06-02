@@ -2,14 +2,19 @@ import { logger } from "../config/logger"
 import AppDataSource from "../data-source"
 import { Request, Response } from 'express';
 import { Task } from "../entities/Task"
+import { Call } from "../entities/Call";
 
 
 class TaskController {
 
     public async getHistoric(req: Request, res: Response): Promise<Response> {
         try {
+            const groupId:any = req.params.uuid
             const taskRepository = AppDataSource.getRepository(Task)
-            const allTask = await taskRepository.find()
+            const allTask = await taskRepository.find({relations: { group: true },
+                where: {
+                    group: {id: groupId}
+                },}) 
             logger.info(JSON.stringify({ allTask, message: "Sucesso ao pegar os chamados no kanban." }))
             return res.json(allTask)
         } catch (err) {
@@ -24,10 +29,11 @@ class TaskController {
             const createTask = req.body
             const taskRepository = AppDataSource.getRepository(Task)
             const insertTask = new Task();
-            insertTask.taskStatus = createTask.taskStatus
-            insertTask.taskDescription = createTask.taskDescription
-            insertTask.taskUserResponsible = createTask.taskUserDescription
-          
+            insertTask.taskStatus = 'Aprovada'
+            insertTask.taskDescription = ' Aprovada'
+            insertTask.taskUserResponsible = 'Aprovada '
+            insertTask.call = createTask.call
+            insertTask.group = createTask.group
          
             const allTask = await taskRepository.save(insertTask)
             logger.info(JSON.stringify({ allTask, message: "Sucesso ao cadastrar a task no kanban." }))
@@ -58,6 +64,19 @@ class TaskController {
         }
     }
 
+    public async patch(req:Request, res: Response): Promise<Response>{
+        try{
+            const {id, status} = req.body
+            const taskRepository = AppDataSource.getRepository(Call)
+            const find = await taskRepository.findOneBy({id: id})
+            find.callStatus = status
+            const save = taskRepository.save(find)
+            return res.json(save)
+        }catch(err){
+            return res.status(400).json({erro: "Erro ao alterar o status"})
+        }
+    }
+    
     public async delete(req: Request, res: Response): Promise<Response> {
         try {
             const idTask: any = req.params.uuid

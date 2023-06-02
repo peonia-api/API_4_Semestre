@@ -177,7 +177,7 @@ class CallController {
             const findCall = await callRepository.findOneBy({ id: idCall })
             findCall.HpDescription = createCall.desc;
             findCall.callPriority = createCall.impact;
-            findCall.callStatus = "Em desenvolvimento";
+            findCall.callStatus = "Aprovada";
 
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({ allCall, message: "Sucesso ao priorizar o chamado." }))

@@ -3,7 +3,7 @@ import Swal, { SweetAlertResult } from "sweetalert2";
 function avisoErro() {
   Swal.fire({
     title: "Erro",
-    text: "Preencha corretamente todos os campos antes de enviar!",
+    text: "Preencha corretamente todos os campos antes de enviar.",
     icon: "error",
     confirmButtonColor: "#54C5CE",
   });
@@ -11,7 +11,7 @@ function avisoErro() {
 function avisoChamado(){
   Swal.fire({
     title: "Ocorreu um erro!",
-    text: "Não é possível deletar, pois este grupo está vinculado ao chamado ",
+    text: "Não é possível deletar, pois este grupo está vinculado a um chamado.",
     icon: "error",
   });
 }
@@ -28,7 +28,7 @@ function avisoErroAoDeletar(){
   Swal.fire({
     icon: 'error',
     title: 'Erro',
-    text: 'Não foi possível excluir!',
+    text: 'Não foi possível excluir.',
   })
 }
 
@@ -36,7 +36,7 @@ function avisoErroLogin(){
   Swal.fire({
     icon: 'error',
     title: 'Erro',
-    text: 'Não foi possível realizar o login!',
+    text: 'Não foi possível realizar o login.',
   })
 }
 
@@ -44,7 +44,7 @@ function avisoErroRequisicao(){
   Swal.fire({
     icon: 'error',
     title: 'Erro',
-    text: 'Houve um erro na requisição!',
+    text: 'Houve um erro na requisição.',
   })
 }
 

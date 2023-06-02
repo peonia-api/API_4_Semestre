@@ -1,0 +1,28 @@
+.rodape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rodape a {
+  font-size: 20px;
+  color: #1e161a;
+}
+
+.rodape a:hover {
+  color: #2a6266;
+  transition: .2s;
+}
+
+.colStyle {
+  margin: 50px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ECECEC;
+  width: 200px;
+  height: 150px;
+  margin: 50px;
+  padding: 30px;
+}
