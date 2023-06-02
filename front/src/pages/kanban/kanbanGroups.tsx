@@ -1,4 +1,3 @@
-import { Container, Row, Col } from 'react-grid-system';
 import Header from '../../components/Header';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -6,7 +5,7 @@ import { GroupsToUser } from '../../types/groupToUser';
 import '../../styles/kanbanGroups.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { URIgroup, URIgroupToUser } from '../../enumerations/uri';
+import { URIgroup } from '../../enumerations/uri';
 import { Groups } from '../../types/group';
 
 function KanbanGroups() {

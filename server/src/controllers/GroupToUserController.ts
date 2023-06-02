@@ -22,6 +22,17 @@ class GroupToUserController {
         return res.json(allGroupToUser)
     }
 
+    public async getGroupUser (req: Request, res: Response) : Promise<Response> {
+        const userEmail:any = req.params.uuid
+        const groupToUserRepository = AppDataSource.getRepository(GroupToUser)
+        const allGroupToUser = await groupToUserRepository.find({relations: { user: true },
+            where: {
+                user: {userEmail: userEmail}
+            },}) 
+        return res.json(allGroupToUser)
+    }
+
+
     public async postGroup (req: Request, res: Response) : Promise<Response> {
         const createGroupToUser = req.body
         const groupToUserRepository = AppDataSource.getRepository(GroupToUser)

@@ -31,6 +31,7 @@ export enum URIgroupToUser {
     DELETE_GROUP_TO_USER = "http://localhost:3001/groupToUser/delete/",
     PEGAR_GROUP_TO_USER = "http://localhost:3001/groupToUser/historic",
     PEGAR_GROUP_TO_USER_ESPECIFICO = "http://localhost:3001/groupToUser/specific/",
+    PEGAR_GROUP_TO_USER_EMAIL = "http://localhost:3001/groupToUser/groupUser/",
 }
 
 export enum URIgroupToCall {
