@@ -16,6 +16,7 @@ import { Calls } from "../../types/call";
 import axios from "axios";
 import '../../App.css';
 import { removeFile } from "../../services/supabase";
+import moment from "moment";
 
 
 function ListagemCallUser() {
@@ -133,13 +134,21 @@ function ListagemCallUser() {
     }
   }
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const filteredData = data.filter(
-    (item) =>
-    item.callTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.callType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.callStatus.toLowerCase().includes(searchQuery.toLowerCase()) 
-  );
+    //search
+    const [searchQuery, setSearchQuery] = useState("");
+    const filteredData = data.filter((item) => {
+      const lowerCaseSearchQuery = searchQuery.toLowerCase();
+  
+      const formattedDate = moment(item.callDateCreate).format('DD/MM/YYYY');
+  
+      return (
+        item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.callStatus.toLowerCase().includes(lowerCaseSearchQuery) ||
+        item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
+        formattedDate.includes(lowerCaseSearchQuery)
+      );
+    });
 
   return (
     <>
