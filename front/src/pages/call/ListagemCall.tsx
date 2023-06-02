@@ -143,7 +143,7 @@ function ListagemCall() {
     const formattedDateCreate = moment(item.callDateCreate).format('DD/MM/YYYY');
     const formattedDateFinalization = moment(item.callDateFinalization).format('DD/MM/YYYY');
     return (
-      item.id.toString().toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.id.toString().toLowerCase().includes(lowerCaseSearchQuery) ||
       item.callTitle.toLowerCase().includes(lowerCaseSearchQuery) ||
       item.callEmail.toLowerCase().includes(lowerCaseSearchQuery) ||
       item.callType.toLowerCase().includes(lowerCaseSearchQuery) ||
