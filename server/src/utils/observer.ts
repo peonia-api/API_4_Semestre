@@ -24,6 +24,7 @@ class ConcreteSubject {
 
     public notifyObservers(): void {
         console.log('Subject: Notifying observers...');
+        console.log(this.observers);
         this.observers.forEach((observer) => observer.update());
     }
 }
@@ -43,6 +44,8 @@ class UserObserver implements Observer {
     public update(): void {
 
         let nodemailer = require('nodemailer');
+
+        console.log("Passei 2.0")
 
         var transporter = nodemailer.createTransport({
             host: "smtp-mail.outlook.com", // hostname

@@ -1,4 +1,4 @@
-import { URI, URIcommit, URIgroup } from "../../enumerations/uri";
+import { URI, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import './comite.css';
@@ -7,11 +7,8 @@ import Header from "../../components/Header";
 import '../../App.css';
 import Select from "react-select";
 import { Groups } from "../../types/group";
-import { ConcreteSubject, UserObserver } from '../../utils/observer';
 
 export function Comites() {
-
-    const concreteSubject = new ConcreteSubject();
 
     const id = window.location.href.split("/")[4];
 
@@ -34,7 +31,7 @@ export function Comites() {
         })
     }
 
-    function changeDes() {
+    async function changeDes() {
         if(type === "CSO" || type === "RT"){
             setDescType("Análise de Risco")
             setUrl(type === "CSO" ? URIcommit.ALTERA_COMITE_CSO : URIcommit.ALTERA_COMITE_RT)
@@ -42,7 +39,6 @@ export function Comites() {
             if(typeCall === "hotfix"){
                 setUrl(URI.ATUALIZA_HOTFIX)
                 setDescType("Prioridade do Hotfix");
-                concreteSubject.notifyObservers();
             } else {
                 setUrl(type === "RT" ? URIcommit.ALTERA_COMITE_RT : URIcommit.ALTERA_COMITE_SQUAD)
                 setDescType("Análise de Impacto")
@@ -50,6 +46,28 @@ export function Comites() {
             
         }
     }
+
+    // const getGroupToCall = async (id: any) => {
+    //     try {
+    //         const response = await axios.get(`${URIgroupToCall.PEGAR_GROUP_TO_CALL_CLIENT}/${id}`);
+    //         const listaCliente = response.data;
+    //         console.log(listaCliente);
+    
+    //         listaCliente.forEach((item: any) => {
+    //             const emails = item.email;
+    
+    //             const observer = new UserObserver(emails, item.status, item.titulo);
+    //             concreteSubject.addObserver(observer);
+    //             console.log(observer);
+    //             console.log("Passei por aqui 2");
+    //         });
+    
+    //         setData(listaCliente);
+    //     } catch (error) {
+    //         console.log('Erro ao obter os dados do grupo de clientes', error);
+    //     }
+    // };
+
     useEffect(() => {
         async function fetchGroups() {
             axios
