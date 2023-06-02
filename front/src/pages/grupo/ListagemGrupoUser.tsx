@@ -5,7 +5,7 @@ import autoAnimate from "@formkit/auto-animate";
 import { Container, Table } from "react-bootstrap";
 import { FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { avisoErroAoDeletar } from "../../controllers";
 import { avisoDeletar } from "../../controllers/avisoConcluido";
@@ -43,14 +43,14 @@ function ListagemGruposUser() {
 
   console.log(data);
   console.log(dataGroup);
-  
+
 
   //delete  
   async function handleDeleteGroupUser(id: number) {
     try {
       const groupToUserEntries = data.filter(dataGroup => dataGroup.group.id === id);
       console.log(groupToUserEntries);
-      
+
       const shouldDelete = await avisoDeletar();
       if (shouldDelete.isConfirmed) {
         // if(dataGroup.find((item) => item.id == id && item.groupType == "Funcionario") !=undefined){
@@ -59,13 +59,14 @@ function ListagemGruposUser() {
         //     await axios.delete(`${URIgroupToUser.DELETE_GROUP_TO_USER}${groupToUserId}`);
         //   }));
         // }
-        
-          await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).then(() => {  
-            setTimeout(() => {
+
+        await axios.delete(`${URIgroup.DELETE_GROUP}${id}`).then(() => {
+          setTimeout(() => {
             window.location.reload();
-          }, 200);})
+          }, 200);
+        })
           .catch((err) => {
-           avisoChamado();
+            avisoChamado();
           })
 
       }
@@ -111,10 +112,10 @@ function ListagemGruposUser() {
   const [searchQuery, setSearchQuery] = useState("");
   const filteredData = dataGroup.filter(
     (item) =>
-    item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
+      item.groupName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.groupType.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
+
   return (
     <>
       <Header />
@@ -132,7 +133,7 @@ function ListagemGruposUser() {
                 <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
                   <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
                 </button>
-                
+
                 <input
                   className="input-search"
                   type="text"
@@ -159,7 +160,7 @@ function ListagemGruposUser() {
                       <td className="text-center">{grupo.groupName}</td>
                       <td className="text-center">{grupo.groupType}</td>
                       <td className="text-center">
-                        {grupo.groupType === "Funcionario"? 
+                        {grupo.groupType === "Funcionario" ?
                           <Link to={"/editarGrupoFun/" + grupo.id + "/" + grupo.groupType} style={{ padding: "3px" }}>
                             <img src={editar} style={{ width: '25px' }} alt='Editar' />
                           </Link>
@@ -168,20 +169,20 @@ function ListagemGruposUser() {
                             <img src={editar} style={{ width: '25px' }} alt='Editar' />
                           </Link>
                         }
-                          <img
-                            className="actions"
-                            style={{ width: "35px", padding: "3px" }}
-                            src={excluir}
-                            alt="Excluir"
-                            onClick={() => handleDeleteGroupUser(grupo.id)}
-                          />
+                        <img
+                          className="actions"
+                          style={{ width: "35px", padding: "3px" }}
+                          src={excluir}
+                          alt="Excluir"
+                          onClick={() => handleDeleteGroupUser(grupo.id)}
+                        />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(data.length / itemsPerPage)}
+                pageCount={Math.ceil(filteredData.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}
@@ -194,7 +195,7 @@ function ListagemGruposUser() {
       </div>
     </>
   );
-  
+
 }
 
 export default ListagemGruposUser;

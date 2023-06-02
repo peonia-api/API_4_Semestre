@@ -216,7 +216,7 @@ function ListagemCall() {
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(data.length / itemsPerPage)}
+                pageCount={Math.ceil(filteredData.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}
