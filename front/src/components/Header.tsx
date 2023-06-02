@@ -2,12 +2,10 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Images from "../images/logo_navbar.svg";
 import { AuthContext } from "../contexts/auth";
 import { useContext } from "react";
 import "../App.css";
 import { NavDropdown } from "react-bootstrap";
-import perfil from "../images/do-utilizador.png";
 
 function Header() {
   const { logout } = useContext(AuthContext);
@@ -40,67 +38,135 @@ function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"></Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="d-flex" style={{alignItems:"center"}}>
-              <CustomLink to="/listagemCall">MEUS CHAMADOS</CustomLink>
-              {tipoUsuario !== "Padrao" ? 
-                <>
-                  {
-                    tipoUsuario === 'Diretor' && (
-                      <>
-                        <CustomLink to="/arquivar">ARQUIVADOS</CustomLink>
-                        <CustomLink to="/logAvaliacoes">LOGS</CustomLink>
-                      </>
-                    )
-                  }
-                  <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
-                      <NavDropdown.Item href="/listagemGruposUser">
-                        Meus Grupos
-                      </NavDropdown.Item>
-                      {tipoUsuario !== 'Diretor' &&(
-                      <NavDropdown.Item href="/listagemTipoUsuario">
-                        Comitê
-                      </NavDropdown.Item>
-                      )}
-                      {
-                        tipoUsuario === 'Diretor' && (
+            {tipoUsuario === 'Diretor' &&(
+                        <>
+                        <CustomLink to="/kanban">KANBAN</CustomLink>
+                        <NavDropdown className="me-2" title="CHAMADOS" id="navbarScrollingDropdown">
+                              <NavDropdown.Item href="/listagemCall">
+                                Meus chamados
+                              </NavDropdown.Item>
+                              <NavDropdown.Item href="/listagem">
+                                Todos os chamados
+                              </NavDropdown.Item>
+                              <NavDropdown.Item href="/arquivar">
+                                Arquivados
+                              </NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown className="me-2" title="GRUPOS" id="navbarScrollingDropdown">
+                          <NavDropdown.Item href="/listagemGruposUser">
+                            Meus grupos
+                          </NavDropdown.Item>
+                          <NavDropdown.Item href="/listagemGrupos">
+                            Todos os grupos
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown className="me-2" title="GERENCIAR" id="navbarScrollingDropdown">
+                          <NavDropdown.Item href="/listagemUser">
+                            Usuários
+                          </NavDropdown.Item>
+                          <NavDropdown.Item href="/logAvaliacoes">
+                            Logs
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown 
+                          className="me-2 perfil" 
+                          title={
+                            <>
+                              <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
+                                width: 60,
+                                height: 60
+                              }} />
+                              <span style={{
+                                position: "relative",
+                                top: 0,
+                                right: 35,
+                                width: 0,
+                                height: 0
+                              }}></span>
+                            
+                            </>
+                          }>
+                            <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
+                            <NavDropdown.Item className="itemPerfil" onClick={signUp}>Sair</NavDropdown.Item>
+                        </NavDropdown>
+                  </>
+                  )}
+                </Nav>
+
+                <Nav className="d-flex" style={{alignItems:"center"}}>
+                {tipoUsuario === 'Padrao' &&(
+                  <>
+                    <CustomLink to="/kanban">KANBAN</CustomLink>
+                    <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
+                    <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
+                    <NavDropdown 
+                        className="me-2 perfil" 
+                        title={
                           <>
-                            <NavDropdown.Item href="/listagemGrupos"> Grupos </NavDropdown.Item>
-                            <NavDropdown.Item href="/listagemUser">Usuário</NavDropdown.Item>
-                            <NavDropdown.Item href="/listagem">Chamados</NavDropdown.Item>
+                            <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
+                              width: 60,
+                              height: 60
+                            }} />
+                            <span style={{
+                              position: "relative",
+                              top: 0,
+                              right: 35,
+                              width: 0,
+                              height: 0
+                            }}></span>
+                          
+                          </>
+                        }>
+                          <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
+                          <NavDropdown.Item className="itemPerfil" onClick={signUp}>Sair</NavDropdown.Item>
+                      </NavDropdown>
+                      : 
+                    <>
+                    </> 
+                  </>
+                  )}
+                </Nav>
+
+                <Nav className="d-flex" style={{alignItems:"center"}}>
+                  {tipoUsuario !== "Padrao" ? 
+                    <>
+                      {
+                        tipoUsuario !== 'Diretor' && (
+                          <>
+                            <CustomLink to="/kanban">KANBAN</CustomLink>
+                            <CustomLink to="/listagemCall">CHAMADOS</CustomLink>
+                            <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
+                            <CustomLink to="/listagemTipoUsuario">COMITÊ</CustomLink>
+                            <NavDropdown 
+                              className="me-2 perfil" 
+                              title={
+                                <>
+                                  <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
+                                    width: 60,
+                                    height: 60
+                                  }} />
+                                  <span style={{
+                                    position: "relative",
+                                    top: 0,
+                                    right: 35,
+                                    width: 0,
+                                    height: 0
+                                  }}></span>
+                                
+                                </>
+                              }>
+                                <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
+                                <NavDropdown.Item className="itemPerfil" onClick={signUp}>Sair</NavDropdown.Item>
+                            </NavDropdown>
                           </>
                         )
                       }
-                  </NavDropdown>
                 </>
                 : 
                 <>
-                  {/* <CustomLink to="/cadastroGrupo">CRIAR GRUPO</CustomLink>  */}
-                  <CustomLink to="/listagemGruposUser">GRUPOS</CustomLink>
-                </>
-                
+                </> 
                }
-              <NavDropdown 
-                className="me-2 perfil" 
-                title={
-                  <>
-                    <img src={icone} alt="Meu Perfil" className="rounded-circle" style={{
-                      width: 60,
-                      height: 60
-                    }} />
-                    <span style={{
-                      position: "relative",
-                      top: 0,
-                      right: 35,
-                      width: 0,
-                      height: 0
-                    }}></span>
-                    
-                    
-                  </>
-                }>
-                  <NavDropdown.Item className="itemPerfil" href="/perfil">Meu Perfil</NavDropdown.Item>
-                  <NavDropdown.Item className="itemPerfil" onClick={signUp}>Sair</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
+              </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
