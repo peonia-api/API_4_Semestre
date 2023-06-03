@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { URIgroup, URIgroupToUser } from '../../enumerations/uri';
 import { Groups } from '../../types/group';
+import imagem from '../../images/60e0c4ffe2f47772acb20be7_favicon.png'
 
 function KanbanGroups() {
   const [dataGroup, setGroup] = useState<Groups[]>([]);
@@ -30,6 +31,9 @@ function KanbanGroups() {
   }, []);
 
   console.log(dataGroup);
+  function linkTo(id:any){
+    window.location.assign('/kanban/'+ id)
+  }
 
   return (
     <>
@@ -43,10 +47,10 @@ function KanbanGroups() {
               Equipes
             </h1>
           </div>
-          <div className='rodape row mt-5' >
+          <div className='rodape caixa mt-5 ' >
             {dataGroup.map((g: any) => (
-              <div className='colStyle col-2'>
-                <a href={'/kanban/' + g.group.id} >{g.group.groupName} </a>
+              <div className='colStyle kanban' onClick={() => linkTo(g.group.id)}>
+                <p style={{marginRight: '15px'}}><img src={imagem} alt="imagem" style={{marginRight: '5px'}} />{g.group.groupName}</p>
               </div>
             ))}
           </div>

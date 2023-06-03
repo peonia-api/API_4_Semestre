@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import "../../App.css";
+import "../../styles/Responsivo.css";
 import axios from "axios";
 import { avisoEdicao, avisoErro, solicitacaoValidationSchema } from "../../controllers";
 import { URI, URIattach, URIcommit, URIgroup, URIgroupToCall } from "../../enumerations/uri";
@@ -417,7 +418,7 @@ console.log(formik.values.group);
 
                   {/* <Dropzonee callFiles={formik.values.callFiles} setFieldValue={formik.setFieldValue} /> */}
                   <Dropzone
-                    style={{ minWidth: "505px" }}
+                    className="responsivo"
                     onChange={updateFiles}
                     value={files}
                   >

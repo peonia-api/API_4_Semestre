@@ -148,7 +148,7 @@ function LogAvaliacoes() {
                 </thead>
 
                 <tbody>
-                  {filteredData.map((data) => {
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
                       <tr>
                         {/*corpo tabela*/}
@@ -166,7 +166,7 @@ function LogAvaliacoes() {
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(data.length / itemsPerPage)}
+                pageCount={Math.ceil(filteredData.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}

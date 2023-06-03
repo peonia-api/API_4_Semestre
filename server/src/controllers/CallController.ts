@@ -106,6 +106,7 @@ class CallController {
             insertCall.callPriority = createCall.callPriority
             insertCall.callEmail = createCall.callEmail
             insertCall.callStatus = "Em análise"
+            insertCall.callDateCreate = new Date()
             if (insertCall.callType == "feature") {
                 insertCall.avaliar = "CSO"
             } else {

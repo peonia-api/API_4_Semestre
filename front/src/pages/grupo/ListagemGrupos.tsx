@@ -163,7 +163,6 @@ function ListagemGrupos() {
     <>
       <Header />
       <div className='d-flex flex-center flex-column flex-column-fluid hf-spacing px-2 mt-5'>
-
         <div className='container bg-light-opacity rounded mx-auto' style={{ padding: "2rem" }}>
           <div className="text-center">
             <h1 className="text-dark mb-0 font-padrao-titulo">
@@ -173,7 +172,7 @@ function ListagemGrupos() {
           <Container className="px-2 mb-5">
             <Container>
               <div className="box-search d-flex align-items-center justify-content-between mt-4 Margin">
-                <button type="button" className="btn btn-form" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
+                <button type="button" className="btn btn-form resp" onClick={() => window.location.href = '/cadastroGrupo'}>Adicionar Grupo
                   <img src={grupoImag} alt="Botão para adicionar grupos" style={{ width: "25px", height: "25px", marginLeft: "7px" }} />
                 </button>
 
@@ -225,7 +224,7 @@ function ListagemGrupos() {
                 </tbody>
               </Table>
               <ReactPaginate
-                pageCount={Math.ceil(data.length / itemsPerPage)}
+                pageCount={Math.ceil(filteredData.length / itemsPerPage)}
                 onPageChange={handlePageClick}
                 previousLabel={<FaChevronLeft />}
                 nextLabel={<FaChevronRight />}

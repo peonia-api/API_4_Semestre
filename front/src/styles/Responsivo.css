@@ -5,6 +5,15 @@
 	}
 	
 }
+
+@media (max-width: 2000px){
+	.respLog{
+		width: 60%;
+		height: 100px;
+	}
+	
+}
+
 @media (max-width: 600px){
 	.responsivo{
 		width: 50px;
@@ -15,5 +24,17 @@
 		height: 60px;
 		margin-left: -20px;
 		margin-right: 20px;
+	}
+
+	.respLog{
+		width: 100%;
+	}
+	.logo{
+		width: 100%;
+	}
+
+	.kanban{
+		width: 20%;
+		height: 20%;
 	}
 }
