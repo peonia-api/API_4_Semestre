@@ -5,6 +5,15 @@
 	}
 	
 }
+
+@media (max-width: 2000px){
+	.respLog{
+		width: 60%;
+		height: 100px;
+	}
+	
+}
+
 @media (max-width: 600px){
 	.responsivo{
 		width: 50px;

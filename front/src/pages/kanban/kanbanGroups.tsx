@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { URIgroup, URIgroupToUser } from '../../enumerations/uri';
 import { Groups } from '../../types/group';
+import imagem from '../../images/60e0c4ffe2f47772acb20be7_favicon.png'
 
 function KanbanGroups() {
   const [dataGroup, setGroup] = useState<Groups[]>([]);
@@ -45,9 +46,12 @@ function KanbanGroups() {
           </div>
           <div className='rodape caixa mt-5 ' >
             {dataGroup.map((g: any) => (
+              <a href={'/kanban/' + g.group.id} >
               <div className='colStyle kanban'>
-                <a href={'/kanban/' + g.group.id} >{g.group.groupName} </a>
+                <img src={imagem} alt="imagem" style={{marginRight: '5px'}} />
+                {g.group.groupName}
               </div>
+              </a>
             ))}
           </div>
         </div>
