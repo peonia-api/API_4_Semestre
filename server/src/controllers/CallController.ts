@@ -3,10 +3,8 @@ import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { logger } from "../config/logger";
 import { getGroupToCall } from "../utils/funcao";
-import { ConcreteSubject, UserObserver } from '../utils/observer';
+import { ConcreteSubject } from '../utils/observer';
 import { GroupToCall } from "../entities/GroupToCall";
-
-const concreteSubject = new ConcreteSubject();
 
 class CallController {
 
@@ -135,7 +133,6 @@ class CallController {
             findCall.callDescription = createCall.callDescription
             findCall.callPriority = createCall.callPriority
             findCall.callEmail = createCall.callEmail
-            //findCall.callStatus = findCall.callStatus
 
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({ allCall, message: "Sucesso ao editar o chamado." }))
@@ -183,12 +180,11 @@ class CallController {
             findCall.callPriority = createCall.impact;
             findCall.callStatus = "Aprovada";
 
-            await getGroupToCall(idCall);
-            console.log("Passei");
-            concreteSubject.notifyObservers();
-
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({ allCall, message: "Sucesso ao priorizar o chamado." }))
+
+            await getGroupToCall(idCall);
+
             return res.json(allCall)
         } catch (err) {
             logger.error(JSON.stringify({ mensage: "Erro ao priorizar o chamado" }))
