@@ -3,17 +3,6 @@
   justify-content: center;
   align-items: center;
 }
-
-.rodape a {
-  font-size: 20px;
-  color: #1e161a;
-}
-
-.rodape a:hover {
-  color: #2a6266;
-  transition: .2s;
-}
-
 .caixa{
   flex-shrink: 0;
   max-width: 100%;
@@ -41,9 +30,14 @@
   height: 250px;
   margin: 50px;
   padding: 30px;
-  font-size: 20px;
 }
 .colStyle:hover{
   background-color: #c0c0c0;
   transition: .5s;
+}
+
+.colStyle p {
+  font-size: 23px;
+  color: #1e161a;
+  font-weight: bold;
 }

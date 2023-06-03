@@ -148,7 +148,7 @@ function LogAvaliacoes() {
                 </thead>
 
                 <tbody>
-                  {filteredData.map((data) => {
+                  {filteredData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).map((data) => {
                     return (
                       <tr>
                         {/*corpo tabela*/}

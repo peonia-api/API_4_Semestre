@@ -50,8 +50,7 @@ function KanbanGroups() {
           <div className='rodape caixa mt-5 ' >
             {dataGroup.map((g: any) => (
               <div className='colStyle kanban' onClick={() => linkTo(g.group.id)}>
-                <img src={imagem} alt="imagem" style={{marginRight: '5px'}} />
-                {g.group.groupName}
+                <p style={{marginRight: '15px'}}><img src={imagem} alt="imagem" style={{marginRight: '5px'}} />{g.group.groupName}</p>
               </div>
             ))}
           </div>
