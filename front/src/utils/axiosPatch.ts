@@ -11,7 +11,7 @@ export const taskBody = async (data: any) => {
    data.map((res:any) => {
       if(res.call.callType === "hotfix"){
          list.push({
-            Id: res.id,
+            Id: res.call.id,
             Status: res.call.callStatus,
             Title: res.call.callTitle, 
             Priority: res.call.callPriority, 
@@ -21,7 +21,7 @@ export const taskBody = async (data: any) => {
          })
       }else{
          list.push({
-            Id: res.id, 
+            Id: res.call.id, 
             Status: res.call.callStatus, 
             Title: res.call.callTitle, 
             Priority: res.call.callPriority, 
