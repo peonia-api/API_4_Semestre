@@ -84,21 +84,21 @@ class GroupToCallController {
 
     public async getGroupToCall(req: Request, res: Response) {
         try {
-            const idgroupToCall: any = req.params.uuid
-            const groupToCallRepository = AppDataSource.getRepository(GroupToCall)
+            const id: any = req.params.uuid;
+            const groupToCallRepository = AppDataSource.getRepository(GroupToCall);
             const allgroupToCall = await groupToCallRepository.find({
                 relations: { call: true },
                 where: {
-                    call: { id: idgroupToCall },
+                    call: { id: id },
                 },
-            })
+            });
             let listaCliente = [];
-            allgroupToCall.forEach((item) => (listaCliente.push(item.group.cliente, item.call.callTitle, item.call.callStatus)))
-            // console.log(listaCliente);
+            allgroupToCall.forEach((item) => (listaCliente.push({ email: item.group.cliente, titulo: item.call.callTitle, status: item.call.callStatus })))
 
-            return (listaCliente);
+            console.log(listaCliente);
+            return res.json(listaCliente);
         } catch (err) {
-            return res.status(400).json({ menssagem: "Erro ao pegar" })
+            return res.status(400).json({ mensagem: "Erro ao pegar" });
         }
     }
 }

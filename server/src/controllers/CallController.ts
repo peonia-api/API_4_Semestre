@@ -2,16 +2,17 @@ import AppDataSource from "../data-source";
 import { Request, Response } from 'express';
 import { Call } from "../entities/Call";
 import { logger } from "../config/logger";
-
-
+import { getGroupToCall } from "../utils/funcao";
+import { ConcreteSubject } from '../utils/observer';
+import { GroupToCall } from "../entities/GroupToCall";
 
 class CallController {
 
-    public async hello(req: Request, res: Response): Promise<Response>{
-        try{
-            return res.json({menssagem: "Hello word!"})
-        }catch(err){
-            return res.status(400).json({erro: "Erro ao rodar"})
+    public async hello(req: Request, res: Response): Promise<Response> {
+        try {
+            return res.json({ menssagem: "Hello word!" })
+        } catch (err) {
+            return res.status(400).json({ erro: "Erro ao rodar" })
         }
     }
 
@@ -79,18 +80,18 @@ class CallController {
     }
 
 
-    public async patchCall(req: Request, res: Response): Promise<Response>{
-        try{
-            const {email, antes} = req.body
+    public async patchCall(req: Request, res: Response): Promise<Response> {
+        try {
+            const { email, antes } = req.body
             const rep = await AppDataSource
-            .createQueryBuilder()
-            .update(Call)
-            .set({callEmail: email})
-            .where("callEmail = :callEmail", {callEmail: antes })
-            .execute()
+                .createQueryBuilder()
+                .update(Call)
+                .set({ callEmail: email })
+                .where("callEmail = :callEmail", { callEmail: antes })
+                .execute()
             return res.json(rep)
-        }catch(err){
-            return res.status(400).json({erro: "Erro ao mudar!"})
+        } catch (err) {
+            return res.status(400).json({ erro: "Erro ao mudar!" })
         }
     }
 
@@ -133,7 +134,6 @@ class CallController {
             findCall.callDescription = createCall.callDescription
             findCall.callPriority = createCall.callPriority
             findCall.callEmail = createCall.callEmail
-            //findCall.callStatus = findCall.callStatus
 
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({ allCall, message: "Sucesso ao editar o chamado." }))
@@ -175,6 +175,7 @@ class CallController {
             const createCall = req.body
             const idCall: any = req.params.uuid
             const callRepository = AppDataSource.getRepository(Call)
+            const groupToCall = AppDataSource.getRepository(GroupToCall)
             const findCall = await callRepository.findOneBy({ id: idCall })
             findCall.HpDescription = createCall.desc;
             findCall.callPriority = createCall.impact;
@@ -182,6 +183,9 @@ class CallController {
 
             const allCall = await callRepository.save(findCall)
             logger.info(JSON.stringify({ allCall, message: "Sucesso ao priorizar o chamado." }))
+
+            await getGroupToCall(idCall);
+
             return res.json(allCall)
         } catch (err) {
             logger.error(JSON.stringify({ mensage: "Erro ao priorizar o chamado" }))

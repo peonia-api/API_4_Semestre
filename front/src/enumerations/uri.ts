@@ -8,7 +8,7 @@ export enum URI {
     PEGAR_CALL = "http://localhost:3001/call/historic",
     PEGAR_CAll_ESPECIFICO = "http://localhost:3001/call/especificoCall/",
     PEGAR_CALL_HOTFIX = "http://localhost:3001/call/hotfix",
-    PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature", 
+    PEGAR_CALL_FEATURE = "http://localhost:3001/call/feature",
     PEGAR_CAll_User = "http://localhost:3001/call/callUser/",
     PEGAR_CAll_ARQUIVADO = "http://localhost:3001/call/arquivados/",
     ALTERA_EMAIL = "http://localhost:3001/call/email/",
@@ -20,7 +20,7 @@ export enum URIgroup {
     DELETE_GROUP = "http://localhost:3001/group/delete/",
     PEGAR_GROUP = "http://localhost:3001/group/historic",
     PEGAR_GROUP_USER = "http://localhost:3001/group/email/",
-    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/", 
+    PEGAR_GROUP_ESPECIFICO = "http://localhost:3001/group/specific/",
     PEGAR_GROUP_Cliente = "http://localhost:3001/group/cliente/", //cliente
     ALTERA_EMAIL = "http://localhost:3001/group/email/",
     PEGAR_GRUPO_FUNCIONARIO = "http://localhost:3001/group/funcionario/"
@@ -41,6 +41,7 @@ export enum URIgroupToCall {
     DELETE_GROUP_TO_CALL = "http://localhost:3001/groupToCall/delete/",
     PEGAR_GROUP_TO_CALL = "http://localhost:3001/groupToCall/historic",
     PEGAR_GROUP_TO_CALL_ESPECIFICO = "http://localhost:3001/groupToCall/specific/",
+    PEGAR_GROUP_TO_CALL_CLIENT = "http://localhost:3001/groupToCall/grouptocall/",
 }
 
 export enum URIuser {
@@ -75,7 +76,7 @@ export enum URIcommit {
     PEGAR_COMITE_STATUS = "http://localhost:3001/committee/filterAllStatus/",
     PEGAR_comiRiskRt_STATUS = "http://localhost:3001/committee/comiRiskRtStatus/",
     PEGAR_ARCHIVED_STATUS = "http://localhost:3001/committee/archived/",
-    
+
 
     PEGAR_comiRiskCso_STATUS = "http://localhost:3001/committee//comiRiskCsoStatus/",
     PEGAR_comiImpactCto_STATUS = "http://localhost:3001/committee/comiImpactCtoStatus/",

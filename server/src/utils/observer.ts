@@ -1,10 +1,9 @@
-import * as nodemailer from 'nodemailer';
 require('dotenv').config();
 
 
 // Interface Observer
 interface Observer {
-    update(): void;
+    update(email: string, status: string, titulo: string): void;
 }
 
 // Classe ConcreteSubject
@@ -22,9 +21,9 @@ class ConcreteSubject {
         }
     }
 
-    public notifyObservers(): void {
+    public notifyObservers(email: string, status: string, titulo: string): void {
         console.log('Subject: Notifying observers...');
-        this.observers.forEach((observer) => observer.update());
+        this.observers.forEach((observer) => observer.update(email, status, titulo));
     }
 }
 
@@ -40,7 +39,7 @@ class UserObserver implements Observer {
         this.titulo = titulo;
     }
 
-    public update(): void {
+    public update(email: string, status: string, titulo: string): void {
 
         let nodemailer = require('nodemailer');
 

@@ -7,11 +7,8 @@ import Header from "../../components/Header";
 import '../../App.css';
 import Select from "react-select";
 import { Groups } from "../../types/group";
-import { ConcreteSubject, UserObserver } from '../../utils/observer';
 
 export function Comites() {
-
-    const concreteSubject = new ConcreteSubject();
 
     const id = window.location.href.split("/")[4];
 
@@ -55,7 +52,6 @@ export function Comites() {
                 if(typeCall === "hotfix"){
                     setUrl(URI.ATUALIZA_HOTFIX)
                     setDescType("Prioridade do Hotfix");
-                    concreteSubject.notifyObservers();
                 } else {
                     setUrl(type === "CTO" ? URIcommit.ALTERA_COMITE_CTO : URIcommit.ALTERA_COMITE_HP)
                     setDescType("Análise de Impacto")

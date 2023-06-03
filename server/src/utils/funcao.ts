@@ -18,7 +18,6 @@ export const validateCommitteeFilter = async (idCommittee) => {
             call.callDateFinalization = new Date();
             await callRep.save(call);
             await getGroupToCall(idCommittee);
-            concreteSubject.notifyObservers();
         }
         else if (allCommittee.comiImpactCto == null || allCommittee.comiImpactHp == null || allCommittee.comiRiskCso == null || allCommittee.comiRiskRt == null) {
             if (allCommittee.comiRiskCso < 3 && allCommittee.comiRiskRt == null && allCommittee.comiRiskCso != null) {
@@ -40,7 +39,6 @@ export const validateCommitteeFilter = async (idCommittee) => {
             call.callStatus = "Aprovada"
             await callRep.save(call);
             await getGroupToCall(idCommittee);
-            concreteSubject.notifyObservers();
         }
     }
 }
@@ -63,6 +61,7 @@ export const getGroupToCall = async (idgroupToCall: number) => {
             const observer = new UserObserver(emails, item.status, item.titulo);
             concreteSubject.addObserver(observer);
             console.log(observer);
+            concreteSubject.notifyObservers('email', 'status', 'título');
         });
 
         return listaCliente;
