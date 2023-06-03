@@ -28,7 +28,7 @@ export class Call {
     @Column({ nullable: true })
     callStatus: string;
 
-    @CreateDateColumn({ name: 'callDateCreate' })
+    @Column({ name: 'callDateCreate' })
     callDateCreate: Date;
 
     @CreateDateColumn({ name: 'callDateFinalization' })
