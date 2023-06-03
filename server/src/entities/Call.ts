@@ -34,7 +34,7 @@ export class Call {
     @CreateDateColumn({ name: 'callDateFinalization' })
     callDateFinalization: Date;
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     HpDescription: string
 
     @Column({ nullable: true })
@@ -48,7 +48,6 @@ export class Call {
 
     @OneToMany(() => Task, (task) => task.call)
     task: Task[];
-
 
     @OneToMany(() => GroupToCall, (groupToCall) => groupToCall.call)
     groupToCall: GroupToCall[];
