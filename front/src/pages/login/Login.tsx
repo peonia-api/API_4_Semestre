@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import "../../App.css";
 import "../../styles/Login.css";
+import "../../styles/Responsivo.css";
 import { AuthContext } from "../../contexts/auth";
 //import emailjs from "emailjs-com";
 import  emailjs  from  '@emailjs/browser'
@@ -92,7 +93,7 @@ function Login() {
               alt="Logotipo de IONIC Health"
               className="logo-login"
             />
-            <div className="card mt-5 w-50 ml-5">
+            <div className="card mt-5 w-50 ml-5 respLog">
               <div className="card-body">
                 <form onSubmit={handleSubmit}>
                   <div className="form-group text-dark fw-bolder mb-3 font-padrao-titulo">

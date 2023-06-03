@@ -16,4 +16,16 @@
 		margin-left: -20px;
 		margin-right: 20px;
 	}
+
+	.respLog{
+		width: 100%;
+	}
+	.logo{
+		width: 100%;
+	}
+
+	.kanban{
+		width: 20%;
+		height: 20%;
+	}
 }
