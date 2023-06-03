@@ -41,5 +41,9 @@
   height: 250px;
   margin: 50px;
   padding: 30px;
-  padding-left: 5px;
+  font-size: 20px;
+}
+.colStyle:hover{
+  background-color: #c0c0c0;
+  transition: .5s;
 }

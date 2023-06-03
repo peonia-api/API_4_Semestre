@@ -31,6 +31,9 @@ function KanbanGroups() {
   }, []);
 
   console.log(dataGroup);
+  function linkTo(id:any){
+    window.location.assign('/kanban/'+ id)
+  }
 
   return (
     <>
@@ -46,12 +49,10 @@ function KanbanGroups() {
           </div>
           <div className='rodape caixa mt-5 ' >
             {dataGroup.map((g: any) => (
-              <a href={'/kanban/' + g.group.id} >
-              <div className='colStyle kanban'>
+              <div className='colStyle kanban' onClick={() => linkTo(g.group.id)}>
                 <img src={imagem} alt="imagem" style={{marginRight: '5px'}} />
                 {g.group.groupName}
               </div>
-              </a>
             ))}
           </div>
         </div>
