@@ -21,6 +21,7 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
 <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
     <img src="../imagens/DERsprint3.jpg" align="center"/>
+ <br>
     <img src="../imagens/LOGICO_DERsprint3.jpg" align="center"/>
 </h1>
 <br>
