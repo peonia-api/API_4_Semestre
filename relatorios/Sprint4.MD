@@ -15,8 +15,12 @@
 <br>
 </p>
 
-Para acessar o sistema online, basta acessar este [link](http://35.233.194.15/).
- 
+Para acessar o sistema online, basta acessar este [link](http://35.233.194.15/) ou escanear o QR Code abaixo:
+    
+<div align="center">
+    <img src="imagens/QRCode-Servidor.jpeg" alt="QR Code para acesso à aplicação" height="30%" width="30%">
+</div>
+
 
 <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
