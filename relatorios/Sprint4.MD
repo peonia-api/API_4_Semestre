@@ -17,6 +17,13 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
  
 <br>
 </p>
+ 
+<h3 align="center" id="diagramas"> DIAGRAMAS </h3>
+<h1 align="center">
+    <img src="../imagens/DERsprint3.jpg" align="center"/>
+    <img src="../imagens/LOGICO_DERsprint3.jpg" align="center"/>
+</h1>
+<br>
 
 → [Voltar ao topo](#topo)
   
@@ -24,7 +31,7 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
  
 ## :pushpin: Burndown
 <br>
-     <img src="https://github.com/peonia-api/API_4_Semestre/blob/main/imagens/Burndown-4a%20sprint.jpeg" align="center"/>
+     <img src="../imagens/Burndown-4a%20sprint.jpeg" align="center"/>
 <br>
  <br>
 
