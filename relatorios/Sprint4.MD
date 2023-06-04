@@ -11,13 +11,13 @@
 <span id="mvp">
  
 <h1> :rocket: MVP </h1>
-<p align="justify">Para finalizar o projeto, a equipe implementou o Kanban para que, finalizado o processo de análise do comitê, seja possível acompanhar o desenvolvimento das atividades de cada um dos times. Foram realizados também ajustes de responsividade das telas, ordenação das tabelas, filtros de pesquisas e modais. Por fim, foi feito o deploy do sistema e a documentação de navegação na aplicação.<br>
-<br>
-Para acessar o sistema online, basta acessar este endereço: http://35.233.194.15/.
- 
+<p align="justify">Para finalizar o projeto, a equipe implementou o Kanban para que, finalizado o processo de análise do comitê, seja possível acompanhar o desenvolvimento das atividades de cada um dos times. Foram realizados também ajustes de responsividade das telas, ordenação das tabelas, filtros de pesquisas e modais. Por fim, foi feito o deploy do sistema e a documentação de navegação na aplicação.
 <br>
 </p>
+
+Para acessar o sistema online, basta acessar este [link](http://35.233.194.15/).
  
+
 <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
     <img src="../imagens/DERsprint3.jpg" align="center"/>
@@ -26,6 +26,9 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
 </h1>
 <br>
 
+Para acessar o dicionário de dados, clique [aqui](https://github.com/peonia-api/API_4_Semestre/blob/main/documenta%C3%A7%C3%A3o/Dicion%C3%A1rios%20de%20Dados.pdf).
+ 
+ 
 → [Voltar ao topo](#topo)
   
 <span id="burndown">
