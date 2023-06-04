@@ -34,7 +34,7 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
  
 ## 👩‍💻 Entrega
 
-Para visualizar o vídeo que ilustra o fluxo do usuário padrão, acesse este [link](https://clipchamp.com/watch/HeTpkkz2kLy).
+Para visualizar o vídeo que ilustra o fluxo do usuário padrão, acesse este link.
   
   
 Para acessar o vídeo que demonstra o fluxo do usuário Diretor, acesse este [link](https://clipchamp.com/watch/HeTpkkz2kLy).
