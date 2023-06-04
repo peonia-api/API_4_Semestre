@@ -5,17 +5,19 @@
     <a href="#objetivo">Objetivo</a> | 
     <a href="#requisitos">Requisitos</a> | 
     <a href="#relatório">Relatório</a> | 
-    <a href="#projeto">Resultado</a> |
+    <a href="#projeto">Backlog</a> |
     <a href="#tecnologias">Tecnologias</a> | 
     <a href="#equipe">Equipe</a> 
 </p>
 
 <span id="objetivo">
+
 <h2> :dart: Objetivo</h2>
 
 <p align="justify"> O projeto consiste em desenvolver uma plataforma de gerenciamento de chamados internos para a Ionic Health. Essa plataforma deve ser capaz de receber demandas de correção urgente (hotfix) e novas funcionalidades (feature), direcionando-as para as equipes responsáveis. Além disso, deve permitir a aprovação de novas funcionalidades por um comitê de avaliação. Com essa plataforma, a empresa poderia melhorar a comunicação interna, colaboração entre as equipes e monitorar o desempenho do processo de desenvolvimento de produtos.</p>
 
 <span id="requisitos">
+
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
 - [x] Cadastro de grupo de usuários;
@@ -27,7 +29,7 @@
 - [x] Cadastro de soluções para problemas conhecidos;
 - [x] Formulário de abertura de chamado com indicação de interessados;
 
-<h3> Requisitos Não Funcionais </h3>
+<h2> 📋 Requisitos Não Funcionais </h2>
 
 - [x] React;
 - [x] NodeJS;
@@ -35,7 +37,7 @@
 
  → [Voltar ao topo](#topo)
     
- ## Entregas 
+<h2> 💻 Entregas</h2> 
 
 <h4> Entrega da Sprint 1 </h4>
 <p align="center"> 
@@ -96,24 +98,25 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 
 → [Voltar ao topo](#topo)
     
-<!-- <span id="Documentação">
+<span id="Documentação">
 <h2> :clipboard: Documentação</h2>
-
-<p align="center"> <img src = "imagens/doc1.png"></p>    
-<p align="center"> <img src = "imagens/doc2.png"></p>
-<p align="center"> <img src = "imagens/doc3.png"></p>
-<p align="center"> <img src = "imagens/doc4.png"></p>-->
     
+Para acessar a documentação e entender como usar a aplicação, basta acessar este [link](https://github.com/peonia-api/API_4_Semestre/blob/main/documenta%C3%A7%C3%A3o/Documenta%C3%A7%C3%A3o.pdf).
+ 
 
 <span id="projeto">
     
  ## 📌 Backlog Priorizado
-    
-<h1 align="center"> 
+ 
+<div align="center">
+    <p> 
     
 ![Product Backlog](https://github.com/peonia-api/API_4_Semestre/assets/86448876/213af40e-72e7-49c2-8102-f270e8aad344)
     
-</h1>
+</p>
+</div>
+    
+→ [Voltar ao topo](#topo)  
  
  <!--## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
@@ -144,23 +147,7 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 04 | Documentação para explicação e how-to da solução agnóstica apresentada. | :heavy_check_mark: |
  
 <br>-->
-<span id="equipe">
- 
-## 👩‍💻 Equipe
-|Função|Nome|GitHub|LinkedIn|
-| -------- |-------- |-------- |-------- |
-| Scrum Master |Mateus Henrique Lima da Silva|<a href="https://github.com/mateushlsilva" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/mateus-silva-80232a222/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Product Owner |Davi Elias Silvestre|<a href="https://github.com/silvestredavi" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/davi-silvestre/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Ana Carolina das Neves|<a href="https://github.com/AnaCarolinaNeves" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>|<a href="https://www.linkedin.com/in/ana-carolina-neves-36aa68207/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Diego Batista da Silva|<a href="https://github.com/diiegobsilva" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/diegobatista1/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Jeniffer Cristina Freitas Pereira|<a href="https://github.com/Jennyads" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>|<a href="https://www.linkedin.com/in/jeniffer-pereira-65787b205/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Larissa Aparecida Diniz Silva|<a href="https://github.com/laaridiniz" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/larissa-diniz-dev" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Renan Vitor Fernandes Mendonça|<a href="https://github.com/RenanVitor" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/renan-vitor" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-| Developer |Yasmin Aparecida Vieira|<a href="https://github.com/YasminVieira" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/yasmin-vieira-b68641213/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
-<br>
 
-→ [Voltar ao topo](#topo)
-    
 <span id="tecnologias">
 
 ## 🛠️ Tecnologias
@@ -176,9 +163,29 @@ Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execuçã
 - [Node](https://nodejs.org/): Runtime
 - [React](https://pt-br.reactjs.org/): Framework
 - [DevOps](https://azure.microsoft.com/pt-br/products/devops): Planejamento
+- [PostgreSQL](https://www.postgresql.org/): Banco de dados
+- [Google Cloud Platform](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1605194-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_512285710746-ADGP_Hybrid%20%7C%20BKWS%20-%20PHR%20%7C%20Txt%20~%20GCP_General-KWID_43700062788251476-kwd-295915745166&utm_term=KW_gcp-ST_GCP&gclid=EAIaIQobChMI9bqWjJOq_wIVtyKtBh04WQpvEAAYASAAEgLSfvD_BwE&gclsrc=aw.ds&hl=pt-br): Deployment
+
+→ [Voltar ao topo](#topo)    
+    
+<span id="equipe">
+ 
+## 👩‍💻 Equipe
+|Função|Nome|GitHub|LinkedIn|
+| -------- |-------- |-------- |-------- |
+| Scrum Master |Mateus Henrique Lima da Silva|<a href="https://github.com/mateushlsilva" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/mateus-silva-80232a222/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Product Owner |Davi Elias Silvestre|<a href="https://github.com/silvestredavi" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/davi-silvestre/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Ana Carolina das Neves|<a href="https://github.com/AnaCarolinaNeves" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>|<a href="https://www.linkedin.com/in/ana-carolina-neves-36aa68207/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Diego Batista da Silva|<a href="https://github.com/diiegobsilva" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/diegobatista1/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Jeniffer Cristina Freitas Pereira|<a href="https://github.com/Jennyads" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>|<a href="https://www.linkedin.com/in/jeniffer-pereira-65787b205/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Larissa Aparecida Diniz Silva|<a href="https://github.com/laaridiniz" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/larissa-diniz-dev" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Renan Vitor Fernandes Mendonça|<a href="https://github.com/RenanVitor" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/renan-vitor" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
+| Developer |Yasmin Aparecida Vieira|<a href="https://github.com/YasminVieira" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/yasmin-vieira-b68641213/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
 
 → [Voltar ao topo](#topo)
+ 
 
 <br>
 
  <h1 align="center"> <img src = "https://fatecsjc-prd.azurewebsites.net/images/logo/fatecsjc_400x192.png" height="70"  align="auto">
+ <h5 align="center"> Aprendizagem por Projetos Integrados - Faculdade de Tecnologia de São José dos Campos - Prof. Jessen Vidal </h5>
