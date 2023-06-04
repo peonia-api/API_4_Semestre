@@ -61,4 +61,4 @@ https://github.com/peonia-api/API_4_Semestre/assets/86115352/6ebd21c9-1c9d-4ee9-
  → [Voltar ao topo](#topo)
    
 <h1 align="center"> <img src="https://fatecsjc-prd.azurewebsites.net/images/logo/fatecsjc_400x192.png" height="70"  align="auto">
-<h5 align="center"> Projeto Integrador - Faculdade de Tecnologia de São José dos Campos - Prof. Jessen Vidal </h5>
+<h5 align="center"> Aprendizagem por Projetos Integrados - Faculdade de Tecnologia de São José dos Campos - Prof. Jessen Vidal </h5>
