@@ -102,8 +102,17 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <h2> :clipboard: Documentação</h2>
     
 Para acessar a documentação e entender como usar a aplicação, basta acessar este [link](https://github.com/peonia-api/API_4_Semestre/blob/main/documenta%C3%A7%C3%A3o/Documenta%C3%A7%C3%A3o.pdf).
- 
 
+O dicionário de dados pode ser acessado por este [link](https://github.com/peonia-api/API_4_Semestre/blob/main/documenta%C3%A7%C3%A3o/Dicion%C3%A1rios%20de%20Dados.pdf).
+    
+Por fim, a aplicação pode ser acessada clicando neste [link](http://35.233.194.15/) ou escaneando o QR Code abaixo:
+    
+<div align="center">
+    <img src="imagens/QRCode-Servidor.jpeg" alt="QR Code para acesso à aplicação" height="30%" width="30%">
+</div>
+
+→ [Voltar ao topo](#topo)
+    
 <span id="projeto">
     
  ## 📌 Backlog Priorizado
