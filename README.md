@@ -121,7 +121,7 @@ Por fim, a aplicação pode ser acessada clicando neste [link](http://35.233.194
 <div align="center">
     <p> 
     
-![Product Backlog](https://github.com/peonia-api/API_4_Semestre/assets/86448876/213af40e-72e7-49c2-8102-f270e8aad344)
+![image](https://github.com/peonia-api/API_4_Semestre/assets/86448876/b494d41d-2a8f-4622-821b-ee0fb6dc02f2)
     
 </p>
 </div>
