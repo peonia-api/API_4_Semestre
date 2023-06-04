@@ -7,7 +7,7 @@
     <a href="#relatório">Relatório</a> | 
     <a href="#projeto">Resultado</a> |
     <a href="#tecnologias">Tecnologias</a> | 
-    <a href="#equipe">Equipe</a> | 
+    <a href="#equipe">Equipe</a> 
 </p>
 
 <span id="objetivo">
@@ -83,21 +83,19 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 | 01 | 02/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint1.MD) |
 | 02 | 23/04/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint2.MD) |
 | 03 | 14/05/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint3.MD) |
-<!--| 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
+| 04 | 04/06/2023 | :heavy_check_mark:	 | [ver relatório](https://github.com/peonia-api/API_4_Semestre/blob/main/relatorios/Sprint4.MD) |
 
-<span id="Documentação">
+<!-- <span id="Documentação">
 <h2> :clipboard: Documentação</h2>
 
 <p align="center"> <img src = "imagens/doc1.png"></p>    
 <p align="center"> <img src = "imagens/doc2.png"></p>
 <p align="center"> <img src = "imagens/doc3.png"></p>
-<p align="center"> <img src = "imagens/doc4.png"></p>
+<p align="center"> <img src = "imagens/doc4.png"></p>-->
+    
 
 <span id="projeto">
     
-<br>-->
-    
- 
  ## 📌 Backlog Priorizado
     
 <h1 align="center"> 
