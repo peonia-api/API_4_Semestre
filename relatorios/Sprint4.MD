@@ -27,6 +27,10 @@ Para acessar o sistema online, basta acessar este [link](http://35.233.194.15/) 
  
 ![image](https://github.com/peonia-api/API_4_Semestre/assets/86448876/c152f4bd-7d69-49fa-88cd-d54929c52e39)
  
+<br>
+ 
+ ![image](https://github.com/peonia-api/API_4_Semestre/assets/86448876/f52b98dd-411c-4b74-9418-2174ecd13f75)
+
 </h1>
 
 <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
