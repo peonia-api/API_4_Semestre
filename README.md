@@ -65,12 +65,19 @@ https://user-images.githubusercontent.com/86115352/233877053-97b2f78b-c03e-4a55-
 https://github.com/peonia-api/API_4_Semestre/assets/86448876/52bd5e2f-9586-40a0-b2df-8b6c3db24b9a
  
 </p>
-<!--<h4> Entrega da Sprint 4 </h4>
-<p align="center"> <img width="100%" src = "imagens/sprint_4.gif"></p>
-<h4> Endereço do site para acesso na nuvem:  </h4>
-<p align="center">
-  <img width="300" src="https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/qrcode.jpeg">
-</p>-->
+
+<h4> Entrega da Sprint 4 </h4>
+
+Para visualizar o vídeo que ilustra o fluxo do usuário padrão, acesse este [link](https://clipchamp.com/watch/8KruCz3Wpls).
+    
+Para acessar o vídeo que demonstra o fluxo do usuário Diretor, acesse este [link](https://clipchamp.com/watch/tK9AXBtIvTg).
+
+
+https://github.com/peonia-api/API_4_Semestre/assets/86115352/90962519-6285-4790-8d80-379a15f303a5
+
+
+https://github.com/peonia-api/API_4_Semestre/assets/86115352/c558bbaf-6f40-47b3-bd0f-d16a869c4a41
+    
 <br>
     
 <span id="relatório">
