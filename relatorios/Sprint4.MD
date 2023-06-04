@@ -22,6 +22,13 @@ Para acessar o sistema online, basta acessar este [link](http://35.233.194.15/) 
 </div>
 
 
+<h3 align="center" id="diagramas"> TELAS </h3>
+<h1 align="center">
+ 
+![image](https://github.com/peonia-api/API_4_Semestre/assets/86448876/c152f4bd-7d69-49fa-88cd-d54929c52e39)
+ 
+</h1>
+
 <h3 align="center" id="diagramas"> DIAGRAMAS </h3>
 <h1 align="center">
     <img src="../imagens/DERsprint3.jpg" align="center"/>
