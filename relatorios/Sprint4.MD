@@ -33,8 +33,25 @@ Para acessar o sistema online, basta acessar este endereço: http://35.233.194.1
  
 ## 👩‍💻 Entrega
 
+Para visualizar o vídeo que ilustra o fluxo do usuário padrão, acesse o link abaixo:
+  
+  [link](https://clipchamp.com/watch/HeTpkkz2kLy)
+  
+  
+Para acessar o vídeo que demonstra o fluxo do usuário Diretor, acesse o link abaixo:
+  
+  https://clipchamp.com/watch/HeTpkkz2kLy
 
 
+
+https://github.com/peonia-api/API_4_Semestre/assets/86115352/e57ccb39-1f4a-4901-9ddc-174565826a9e
+
+
+
+https://github.com/peonia-api/API_4_Semestre/assets/86115352/6ebd21c9-1c9d-4ee9-afb6-1b84f601b3f9
+
+
+  
 <br>
    
  → [Voltar ao topo](#topo)
