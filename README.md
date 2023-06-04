@@ -5,6 +5,7 @@
     <a href="#objetivo">Objetivo</a> | 
     <a href="#requisitos">Requisitos</a> | 
     <a href="#relatório">Relatórios</a> | 
+    <a href="#documentacao">Documentação</a> |
     <a href="#projeto">Backlog</a> |
     <a href="#tecnologias">Tecnologias</a> | 
     <a href="#equipe">Equipe</a> 
@@ -98,7 +99,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 
 → [Voltar ao topo](#topo)
     
-<span id="Documentação">
+<span id="documentacao">
 <h2> :clipboard: Documentação</h2>
     
 Para acessar a documentação e entender como usar a aplicação, basta acessar este [link](https://github.com/peonia-api/API_4_Semestre/blob/main/documenta%C3%A7%C3%A3o/Documenta%C3%A7%C3%A3o.pdf).
