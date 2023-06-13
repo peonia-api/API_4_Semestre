@@ -165,15 +165,18 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execução do projeto:
 
 - [HTML5 & CSS3](https://www.w3schools.com/): Linguagens de marcação
-- [Typescript](https://www.typescriptlang.org/): Linguagem de programação
+- [TypeScript](https://www.typescriptlang.org/): Linguagem de programação
 - [Git](https://git-scm.com): Versionamento
 - [GitHub](https://github.com/): Armazenamento de código
 - [Teams](https://teams.microsoft.com): Comunicação
 - [Figma](https://www.figma.com): Prototipagem
-- [Node](https://nodejs.org/): Runtime
-- [React](https://pt-br.reactjs.org/): Framework
+- [NodeJS](https://nodejs.org/): Runtime
+- [ReactJS](https://pt-br.reactjs.org/): Framework
+- [TypeORM](https://typeorm.io/): Framework
 - [DevOps](https://azure.microsoft.com/pt-br/products/devops): Planejamento
 - [PostgreSQL](https://www.postgresql.org/): Banco de dados
+- [EmailJS](https://www.emailjs.com/): Observer e redefinição de senha
+- [Nodemailer](https://www.npmjs.com/package/nodemailer): Observer e redefinição de senha
 - [Google Cloud Platform](https://cloud.google.com/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1605194-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_512285710746-ADGP_Hybrid%20%7C%20BKWS%20-%20PHR%20%7C%20Txt%20~%20GCP_General-KWID_43700062788251476-kwd-295915745166&utm_term=KW_gcp-ST_GCP&gclid=EAIaIQobChMI9bqWjJOq_wIVtyKtBh04WQpvEAAYASAAEgLSfvD_BwE&gclsrc=aw.ds&hl=pt-br): Deployment
 
 → [Voltar ao topo](#topo)    
